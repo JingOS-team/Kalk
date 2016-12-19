@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/ui">
+        <file>qmldir</file>
+        <file>Main.qml</file>
+        <file>ButtonsPanel.qml</file>
+    </qresource>
+</RCC>

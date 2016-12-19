@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/engine">
+        <file>qmldir</file>
+        <file>MathJs.qml</file>
+        <file>math.js</file>
+    </qresource>
+</RCC>
