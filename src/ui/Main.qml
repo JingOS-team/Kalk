@@ -27,6 +27,7 @@ import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
 import Fluid.Controls 1.0
 import Fluid.Material 1.0
+import Qt.labs.settings 1.0
 import ".."
 import "../engine"
 
@@ -39,7 +40,13 @@ FluidWindow {
 
     maximumWidth: 64 * (3 + 4 + 1)
     minimumWidth: 64 * (3 + 4 + 1)
-    height: 296
+    height: 60
+    onHeightChanged: updateHeight()
+
+    Settings {
+        property alias expanded: root.expanded
+    }
+
 
     property var mathJs: mathJsLoader.item ? mathJsLoader.item.mathJs : null;
 
@@ -77,6 +84,7 @@ FluidWindow {
             onTextChanged: calculationResult.text = calculate(text)
             wrapMode: TextInput.WrapAnywhere
             onHeightChanged: updateHeight()
+            selectByMouse: true
         }
 
         DisplayLabel {
@@ -141,15 +149,15 @@ FluidWindow {
                 onClicked: toogleExpanded()
             }
 
-            IconButton {
-                id: menuButton
-                implicitHeight: 40
-                implicitWidth: 40
-                iconSize: 20
-                iconName: 'navigation/menu'
-                iconColor: 'black'
-                opacity: 0.54
-            }
+//            IconButton {
+//                id: menuButton
+//                implicitHeight: 40
+//                implicitWidth: 40
+//                iconSize: 20
+//                iconName: 'navigation/menu'
+//                iconColor: 'black'
+//                opacity: 0.54
+//            }
         }
     }
 
@@ -160,6 +168,7 @@ FluidWindow {
         anchors.bottom: parent.bottom
         anchors.top: calculationZone.bottom
         height: fns.height
+        Component.onCompleted: updateHeight()
 
         Row {
             anchors.fill: parent
@@ -167,15 +176,15 @@ FluidWindow {
             ButtonsPanel {
                 id: fns
                 color: Material.color(Material.Pink, Material.Shade500)
-                labels: ['sqrt','pow','!','cos','sin','tan','acos','asin','atan','exp','log','pi']
-                targets: ['sqrt(','pow(','!','cos(','sin(','tan(','acos(','asin(','atan(','exp(','log(','pi']
+                labels: ['sqrt','exp','log','cos','sin','tan','acos','asin','atan','π','∞','x10^']
+                targets: ['sqrt(','exp(','log','cos(','sin(','tan(','acos(','asin(','atan(','pi','Infinity','e']
                 onButtonClicked: appendToFormula(strToAppend)
             }
 
             ButtonsPanel {
                 color: Material.color(Material.Grey, Material.Shade900)
-                labels: ['7', '8', '9', 'X', '4', '5', '6', '→X', '1', '2', '3', '(', '0', '.', ',', ')']
-                targets: ['7', '8', '9', 'X', '4', '5', '6', '->X', '1', '2', '3', '(', '0', '.', ',', ')']
+                labels: ['7', '8', '9', '^', '4', '5', '6', '!', '1', '2', '3', '(', '0', '.', ',', ')']
+                targets: ['7', '8', '9', '^', '4', '5', '6', '!', '1', '2', '3', '(', '0', '.', ',', ')']
                 onButtonClicked: appendToFormula(strToAppend)
             }
 
@@ -206,6 +215,7 @@ FluidWindow {
     function toogleExpanded() {
         root.expanded = !root.expanded;
         updateHeight();
+        formula.forceActiveFocus();
     }
 
     function updateHeight() {

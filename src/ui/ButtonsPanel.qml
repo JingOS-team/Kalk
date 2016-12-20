@@ -37,7 +37,7 @@ Rectangle {
     property var labels
     property var targets
     property int rowsCount: 4
-    property int fontSize: 20
+    property int fontSize: 17
     signal buttonClicked(string strToAppend)
 
     Grid {
@@ -55,12 +55,13 @@ Rectangle {
             Label {
                 text: modelData
                 width: 64
-                topPadding: Units.smallSpacing
-                bottomPadding: Units.smallSpacing
+                topPadding: Units.smallSpacing / 2
+                bottomPadding: Units.smallSpacing / 2
                 horizontalAlignment: Qt.AlignHCenter
                 verticalAlignment: Qt.AlignVCenter
                 color: 'white'
                 font.pixelSize: buttonsPanel.fontSize
+//                font.capitalization: Font.AllUppercase
 
                 MouseArea {
                     anchors.fill: parent
