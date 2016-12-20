@@ -30,6 +30,7 @@ import Fluid.Material 1.0
 import Qt.labs.settings 1.0
 import ".."
 import "../engine"
+import QtQuick.Dialogs 1.2
 
 FluidWindow {
     id: root
@@ -37,6 +38,7 @@ FluidWindow {
     Component.onCompleted: formula.forceActiveFocus()
 
     property bool expanded: true
+    property var history: []
 
     maximumWidth: 64 * (3 + 4 + 1)
     minimumWidth: 64 * (3 + 4 + 1)
@@ -81,10 +83,14 @@ FluidWindow {
             anchors.right: actions.left
             anchors.margins: Units.smallSpacing
             font.pixelSize: 20
-            onTextChanged: calculationResult.text = calculate(text)
             wrapMode: TextInput.WrapAnywhere
-            onHeightChanged: updateHeight()
             selectByMouse: true
+            onHeightChanged: updateHeight()
+            onAccepted: addToHistory()
+            onTextChanged: {
+                addToHistoryTimer.restart();
+                calculationResult.text = calculate(text);
+            }
         }
 
         DisplayLabel {
@@ -136,6 +142,17 @@ FluidWindow {
                         duration: 200
                     }
                 }
+            }
+
+            IconButton {
+                id: historyButton
+                implicitHeight: 40
+                implicitWidth: 40
+                iconSize: 20
+                iconName: 'action/history'
+                iconColor: 'black'
+                opacity: 0.54
+                onClicked: openHistory()
             }
 
             IconButton {
@@ -197,6 +214,13 @@ FluidWindow {
         }
     }
 
+    Timer {
+        id: addToHistoryTimer
+        running: false
+        interval: 1000
+        onTriggered: addToHistory()
+    }
+
     function appendToFormula(text) {
         formula.text += text;
         formula.forceActiveFocus();
@@ -208,6 +232,7 @@ FluidWindow {
     }
 
     function clearFormula() {
+        addToHistory();
         formula.text = '';
         formula.forceActiveFocus();
     }
@@ -230,7 +255,34 @@ FluidWindow {
         return formula.height + 4 * Units.smallSpacing + calculationResult.height;
     }
 
+    function addToHistory() {
+        if (formula.text !== '' && calculationResult.text !== '') {
+            root.history.push({
+                formula: formula.text,
+                result: calculationResult.text,
+            });
+        }
+    }
 
+    function openHistory() {
+        historyWindow.open(root.history);
+    }
+
+    function clearHistory() {
+        root.history = [];
+        formula.forceActiveFocus();
+    }
+
+    function replaceFormula(formulaStr) {
+        formula.text = formulaStr;
+        formula.forceActiveFocus();
+    }
+
+    HistoryWindow {
+        id: historyWindow
+        onCalculationSelected: replaceFormula()
+        onHistoryCleared: clearHistory()
+    }
 
     /*
      * Copyright (C) 2014 Canonical Ltd

@@ -61,7 +61,6 @@ Rectangle {
                 verticalAlignment: Qt.AlignVCenter
                 color: 'white'
                 font.pixelSize: buttonsPanel.fontSize
-//                font.capitalization: Font.AllUppercase
 
                 MouseArea {
                     anchors.fill: parent

@@ -3,5 +3,6 @@
         <file>qmldir</file>
         <file>Main.qml</file>
         <file>ButtonsPanel.qml</file>
+        <file>HistoryWindow.qml</file>
     </qresource>
 </RCC>
