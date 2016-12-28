@@ -38,7 +38,7 @@ FluidWindow {
     Component.onCompleted: formula.forceActiveFocus()
 
     property bool expanded: true
-    property var history: []
+    property var history: ListModel {}
 
     maximumWidth: 64 * (3 + 4 + 1)
     minimumWidth: 64 * (3 + 4 + 1)
@@ -47,6 +47,7 @@ FluidWindow {
 
     Settings {
         property alias expanded: root.expanded
+        property alias history: root.history
     }
 
 
@@ -223,24 +224,24 @@ FluidWindow {
 
     function appendToFormula(text) {
         formula.text += text;
-        formula.forceActiveFocus();
+        retrieveFormulaFocus();
     }
 
     function removeFromFormula() {
         formula.text = formula.text.slice(0, -1);
-        formula.forceActiveFocus();
+        retrieveFormulaFocus();
     }
 
     function clearFormula() {
         addToHistory();
         formula.text = '';
-        formula.forceActiveFocus();
+        retrieveFormulaFocus();
     }
 
     function toogleExpanded() {
         root.expanded = !root.expanded;
         updateHeight();
-        formula.forceActiveFocus();
+        retrieveFormulaFocus();
     }
 
     function updateHeight() {
@@ -257,7 +258,7 @@ FluidWindow {
 
     function addToHistory() {
         if (formula.text !== '' && calculationResult.text !== '') {
-            root.history.push({
+            root.history.insert(0, {
                 formula: formula.text,
                 result: calculationResult.text,
             });
@@ -269,19 +270,23 @@ FluidWindow {
     }
 
     function clearHistory() {
-        root.history = [];
-        formula.forceActiveFocus();
+        root.history.clear();
+        retrieveFormulaFocus();
     }
 
     function replaceFormula(formulaStr) {
         formula.text = formulaStr;
+        retrieveFormulaFocus();
+    }
+
+    function retrieveFormulaFocus() {
         formula.forceActiveFocus();
     }
 
     HistoryWindow {
         id: historyWindow
-        onCalculationSelected: replaceFormula()
-        onHistoryCleared: clearHistory()
+        onCalculationSelected: replaceFormula(formulaStr)
+        onHistoryCleared: root.clearHistory()
     }
 
     /*

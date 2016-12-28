@@ -5,16 +5,17 @@ import ".."
 
 FluidWindow {
     id: window
-    width: 300
+    width: 400
+    height: 500
     visible: false
     signal calculationSelected(string formulaStr)
     signal historyCleared()
 
-//    onActiveFocusItemChanged: {
-//        if (activeFocusItem == null) {
-//            hide();
-//        }
-//    }
+    onActiveFocusItemChanged: {
+        if (activeFocusItem == null) {
+            root.retrieveFormulaFocus();
+        }
+    }
 
     IconButton {
         id: deleteButton
@@ -45,15 +46,15 @@ FluidWindow {
             text: "Calculations history"
         }
         delegate: ListItem {
-            text: modelData.formula + ' → ' + modelData.result
-            onClicked: select(modelData.formula)
+            text: formula
+            subText: result
+            onClicked: select(formula)
         }
 
         ScrollIndicator.vertical: ScrollIndicator {}
     }
 
-    function open(history) {
-        list.model = history;
+    function open() {
         window.showNormal();
     }
 
@@ -63,7 +64,6 @@ FluidWindow {
     }
 
     function clearHistory() {
-        list.model = [];
         historyCleared();
     }
 }
