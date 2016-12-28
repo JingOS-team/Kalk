@@ -30,7 +30,6 @@ import Fluid.Material 1.0
 import Qt.labs.settings 1.0
 import ".."
 import "../engine"
-import QtQuick.Dialogs 1.2
 
 FluidWindow {
     id: root
@@ -326,7 +325,7 @@ FluidWindow {
         try {
             var result = mathJs.eval(formula);
             result = formatBigNumber(result)
-        } catch(exception) {
+        } catch (exception) {
             console.log("[LOG]: Unable to calculate formula : \"" + formula + "\", math.js: " + exception.toString());
             return '';
         }

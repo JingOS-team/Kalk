@@ -2,7 +2,9 @@ TEMPLATE = app
 TARGET = liri-calculator
 
 CONFIG += c++11
-QT += qml quick
+QT += qml quick svg
+
+ICON += src/icons/liri-calculator.icns
 
 # Enable High DPI scaling if Qt >= 5.6
 greaterThan(QT_MAJOR_VERSION, 4) {
