@@ -118,24 +118,12 @@ FluidWindow {
                 iconName: 'navigation/arrow_back'
                 iconColor: 'black'
                 opacity: formula.text !== '' ? 0.54 : 0
-                onClicked: removeFromFormula()
 
-                Behavior on opacity {
-                    NumberAnimation {
-                        duration: 200
-                    }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: removeFromFormula()
+                    onPressAndHold: clearFormula()
                 }
-            }
-
-            IconButton {
-                id: deleteButton
-                implicitHeight: 40
-                implicitWidth: 40
-                iconSize: 20
-                iconName: 'action/delete'
-                iconColor: 'black'
-                opacity: formula.text !== '' ? 0.54 : 0
-                onClicked: clearFormula()
 
                 Behavior on opacity {
                     NumberAnimation {
