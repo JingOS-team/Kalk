@@ -111,29 +111,6 @@ FluidWindow {
             anchors.right: parent.right
 
             IconButton {
-                id: trimButton
-                implicitHeight: 40
-                visible: expanded
-                implicitWidth: 40
-                iconSize: 20
-                iconName: 'navigation/arrow_back'
-                iconColor: 'black'
-                opacity: formula.text !== '' ? 0.54 : 0
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: removeFromFormula()
-                    onPressAndHold: clearFormula()
-                }
-
-                Behavior on opacity {
-                    NumberAnimation {
-                        duration: 200
-                    }
-                }
-            }
-
-            IconButton {
                 id: historyButton
                 implicitHeight: 40
                 implicitWidth: 40
@@ -189,9 +166,14 @@ FluidWindow {
 
             ButtonsPanel {
                 color: Material.color(Material.Grey, Material.Shade900)
-                labels: ['7', '8', '9', '^', '4', '5', '6', '!', '1', '2', '3', '(', '0', '.', ',', ')']
-                targets: ['7', '8', '9', '^', '4', '5', '6', '!', '1', '2', '3', '(', '0', '.', ',', ')']
+                labels: ['7', '8', '9', '←', '4', '5', '6', '^', '1', '2', '3', '!', '.', '0', '(', ')']
+                targets: ['7', '8', '9', 'DEL', '4', '5', '6', '^', '1', '2', '3', '!', '.', '0', '(', ')']
                 onButtonClicked: appendToFormula(strToAppend)
+                onButtonLongPressed: {
+                    if (strToAppend === "DEL") {
+                        clearFormula();
+                    }
+                }
             }
 
             ButtonsPanel {
@@ -211,6 +193,11 @@ FluidWindow {
     }
 
     function appendToFormula(text) {
+        if (text === "DEL") {
+            removeFromFormula();
+            return;
+        }
+
         formula.text += text;
         retrieveFormulaFocus();
     }

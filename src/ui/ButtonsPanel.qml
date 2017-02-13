@@ -39,6 +39,7 @@ Rectangle {
     property int rowsCount: 4
     property int fontSize: 17
     signal buttonClicked(string strToAppend)
+    signal buttonLongPressed(string strToAppend)
 
     Grid {
         id: grid
@@ -65,6 +66,7 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: buttonsPanel.buttonClicked(targets[index])
+                    onPressAndHold: buttonsPanel.buttonLongPressed(targets[index])
                 }
 
             }
