@@ -2,7 +2,7 @@ TEMPLATE = app
 TARGET = liri-calculator
 
 CONFIG += c++11
-QT += qml quick svg
+QT += qml quick svg quickcontrols2
 
 ICON += src/icons/liri-calculator.icns
 
