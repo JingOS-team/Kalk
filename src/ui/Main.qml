@@ -113,6 +113,7 @@ FluidWindow {
             IconButton {
                 id: trimButton
                 implicitHeight: 40
+                visible: expanded
                 implicitWidth: 40
                 iconSize: 20
                 iconName: 'navigation/arrow_back'
