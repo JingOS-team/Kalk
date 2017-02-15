@@ -28,55 +28,42 @@ import QtQuick.Controls.Material 2.0
 import Fluid.Controls 1.0
 import Fluid.Material 1.0
 import ".."
-
+import "../engine"
 
 Rectangle {
     id: buttonsPanel
-    height: grid.height
-    width: grid.width
-    property var labels
-    property var targets
-    property int rowsCount: 4
-    property int fontSize: 17
-    signal buttonClicked(string strToAppend)
-    signal buttonLongPressed(string strToAppend)
+    Component.onCompleted: updateHeight()
 
-    Grid {
-        id: grid
-        columns: getColumnsCount()
-        rows: 4
-        topPadding: Units.smallSpacing
-        bottomPadding: Units.smallSpacing
-        rowSpacing: Units.smallSpacing
-        columnSpacing: 0
+    property alias computedHeight: fns.height
 
-        Repeater {
-            model: buttonsPanel.labels
+    Row {
+        anchors.fill: parent
 
-            Label {
-                text: modelData
-                width: 64
-                topPadding: Units.smallSpacing / 2
-                bottomPadding: Units.smallSpacing / 2
-                horizontalAlignment: Qt.AlignHCenter
-                verticalAlignment: Qt.AlignVCenter
-                color: 'white'
-                font.pixelSize: buttonsPanel.fontSize
+        ButtonsView {
+            id: fns
+            color: Material.color(Material.Pink, Material.Shade500)
+            labels: ['sqrt','exp','log','cos','sin','tan','acos','asin','atan','π','∞','x10^']
+            targets: ['sqrt(','exp(','log','cos(','sin(','tan(','acos(','asin(','atan(','pi','Infinity','e']
+            onButtonClicked: calculationZone.appendToFormula(strToAppend)
+        }
 
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: buttonsPanel.buttonClicked(targets[index])
-                    onPressAndHold: buttonsPanel.buttonLongPressed(targets[index])
+        ButtonsView {
+            color: Material.color(Material.Grey, Material.Shade900)
+            labels: ['7', '8', '9', '←', '4', '5', '6', '^', '1', '2', '3', '!', '.', '0', '(', ')']
+            targets: ['7', '8', '9', 'DEL', '4', '5', '6', '^', '1', '2', '3', '!', '.', '0', '(', ')']
+            onButtonClicked: calculationZone.appendToFormula(strToAppend)
+            onButtonLongPressed: {
+                if (strToAppend === "DEL") {
+                    calculationZone.clearFormula();
                 }
-
             }
         }
-    }
 
-    function getColumnsCount() {
-        if (buttonsPanel.labels.length % buttonsPanel.rowsCount === 0) {
-            return buttonsPanel.labels.length / buttonsPanel.rowsCount;
+        ButtonsView {
+            color: Material.color(Material.Grey, Material.Shade800)
+            labels: ['+', '-', '×', '÷']
+            targets: ['+', '-', '*', '/']
+            onButtonClicked: calculationZone.appendToFormula(strToAppend)
         }
-        return Math.floor(buttonsPanel.labels.length / buttonsPanel.rowsCount) + 1;
     }
 }
