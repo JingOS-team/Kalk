@@ -37,12 +37,25 @@ FluidWindow {
     Component.onCompleted: calculationZone.retrieveFormulaFocus()
 
     property bool expanded: true
+    property bool advanced: false
     property var history: ListModel {}
 
-    maximumWidth: 64 * (3 + 4 + 1)
-    minimumWidth: 64 * (3 + 4 + 1)
-    height: 60
-    onHeightChanged: updateHeight()
+    property string lastFormula
+    property string lastError
+
+    property int normalWidth: 64 * (3 + 4 + 1)
+    property int normalHeight: 60
+    property int advancedWidth: 700
+    property int advancedHeight: 400
+
+    maximumWidth: root.advanced ? 1000 : normalWidth
+    minimumWidth: normalWidth
+    height: normalHeight
+    onHeightChanged: {
+        if (!advanced) {
+            updateHeight()
+        }
+    }
 
     Settings {
         property alias expanded: root.expanded
@@ -71,6 +84,7 @@ FluidWindow {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.top: calculationZone.bottom
+        visible: !root.advanced
     }
 
     HistoryPanel {
@@ -87,11 +101,19 @@ FluidWindow {
         id: addToHistoryTimer
         running: false
         interval: 1000
-        onTriggered: historyPanel.add()
+        onTriggered: {
+            handleCalculationError();
+            historyPanel.add();
+        }
+    }
+
+    InfoBar {
+       id: infoBar
     }
 
     function toogleExpanded() {
         setExpanded(!root.expanded);
+        root.advanced = false;
     }
 
     function setExpanded(expanded) {
@@ -105,11 +127,34 @@ FluidWindow {
         setExpanded(true);
     }
 
+    function toogleAdvanced() {
+        setAdvanced(!root.advanced);
+        setExpanded(!root.advanced);
+    }
+
+    function setAdvanced(advanced) {
+        root.advanced = advanced;
+        root.width = advanced ? advancedWidth : normalWidth;
+        root.height = advanced ? advancedHeight : normalHeight;
+        calculationZone.formulasLines.forceActiveFocus();
+        calculationZone.formulasLines.focus = true;
+    }
+
     function updateHeight() {
+        if (root.advanced) {
+            return;
+        }
+
         if (root.expanded) {
             root.height = calculationZone.getHeight() + buttonsPanel.computedHeight;
         } else {
             root.height = calculationZone.getHeight();
+        }
+    }
+
+    function handleCalculationError() {
+        if (lastFormula !== '' && lastError) {
+            infoBar.open(lastError);
         }
     }
 
@@ -146,15 +191,22 @@ FluidWindow {
         return bigNumberToFormat.toString()
     }
 
-    function calculate(formula) {
+    function calculate(formula, wantArray) {
+//        lastFormula = formula;
         try {
-            var result = mathJs.eval(formula);
-            result = formatBigNumber(result)
+            var res = mathJs.eval(formula);
+            if (!wantArray) {
+                res = formatBigNumber(res);
+            }
+//            lastError = undefined;
+//            console.log(res);
         } catch (exception) {
-            console.log("[LOG]: Unable to calculate formula : \"" + formula + "\", math.js: " + exception.toString());
+            console.log(exception.toString());
+            if (exception.toString().indexOf('Syntax') > -1) {
+                lastError = exception.toString();
+            }
             return '';
         }
-
-        return result;
+        return res;
     }
 }

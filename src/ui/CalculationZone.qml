@@ -17,8 +17,9 @@ Rectangle {
 
     property alias formula: formula
     property alias result: result
+    property alias formulasLines: formulasLines
 
-    height: getHeight()
+    height: root.advanced ? root.height : getHeight()
 
     TextInput {
         id: formula
@@ -27,6 +28,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: actions.left
+        visible: !root.advanced
         anchors.margins: Units.smallSpacing
         font.pixelSize: 20
         wrapMode: TextInput.WrapAnywhere
@@ -38,9 +40,58 @@ Rectangle {
         }
     }
 
+    Flickable {
+        visible: root.advanced
+        width: parent.width
+        height: parent.width
+        contentWidth: parent.width
+        contentHeight: formulasLines.implicitHeight
+//        boundsBehavior: Flickable.StopAtBounds
+        Row {
+            id: row
+            width: parent.width
+            padding: Units.smallSpacing
+            spacing: Units.smallSpacing
+
+            TextEdit {
+                id: formulasLines
+                text: ''
+                width: parent.width * 2/3
+                font.pointSize: 18
+                opacity: 0.54
+                selectByMouse: true
+                clip: true
+                onTextChanged: {
+                    resultsLines.text = calculate(text.split('\n'), true).join('\n')
+                }
+                wrapMode: TextEdit.NoWrap
+                property string placeholderText: "Write your multiline calculations here..."
+
+                Text {
+                    text: formulasLines.placeholderText
+                    color: 'black'
+                    opacity: 0.38
+                    font.pointSize: 18
+                    visible: !formulasLines.text
+                }
+            }
+
+            Text {
+                id: resultsLines
+                text: ''
+                opacity: 0.87
+                width: parent.width * 1/3
+                font.pointSize: 18
+                clip: true
+                wrapMode: TextEdit.NoWrap
+            }
+        }
+    }
+
     DisplayLabel {
         id: result
         opacity: 0.87
+        visible: !root.advanced
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
@@ -56,14 +107,25 @@ Rectangle {
         anchors.right: parent.right
 
         IconButton {
+            id: advancedButton
+            implicitHeight: 40
+            implicitWidth: 40
+            iconSize: 20
+            iconName: root.advanced ? 'navigation/close' : 'action/list'
+            iconColor: 'black'
+            opacity: 0.54
+            onClicked: toogleAdvanced()
+        }
+
+        IconButton {
             id: historyButton
             implicitHeight: 40
             implicitWidth: 40
             iconSize: 20
+            visible: !root.advanced
             iconName: historyPanel.visible ? 'communication/dialpad' : 'action/history'
             iconColor: 'black'
             opacity: 0.54
-//                onClicked: openHistory()
             onClicked: toogleHistory()
         }
 
@@ -72,6 +134,7 @@ Rectangle {
             implicitHeight: 40
             implicitWidth: 40
             iconSize: 20
+            visible: !root.advanced
             iconName: root.expanded ? 'navigation/expand_less' : 'navigation/expand_more'
             iconColor: 'black'
             opacity: 0.54
