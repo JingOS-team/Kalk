@@ -32,7 +32,6 @@ Rectangle {
         wrapMode: TextInput.WrapAnywhere
         selectByMouse: true
         onHeightChanged: updateHeight()
-        onAccepted: addToHistory()
         onTextChanged: {
             addToHistoryTimer.restart();
             result.text = calculate(text);

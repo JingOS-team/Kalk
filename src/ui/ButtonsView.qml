@@ -32,8 +32,8 @@ import ".."
 
 Rectangle {
     id: buttonsView
-    height: grid.height
-    width: grid.width
+    implicitHeight: grid.height
+    implicitWidth: grid.width
     property var labels
     property var targets
     property int rowsCount: 4
@@ -77,6 +77,6 @@ Rectangle {
         if (buttonsView.labels.length % buttonsView.rowsCount === 0) {
             return buttonsView.labels.length / buttonsView.rowsCount;
         }
-        return Math.floor(buttonsView.labels.length / buttonsView.rowsCount) + 1;
+        return Math.ceil(buttonsView.labels.length / buttonsView.rowsCount);
     }
 }
