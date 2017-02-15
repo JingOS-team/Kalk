@@ -32,8 +32,8 @@ import ".."
 
 Rectangle {
     id: buttonsView
-    implicitHeight: grid.height
-    implicitWidth: grid.width
+    implicitHeight: grid.implicitHeight
+    implicitWidth: grid.implicitWidth
     property var labels
     property var targets
     property int rowsCount: 4
@@ -74,9 +74,6 @@ Rectangle {
     }
 
     function getColumnsCount() {
-        if (buttonsView.labels.length % buttonsView.rowsCount === 0) {
-            return buttonsView.labels.length / buttonsView.rowsCount;
-        }
         return Math.ceil(buttonsView.labels.length / buttonsView.rowsCount);
     }
 }
