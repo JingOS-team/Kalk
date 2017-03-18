@@ -57,6 +57,9 @@ FluidWindow {
         }
     }
 
+    header: Item {}
+    title: 'Calculator'
+
     Settings {
         property alias expanded: root.expanded
         property alias history: root.history
