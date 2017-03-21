@@ -32,7 +32,7 @@ unix:!android:!mac {
     ICONS_SIZES = 16 32 64 128 192 256 512 1024 2048
     for(size, ICONS_SIZES) {
         eval(icon$${size}.files = data/icons/$${size}x$${size}/io.liri.Calculator.png)
-        eval(icon$${size}.path = $$LIRI_INSTALL_DATADIR/icons/hicolor/$${size}x$${size}/apps)
+        eval(icon$${size}.path = $$LIRI_INSTALL_PREFIX/share/icons/hicolor/$${size}x$${size}/apps)
         INSTALLS += icon$${size}
     }
 
