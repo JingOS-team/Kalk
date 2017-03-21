@@ -27,3 +27,13 @@ unix:!android {
     target.path = $$LIRI_INSTALL_BINDIR
     INSTALLS += target
 }
+
+unix:!android:!mac {
+    desktop.files = data/io.liri.Calculator.desktop
+    desktop.path = $$LIRI_INSTALL_APPLICATIONSDIR
+    INSTALLS += desktop
+
+    appdata.files = data/io.liri.Calculator.appdata.xml
+    appdata.path = $$LIRI_INSTALL_APPDATADIR
+    INSTALLS += appdata
+}
