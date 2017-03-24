@@ -7,5 +7,6 @@
         <file>ButtonsPanel.qml</file>
         <file>CalculationZone.qml</file>
         <file>Styles.qml</file>
+        <file>Shortcuts.qml</file>
     </qresource>
 </RCC>

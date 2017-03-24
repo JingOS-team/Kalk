@@ -62,6 +62,8 @@ FluidWindow {
 
     property Item styles: Styles {}
 
+    Shortcuts {}
+
     Settings {
         property alias expanded: root.expanded
         property alias history: root.history

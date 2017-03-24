@@ -38,6 +38,12 @@ Rectangle {
             addToHistoryTimer.restart();
             result.text = calculate(text);
         }
+//        Keys.onPressed: {
+//            if (event.key === Qt.P) {
+//                console.log('Key A was pressed');
+//                root.setAdvanced(true);
+//            }
+//        }
     }
 
     Flickable {
