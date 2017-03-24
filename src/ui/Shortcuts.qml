@@ -7,6 +7,16 @@ Item {
     }
 
     Shortcut {
+        sequence: "Ctrl+S"
+        onActivated: saveDialog.open()
+    }
+
+    Shortcut {
+        sequence: "Ctrl+O"
+        onActivated: openDialog.open()
+    }
+
+    Shortcut {
         sequence: "Ctrl+H"
         onActivated: toogleHistory()
         enabled: !advanced

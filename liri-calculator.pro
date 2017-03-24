@@ -16,9 +16,6 @@ greaterThan(QT_MAJOR_VERSION, 4) {
     }
 }
 
-SOURCES += \
-    $$PWD/src/main/main.cpp
-
 RESOURCES += \
     $$PWD/src/engine/engine.qrc \
     $$PWD/src/ui/ui.qrc
@@ -44,3 +41,6 @@ unix:!android:!mac {
     appdata.path = $$LIRI_INSTALL_APPDATADIR
     INSTALLS += appdata
 }
+
+include(src/main/main.pri)
+include(src/filehandler/filehandler.pri)

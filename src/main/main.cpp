@@ -28,6 +28,8 @@
 #include <QQmlContext>
 #include <QDebug>
 
+#include "../filehandler/filehandler.h"
+
 int main(int argc, char *argv[])
 {
     // Set Material Design QtQuick Controls 2 style
@@ -47,6 +49,8 @@ int main(int argc, char *argv[])
     #else
        engine.rootContext()->setContextProperty("debug", false);
     #endif
+
+    qmlRegisterType<FileHandler>("filehandler", 1, 0, "FileHandler");
 
     // setup qml imports
     engine.addImportPath("qrc:/");

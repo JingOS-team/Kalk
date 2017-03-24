@@ -23,11 +23,12 @@
 
 import QtQuick 2.7
 import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
 import Fluid.Controls 1.0
 import Fluid.Material 1.0
+import Qt.labs.platform 1.0
 import Qt.labs.settings 1.0
+import filehandler 1.0
 import ".."
 import "../engine"
 
@@ -113,6 +114,47 @@ FluidWindow {
         }
     }
 
+    FileHandler {
+        id: document
+        document: calculationZone.formulasLines.textDocument
+        cursorPosition: calculationZone.formulasLines.cursorPosition
+        selectionStart: calculationZone.formulasLines.selectionStart
+        selectionEnd: calculationZone.formulasLines.selectionEnd
+        onLoaded: {
+            setAdvanced(true);
+            calculationZone.formulasLines.text = text;
+        }
+        onError: {
+            console.log(message);
+        }
+        onFileUrlChanged: {
+            updateTitle()
+        }
+    }
+
+    FileDialog {
+        id: openDialog
+        fileMode: FileDialog.OpenFile
+        selectedNameFilter.index: 1
+        nameFilters: ["Text files (*.txt)"]
+        folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
+        onAccepted: document.load(file)
+    }
+
+    FileDialog {
+        id: saveDialog
+        fileMode: FileDialog.SaveFile
+        defaultSuffix: document.fileType
+        nameFilters: openDialog.nameFilters
+        selectedNameFilter.index: document.fileType === "txt" ? 0 : 1
+        folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
+        onAccepted: document.saveAs(file)
+    }
+
+    function updateTitle() {
+        root.title = 'Calculator - ' + document.fileName
+    }
+
     function toogleExpanded() {
         setExpanded(!root.expanded);
         root.advanced = false;
@@ -148,6 +190,14 @@ FluidWindow {
             var lines = calculationZone.formulasLines.text.split('\n');
             calculationZone.formula.text = lines[lines.length - 1];
         }
+    }
+
+    function setAdvancedContent(text) {
+        calculationZone.formulasLines.text = text;
+    }
+
+    function getAdvancedContent() {
+        return calculationZone.formulasLines.text;
     }
 
     function updateHeight() {
