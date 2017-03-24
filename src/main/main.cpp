@@ -25,6 +25,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QtQuickControls2/QQuickStyle>
+#include <QQmlContext>
 #include <QDebug>
 
 int main(int argc, char *argv[])
@@ -40,6 +41,12 @@ int main(int argc, char *argv[])
 
     // create qml app engine
     QQmlApplicationEngine engine;
+
+    #ifdef QT_DEBUG
+        engine.rootContext()->setContextProperty("debug", true);
+    #else
+       engine.rootContext()->setContextProperty("debug", false);
+    #endif
 
     // setup qml imports
     engine.addImportPath("qrc:/");

@@ -24,7 +24,7 @@ Rectangle {
     TextInput {
         id: formula
         color: 'black'
-        opacity: 0.54
+        opacity: root.styles.secondaryTextOpacity
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: actions.left
@@ -41,56 +41,76 @@ Rectangle {
     }
 
     Flickable {
-        visible: root.advanced
-        width: parent.width
-        height: parent.width
-        contentWidth: parent.width
-        contentHeight: formulasLines.implicitHeight
-//        boundsBehavior: Flickable.StopAtBounds
-        Row {
-            id: row
-            width: parent.width
-            padding: Units.smallSpacing
-            spacing: Units.smallSpacing
+         id: advancedView
+         visible: root.advanced
+         width: parent.width
+         height: parent.height;
+         contentWidth: formulasLines.paintedWidth
+         contentHeight: formulasLines.paintedHeight
+         clip: true
+         flickableDirection: Flickable.VerticalFlick
 
-            TextEdit {
-                id: formulasLines
-                text: ''
-                width: parent.width * 2/3
-                font.pointSize: 18
-                opacity: 0.54
-                selectByMouse: true
-                clip: true
-                onTextChanged: {
-                    resultsLines.text = calculate(text.split('\n'), true).join('\n')
-                }
-                wrapMode: TextEdit.NoWrap
-                property string placeholderText: "Write your multiline calculations here..."
+         ScrollIndicator.vertical: ScrollIndicator {}
 
-                Text {
-                    text: formulasLines.placeholderText
-                    color: 'black'
-                    opacity: 0.38
-                    font.pointSize: 18
-                    visible: !formulasLines.text
-                }
-            }
+         function ensureVisible(r) {
+             if (contentX >= r.x) {
+                 contentX = r.x;
+             } else if (contentX + width <= r.x + r.width) {
+                 contentX = r.x + r.width - width;
+             }
 
-            Text {
-                id: resultsLines
-                text: ''
-                opacity: 0.87
-                width: parent.width * 1/3
-                font.pointSize: 18
-                clip: true
-                wrapMode: TextEdit.NoWrap
-            }
-        }
-    }
+             if (contentY >= r.y) {
+                 contentY = r.y;
+             } else if (contentY + height <= r.y + r.height) {
+                 contentY = r.y + r.height - height;
+             }
+         }
+
+         Row {
+             id: row
+             width: parent.width
+             padding: Units.smallSpacing
+             spacing: Units.smallSpacing
+
+             TextEdit {
+                 id: formulasLines
+                 text: ''
+                 width: root.advancedWidth * 2/3
+                 height: advancedView.height
+                 font.pointSize: root.styles.advancedFontSize
+                 opacity: root.styles.secondaryTextOpacity
+                 selectByMouse: true
+                 onCursorRectangleChanged: advancedView.ensureVisible(cursorRectangle)
+                 onTextChanged: {
+                     resultsLines.text = calculate(text.split('\n'), true).join('\n')
+                 }
+                 wrapMode: TextEdit.NoWrap
+                 property string placeholderText: "Write your multiline calculations here..."
+
+                 Text {
+                     text: formulasLines.placeholderText
+                     color: 'black'
+                     opacity: root.styles.hintTextOpacity
+                     font.pointSize: root.styles.advancedFontSize
+                     visible: !formulasLines.text
+                 }
+             }
+
+             Text {
+                 id: resultsLines
+                 text: ''
+                 opacity: root.styles.primaryTextOpacity
+                 width: root.advancedWidth * 1/3
+                 font.pointSize: root.styles.advancedFontSize
+                 clip: true
+                 wrapMode: TextEdit.NoWrap
+             }
+         }
+     }
 
     DisplayLabel {
         id: result
-        opacity: 0.87
+        opacity: root.styles.primaryTextOpacity
         visible: !root.advanced
         anchors.bottom: parent.bottom
         anchors.left: parent.left
@@ -113,7 +133,7 @@ Rectangle {
             iconSize: 20
             iconName: root.advanced ? 'navigation/close' : 'action/list'
             iconColor: 'black'
-            opacity: 0.54
+            opacity: root.styles.secondaryTextOpacity
             onClicked: toogleAdvanced()
         }
 
@@ -125,7 +145,7 @@ Rectangle {
             visible: !root.advanced
             iconName: historyPanel.visible ? 'communication/dialpad' : 'action/history'
             iconColor: 'black'
-            opacity: 0.54
+            opacity: root.styles.secondaryTextOpacity
             onClicked: toogleHistory()
         }
 
@@ -137,21 +157,10 @@ Rectangle {
             visible: !root.advanced
             iconName: root.expanded ? 'navigation/expand_less' : 'navigation/expand_more'
             iconColor: 'black'
-            opacity: 0.54
+            opacity: root.styles.secondaryTextOpacity
             onClicked: toogleExpanded()
         }
-
-//            IconButton {
-//                id: menuButton
-//                implicitHeight: 40
-//                implicitWidth: 40
-//                iconSize: 20
-//                iconName: 'navigation/menu'
-//                iconColor: 'black'
-//                opacity: 0.54
-//            }
     }
-
 
     // Shouldn't be needed but the update isn't triggered otherwise
     function getHeight() {
@@ -159,7 +168,11 @@ Rectangle {
     }
 
     function retrieveFormulaFocus() {
-        calculationZone.formula.forceActiveFocus();
+        if (advanced) {
+            calculationZone.formulasLines.forceActiveFocus();
+        } else {
+            calculationZone.formula.forceActiveFocus();
+        }
     }
 
     function appendToFormula(text) {

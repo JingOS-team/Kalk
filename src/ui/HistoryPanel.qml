@@ -45,7 +45,7 @@ Rectangle {
 
         delegate: Label {
             width: parent.width
-            font.pointSize: 18
+            font.pointSize: root.styles.historyFontSize
             textFormat: Text.StyledText
             wrapMode: Text.WrapAnywhere
             text: '<font color="#757575">' + formula + ' = </font><font color="#212121">' + result + '</font>'

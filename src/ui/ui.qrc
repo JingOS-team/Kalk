@@ -6,5 +6,6 @@
         <file>HistoryPanel.qml</file>
         <file>ButtonsPanel.qml</file>
         <file>CalculationZone.qml</file>
+        <file>Styles.qml</file>
     </qresource>
 </RCC>

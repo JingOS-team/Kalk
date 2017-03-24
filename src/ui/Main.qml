@@ -60,6 +60,8 @@ FluidWindow {
     header: Item {}
     title: 'Calculator'
 
+    property Item styles: Styles {}
+
     Settings {
         property alias expanded: root.expanded
         property alias history: root.history
@@ -105,13 +107,8 @@ FluidWindow {
         running: false
         interval: 1000
         onTriggered: {
-            handleCalculationError();
             historyPanel.add();
         }
-    }
-
-    InfoBar {
-       id: infoBar
     }
 
     function toogleExpanded() {
@@ -141,6 +138,14 @@ FluidWindow {
         root.height = advanced ? advancedHeight : normalHeight;
         calculationZone.formulasLines.forceActiveFocus();
         calculationZone.formulasLines.focus = true;
+
+        // Transfer (last) calculation to the other view
+        if (advanced) {
+            calculationZone.formulasLines.text = calculationZone.formula.text;
+        } else {
+            var lines = calculationZone.formulasLines.text.split('\n');
+            calculationZone.formula.text = lines[lines.length - 1];
+        }
     }
 
     function updateHeight() {
@@ -152,12 +157,6 @@ FluidWindow {
             root.height = calculationZone.getHeight() + buttonsPanel.computedHeight;
         } else {
             root.height = calculationZone.getHeight();
-        }
-    }
-
-    function handleCalculationError() {
-        if (lastFormula !== '' && lastError) {
-            infoBar.open(lastError);
         }
     }
 
@@ -180,7 +179,6 @@ FluidWindow {
      */
 
     function formatBigNumber(bigNumberToFormat) {
-
         // Maximum length of the result number
         var NUMBER_LENGTH_LIMIT = 14;
 
@@ -195,18 +193,14 @@ FluidWindow {
     }
 
     function calculate(formula, wantArray) {
-//        lastFormula = formula;
         try {
             var res = mathJs.eval(formula);
             if (!wantArray) {
                 res = formatBigNumber(res);
             }
-//            lastError = undefined;
-//            console.log(res);
         } catch (exception) {
-            console.log(exception.toString());
-            if (exception.toString().indexOf('Syntax') > -1) {
-                lastError = exception.toString();
+            if (debug) {
+                console.log(exception.toString());
             }
             return '';
         }
