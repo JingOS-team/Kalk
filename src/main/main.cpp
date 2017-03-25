@@ -35,9 +35,7 @@ int main(int argc, char *argv[])
     // Set Material Design QtQuick Controls 2 style
     QQuickStyle::setStyle(QLatin1String("Material"));
 
-    #if defined(ENABLE_HIGH_DPI_SCALING)
-        QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    #endif
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
 
