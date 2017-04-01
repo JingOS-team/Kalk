@@ -51,88 +51,61 @@ Rectangle {
             anchors.top: parent.top
             anchors.right: parent.right
 
-            IconButton {
+            NavButton {
                 id: helpButton
-                implicitHeight: 40
-                implicitWidth: 40
-                iconSize: 20
                 visible: root.advanced
                 iconName: 'action/info_outline'
-                iconColor: 'black'
-                opacity: root.styles.secondaryTextOpacity
+                ToolTip.text: "Help"
                 onClicked: Qt.openUrlExternally('http://mathjs.org/docs/expressions/syntax.html')
             }
 
-            IconButton {
+            NavButton {
                 id: openButton
-                implicitHeight: 40
-                implicitWidth: 40
-                iconSize: 20
                 visible: root.advanced
                 iconName: 'file/folder_open'
-                iconColor: 'black'
-                opacity: root.styles.secondaryTextOpacity
+                ToolTip.text: "Open file (Ctrl+O)"
                 onClicked: openFile()
             }
 
-            IconButton {
+            NavButton {
                 id: saveButton
-                implicitHeight: 40
-                implicitWidth: 40
-                iconSize: 20
                 enabled: formulasLines.text !== ''
                 visible: root.advanced
                 iconName: 'content/save'
-                iconColor: 'black'
                 opacity: enabled ? root.styles.secondaryTextOpacity : root.styles.hintTextOpacity
+                ToolTip.text: "Save file (Ctrl+S)"
                 onClicked: saveFile()
             }
 
-            IconButton {
+            NavButton {
                 id: advancedButton
-                implicitHeight: 40
-                implicitWidth: 40
-                iconSize: 20
-                iconName: 'action/list'
                 visible: !root.advanced
-                iconColor: 'black'
-                opacity: root.styles.secondaryTextOpacity
+                iconName: 'action/list'
+                ToolTip.text: "Advanced mode (Ctrl+D)"
                 onClicked: setAdvanced(true)
             }
 
-            IconButton {
+            NavButton {
                 id: closeButton
-                implicitHeight: 40
-                implicitWidth: 40
-                iconSize: 20
-                iconName: 'navigation/close'
-                iconColor: 'black'
                 visible: root.advanced
-                opacity: root.styles.secondaryTextOpacity
+                iconName: 'navigation/close'
+                ToolTip.text: "Close advanced mode"
                 onClicked: closeFile()
             }
 
-            IconButton {
+            NavButton {
                 id: historyButton
-                implicitHeight: 40
-                implicitWidth: 40
-                iconSize: 20
                 visible: !root.advanced
                 iconName: historyPanel.visible ? 'communication/dialpad' : 'action/history'
-                iconColor: 'black'
-                opacity: root.styles.secondaryTextOpacity
+                ToolTip.text: "Toggle history (Ctrl+H)"
                 onClicked: toogleHistory()
             }
 
-            IconButton {
+            NavButton {
                 id: expandButton
-                implicitHeight: 40
-                implicitWidth: 40
-                iconSize: 20
                 visible: !root.advanced
                 iconName: root.expanded ? 'navigation/expand_less' : 'navigation/expand_more'
-                iconColor: 'black'
-                opacity: root.styles.secondaryTextOpacity
+                ToolTip.text: "Toggle expanded (Ctrl+E)"
                 onClicked: toogleExpanded()
             }
         }
