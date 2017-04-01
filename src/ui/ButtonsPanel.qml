@@ -41,7 +41,7 @@ Rectangle {
 
         ButtonsView {
             id: fns
-            color: Material.color(Material.Pink, Material.Shade500)
+            color: styles.accentColor
             labels: ['sqrt','exp','log','cos','sin','tan','acos','asin','atan','π','∞','x10^']
             targets: ['sqrt(','exp(','log','cos(','sin(','tan(','acos(','asin(','atan(','pi','Infinity','e']
             onButtonClicked: calculationZone.appendToFormula(strToAppend)
