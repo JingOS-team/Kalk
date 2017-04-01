@@ -24,6 +24,8 @@
 import QtQuick 2.7
 import QtQuick.Layouts 1.1
 import QtQuick.Controls.Material 2.0
+import QtQuick.Controls 2.1
+import Fluid.Controls 1.0 as FluidControls
 import Fluid.Controls 1.0
 import Fluid.Material 1.0
 import Qt.labs.platform 1.0
@@ -120,16 +122,22 @@ FluidWindow {
         cursorPosition: calculationZone.formulasLines.cursorPosition
         selectionStart: calculationZone.formulasLines.selectionStart
         selectionEnd: calculationZone.formulasLines.selectionEnd
+        onError: snackBar.open(message)
+        onFileUrlChanged: updateTitle()
+        onDocumentChanged: console.log('heyy')
         onLoaded: {
             setAdvanced(true);
             calculationZone.formulasLines.text = text;
+            document.edited = false;
         }
-        onError: {
-            console.log(message);
+
+        onCursorPositionChanged: {
+            edited = true;
+            updateTitle();
         }
-        onFileUrlChanged: {
-            updateTitle()
-        }
+
+        property bool edited: false
+        property bool unsaved: document.fileName === 'untitled.txt'
     }
 
     FileDialog {
@@ -148,11 +156,80 @@ FluidWindow {
         nameFilters: openDialog.nameFilters
         selectedNameFilter.index: document.fileType === "txt" ? 0 : 1
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
-        onAccepted: document.saveAs(file)
+        onAccepted: saveFile(true, file)
+    }
+
+    FluidControls.AlertDialog {
+        id: alertDialog
+        x: (parent.width - width) / 2
+        y: (parent.height - height) / 2
+        standardButtons: Dialog.Ok | Dialog.Cancel
+        title: "Discard unsaved?"
+        onAccepted: target === "close" ? closeFile(true) : openFile(true)
+
+        property string target: ""
+
+        function show(target) {
+            alertDialog.open();
+            alertDialog.target = target;
+        }
+    }
+
+    InfoBar {
+        id: snackBar
+        z: 99
+    }
+
+    function saveFile(bypass, bypassFileUrl) {
+        if (!bypass) {
+            if (document.unsaved) {
+                saveDialog.open();
+                return;
+            }
+        }
+        document.saveAs(bypassFileUrl ? bypassFileUrl : document.fileUrl);
+        document.edited = false;
+        snackBar.open((bypassFileUrl ? bypassFileUrl : document.fileName) + ' saved');
+        updateTitle();
+    }
+
+    function closeFile(bypass) {
+        if (!bypass) {
+            if (document.unsaved || document.edited) {
+                alertDialog.show('close');
+                return;
+            }
+        }
+
+        document.load(null);
+        setAdvanced(false);
+    }
+
+    function openFile(bypass) {
+        if (!bypass && root.advanced) {
+            if (document.unsaved || document.edited) {
+                alertDialog.show('open');
+                return;
+            }
+        }
+        openDialog.open();
+    }
+
+    function getDisplayableFileName() {
+        if (document.unsaved) {
+            return 'Unsaved';
+        }
+        if (document.edited) {
+            return document.fileName + '*';
+        }
+        return document.fileName;
     }
 
     function updateTitle() {
-        root.title = 'Calculator - ' + document.fileName
+        root.title = 'Calculator';
+        if (root.advanced) {
+            root.title += ' - ' + getDisplayableFileName();
+        }
     }
 
     function toogleExpanded() {
@@ -163,6 +240,7 @@ FluidWindow {
     function setExpanded(expanded) {
         root.expanded = expanded;
         updateHeight();
+        updateTitle();
         calculationZone.retrieveFormulaFocus();
     }
 
@@ -189,7 +267,9 @@ FluidWindow {
         } else {
             var lines = calculationZone.formulasLines.text.split('\n');
             calculationZone.formula.text = lines[lines.length - 1];
+            calculationZone.retrieveFormulaFocus();
         }
+        updateTitle();
     }
 
     function setAdvancedContent(text) {
