@@ -118,16 +118,15 @@ FluidWindow {
 
     FileHandler {
         id: document
-        document: calculationZone.formulasLines.textDocument
-        cursorPosition: calculationZone.formulasLines.cursorPosition
-        selectionStart: calculationZone.formulasLines.selectionStart
-        selectionEnd: calculationZone.formulasLines.selectionEnd
+        document: documentText.textDocument
+        cursorPosition: documentText.cursorPosition
+        selectionStart: documentText.selectionStart
+        selectionEnd: documentText.selectionEnd
         onError: snackBar.open(message)
         onFileUrlChanged: updateTitle()
-        onDocumentChanged: console.log('heyy')
         onLoaded: {
             setAdvanced(true);
-            calculationZone.formulasLines.text = text;
+            calculationZone.loadFileContent(text);
             document.edited = false;
         }
 
@@ -137,14 +136,24 @@ FluidWindow {
         }
 
         property bool edited: false
-        property bool unsaved: document.fileName === 'untitled.txt'
+        property bool unsaved: document.fileName === 'untitled.lcs'
+
+        function setEdited(edited) {
+            this.edited = edited;
+            root.updateTitle();
+        }
+    }
+
+    TextEdit {
+        visible: false
+        id: documentText
     }
 
     FileDialog {
         id: openDialog
         fileMode: FileDialog.OpenFile
         selectedNameFilter.index: 1
-        nameFilters: ["Text files (*.txt)"]
+        nameFilters: ["Liri Calculator Script (*.lcs)"]
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
         onAccepted: document.load(file)
     }
@@ -154,7 +163,7 @@ FluidWindow {
         fileMode: FileDialog.SaveFile
         defaultSuffix: document.fileType
         nameFilters: openDialog.nameFilters
-        selectedNameFilter.index: document.fileType === "txt" ? 0 : 1
+        selectedNameFilter.index: document.fileType === "lcs" ? 0 : 1
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
         onAccepted: saveFile(true, file)
     }
@@ -258,15 +267,11 @@ FluidWindow {
         root.advanced = advanced;
         root.width = advanced ? advancedWidth : normalWidth;
         root.height = advanced ? advancedHeight : normalHeight;
-        calculationZone.formulasLines.forceActiveFocus();
-        calculationZone.formulasLines.focus = true;
 
-        // Transfer (last) calculation to the other view
         if (advanced) {
-            calculationZone.formulasLines.text = calculationZone.formula.text;
+            calculationZone.loadFileContent(calculationZone.formula.text);
+            calculationZone.setFocusAt(0);
         } else {
-            var lines = calculationZone.formulasLines.text.split('\n');
-            calculationZone.formula.text = lines[lines.length - 1];
             calculationZone.retrieveFormulaFocus();
         }
         updateTitle();

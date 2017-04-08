@@ -9,5 +9,6 @@
         <file>Styles.qml</file>
         <file>Shortcuts.qml</file>
         <file>NavButton.qml</file>
+        <file>CalculationLine.qml</file>
     </qresource>
 </RCC>

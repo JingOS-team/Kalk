@@ -72,7 +72,7 @@ QString FileHandler::fileName() const {
     const QString filePath = QQmlFile::urlToLocalFileOrQrc(m_fileUrl);
     const QString fileName = QFileInfo(filePath).fileName();
     if (fileName.isEmpty()) {
-        return QStringLiteral("untitled.txt");
+        return QStringLiteral("untitled.lcs");
     }
     return fileName;
 }

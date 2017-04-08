@@ -1,5 +1,5 @@
 import QtQuick 2.7
-import QtQuick.Layouts 1.1
+import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
 import Fluid.Controls 1.0
@@ -17,11 +17,12 @@ Rectangle {
 
     property alias formula: formula
     property alias result: result
-    property alias formulasLines: formulasLines
+    property alias calculationsRepeater: calculationsRepeater
 
     height: root.advanced ? root.height : getHeight()
 
     Rectangle {
+        id: advancedToolbar
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
@@ -69,7 +70,7 @@ Rectangle {
 
             NavButton {
                 id: saveButton
-                enabled: formulasLines.text !== ''
+                enabled: document.edited || document.unsaved
                 visible: root.advanced
                 iconName: 'content/save'
                 opacity: enabled ? root.styles.secondaryTextOpacity : root.styles.hintTextOpacity
@@ -111,13 +112,53 @@ Rectangle {
         }
     }
 
+    Flickable {
+        id: advancedView
+        visible: root.advanced
+        y: 40
+        height: parent.height - y
+        clip: true
+        width: root.advancedWidth
+        contentHeight: contentColumn.height
+        contentWidth: contentColumn.width
+        flickableDirection: Flickable.VerticalFlick
+        boundsBehavior: Flickable.StopAtBounds
+
+        Column {
+            id: contentColumn
+            spacing: Units.smallSpacing
+            width: parent.width
+
+            property Transition transition: Transition {
+                PropertyAnimation { properties: "x,opacity"; easing.type: Easing.InOutQuad }
+            }
+
+            move: transition
+            add: transition
+
+            Repeater {
+                id: calculationsRepeater
+                width: parent.width
+
+                model: ListModel {
+                    ListElement {
+                        formula: ''
+                        result: ''
+                    }
+                }
+
+                delegate: CalculationLine {}
+            }
+        }
+    }
+
     TextInput {
         id: formula
         color: 'black'
         opacity: root.styles.secondaryTextOpacity
         anchors.top: parent.top
         anchors.left: parent.left
-        anchors.right: actions.left
+        width: root.width - actions.width
         visible: !root.advanced
         anchors.margins: Units.smallSpacing
         font.pixelSize: 20
@@ -128,92 +169,7 @@ Rectangle {
             addToHistoryTimer.restart();
             result.text = calculate(text);
         }
-//        Keys.onPressed: {
-//            if (event.key === Qt.P) {
-//                console.log('Key A was pressed');
-//                root.setAdvanced(true);
-//            }
-//        }
     }
-
-    Flickable {
-         id: advancedView
-         visible: root.advanced
-         anchors.fill: parent
-         anchors.topMargin: 40
-         contentWidth: formulasLines.paintedWidth
-         contentHeight: formulasLines.paintedHeight
-         clip: true
-         flickableDirection: Flickable.VerticalFlick
-
-         ScrollIndicator.vertical: ScrollIndicator {}
-
-         function ensureVisible(r) {
-             if (contentX >= r.x) {
-                 contentX = r.x;
-             } else if (contentX + width <= r.x + r.width) {
-                 contentX = r.x + r.width - width;
-             }
-
-             if (contentY >= r.y) {
-                 contentY = r.y;
-             } else if (contentY + height <= r.y + r.height) {
-                 contentY = r.y + r.height - height;
-             }
-         }
-
-         Row {
-             id: row
-             width: parent.width
-             padding: Units.smallSpacing
-             spacing: Units.smallSpacing
-
-             TextEdit {
-                 id: formulasLines
-                 text: ''
-                 width: (root.advancedWidth - 3 * Units.smallSpacing) * 2/3
-                 height: advancedView.height
-                 font.pointSize: root.styles.advancedFontSize
-                 opacity: root.styles.secondaryTextOpacity
-                 selectByMouse: true
-                 onCursorRectangleChanged: advancedView.ensureVisible(cursorRectangle)
-                 onTextChanged: {
-                     resultsLines.text = calculate(text.split('\n'), true).join('\n')
-                 }
-                 wrapMode: TextEdit.NoWrap
-                 property string placeholderText: "Write your multiline calculations here..."
-
-                 Text {
-                     text: formulasLines.placeholderText
-                     color: 'black'
-                     opacity: root.styles.hintTextOpacity * 1/root.styles.secondaryTextOpacity
-                     font.pointSize: root.styles.advancedFontSize
-                     visible: !formulasLines.text
-                 }
-             }
-
-             Text {
-                 id: resultsLines
-                 text: ''
-                 opacity: !formulasLines.text ? root.styles.hintTextOpacity : root.styles.primaryTextOpacity
-                 width: (root.advancedWidth - 3 * Units.smallSpacing) * 1/3
-                 font.pointSize: root.styles.advancedFontSize
-                 horizontalAlignment: Text.AlignRight
-                 clip: true
-                 wrapMode: TextEdit.NoWrap
-                 visible: !!formulasLines.text
-             }
-
-             Text {
-                 text: '... to get results'
-                 opacity: root.styles.hintTextOpacity
-                 width: (root.advancedWidth - 3 * Units.smallSpacing) * 1/3
-                 font.pointSize: root.styles.advancedFontSize
-                 horizontalAlignment: Text.AlignRight
-                 visible: !formulasLines.text
-             }
-         }
-     }
 
     DisplayLabel {
         id: result
@@ -231,6 +187,26 @@ Rectangle {
     // Shouldn't be needed but the update isn't triggered otherwise
     function getHeight() {
         return calculationZone.formula.height + 4 * Units.smallSpacing + result.height;
+    }
+
+    function loadFileContent(text) {
+        var formulas = text.split('\n');
+        calculationsRepeater.model.clear();
+        for (var i=0; i<formulas.length; i++) {
+            calculationsRepeater.model.append({formula: formulas[i], result: ''});
+        }
+    }
+
+    function syncTextDocument() {
+        var text = '';
+        for (var i=0; i<calculationsRepeater.model.count; i++) {
+            text += calculationsRepeater.model.get(i).formula;
+            if (i < calculationsRepeater.model.count - 1) {
+                text += '\n';
+            }
+        }
+        documentText.text = text;
+        document.setEdited(true);
     }
 
     function retrieveFormulaFocus() {
@@ -273,5 +249,9 @@ Rectangle {
     function replaceFormula(formulaStr) {
         setFormulaText(formulaStr);
         retrieveFormulaFocus();
+    }
+
+    function setFocusAt(index) {
+        calculationsRepeater.itemAt(index).children[0].children[0].forceActiveFocus();
     }
 }
