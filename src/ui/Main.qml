@@ -41,7 +41,7 @@ FluidWindow {
 
     property bool expanded: true
     property bool advanced: false
-    property var history: ListModel {}
+    property ListModel history: ListModel {}
 
     property string lastFormula
     property string lastError
