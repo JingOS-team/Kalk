@@ -36,13 +36,6 @@ Column {
                     }
                     syncTextDocument();
                 }
-                Keys.onReturnPressed: {
-                    calculationsRepeater.model.insert(index + 1,{ formula: '', result: '' });
-                    setFocusAt(index + 1);
-                    if (index + 2 === calculationsRepeater.model.count && advancedView.contentHeight >= advancedView.height) {
-                        advancedView.contentY = advancedView.contentHeight - advancedView.height;
-                    }
-                }
                 Keys.onDownPressed: {
                     if (index < calculationsRepeater.model.count - 1) {
                         setFocusAt(index + 1)
@@ -54,9 +47,23 @@ Column {
                     }
                 }
                 Keys.onPressed: {
-                    if (index > 0 && event.key === Qt.Key_Backspace && text === '') {
-                        setFocusAt(index - 1);
-                        calculationsRepeater.model.remove(index, 1);
+                    switch (event.key) {
+                        case Qt.Key_Enter:
+                        case Qt.Key_Return:
+                            event.accepted = true;
+                            calculationsRepeater.model.insert(index + 1,{ formula: '', result: '' });
+                            setFocusAt(index + 1);
+                            if (index + 2 === calculationsRepeater.model.count && advancedView.contentHeight >= advancedView.height) {
+                                advancedView.contentY = advancedView.contentHeight - advancedView.height;
+                            }
+                            break;
+                        case Qt.Key_Backspace:
+                            if (index > 0 && event.key === Qt.Key_Backspace && text === '') {
+                                setFocusAt(index - 1);
+                                calculationsRepeater.model.remove(index, 1);
+                            }
+                            break;
+                        default: return;
                     }
                 }
             }
