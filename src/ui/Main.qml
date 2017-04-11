@@ -119,20 +119,12 @@ FluidWindow {
     FileHandler {
         id: document
         document: documentText.textDocument
-        cursorPosition: documentText.cursorPosition
-        selectionStart: documentText.selectionStart
-        selectionEnd: documentText.selectionEnd
         onError: snackBar.open(message)
         onFileUrlChanged: updateTitle()
         onLoaded: {
             setAdvanced(true);
             calculationZone.loadFileContent(text);
             document.edited = false;
-        }
-
-        onCursorPositionChanged: {
-            edited = true;
-            updateTitle();
         }
 
         property bool edited: false
@@ -203,10 +195,12 @@ FluidWindow {
     }
 
     function closeFile(bypass) {
-        if (!bypass) {
-            if (document.unsaved || document.edited) {
-                alertDialog.show('close');
-                return;
+        if (!(documentText.text === '')) {
+            if (!bypass) {
+                if (document.unsaved || document.edited) {
+                    alertDialog.show('close');
+                    return;
+                }
             }
         }
 
@@ -339,6 +333,8 @@ FluidWindow {
             if (debug) {
                 console.log(exception.toString());
             }
+            lastError = exception.toString();
+            console.log(lastError);
             return '';
         }
         return res;

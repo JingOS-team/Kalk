@@ -115,7 +115,7 @@ Rectangle {
     Flickable {
         id: advancedView
         visible: root.advanced
-        y: 40
+        y: advancedToolbar.height
         height: parent.height - y
         clip: true
         width: root.advancedWidth

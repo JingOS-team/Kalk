@@ -62,22 +62,35 @@ Column {
             }
 
             Text {
-                text: result
+                id: formulaResult
+                text: hasError ? 'Error' : formula === '' ? '' : result
+                color: hasError ? 'red' : 'black'
                 height: formulaEdit.height
-                opacity: root.styles.primaryTextOpacity
+                opacity: hasError ? root.styles.hintTextOpacity : root.styles.primaryTextOpacity
                 width: (root.advancedWidth - 3 * Units.smallSpacing) * 1/3
                 font.pointSize: root.styles.advancedFontSize
                 horizontalAlignment: Text.AlignRight
                 clip: true
                 wrapMode: TextEdit.NoWrap
+                font.italic: hasError
                 verticalAlignment: Qt.AlignBottom
+
+                property bool hasError: result === 'undefined' && formula !== ''
+
+                MouseArea {
+                    visible: parent.hasError
+                    enabled: parent.hasError
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: snackBar.open(root.lastError)
+                }
             }
     }
 
     Rectangle {
         width: parent.width - 2 * Units.smallSpacing
         height: 1
-        color: 'black'
+        color: formulaResult.hasError ? 'red' : 'black'
         opacity: 0.1
     }
 }
