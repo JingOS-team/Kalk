@@ -37,11 +37,11 @@ import "../engine"
 FluidWindow {
     id: root
     visible: true
-    Component.onCompleted: calculationZone.retrieveFormulaFocus()
 
     property bool expanded: true
     property bool advanced: false
-    property ListModel history: ListModel {}
+
+    property var history: []
 
     property string lastFormula
     property string lastError
@@ -62,6 +62,13 @@ FluidWindow {
 
     header: Item {}
     title: 'Calculator'
+
+    Component.onCompleted: {
+        calculationZone.retrieveFormulaFocus();
+        retrieveHistory();
+    }
+
+    Component.onDestruction: saveHistory()
 
     property Item styles: Styles {}
 
@@ -179,6 +186,21 @@ FluidWindow {
     InfoBar {
         id: snackBar
         z: 99
+    }
+
+    function retrieveHistory() {
+        historyPanel.historyModel.clear();
+        for (var i = 0; i < root.history.length; i++) {
+            historyPanel.historyModel.append(root.history[i]);
+        }
+    }
+
+    function saveHistory() {
+        var historyArray = [];
+        for (var i = 0; i < historyPanel.historyModel.count; i++) {
+            historyArray.push(historyPanel.historyModel.get(i));
+        }
+        root.history = historyArray;
     }
 
     function saveFile(bypass, bypassFileUrl) {
