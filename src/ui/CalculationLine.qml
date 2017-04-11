@@ -63,7 +63,7 @@ Column {
 
             Text {
                 id: formulaResult
-                text: hasError ? 'Error' : formula === '' ? '' : result
+                text: hasError ? qsTr('Error') : formula === '' ? '' : result
                 color: hasError ? 'red' : 'black'
                 height: formulaEdit.height
                 opacity: hasError ? root.styles.hintTextOpacity : root.styles.primaryTextOpacity

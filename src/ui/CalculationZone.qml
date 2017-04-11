@@ -56,7 +56,7 @@ Rectangle {
                 id: helpButton
                 visible: root.advanced
                 iconName: 'action/info_outline'
-                ToolTip.text: "Help"
+                ToolTip.text: qsTr('Help')
                 onClicked: Qt.openUrlExternally('http://mathjs.org/docs/expressions/syntax.html')
             }
 
@@ -64,7 +64,7 @@ Rectangle {
                 id: openButton
                 visible: root.advanced
                 iconName: 'file/folder_open'
-                ToolTip.text: "Open file (Ctrl+O)"
+                ToolTip.text: qsTr('Open file') + ' (Ctrl+O)'
                 onClicked: openFile()
             }
 
@@ -74,7 +74,7 @@ Rectangle {
                 visible: root.advanced
                 iconName: 'content/save'
                 opacity: enabled ? root.styles.secondaryTextOpacity : root.styles.hintTextOpacity
-                ToolTip.text: "Save file (Ctrl+S)"
+                ToolTip.text: qsTr('Save file') + ' (Ctrl+S)'
                 onClicked: saveFile()
             }
 
@@ -82,7 +82,7 @@ Rectangle {
                 id: advancedButton
                 visible: !root.advanced
                 iconName: 'action/list'
-                ToolTip.text: "Advanced mode (Ctrl+D)"
+                ToolTip.text: qsTr('Advanced mode') + ' (Ctrl+D)'
                 onClicked: setAdvanced(true)
             }
 
@@ -90,7 +90,7 @@ Rectangle {
                 id: closeButton
                 visible: root.advanced
                 iconName: 'navigation/close'
-                ToolTip.text: "Close advanced mode"
+                ToolTip.text: qsTr('Close advanced mode')
                 onClicked: closeFile()
             }
 
@@ -98,7 +98,7 @@ Rectangle {
                 id: historyButton
                 visible: !root.advanced
                 iconName: historyPanel.visible ? 'communication/dialpad' : 'action/history'
-                ToolTip.text: "Toggle history (Ctrl+H)"
+                ToolTip.text: qsTr('Toggle history') + ' (Ctrl+H)'
                 onClicked: toogleHistory()
             }
 
@@ -106,7 +106,7 @@ Rectangle {
                 id: expandButton
                 visible: !root.advanced
                 iconName: root.expanded ? 'navigation/expand_less' : 'navigation/expand_more'
-                ToolTip.text: "Toggle expanded (Ctrl+E)"
+                ToolTip.text: qsTr('Toggle expanded') + ' (Ctrl+E)'
                 onClicked: toogleExpanded()
             }
         }

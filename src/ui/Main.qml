@@ -155,7 +155,7 @@ FluidWindow {
         fileMode: FileDialog.SaveFile
         defaultSuffix: document.fileType
         nameFilters: openDialog.nameFilters
-        selectedNameFilter.index: document.fileType === "lcs" ? 0 : 1
+        selectedNameFilter.index: document.fileType === 'lcs' ? 0 : 1
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
         onAccepted: saveFile(true, file)
     }
@@ -165,10 +165,10 @@ FluidWindow {
         x: (parent.width - width) / 2
         y: (parent.height - height) / 2
         standardButtons: Dialog.Ok | Dialog.Cancel
-        title: "Discard unsaved?"
-        onAccepted: target === "close" ? closeFile(true) : openFile(true)
+        title: qsTr('Discard unsaved?')
+        onAccepted: target === 'close' ? closeFile(true) : openFile(true)
 
-        property string target: ""
+        property string target: ''
 
         function show(target) {
             alertDialog.open();
@@ -190,7 +190,7 @@ FluidWindow {
         }
         document.saveAs(bypassFileUrl ? bypassFileUrl : document.fileUrl);
         document.edited = false;
-        snackBar.open((bypassFileUrl ? bypassFileUrl : document.fileName) + ' saved');
+        snackBar.open((bypassFileUrl ? bypassFileUrl : document.fileName) + ' ' + qsTr('saved'));
         updateTitle();
     }
 
