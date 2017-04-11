@@ -41,7 +41,7 @@ FluidWindow {
     property bool expanded: true
     property bool advanced: false
 
-    property var history: []
+    property string history: ''
 
     property string lastFormula
     property string lastError
@@ -190,17 +190,22 @@ FluidWindow {
 
     function retrieveHistory() {
         historyPanel.historyModel.clear();
-        for (var i = 0; i < root.history.length; i++) {
-            historyPanel.historyModel.append(root.history[i]);
+        var historyArray = JSON.parse(root.history);
+        for (var i = 0; i < historyArray.length; i++) {
+            historyPanel.historyModel.append(historyArray[i]);
         }
     }
 
     function saveHistory() {
         var historyArray = [];
         for (var i = 0; i < historyPanel.historyModel.count; i++) {
-            historyArray.push(historyPanel.historyModel.get(i));
+            var item = historyPanel.historyModel.get(i);
+            historyArray.push({
+               formula: item.formula,
+               result: item.result,
+            });
         }
-        root.history = historyArray;
+        root.history = JSON.stringify(historyArray)
     }
 
     function saveFile(bypass, bypassFileUrl) {
@@ -356,7 +361,6 @@ FluidWindow {
                 console.log(exception.toString());
             }
             lastError = exception.toString();
-            console.log(lastError);
             return '';
         }
         return res;
