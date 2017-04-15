@@ -157,8 +157,9 @@ Rectangle {
         anchors.bottom: result.top
         width: root.width - actions.width
         visible: !root.advanced
-        contentHeight: formula.paintedHeight
-        ScrollBar.vertical: ScrollBar { }
+        contentHeight: formula.implicitHeight
+        flickableDirection: Flickable.VerticalFlick
+        ScrollIndicator.vertical: ScrollIndicator {}
 
         function ensureVisible(r) {
             if (contentY >= r.y) {
@@ -180,7 +181,6 @@ Rectangle {
             font.pixelSize: 20
             wrapMode: TextInput.WrapAnywhere
             selectByMouse: true
-            onHeightChanged: updateHeight()
             onTextChanged: {
                 addToHistoryTimer.restart();
                 result.text = calculate(text);

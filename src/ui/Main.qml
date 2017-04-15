@@ -46,13 +46,16 @@ FluidWindow {
     property string lastFormula
     property string lastError
 
-    property int normalWidth: 64 * (3 + 4 + 1) * 0 + 60
-    property int normalHeight: 60
+    property int normalWidth: 64 * (3 + 4 + 1)
+    property int normalHeight: root.expanded ? buttonsPanel.height + normalCalculationZoneHeight : normalCalculationZoneHeight
     property int advancedWidth: 700
     property int advancedHeight: 400
+    property int normalCalculationZoneHeight: 110
 
-    height: 320
-    width: 500
+    height: normalHeight
+    minimumHeight: normalHeight
+    width: normalWidth
+    minimumWidth: normalWidth
     header: Item {}
     title: 'Calculator'
 
@@ -91,7 +94,7 @@ FluidWindow {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.bottom: root.advanced ? parent.bottom : buttonsPanel.top
+        anchors.bottom: root.advanced || !root.expanded ? parent.bottom : buttonsPanel.top
     }
 
     ButtonsPanel {

@@ -32,9 +32,9 @@ import "../engine"
 
 Rectangle {
     id: buttonsPanel
-    Component.onCompleted: updateHeight()
 
     property alias computedHeight: fns.height
+
     height: computedHeight
 
     Row {
