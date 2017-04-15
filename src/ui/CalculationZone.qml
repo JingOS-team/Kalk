@@ -8,9 +8,6 @@ import Fluid.Material 1.0
 Rectangle {
     id: calculationZone
     color: 'white'
-    anchors.top: parent.top
-    anchors.left: parent.left
-    anchors.right: parent.right
     layer.enabled: true
     z: 10
     layer.effect: ElevationEffect { elevation: 2 }
@@ -152,22 +149,43 @@ Rectangle {
         }
     }
 
-    TextInput {
-        id: formula
-        color: 'black'
-        opacity: root.styles.secondaryTextOpacity
+    Flickable {
+        id: formulaFlick
         anchors.top: parent.top
         anchors.left: parent.left
+        clip: true
+        anchors.bottom: result.top
         width: root.width - actions.width
         visible: !root.advanced
-        anchors.margins: Units.smallSpacing
-        font.pixelSize: 20
-        wrapMode: TextInput.WrapAnywhere
-        selectByMouse: true
-        onHeightChanged: updateHeight()
-        onTextChanged: {
-            addToHistoryTimer.restart();
-            result.text = calculate(text);
+        contentHeight: formula.implicitHeight
+        flickableDirection: Flickable.VerticalFlick
+        ScrollIndicator.vertical: ScrollIndicator {}
+
+        function ensureVisible(r) {
+            if (contentY >= r.y) {
+                contentY = r.y;
+            }
+            else if (contentY + height <= r.y + r.height) {
+                contentY = r.y + r.height - height;
+            }
+        }
+
+        TextInput {
+            id: formula
+            color: 'black'
+            opacity: root.styles.secondaryTextOpacity
+            padding: Units.smallSpacing
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
+            font.pixelSize: 20
+            wrapMode: TextInput.WrapAnywhere
+            selectByMouse: true
+            onTextChanged: {
+                addToHistoryTimer.restart();
+                result.text = calculate(text);
+            }
+            onCursorRectangleChanged: formulaFlick.ensureVisible(cursorRectangle)
         }
     }
 
@@ -223,7 +241,7 @@ Rectangle {
             return;
         }
 
-        setFormulaText(getFormulaText() + text);
+        calculationZone.formula.insert(calculationZone.formula.cursorPosition, text);
         retrieveFormulaFocus();
     }
 
@@ -236,7 +254,8 @@ Rectangle {
     }
 
     function removeFromFormula() {
-        setFormulaText(getFormulaText().slice(0, -1));
+        var index = calculationZone.formula.cursorPosition;
+        calculationZone.formula.remove(index - 1, index);
         retrieveFormulaFocus();
     }
 
