@@ -46,20 +46,13 @@ FluidWindow {
     property string lastFormula
     property string lastError
 
-    property int normalWidth: 64 * (3 + 4 + 1)
+    property int normalWidth: 64 * (3 + 4 + 1) * 0 + 60
     property int normalHeight: 60
     property int advancedWidth: 700
     property int advancedHeight: 400
 
-    maximumWidth: root.advanced ? 1000 : normalWidth
-    minimumWidth: normalWidth
-    height: normalHeight
-    onHeightChanged: {
-        if (!advanced) {
-            updateHeight()
-        }
-    }
-
+    height: 320
+    width: 500
     header: Item {}
     title: 'Calculator'
 
@@ -93,15 +86,20 @@ FluidWindow {
         }
     }
 
-    CalculationZone { id: calculationZone }
+    CalculationZone {
+        id: calculationZone
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: root.advanced ? parent.bottom : buttonsPanel.top
+    }
 
     ButtonsPanel {
         id: buttonsPanel
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.top: calculationZone.bottom
-        visible: !root.advanced
+        visible: !root.advanced && root.expanded
     }
 
     HistoryPanel {
@@ -118,9 +116,7 @@ FluidWindow {
         id: addToHistoryTimer
         running: false
         interval: 1000
-        onTriggered: {
-            historyPanel.add();
-        }
+        onTriggered: historyPanel.add()
     }
 
     FileHandler {
@@ -269,7 +265,6 @@ FluidWindow {
 
     function setExpanded(expanded) {
         root.expanded = expanded;
-        updateHeight();
         updateTitle();
         calculationZone.retrieveFormulaFocus();
     }
@@ -300,22 +295,6 @@ FluidWindow {
 
     function setAdvancedContent(text) {
         calculationZone.formulasLines.text = text;
-    }
-
-    function getAdvancedContent() {
-        return calculationZone.formulasLines.text;
-    }
-
-    function updateHeight() {
-        if (root.advanced) {
-            return;
-        }
-
-        if (root.expanded) {
-            root.height = calculationZone.getHeight() + buttonsPanel.computedHeight;
-        } else {
-            root.height = calculationZone.getHeight();
-        }
     }
 
     /*

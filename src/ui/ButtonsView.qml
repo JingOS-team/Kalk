@@ -55,7 +55,7 @@ Rectangle {
 
             Label {
                 text: modelData
-                width: 64
+                width: root.width / 8
                 topPadding: Units.smallSpacing / 2
                 bottomPadding: Units.smallSpacing / 2
                 horizontalAlignment: Qt.AlignHCenter
