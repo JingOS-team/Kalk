@@ -10,7 +10,8 @@ ICON += $$PWD/src/icons/liri-calculator.icns
 
 RESOURCES += \
     $$PWD/src/engine/engine.qrc \
-    $$PWD/src/ui/ui.qrc
+    $$PWD/src/ui/ui.qrc \
+    $$PWD/src/icons/icons.qrc
 
 unix:!android {
     target.path = $$LIRI_INSTALL_BINDIR
