@@ -41,3 +41,7 @@ script:
   - ./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -appimage -qmldir=. -verbose=2
   - find ./appdir -executable -type f -exec ldd {} \; | grep " => /usr" | cut -d " " -f 2-3 | sort | uniq
   - curl --upload-file ./Liri_Calculator*.AppImage https://transfer.sh/Liri_Calculator-git-$(date +%Y%m%d-%H%M%S)-$(git rev-parse --short HEAD)-x86_64.AppImage
+
+notifications:
+  email: false
+  slack: lirios:fdUqVmPzqPskEL1UBhqapZ0w
