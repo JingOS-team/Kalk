@@ -6,40 +6,16 @@ QtGuiApplication {
     Depends { name: "lirideployment" }
     Depends { name: "Qt"; submodules: ["qml", "quick", "svg", "quickcontrols2", "widgets"] }
 
-    Group {
-        name: "Main"
-        files: ["*.cpp", "*.h", "*.qrc"]
-        prefix: "main/"
-        fileTags: ["cpp"]
-    }
-
-    Group {
-        name: "Engine"
-        files: ["*.qml", "*.js", "*.qrc"]
-        prefix: "engine/"
-        fileTags: ["cpp"]
-    }
-
-    Group {
-        name: "File Handler"
-        files: ["*.cpp", "*.h"]
-        prefix: "filehandler/"
-        fileTags: ["cpp"]
-    }
-
-    Group {
-        name: "UI"
-        files: ["*.qml", "*.qrc"]
-        prefix: "ui/"
-        fileTags: ["cpp"]
-    }
-
-    Group {
-        name: "Icons"
-        files: ["*.qrc"]
-        prefix: "icons/"
-        fileTags: ["cpp"]
-    }
+    files: [
+        "main/*.cpp",
+        "main/*.h",
+        "main/*.qrc",
+        "engine/*.cpp",
+        "filehandler/*.cpp",
+        "filehandler/*.h",
+        "ui/*.qrc",
+        "icons/*.qrc"
+    ]
 
     Group {
         qbs.install: true
