@@ -41,4 +41,4 @@ script:
   - rm ./appdir/io.liri.Calculator.png # Workaround for linuxedeloyqt bug
   - ./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -appimage -qmldir=. -verbose=2
   - find ./appdir -executable -type f -exec ldd {} \; | grep " => /usr" | cut -d " " -f 2-3 | sort | uniq
-  - curl --upload-file ./Liri_Calculator*.AppImage https://transfer.sh/Liri_Calculator-git.$(git rev-parse --short HEAD)-x86_64.AppImage
+  - curl --upload-file ./Liri_Calculator*.AppImage https://transfer.sh/Liri_Calculator-git-$(date +%Y%m%d-%H%M%S)-$(git rev-parse --short HEAD)-x86_64.AppImage

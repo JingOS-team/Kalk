@@ -23,6 +23,7 @@
 
 #include <QtGlobal>
 #include <QGuiApplication>
+#include <QIcon>
 #include <QQmlApplicationEngine>
 #include <QtQuickControls2/QQuickStyle>
 #include <QQmlContext>
@@ -38,6 +39,11 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
+    app.setOrganizationName(QLatin1String("Liri"));
+    app.setOrganizationDomain(QLatin1String("liri.io"));
+    app.setApplicationName(QLatin1String("Calculator"));
+    app.setDesktopFileName(QLatin1String("io.liri.Calculator.desktop"));
+    app.setWindowIcon(QIcon("qrc:/icons/icon.png"));
 
     // create qml app engine
     QQmlApplicationEngine engine;

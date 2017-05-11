@@ -33,12 +33,13 @@ import "../engine"
 Rectangle {
     id: historyPanel
     color: 'white'
+    property ListModel historyModel: ListModel { }
 
     ListView {
         id: list
         anchors.margins: Units.smallSpacing
         anchors.fill: parent
-        model: root.history
+        model: historyModel
         boundsBehavior: Flickable.StopAtBounds
         snapMode: ListView.NoSnap
         spacing: Units.smallSpacing
@@ -61,7 +62,7 @@ Rectangle {
 
     function add() {
         if (calculationZone.getFormulaText() !== '' && calculationZone.result.text !== '') {
-            root.history.insert(0, {
+            historyModel.insert(0, {
                 formula: calculationZone.getFormulaText(),
                 result: calculationZone.result.text,
             });
@@ -69,7 +70,7 @@ Rectangle {
     }
 
     function clear() {
-        root.history.clear();
+        historyModel.clear();
         calculationZone.retrieveFormulaFocus();
     }
 }

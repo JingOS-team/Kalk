@@ -37,31 +37,34 @@ import "../engine"
 FluidWindow {
     id: root
     visible: true
-    Component.onCompleted: calculationZone.retrieveFormulaFocus()
 
     property bool expanded: true
     property bool advanced: false
-    property var history: ListModel {}
+
+    property string history: ''
 
     property string lastFormula
     property string lastError
 
     property int normalWidth: 64 * (3 + 4 + 1)
-    property int normalHeight: 60
+    property int normalHeight: root.expanded ? buttonsPanel.height + normalCalculationZoneHeight : normalCalculationZoneHeight
     property int advancedWidth: 700
     property int advancedHeight: 400
+    property int normalCalculationZoneHeight: 110
 
-    maximumWidth: root.advanced ? 1000 : normalWidth
-    minimumWidth: normalWidth
     height: normalHeight
-    onHeightChanged: {
-        if (!advanced) {
-            updateHeight()
-        }
-    }
-
+    minimumHeight: normalHeight
+    width: normalWidth
+    minimumWidth: normalWidth
     header: Item {}
     title: 'Calculator'
+
+    Component.onCompleted: {
+        calculationZone.retrieveFormulaFocus();
+        retrieveHistory();
+    }
+
+    Component.onDestruction: saveHistory()
 
     property Item styles: Styles {}
 
@@ -86,15 +89,20 @@ FluidWindow {
         }
     }
 
-    CalculationZone { id: calculationZone }
+    CalculationZone {
+        id: calculationZone
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: root.advanced || !root.expanded ? parent.bottom : buttonsPanel.top
+    }
 
     ButtonsPanel {
         id: buttonsPanel
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.top: calculationZone.bottom
-        visible: !root.advanced
+        visible: !root.advanced && root.expanded
     }
 
     HistoryPanel {
@@ -111,40 +119,39 @@ FluidWindow {
         id: addToHistoryTimer
         running: false
         interval: 1000
-        onTriggered: {
-            historyPanel.add();
-        }
+        onTriggered: historyPanel.add()
     }
 
     FileHandler {
         id: document
-        document: calculationZone.formulasLines.textDocument
-        cursorPosition: calculationZone.formulasLines.cursorPosition
-        selectionStart: calculationZone.formulasLines.selectionStart
-        selectionEnd: calculationZone.formulasLines.selectionEnd
+        document: documentText.textDocument
         onError: snackBar.open(message)
         onFileUrlChanged: updateTitle()
-        onDocumentChanged: console.log('heyy')
         onLoaded: {
             setAdvanced(true);
-            calculationZone.formulasLines.text = text;
+            calculationZone.loadFileContent(text);
             document.edited = false;
         }
 
-        onCursorPositionChanged: {
-            edited = true;
-            updateTitle();
-        }
-
         property bool edited: false
-        property bool unsaved: document.fileName === 'untitled.txt'
+        property bool unsaved: document.fileName === 'untitled.lcs'
+
+        function setEdited(edited) {
+            this.edited = edited;
+            root.updateTitle();
+        }
+    }
+
+    TextEdit {
+        visible: false
+        id: documentText
     }
 
     FileDialog {
         id: openDialog
         fileMode: FileDialog.OpenFile
         selectedNameFilter.index: 1
-        nameFilters: ["Text files (*.txt)"]
+        nameFilters: ["Liri Calculator Script (*.lcs)"]
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
         onAccepted: document.load(file)
     }
@@ -154,7 +161,7 @@ FluidWindow {
         fileMode: FileDialog.SaveFile
         defaultSuffix: document.fileType
         nameFilters: openDialog.nameFilters
-        selectedNameFilter.index: document.fileType === "txt" ? 0 : 1
+        selectedNameFilter.index: document.fileType === 'lcs' ? 0 : 1
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
         onAccepted: saveFile(true, file)
     }
@@ -164,10 +171,10 @@ FluidWindow {
         x: (parent.width - width) / 2
         y: (parent.height - height) / 2
         standardButtons: Dialog.Ok | Dialog.Cancel
-        title: "Discard unsaved?"
-        onAccepted: target === "close" ? closeFile(true) : openFile(true)
+        title: qsTr('Discard unsaved?')
+        onAccepted: target === 'close' ? closeFile(true) : openFile(true)
 
-        property string target: ""
+        property string target: ''
 
         function show(target) {
             alertDialog.open();
@@ -180,6 +187,26 @@ FluidWindow {
         z: 99
     }
 
+    function retrieveHistory() {
+        historyPanel.historyModel.clear();
+        var historyArray = JSON.parse(root.history);
+        for (var i = 0; i < historyArray.length; i++) {
+            historyPanel.historyModel.append(historyArray[i]);
+        }
+    }
+
+    function saveHistory() {
+        var historyArray = [];
+        for (var i = 0; i < historyPanel.historyModel.count; i++) {
+            var item = historyPanel.historyModel.get(i);
+            historyArray.push({
+               formula: item.formula,
+               result: item.result,
+            });
+        }
+        root.history = JSON.stringify(historyArray)
+    }
+
     function saveFile(bypass, bypassFileUrl) {
         if (!bypass) {
             if (document.unsaved) {
@@ -189,15 +216,17 @@ FluidWindow {
         }
         document.saveAs(bypassFileUrl ? bypassFileUrl : document.fileUrl);
         document.edited = false;
-        snackBar.open((bypassFileUrl ? bypassFileUrl : document.fileName) + ' saved');
+        snackBar.open((bypassFileUrl ? bypassFileUrl : document.fileName) + ' ' + qsTr('saved'));
         updateTitle();
     }
 
     function closeFile(bypass) {
-        if (!bypass) {
-            if (document.unsaved || document.edited) {
-                alertDialog.show('close');
-                return;
+        if (!(documentText.text === '')) {
+            if (!bypass) {
+                if (document.unsaved || document.edited) {
+                    alertDialog.show('close');
+                    return;
+                }
             }
         }
 
@@ -239,7 +268,6 @@ FluidWindow {
 
     function setExpanded(expanded) {
         root.expanded = expanded;
-        updateHeight();
         updateTitle();
         calculationZone.retrieveFormulaFocus();
     }
@@ -258,15 +286,11 @@ FluidWindow {
         root.advanced = advanced;
         root.width = advanced ? advancedWidth : normalWidth;
         root.height = advanced ? advancedHeight : normalHeight;
-        calculationZone.formulasLines.forceActiveFocus();
-        calculationZone.formulasLines.focus = true;
 
-        // Transfer (last) calculation to the other view
         if (advanced) {
-            calculationZone.formulasLines.text = calculationZone.formula.text;
+            calculationZone.loadFileContent(calculationZone.formula.text);
+            calculationZone.setFocusAt(0);
         } else {
-            var lines = calculationZone.formulasLines.text.split('\n');
-            calculationZone.formula.text = lines[lines.length - 1];
             calculationZone.retrieveFormulaFocus();
         }
         updateTitle();
@@ -274,22 +298,6 @@ FluidWindow {
 
     function setAdvancedContent(text) {
         calculationZone.formulasLines.text = text;
-    }
-
-    function getAdvancedContent() {
-        return calculationZone.formulasLines.text;
-    }
-
-    function updateHeight() {
-        if (root.advanced) {
-            return;
-        }
-
-        if (root.expanded) {
-            root.height = calculationZone.getHeight() + buttonsPanel.computedHeight;
-        } else {
-            root.height = calculationZone.getHeight();
-        }
     }
 
     /*
@@ -334,6 +342,7 @@ FluidWindow {
             if (debug) {
                 console.log(exception.toString());
             }
+            lastError = exception.toString();
             return '';
         }
         return res;

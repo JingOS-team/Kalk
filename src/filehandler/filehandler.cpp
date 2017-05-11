@@ -11,10 +11,7 @@
 #include <QTextDocument>
 
 FileHandler::FileHandler(QObject *parent):QObject(parent),
-    m_document(nullptr),
-    m_cursorPosition(-1),
-    m_selectionStart(0),
-    m_selectionEnd(0) {}
+    m_document(nullptr){}
 
 QQuickTextDocument *FileHandler::document() const {
     return m_document;
@@ -29,50 +26,11 @@ void FileHandler::setDocument(QQuickTextDocument *document) {
     emit documentChanged();
 }
 
-int FileHandler::cursorPosition() const {
-    return m_cursorPosition;
-}
-
-void FileHandler::setCursorPosition(int position) {
-    if (position == m_cursorPosition) {
-        return;
-    }
-
-    m_cursorPosition = position;
-    emit cursorPositionChanged();
-}
-
-int FileHandler::selectionStart() const{
-    return m_selectionStart;
-}
-
-void FileHandler::setSelectionStart(int position){
-    if (position == m_selectionStart) {
-        return;
-    }
-
-    m_selectionStart = position;
-    emit selectionStartChanged();
-}
-
-int FileHandler::selectionEnd() const {
-    return m_selectionEnd;
-}
-
-void FileHandler::setSelectionEnd(int position) {
-    if (position == m_selectionEnd) {
-        return;
-    }
-
-    m_selectionEnd = position;
-    emit selectionEndChanged();
-}
-
 QString FileHandler::fileName() const {
     const QString filePath = QQmlFile::urlToLocalFileOrQrc(m_fileUrl);
     const QString fileName = QFileInfo(filePath).fileName();
     if (fileName.isEmpty()) {
-        return QStringLiteral("untitled.txt");
+        return QStringLiteral("untitled.lcs");
     }
     return fileName;
 }
@@ -137,33 +95,10 @@ void FileHandler::saveAs(const QUrl &fileUrl) {
     emit fileUrlChanged();
 }
 
-QTextCursor FileHandler::textCursor() const {
-    QTextDocument *doc = textDocument();
-    if (!doc)
-        return QTextCursor();
-
-    QTextCursor cursor = QTextCursor(doc);
-    if (m_selectionStart != m_selectionEnd) {
-        cursor.setPosition(m_selectionStart);
-        cursor.setPosition(m_selectionEnd, QTextCursor::KeepAnchor);
-    } else {
-        cursor.setPosition(m_cursorPosition);
-    }
-    return cursor;
-}
-
 QTextDocument *FileHandler::textDocument() const {
     if (!m_document) {
         return nullptr;
     }
 
     return m_document->textDocument();
-}
-
-void FileHandler::mergeFormatOnWordOrSelection(const QTextCharFormat &format) {
-    QTextCursor cursor = textCursor();
-    if (!cursor.hasSelection()) {
-        cursor.select(QTextCursor::WordUnderCursor);
-    }
-    cursor.mergeCharFormat(format);
 }

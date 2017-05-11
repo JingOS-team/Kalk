@@ -1,5 +1,5 @@
 import QtQuick 2.7
-import QtQuick.Layouts 1.1
+import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
 import Fluid.Controls 1.0
@@ -8,20 +8,18 @@ import Fluid.Material 1.0
 Rectangle {
     id: calculationZone
     color: 'white'
-    anchors.top: parent.top
-    anchors.left: parent.left
-    anchors.right: parent.right
     layer.enabled: true
     z: 10
     layer.effect: ElevationEffect { elevation: 2 }
 
     property alias formula: formula
     property alias result: result
-    property alias formulasLines: formulasLines
+    property alias calculationsRepeater: calculationsRepeater
 
     height: root.advanced ? root.height : getHeight()
 
     Rectangle {
+        id: advancedToolbar
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
@@ -51,196 +49,145 @@ Rectangle {
             anchors.top: parent.top
             anchors.right: parent.right
 
-            IconButton {
+            NavButton {
                 id: helpButton
-                implicitHeight: 40
-                implicitWidth: 40
-                iconSize: 20
                 visible: root.advanced
                 iconName: 'action/info_outline'
-                iconColor: 'black'
-                opacity: root.styles.secondaryTextOpacity
+                ToolTip.text: qsTr('Help')
                 onClicked: Qt.openUrlExternally('http://mathjs.org/docs/expressions/syntax.html')
             }
 
-            IconButton {
+            NavButton {
                 id: openButton
-                implicitHeight: 40
-                implicitWidth: 40
-                iconSize: 20
                 visible: root.advanced
                 iconName: 'file/folder_open'
-                iconColor: 'black'
-                opacity: root.styles.secondaryTextOpacity
+                ToolTip.text: qsTr('Open file') + ' (Ctrl+O)'
                 onClicked: openFile()
             }
 
-            IconButton {
+            NavButton {
                 id: saveButton
-                implicitHeight: 40
-                implicitWidth: 40
-                iconSize: 20
-                enabled: formulasLines.text !== ''
+                enabled: document.edited || document.unsaved
                 visible: root.advanced
                 iconName: 'content/save'
-                iconColor: 'black'
                 opacity: enabled ? root.styles.secondaryTextOpacity : root.styles.hintTextOpacity
+                ToolTip.text: qsTr('Save file') + ' (Ctrl+S)'
                 onClicked: saveFile()
             }
 
-            IconButton {
+            NavButton {
                 id: advancedButton
-                implicitHeight: 40
-                implicitWidth: 40
-                iconSize: 20
-                iconName: 'action/list'
                 visible: !root.advanced
-                iconColor: 'black'
-                opacity: root.styles.secondaryTextOpacity
+                iconName: 'action/list'
+                ToolTip.text: qsTr('Advanced mode') + ' (Ctrl+D)'
                 onClicked: setAdvanced(true)
             }
 
-            IconButton {
+            NavButton {
                 id: closeButton
-                implicitHeight: 40
-                implicitWidth: 40
-                iconSize: 20
-                iconName: 'navigation/close'
-                iconColor: 'black'
                 visible: root.advanced
-                opacity: root.styles.secondaryTextOpacity
+                iconName: 'navigation/close'
+                ToolTip.text: qsTr('Close advanced mode')
                 onClicked: closeFile()
             }
 
-            IconButton {
+            NavButton {
                 id: historyButton
-                implicitHeight: 40
-                implicitWidth: 40
-                iconSize: 20
                 visible: !root.advanced
                 iconName: historyPanel.visible ? 'communication/dialpad' : 'action/history'
-                iconColor: 'black'
-                opacity: root.styles.secondaryTextOpacity
+                ToolTip.text: qsTr('Toggle history') + ' (Ctrl+H)'
                 onClicked: toogleHistory()
             }
 
-            IconButton {
+            NavButton {
                 id: expandButton
-                implicitHeight: 40
-                implicitWidth: 40
-                iconSize: 20
                 visible: !root.advanced
                 iconName: root.expanded ? 'navigation/expand_less' : 'navigation/expand_more'
-                iconColor: 'black'
-                opacity: root.styles.secondaryTextOpacity
+                ToolTip.text: qsTr('Toggle expanded') + ' (Ctrl+E)'
                 onClicked: toogleExpanded()
             }
         }
     }
 
-    TextInput {
-        id: formula
-        color: 'black'
-        opacity: root.styles.secondaryTextOpacity
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: actions.left
-        visible: !root.advanced
-        anchors.margins: Units.smallSpacing
-        font.pixelSize: 20
-        wrapMode: TextInput.WrapAnywhere
-        selectByMouse: true
-        onHeightChanged: updateHeight()
-        onTextChanged: {
-            addToHistoryTimer.restart();
-            result.text = calculate(text);
+    Flickable {
+        id: advancedView
+        visible: root.advanced
+        y: advancedToolbar.height
+        height: parent.height - y
+        clip: true
+        width: root.width
+        contentHeight: contentColumn.height
+        contentWidth: contentColumn.width
+        flickableDirection: Flickable.VerticalFlick
+        boundsBehavior: Flickable.StopAtBounds
+
+        Column {
+            id: contentColumn
+            spacing: Units.smallSpacing
+            width: parent.width
+
+            property Transition transition: Transition {
+                PropertyAnimation { properties: "x,opacity"; easing.type: Easing.InOutQuad }
+            }
+
+            move: transition
+            add: transition
+
+            Repeater {
+                id: calculationsRepeater
+                width: parent.width
+
+                model: ListModel {
+                    ListElement {
+                        formula: ''
+                        result: ''
+                    }
+                }
+
+                delegate: CalculationLine {}
+            }
         }
-//        Keys.onPressed: {
-//            if (event.key === Qt.P) {
-//                console.log('Key A was pressed');
-//                root.setAdvanced(true);
-//            }
-//        }
     }
 
     Flickable {
-         id: advancedView
-         visible: root.advanced
-         anchors.fill: parent
-         anchors.topMargin: 40
-         contentWidth: formulasLines.paintedWidth
-         contentHeight: formulasLines.paintedHeight
-         clip: true
-         flickableDirection: Flickable.VerticalFlick
+        id: formulaFlick
+        anchors.top: parent.top
+        anchors.left: parent.left
+        clip: true
+        anchors.bottom: result.top
+        width: root.width - actions.width
+        visible: !root.advanced
+        contentHeight: formula.implicitHeight
+        flickableDirection: Flickable.VerticalFlick
+        ScrollIndicator.vertical: ScrollIndicator {}
 
-         ScrollIndicator.vertical: ScrollIndicator {}
+        function ensureVisible(r) {
+            if (contentY >= r.y) {
+                contentY = r.y;
+            }
+            else if (contentY + height <= r.y + r.height) {
+                contentY = r.y + r.height - height;
+            }
+        }
 
-         function ensureVisible(r) {
-             if (contentX >= r.x) {
-                 contentX = r.x;
-             } else if (contentX + width <= r.x + r.width) {
-                 contentX = r.x + r.width - width;
-             }
-
-             if (contentY >= r.y) {
-                 contentY = r.y;
-             } else if (contentY + height <= r.y + r.height) {
-                 contentY = r.y + r.height - height;
-             }
-         }
-
-         Row {
-             id: row
-             width: parent.width
-             padding: Units.smallSpacing
-             spacing: Units.smallSpacing
-
-             TextEdit {
-                 id: formulasLines
-                 text: ''
-                 width: (root.advancedWidth - 3 * Units.smallSpacing) * 2/3
-                 height: advancedView.height
-                 font.pointSize: root.styles.advancedFontSize
-                 opacity: root.styles.secondaryTextOpacity
-                 selectByMouse: true
-                 onCursorRectangleChanged: advancedView.ensureVisible(cursorRectangle)
-                 onTextChanged: {
-                     resultsLines.text = calculate(text.split('\n'), true).join('\n')
-                 }
-                 wrapMode: TextEdit.NoWrap
-                 property string placeholderText: "Write your multiline calculations here..."
-
-                 Text {
-                     text: formulasLines.placeholderText
-                     color: 'black'
-                     opacity: root.styles.hintTextOpacity * 1/root.styles.secondaryTextOpacity
-                     font.pointSize: root.styles.advancedFontSize
-                     visible: !formulasLines.text
-                 }
-             }
-
-             Text {
-                 id: resultsLines
-                 text: ''
-                 opacity: !formulasLines.text ? root.styles.hintTextOpacity : root.styles.primaryTextOpacity
-                 width: (root.advancedWidth - 3 * Units.smallSpacing) * 1/3
-                 font.pointSize: root.styles.advancedFontSize
-                 horizontalAlignment: Text.AlignRight
-                 clip: true
-                 wrapMode: TextEdit.NoWrap
-                 visible: !!formulasLines.text
-             }
-
-             Text {
-                 text: '... to get results'
-                 opacity: root.styles.hintTextOpacity
-                 width: (root.advancedWidth - 3 * Units.smallSpacing) * 1/3
-                 font.pointSize: root.styles.advancedFontSize
-                 horizontalAlignment: Text.AlignRight
-                 visible: !formulasLines.text
-             }
-         }
-     }
+        TextInput {
+            id: formula
+            color: 'black'
+            opacity: root.styles.secondaryTextOpacity
+            padding: Units.smallSpacing
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
+            font.pixelSize: 20
+            wrapMode: TextInput.WrapAnywhere
+            selectByMouse: true
+            onTextChanged: {
+                addToHistoryTimer.restart();
+                result.text = calculate(text);
+            }
+            onCursorRectangleChanged: formulaFlick.ensureVisible(cursorRectangle)
+        }
+    }
 
     DisplayLabel {
         id: result
@@ -260,6 +207,26 @@ Rectangle {
         return calculationZone.formula.height + 4 * Units.smallSpacing + result.height;
     }
 
+    function loadFileContent(text) {
+        var formulas = text.split('\n');
+        calculationsRepeater.model.clear();
+        for (var i=0; i<formulas.length; i++) {
+            calculationsRepeater.model.append({formula: formulas[i], result: ''});
+        }
+    }
+
+    function syncTextDocument() {
+        var text = '';
+        for (var i=0; i<calculationsRepeater.model.count; i++) {
+            text += calculationsRepeater.model.get(i).formula;
+            if (i < calculationsRepeater.model.count - 1) {
+                text += '\n';
+            }
+        }
+        documentText.text = text;
+        document.setEdited(true);
+    }
+
     function retrieveFormulaFocus() {
         if (advanced) {
             calculationZone.formulasLines.forceActiveFocus();
@@ -274,7 +241,7 @@ Rectangle {
             return;
         }
 
-        setFormulaText(getFormulaText() + text);
+        calculationZone.formula.insert(calculationZone.formula.cursorPosition, text);
         retrieveFormulaFocus();
     }
 
@@ -287,7 +254,8 @@ Rectangle {
     }
 
     function removeFromFormula() {
-        setFormulaText(getFormulaText().slice(0, -1));
+        var index = calculationZone.formula.cursorPosition;
+        calculationZone.formula.remove(index - 1, index);
         retrieveFormulaFocus();
     }
 
@@ -300,5 +268,9 @@ Rectangle {
     function replaceFormula(formulaStr) {
         setFormulaText(formulaStr);
         retrieveFormulaFocus();
+    }
+
+    function setFocusAt(index) {
+        calculationsRepeater.itemAt(index).children[0].children[0].forceActiveFocus();
     }
 }
