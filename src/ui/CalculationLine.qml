@@ -7,7 +7,7 @@ import Fluid.Material 1.0
 
 
 Column {
-    width: parent.width
+    width: root.width
     padding: Units.smallSpacing
     spacing: Units.smallSpacing
 
@@ -19,7 +19,7 @@ Column {
             TextEdit {
                 id: formulaEdit
                 text: formula
-                width: (root.advancedWidth - 3 * Units.smallSpacing) * 2/3
+                width: (root.width - 3 * Units.smallSpacing) * 2/3
                 font.pointSize: root.styles.advancedFontSize
                 opacity: root.styles.secondaryTextOpacity
                 selectByMouse: true
@@ -74,7 +74,7 @@ Column {
                 color: hasError ? 'red' : 'black'
                 height: formulaEdit.height
                 opacity: hasError ? root.styles.hintTextOpacity : root.styles.primaryTextOpacity
-                width: (root.advancedWidth - 3 * Units.smallSpacing) * 1/3
+                width: (root.width - 3 * Units.smallSpacing) * 1/3
                 font.pointSize: root.styles.advancedFontSize
                 horizontalAlignment: Text.AlignRight
                 clip: true
@@ -95,7 +95,7 @@ Column {
     }
 
     Rectangle {
-        width: parent.width - 2 * Units.smallSpacing
+        width: root.width - 2 * Units.smallSpacing
         height: 1
         color: formulaResult.hasError ? 'red' : 'black'
         opacity: 0.1

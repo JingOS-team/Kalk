@@ -115,7 +115,7 @@ Rectangle {
         y: advancedToolbar.height
         height: parent.height - y
         clip: true
-        width: root.advancedWidth
+        width: root.width
         contentHeight: contentColumn.height
         contentWidth: contentColumn.width
         flickableDirection: Flickable.VerticalFlick
