@@ -11,6 +11,7 @@ QtGuiApplication {
         "main/*.h",
         "main/*.qrc",
         "engine/*.cpp",
+        "engine/*.qrc",
         "filehandler/*.cpp",
         "filehandler/*.h",
         "ui/*.qrc",
