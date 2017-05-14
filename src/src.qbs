@@ -43,7 +43,7 @@ QtGuiApplication {
         name: "AppStream Metadata"
         files: ["../data/io.liri.Calculator.appdata.xml"]
         qbs.install: true
-        qbs.installDir: lirideployment.appdataDir
+        qbs.installDir: lirideployment.appDataDir
     }
 
     Group {
