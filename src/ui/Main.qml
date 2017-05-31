@@ -34,7 +34,7 @@ import filehandler 1.0
 import ".."
 import "../engine"
 
-FluidWindow {
+ApplicationWindow {
     id: root
     visible: true
 
