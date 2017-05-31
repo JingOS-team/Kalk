@@ -22,7 +22,7 @@
 */
 
 #include <QtGlobal>
-#include <QGuiApplication>
+#include <QApplication>
 #include <QIcon>
 #include <QQmlApplicationEngine>
 #include <QtQuickControls2/QQuickStyle>
@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
-    QGuiApplication app(argc, argv);
+    QApplication app(argc, argv);
     app.setOrganizationName(QLatin1String("Liri"));
     app.setOrganizationDomain(QLatin1String("liri.io"));
     app.setApplicationName(QLatin1String("Calculator"));
