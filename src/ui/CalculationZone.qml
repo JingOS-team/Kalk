@@ -3,14 +3,14 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
 import Fluid.Controls 1.0
-import Fluid.Material 1.0
+import Fluid.Effects 1.0 as FluidEffects
 
 Rectangle {
     id: calculationZone
     color: 'white'
     layer.enabled: true
     z: 10
-    layer.effect: ElevationEffect { elevation: 2 }
+    layer.effect: FluidEffects.Elevation { elevation: 2 }
 
     property alias formula: formula
     property alias result: result
@@ -25,7 +25,7 @@ Rectangle {
         anchors.right: parent.right
         height: 40
         layer.enabled: root.advanced
-        layer.effect: ElevationEffect {
+        layer.effect: FluidEffects.Elevation {
             elevation: advancedView.contentY < 5 ? 0 : 2
 
             Behavior on elevation {
