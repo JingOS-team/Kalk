@@ -4,6 +4,7 @@ QtGuiApplication {
     property bool isBundle: qbs.targetOS.contains("darwin") && bundle.isBundle
 
     name: "liri-calculator"
+    consoleApplication: false
 
     Depends { name: "lirideployment" }
     Depends { name: "Qt"; submodules: ["qml", "quick", "svg", "quickcontrols2", "widgets"] }
