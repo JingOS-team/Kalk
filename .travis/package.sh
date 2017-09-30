@@ -1,7 +1,8 @@
 #!/bin/bash
 
 if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
-    pushd build/default/install-root >/dev/null && macdeployqt ./liri-calculator.app -dmg -qmldir=. -verbose=2 && popd >/dev/null
+    srcdir=$(pwd)/src
+    pushd build/default/install-root >/dev/null && macdeployqt ./liri-calculator.app -dmg -qmldir=$srcdir -verbose=2 && popd >/dev/null
     mv ./build/default/install-root/liri-calculator.dmg Liri_Calculator.dmg
     curl --upload-file ./Liri_Calculator.dmg https://transfer.sh/Liri_Calculator-git-$(date +%Y%m%d-%H%M%S)-$(git rev-parse --short HEAD).dmg
 else
