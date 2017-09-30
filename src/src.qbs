@@ -7,6 +7,7 @@ QtGuiApplication {
 
     Depends { name: "lirideployment" }
     Depends { name: "Qt"; submodules: ["qml", "quick", "svg", "quickcontrols2", "widgets"] }
+    Depends { name: "ib"; condition: qbs.targetOS.contains("macos") }
 
     files: [
         "main/*.cpp",
@@ -18,6 +19,7 @@ QtGuiApplication {
         "filehandler/*.h",
         "ui/*.qrc",
         "icons/*.qrc",
+        "icons/liri-calculator.icns",
     ]
 
     Group {
@@ -119,12 +121,4 @@ QtGuiApplication {
         qbs.install: true
         qbs.installDir: lirideployment.dataDir + "/icons/hicolor/2048x2048/apps"
     }
-
-    Group {
-         name: "macOS (icons)"
-         condition: qbs.targetOS.contains("macos")
-         files: ["icons/liri-calculator.icns"]
-         qbs.install: true
-         qbs.installDir: "liri-calculator.app/Contents/Resources"
-     }
 }
