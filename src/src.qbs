@@ -6,6 +6,9 @@ QtGuiApplication {
     name: "liri-calculator"
     consoleApplication: false
 
+    bundle.identifierPrefix: "io.liri"
+    bundle.identifier: "io.liri.Calculator"
+
     Depends { name: "lirideployment" }
     Depends { name: "Qt"; submodules: ["qml", "quick", "svg", "quickcontrols2", "widgets"] }
     Depends { name: "ib"; condition: qbs.targetOS.contains("macos") }
