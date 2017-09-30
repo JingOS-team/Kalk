@@ -1,6 +1,8 @@
 import qbs 1.0
 
 QtGuiApplication {
+    property bool isBundle: qbs.targetOS.contains("darwin") && bundle.isBundle
+
     name: "liri-calculator"
 
     Depends { name: "lirideployment" }
@@ -15,20 +17,19 @@ QtGuiApplication {
         "filehandler/*.cpp",
         "filehandler/*.h",
         "ui/*.qrc",
-        "icons/*.qrc"
+        "icons/*.qrc",
     ]
 
     Group {
         qbs.install: true
         qbs.installDir: {
-            if (qbs.targetOS.contains("windows"))
-                return "";
-            else if (qbs.targetOS.contains("darwin"))
-                return "Contents/MacOS";
-            else
+            if (qbs.targetOS.contains("linux"))
                 return lirideployment.binDir;
+            else
+                return "";
         }
-        fileTagsFilter: product.type
+        qbs.installSourceBase: isBundle ? product.buildDirectory : ""
+        fileTagsFilter: isBundle ? ["bundle.content"] : ["application"]
     }
 
     Group {
@@ -124,6 +125,6 @@ QtGuiApplication {
          condition: qbs.targetOS.contains("macos")
          files: ["icons/liri-calculator.icns"]
          qbs.install: true
-         qbs.installDir: "Contents/Resources"
+         qbs.installDir: "liri-calculator.app/Contents/Resources"
      }
 }
