@@ -1,7 +1,7 @@
 import qbs 1.0
 
 QtGuiApplication {
-    property bool isBundle: qbs.targetOS.contains("darwin") && bundle.isBundle
+    readonly property bool isBundle: qbs.targetOS.contains("darwin") && bundle.isBundle
 
     name: "liri-calculator"
     consoleApplication: false
