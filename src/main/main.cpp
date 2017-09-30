@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
     app.setDesktopFileName(QLatin1String("io.liri.Calculator.desktop"));
     app.setWindowIcon(QIcon("qrc:/icons/icon.png"));
 
-    // Set the X11 WML_CLASS so X11 desktops can find the desktop file
+    // Set the X11 WM_CLASS so X11 desktops can find the desktop file
     qputenv("RESOURCE_NAME", "io.liri.Calculator");
 
     // create qml app engine
