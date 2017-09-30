@@ -19,26 +19,32 @@ Qt >= 5.8.0 with at least the following modules is required:
 
 The following modules and their dependencies are required:
 
+ * [qbs-shared](https://github.com/lirios/qbs-shared.git)
  * [fluid](https://github.com/lirios/fluid.git)
 
 ## Build
 
-From the root of the repository, run:
+Liri Calculator uses [Qbs](http://doc.qt.io/qbs/) as build system.
+
+If you haven't already, start by setting up a `qt5` profile for `qbs`:
 
 ```sh
-mkdir build; cd build
-qmake ..
-make
-make install # use sudo if necessary
+qbs setup-toolchains --type gcc /usr/bin/g++ gcc
+qbs setup-qt $(which qmake) qt5 # make sure that qmake is in PATH
+qbs config profiles.qt5.baseProfile gcc
 ```
 
-On the `qmake` line, you can specify additional configuration parameters:
+Then, from the root of the repository, run:
 
- * `LIRI_INSTALL_PREFIX=/path/to/install` (for example `/opt/liri` or `/usr`)
- * `CONFIG+=debug` if you want a debug build
+```sh
+qbs -d build -j $(nproc) profile:qt5 # use sudo if necessary
+```
 
-Use `make distclean` from inside your `build` directory to clean up.
-You need to do this before rerunning `qmake` with different options.
+To the `qbs` call above you can append additional configuration parameters:
+
+ * `project.withFluid:true`: use git submodule for Fluid
+ * `qbs.installRoot:/install/root`: e.g. /
+ * `qbs.installPrefix:path/to/install`: e.g. opt/liri or usr
 
 ## Licensing
 
