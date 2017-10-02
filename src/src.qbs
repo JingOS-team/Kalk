@@ -8,6 +8,7 @@ QtGuiApplication {
 
     bundle.identifierPrefix: "io.liri"
     bundle.identifier: "io.liri.Calculator"
+    bundle.infoPlist: ({"CFBundleIconFile": "liri-calculator"})
 
     Depends { name: "lirideployment" }
     Depends { name: "Qt"; submodules: ["qml", "quick", "svg", "quickcontrols2", "widgets"] }
