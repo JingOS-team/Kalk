@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Liri Calculator
+GenericName=Calculator
+Comment=Perform arithmetic and scientific calculations
+Keywords=calculation;arithmetic;scientific;
+Exec=liri-calculator
+Icon=${SNAP}/share/icons/hicolor/256x256/apps/io.liri.Calculator.png
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=X-Liri;Qt;Utility;Calculator;

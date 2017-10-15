@@ -1,0 +1,30 @@
+name: liri-calculator
+version: git
+summary: A cross-platform material design calculator
+description: A cross-platform material design calculator
+grade: devel
+confinement: strict
+
+plugs:
+  platform:
+    interface: content
+    content: liri-platform
+    target: liri-platform
+    default-provider: liri-platform-0-9
+
+apps:
+  liri-calculator:
+    command: liri-app-launch $SNAP/bin/liri-calculator
+    plugs:
+      - desktop
+      - desktop-legacy
+      - wayland
+      - unity7
+      - opengl
+
+parts:
+  liri-calculator:
+    source: .
+    plugin: qbs
+    build-attributes: ["no-system-libraries"]
+    after: [liri-platform-0-9]

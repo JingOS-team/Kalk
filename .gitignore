@@ -44,3 +44,11 @@ TransportSecurity
 databases/
 
 build/
+
+# Snapcraft
+.snapcraft/
+parts/
+prime/
+stage/
+*.snap
+*source.tar.bz2
