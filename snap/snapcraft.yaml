@@ -4,6 +4,7 @@ summary: A cross-platform material design calculator
 description: A cross-platform material design calculator
 grade: devel
 confinement: strict
+architectures: [amd64]
 
 plugs:
   platform:
