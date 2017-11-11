@@ -16,6 +16,7 @@ plugs:
 apps:
   liri-calculator:
     command: liri-app-launch $SNAP/bin/liri-calculator
+    desktop: share/applications/io.liri.Calculator.desktop
     plugs:
       - desktop
       - desktop-legacy
@@ -27,5 +28,7 @@ parts:
   liri-calculator:
     source: .
     plugin: qbs
+    prepare: |
+      sed -i 's|Icon=.*|Icon=${SNAP}/share/icons/hicolor/256x256/apps/io\.liri\.Calculator\.png|g' data/io.liri.Calculator.desktop
     build-attributes: ["no-system-libraries"]
     after: [liri-platform-0-9]
