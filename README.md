@@ -6,7 +6,7 @@ Liri Calculator
 [![Build Status](https://travis-ci.org/lirios/calculator.svg?branch=master)](https://travis-ci.org/lirios/calculator)
 [![Snap Status](https://build.snapcraft.io/badge/lirios/calculator.svg)](https://build.snapcraft.io/user/lirios/calculator)
 [![GitHub issues](https://img.shields.io/github/issues/lirios/calculator.svg)](https://github.com/lirios/calculator/issues)
-[![Maintained](https://img.shields.io/maintenance/yes/2017.svg)](https://github.com/lirios/calculator/commits/master)
+[![Maintained](https://img.shields.io/maintenance/yes/2018.svg)](https://github.com/lirios/calculator/commits/develop)
 
 A cross-platform material design calculator.
 
