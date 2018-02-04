@@ -52,7 +52,7 @@ Rectangle {
             NavButton {
                 id: helpButton
                 visible: root.advanced
-                icon.name: 'action/info_outline'
+                icon.source: Utils.iconUrl("action/info_outline")
                 ToolTip.text: qsTr('Help')
                 onClicked: Qt.openUrlExternally('http://mathjs.org/docs/expressions/syntax.html')
             }
@@ -60,7 +60,7 @@ Rectangle {
             NavButton {
                 id: openButton
                 visible: root.advanced
-                icon.name: 'file/folder_open'
+                icon.source: Utils.iconUrl("file/folder_open")
                 ToolTip.text: qsTr('Open file') + ' (Ctrl+O)'
                 onClicked: openFile()
             }
@@ -69,7 +69,7 @@ Rectangle {
                 id: saveButton
                 enabled: document.edited || document.unsaved
                 visible: root.advanced
-                icon.name: 'content/save'
+                icon.source: Utils.iconUrl("content/save")
                 opacity: enabled ? root.styles.secondaryTextOpacity : root.styles.hintTextOpacity
                 ToolTip.text: qsTr('Save file') + ' (Ctrl+S)'
                 onClicked: saveFile()
@@ -78,7 +78,7 @@ Rectangle {
             NavButton {
                 id: advancedButton
                 visible: !root.advanced
-                icon.name: 'action/list'
+                icon.source: Utils.iconUrl("action/list")
                 ToolTip.text: qsTr('Advanced mode') + ' (Ctrl+D)'
                 onClicked: setAdvanced(true)
             }
@@ -86,7 +86,7 @@ Rectangle {
             NavButton {
                 id: closeButton
                 visible: root.advanced
-                icon.name: 'navigation/close'
+                icon.source: Utils.iconUrl("navigation/close")
                 ToolTip.text: qsTr('Close advanced mode')
                 onClicked: closeFile()
             }
@@ -94,7 +94,7 @@ Rectangle {
             NavButton {
                 id: historyButton
                 visible: !root.advanced
-                icon.name: historyPanel.visible ? 'communication/dialpad' : 'action/history'
+                icon.source: Utils.iconUrl(historyPanel.visible ? "communication/dialpad" : "action/history")
                 ToolTip.text: qsTr('Toggle history') + ' (Ctrl+H)'
                 onClicked: toogleHistory()
             }
@@ -102,7 +102,7 @@ Rectangle {
             NavButton {
                 id: expandButton
                 visible: !root.advanced
-                icon.name: root.expanded ? 'navigation/expand_less' : 'navigation/expand_more'
+                icon.source: Utils.iconUrl(root.expanded ? "navigation/expand_less" : "navigation/expand_more")
                 ToolTip.text: qsTr('Toggle expanded') + ' (Ctrl+E)'
                 onClicked: toogleExpanded()
             }
