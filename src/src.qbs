@@ -17,15 +17,27 @@ QtGuiApplication {
     files: [
         "main/*.cpp",
         "main/*.h",
-        "main/*.qrc",
         "engine/*.cpp",
-        "engine/*.qrc",
         "filehandler/*.cpp",
         "filehandler/*.h",
-        "ui/*.qrc",
-        "icons/*.qrc",
         "icons/liri-calculator.icns",
     ]
+
+    Qt.core.resourcePrefix: "/"
+    Qt.core.resourceSourceBase: sourceDirectory
+
+    Group {
+        name: "Resource Data"
+        files: [
+            "engine/*.js",
+            "engine/*.qml",
+            "engine/qmldir",
+            "icons/*.png",
+            "ui/*.qml",
+            "ui/qmldir",
+        ]
+        fileTags: ["qt.core.resource_data"]
+    }
 
     Group {
         qbs.install: true
