@@ -41,12 +41,7 @@ QtGuiApplication {
 
     Group {
         qbs.install: true
-        qbs.installDir: {
-            if (qbs.targetOS.contains("linux"))
-                return lirideployment.binDir;
-            else
-                return "";
-        }
+        qbs.installDir: lirideployment.binDir
         qbs.installSourceBase: destinationDirectory
         fileTagsFilter: isBundle ? ["bundle.content"] : product.type
     }
