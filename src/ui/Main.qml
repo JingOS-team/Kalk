@@ -181,7 +181,7 @@ ApplicationWindow {
         }
     }
 
-    InfoBar {
+    SnackBar {
         id: snackBar
         z: 99
     }
