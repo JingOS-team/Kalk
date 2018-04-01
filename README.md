@@ -12,7 +12,7 @@ A cross-platform material design calculator.
 
 ## Dependencies
 
-Qt >= 5.8.0 with at least the following modules is required:
+Qt >= 5.10.0 with at least the following modules is required:
 
  * [qtbase](http://code.qt.io/cgit/qt/qtbase.git)
  * [qtdeclarative](http://code.qt.io/cgit/qt/qtdeclarative.git)
@@ -20,7 +20,8 @@ Qt >= 5.8.0 with at least the following modules is required:
 
 The following modules and their dependencies are required:
 
- * [qbs-shared](https://github.com/lirios/qbs-shared.git)
+ * [qbs >= 1.9.0](http://code.qt.io/cgit/qbs/qbs.git)
+ * [qbs-shared >= 1.2.0](https://github.com/lirios/qbs-shared.git)
  * [fluid](https://github.com/lirios/fluid.git)
 
 ## Installation
