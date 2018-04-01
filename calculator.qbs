@@ -12,7 +12,7 @@ Project {
                              qbs.targetOS.contains("macos") ||
                              qbs.targetOS.contains("android")
 
-    minimumQbsVersion: "1.6"
+    minimumQbsVersion: "1.9.0"
 
     qbsSearchPaths: {
         var paths = [];
