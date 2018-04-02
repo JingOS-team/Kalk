@@ -22,7 +22,7 @@ The following modules and their dependencies are required:
 
  * [qbs >= 1.9.0](http://code.qt.io/cgit/qbs/qbs.git)
  * [qbs-shared >= 1.2.0](https://github.com/lirios/qbs-shared.git)
- * [fluid](https://github.com/lirios/fluid.git)
+ * [fluid >= 1.0.0](https://github.com/lirios/fluid.git)
 
 ## Installation
 
