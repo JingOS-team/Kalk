@@ -13,35 +13,18 @@ matrix:
         - docker
     - os: osx
 
+branches:
+  except:
+    - /^(?i:continuous)$/
+
 script:
+  - curl "https://raw.githubusercontent.com/lirios/infra-travis/master/installer" | bash
   - ./.travis/build.sh
 
-before_deploy:
-  - git fetch --unshallow
-  - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then packagetype=appimage ; fi
-  - if [[ $TRAVIS_OS_NAME == 'osx'   ]]; then packagetype=macos ; fi
-  - gittag=$(git describe --tags --abbrev=0)
-  - today=$(date +"%Y-%m-%d")
-  - gitrev=$(git log -1 --format="%h")
-  - gitdate=$(git log -1 --format="%aI")
-  - cat .travis/bintray.json.in |
-    sed -e "s,@BINTRAY_REPO@,$packagetype,g"
-        -e "s,@PKGVER@,$gittag,g"
-        -e "s,@GITTAG@,$gittag,g"
-        -e "s,@TODAY@,$today,g"
-        -e "s,@GITREV@,$gitrev,g"
-        -e "s,@GITDATE@,$gitdate,g"
-        > .travis/bintray.json
-
-deploy:
-  provider: bintray
-  file: .travis/bintray.json
-  on: 
-    tags: true
-  user:
-    secure: "BXHymD6nYkwhYZGW/ElLuB003l9YPKr+PuAqY5QfCkdlfMyWV1/Ozi+/lPSxvv87KOBRJYyjQ8P/dR0v7hPk4gM70KmmXrAIJrax3ws4IvtV2W3KAMIKsAnIcAr/gj/g71B8ktjAGlScqghYABjVrXUXlxeSN7K8lC6Uns7KJSseHfjVGItrGNb349r8uLoRxg6H8lQpoZRIbU5WY0MKewOtpWntKf77sMwMx0EJ5xd3mfPwBXsLUPMlUaDSiNFQKYDxBxDAUraprOd7hj3NdPf9o7Qo/RhYSpN4cwGO7uj859ZE0a76fssP42qX0wd0YTsMea9R/bro3nyWzc/+lDEMRN7vuIxgxcbtFI7EgEJZ8hJZC1LgAfkJmJvVjt3fZ/VHlzB5x/5V7pbw88iabmLEIESf1Tw5W1gBdodMw5YjI1HRfxYBCCE7khUvm7UZYCEw7i86OvkKc1VBD5L5NeoRzgwbetTDVF8ctO/W1mzXXGL4ILsKc9DH2RaC1U6WU0h8ul5dqSebGE9ncjLFUmWZ0qjurglK1T6G1vP3FGsyrN+ztu1TbO4YkpEx4/6Z0umywCOulPRSlHvORnUObnhAuWrtpzr9DJiXGLqtfbrOPf7XB52VhLunEDn6ifOk8/sGqSJQUrQdrtBB59aygPZqKFbebUXJQ6MRyXgF4go="
-  key:
-    secure: "2abu9y+jn3+TXAFBWwSJxY8+IE5L+VIZEPC2M7a56WlQmn4Oo2Qv6MigQ0y8FdjMOlAoPcoa31adpVwssrhqpy6stv+Jh+RQIc4Bu0al4faxGTHZQVO0ZZBjwM2/qNElaa/nnFi7I39pWarVU92R3lIfH7XSIQ5fq0pt7LaBlPFjSRa/OjaugSO6gK1wONxpkzC7XItkI0ujKHjiDkv8xXLdmmIqGMgbxQ2mg7ccMy8iFMnWMpOWJgsQpndBWnqjhQ0UiDRbd6l1/aHmKTLiIAujORUnhQvRacUlUgXJ7frqFVAUVmhZoIyVOb+oNgvyI0qgOlJfrmdrhla2r+2Xi0j2iXfrKFcjl6cl37iLpTRDpTqR0dyBy5wvfw+XWKiE2KtSdHefbtGRyDBXS4AwmI9yzrnGtikuqEHkDOU9oUmTigew9qsX4AUFP5DIqgwJUmnKgjvzT3ZkVCI6WURaR2Sc1F7LbLGKcqACbHw0Fq2b+2r+QpiwJgZ/9S4TUw27MVWqji2Q4J3CHOZcqRwIUxg9ksmm3/odqONFKFjqZMQgWWIw70Lv/I1hvt0UHwiN7B/cA26dkN2iMGFNhDz2hwqKUohvuGolx/yYgAQUsu/LJSKk5/C+b9Da6EvFetgmZlrvJxnQpXn8d/rVpITrrfxdR0gDHM4cX9aT8H9tfzA="
+after_success:
+  - ls -lh travis-out/*
+  - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
+  - bash upload.sh travis-out/*
 
 notifications:
   email: false
