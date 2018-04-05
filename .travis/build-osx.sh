@@ -4,7 +4,7 @@ set -e
 
 source /usr/local/share/liri-travis/functions
 
-if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
+if [ $TRAVIS_OS_NAME == "osx" ]; then
     # Update
     travis_start "brew_update"
     msg "Update..."
@@ -50,14 +50,4 @@ if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
     mkdir -p travis-out
     mv ./build/default/install-root/liri-calculator.dmg travis-out/Liri_Calculator-git-$(date +%Y%m%d-%H%M%S)-$(git rev-parse --short HEAD).dmg
     travis_end "package"
-else
-    image=liridev/ci-ubuntu:latest
-
-    env_vars="-e CC=$CC -e DEBIAN_FRONTEND=noninteractive"
-    for line in $(env | egrep -e '^(FTP|TRAVIS|CLAZY)'); do
-        env_vars="$env_vars -e $line"
-    done
-
-    sudo docker pull $image
-    sudo docker run --privileged --rm -ti -v $(pwd):/home $env_vars --workdir /home $image ./.travis/docker.sh
 fi

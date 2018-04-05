@@ -2,8 +2,6 @@
 
 set -e
 
-curl "https://raw.githubusercontent.com/lirios/infra-travis/master/installer" | bash
-
 source /usr/local/share/liri-travis/functions
 
 # Configure qbs
