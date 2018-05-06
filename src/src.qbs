@@ -47,7 +47,7 @@ QtGuiApplication {
     }
 
     Group {
-        condition: qbs.targetOS.contains("linux")
+        condition: qbs.targetOS.contains("unix") && !qbs.targetOS.contains("darwin") && !qbs.targetOS.contains("android")
         name: "Desktop File"
         files: ["../data/io.liri.Calculator.desktop"]
         qbs.install: true
@@ -55,7 +55,7 @@ QtGuiApplication {
     }
 
     Group {
-        condition: qbs.targetOS.contains("linux")
+        condition: qbs.targetOS.contains("unix") && !qbs.targetOS.contains("darwin") && !qbs.targetOS.contains("android")
         name: "AppStream Metadata"
         files: ["../data/io.liri.Calculator.appdata.xml"]
         qbs.install: true
