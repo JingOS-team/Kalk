@@ -3,15 +3,16 @@ Liri Calculator
 
 [![License](https://img.shields.io/badge/license-GPLv3.0-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![GitHub release](https://img.shields.io/github/release/lirios/calculator.svg)](https://github.com/lirios/calculator)
-[![Build Status](https://travis-ci.org/lirios/calculator.svg?branch=master)](https://travis-ci.org/lirios/calculator)
+[![Build Status](https://travis-ci.org/lirios/calculator.svg?branch=develop)](https://travis-ci.org/lirios/calculator)
+[![Snap Status](https://build.snapcraft.io/badge/lirios/calculator.svg)](https://build.snapcraft.io/user/lirios/calculator)
 [![GitHub issues](https://img.shields.io/github/issues/lirios/calculator.svg)](https://github.com/lirios/calculator/issues)
-[![Maintained](https://img.shields.io/maintenance/yes/2017.svg)](https://github.com/lirios/calculator/commits/master)
+[![Maintained](https://img.shields.io/maintenance/yes/2018.svg)](https://github.com/lirios/calculator/commits/develop)
 
 A cross-platform material design calculator.
 
 ## Dependencies
 
-Qt >= 5.8.0 with at least the following modules is required:
+Qt >= 5.10.0 with at least the following modules is required:
 
  * [qtbase](http://code.qt.io/cgit/qt/qtbase.git)
  * [qtdeclarative](http://code.qt.io/cgit/qt/qtdeclarative.git)
@@ -19,26 +20,47 @@ Qt >= 5.8.0 with at least the following modules is required:
 
 The following modules and their dependencies are required:
 
- * [fluid](https://github.com/lirios/fluid.git)
+ * [qbs](http://code.qt.io/cgit/qbs/qbs.git) >= 1.9.0
+ * [qbs-shared](https://github.com/lirios/qbs-shared.git) >= 1.2.0
+ * [fluid](https://github.com/lirios/fluid.git) >= 1.0.0
 
-## Build
+## Installation
 
-From the root of the repository, run:
+We use the [Qbs](http://doc.qt.io/qbs/) build system.
+
+If you want to learn more, please read the [Qbs manual](http://doc.qt.io/qbs/index.html),
+especially the [setup guide](http://doc.qt.io/qbs/configuring.html) and how to install artifacts
+from the [installation guide](http://doc.qt.io/qbs/installing-files.html).
+
+If you haven't already, start by setting up a `qt5` profile for `qbs`:
 
 ```sh
-mkdir build; cd build
-qmake ..
-make
-make install # use sudo if necessary
+qbs setup-toolchains --type gcc /usr/bin/g++ gcc
+qbs setup-qt $(which qmake) qt5 # make sure that qmake is in PATH
+qbs config profiles.qt5.baseProfile gcc
 ```
 
-On the `qmake` line, you can specify additional configuration parameters:
+Then, from the root of the repository, run:
 
- * `LIRI_INSTALL_PREFIX=/path/to/install` (for example `/opt/liri` or `/usr`)
- * `CONFIG+=debug` if you want a debug build
+```sh
+qbs -d build -j $(nproc) profile:qt5 # use sudo if necessary
+```
 
-Use `make distclean` from inside your `build` directory to clean up.
-You need to do this before rerunning `qmake` with different options.
+To the `qbs` call above you can append additional configuration parameters:
+
+ * `modules.lirideployment.prefix:/path/to/prefix` where most files are installed (default: `/usr/local`)
+ * `modules.lirideployment.dataDir:path/to/lib` where data files are installed (default: `/usr/local/share`)
+ * `modules.lirideployment.libDir:path/to/lib` where libraries are installed (default: `/usr/local/lib`)
+ * `modules.lirideployment.qmlDir:path/to/qml` where QML plugins are installed (default: `/usr/local/lib/qml`)
+ * `modules.lirideployment.pluginsDir:path/to/plugins` where Qt plugins are installed (default: `/usr/local/lib/plugins`)
+ * `modules.lirideployment.qbsModulesDir:path/to/qbs` where Qbs modules are installed (default: `/usr/local/share/qbs/modules`)
+
+See [lirideployment.qbs](https://github.com/lirios/qbs-shared/blob/develop/modules/lirideployment/lirideployment.qbs)
+for more deployment-related parameters.
+
+You can also append the following options to the last line:
+
+ * `project.withFluid:true`: use git submodule for Fluid
 
 ## Licensing
 

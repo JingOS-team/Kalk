@@ -3,14 +3,14 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
 import Fluid.Controls 1.0
-import Fluid.Material 1.0
+import Fluid.Effects 1.0 as FluidEffects
 
 Rectangle {
     id: calculationZone
     color: 'white'
     layer.enabled: true
     z: 10
-    layer.effect: ElevationEffect { elevation: 2 }
+    layer.effect: FluidEffects.Elevation { elevation: 2 }
 
     property alias formula: formula
     property alias result: result
@@ -25,7 +25,7 @@ Rectangle {
         anchors.right: parent.right
         height: 40
         layer.enabled: root.advanced
-        layer.effect: ElevationEffect {
+        layer.effect: FluidEffects.Elevation {
             elevation: advancedView.contentY < 5 ? 0 : 2
 
             Behavior on elevation {
@@ -52,7 +52,7 @@ Rectangle {
             NavButton {
                 id: helpButton
                 visible: root.advanced
-                iconName: 'action/info_outline'
+                icon.source: Utils.iconUrl("action/info_outline")
                 ToolTip.text: qsTr('Help')
                 onClicked: Qt.openUrlExternally('http://mathjs.org/docs/expressions/syntax.html')
             }
@@ -60,7 +60,7 @@ Rectangle {
             NavButton {
                 id: openButton
                 visible: root.advanced
-                iconName: 'file/folder_open'
+                icon.source: Utils.iconUrl("file/folder_open")
                 ToolTip.text: qsTr('Open file') + ' (Ctrl+O)'
                 onClicked: openFile()
             }
@@ -69,7 +69,7 @@ Rectangle {
                 id: saveButton
                 enabled: document.edited || document.unsaved
                 visible: root.advanced
-                iconName: 'content/save'
+                icon.source: Utils.iconUrl("content/save")
                 opacity: enabled ? root.styles.secondaryTextOpacity : root.styles.hintTextOpacity
                 ToolTip.text: qsTr('Save file') + ' (Ctrl+S)'
                 onClicked: saveFile()
@@ -78,7 +78,7 @@ Rectangle {
             NavButton {
                 id: advancedButton
                 visible: !root.advanced
-                iconName: 'action/list'
+                icon.source: Utils.iconUrl("action/list")
                 ToolTip.text: qsTr('Advanced mode') + ' (Ctrl+D)'
                 onClicked: setAdvanced(true)
             }
@@ -86,7 +86,7 @@ Rectangle {
             NavButton {
                 id: closeButton
                 visible: root.advanced
-                iconName: 'navigation/close'
+                icon.source: Utils.iconUrl("navigation/close")
                 ToolTip.text: qsTr('Close advanced mode')
                 onClicked: closeFile()
             }
@@ -94,7 +94,7 @@ Rectangle {
             NavButton {
                 id: historyButton
                 visible: !root.advanced
-                iconName: historyPanel.visible ? 'communication/dialpad' : 'action/history'
+                icon.source: Utils.iconUrl(historyPanel.visible ? "communication/dialpad" : "action/history")
                 ToolTip.text: qsTr('Toggle history') + ' (Ctrl+H)'
                 onClicked: toogleHistory()
             }
@@ -102,7 +102,7 @@ Rectangle {
             NavButton {
                 id: expandButton
                 visible: !root.advanced
-                iconName: root.expanded ? 'navigation/expand_less' : 'navigation/expand_more'
+                icon.source: Utils.iconUrl(root.expanded ? "navigation/expand_less" : "navigation/expand_more")
                 ToolTip.text: qsTr('Toggle expanded') + ' (Ctrl+E)'
                 onClicked: toogleExpanded()
             }

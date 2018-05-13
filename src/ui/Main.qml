@@ -27,14 +27,13 @@ import QtQuick.Controls.Material 2.0
 import QtQuick.Controls 2.1
 import Fluid.Controls 1.0 as FluidControls
 import Fluid.Controls 1.0
-import Fluid.Material 1.0
 import Qt.labs.platform 1.0
 import Qt.labs.settings 1.0
 import filehandler 1.0
 import ".."
 import "../engine"
 
-FluidWindow {
+ApplicationWindow {
     id: root
     visible: true
 
@@ -182,7 +181,7 @@ FluidWindow {
         }
     }
 
-    InfoBar {
+    SnackBar {
         id: snackBar
         z: 99
     }

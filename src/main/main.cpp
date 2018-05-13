@@ -22,7 +22,7 @@
 */
 
 #include <QtGlobal>
-#include <QGuiApplication>
+#include <QApplication>
 #include <QIcon>
 #include <QQmlApplicationEngine>
 #include <QtQuickControls2/QQuickStyle>
@@ -38,12 +38,15 @@ int main(int argc, char *argv[])
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
-    QGuiApplication app(argc, argv);
+    QApplication app(argc, argv);
     app.setOrganizationName(QLatin1String("Liri"));
     app.setOrganizationDomain(QLatin1String("liri.io"));
     app.setApplicationName(QLatin1String("Calculator"));
     app.setDesktopFileName(QLatin1String("io.liri.Calculator.desktop"));
     app.setWindowIcon(QIcon("qrc:/icons/icon.png"));
+
+    // Set the X11 WM_CLASS so X11 desktops can find the desktop file
+    qputenv("RESOURCE_NAME", "io.liri.Calculator");
 
     // create qml app engine
     QQmlApplicationEngine engine;
