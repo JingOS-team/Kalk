@@ -2,12 +2,18 @@
 <component type="desktop">
   <id>io.liri.Calculator.desktop</id>
   <name>Liri Calculator</name>
-  <summary>Perform arithmetic calculations</summary>
+  <summary>Perform arithmetic or scientific calculations</summary>
   <developer_name>Liri</developer_name>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0+</project_license>
   <description>
-    <p>Liri Calculator is a Material Design cross-platform calculator.</p>
+    <p>
+      Liri Calculator is a Material Design application that solves mathematical equations.
+      At first it appears to be a simple calculator with only basic arithmetic operations.
+      However it features a flexible expression parser with support for symbolic
+      computation, a large set of built-in functions and constants and works with different
+      data types like numbers, big numbers, complext numbers, fractions, units and matrices.
+    </p>
   </description>
   <launchable type="desktop-id">io.liri.Calculator.desktop</launchable>
   <provides>
@@ -22,9 +28,11 @@
     </screenshot>
   </screenshots>
   <kudos>
+    <kudo>HiDpiIcon</kudo>
     <kudo>ModernToolkit</kudo>
   </kudos>
   <releases>
+    <release date="2018-10-15" version="1.1.1"/>
     <release date="2018-05-13" version="1.1.0"/>
     <release date="2017-05-11" version="1.0.0"/>
   </releases>
