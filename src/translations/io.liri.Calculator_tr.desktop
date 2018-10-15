@@ -1,0 +1,19 @@
+[Desktop Entry]
+Name=Liri Calculator
+GenericName=Calculator
+Comment=Perform arithmetic and scientific calculations
+Keywords=calculation;arithmetic;scientific;
+#TRANSLATIONS
+Exec=liri-calculator
+Icon=io.liri.Calculator
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=X-Liri;Qt;Utility;Calculator;
+
+
+# Translations
+Comment[tr]=Aritmetik ve bilimsel hesaplama gerçekleştir
+Icon[tr]=io.liri.Calculator
+Name[tr]=Liri Hesap Makinesi
+GenericName[tr]=Hesap Makinesi

@@ -1,0 +1,14 @@
+[main]
+host = https://www.transifex.com
+
+[liri-calculator.app]
+type = QT
+source_lang = en
+source_file = src/translations/liri-calculator.ts
+file_filter = src/translations/liri-calculator_<lang>.ts
+
+[liri-calculator.desktop-file]
+type = DESKTOP
+source_lang = en
+source_file = data/io.liri.Calculator.desktop.in
+file_filter = src/translations/io.liri.Calculator_<lang>.desktop

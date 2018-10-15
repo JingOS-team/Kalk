@@ -9,6 +9,7 @@ QtGuiApplication {
     Depends { name: "lirideployment" }
     Depends { name: "Qt"; submodules: ["qml", "quick", "svg", "quickcontrols2", "widgets"] }
     Depends { name: "ib"; condition: qbs.targetOS.contains("macos") }
+    Depends { name: "LiriTranslations" }
 
     Properties {
         condition: qbs.targetOS.contains("darwin")
@@ -46,15 +47,27 @@ QtGuiApplication {
         qbs.install: true
         qbs.installDir: lirideployment.binDir
         qbs.installSourceBase: destinationDirectory
-        fileTagsFilter: isBundle ? ["bundle.content"] : product.type
+        fileTagsFilter: isBundle ? ["bundle.content"] : ["application"]
     }
 
     Group {
         condition: qbs.targetOS.contains("unix") && !qbs.targetOS.contains("darwin") && !qbs.targetOS.contains("android")
         name: "Desktop File"
-        files: ["../data/io.liri.Calculator.desktop"]
-        qbs.install: true
-        qbs.installDir: lirideployment.applicationsDir
+        files: ["../data/io.liri.Calculator.desktop.in"]
+        fileTags: ["liri.desktop.template"]
+    }
+
+    Group {
+        name: "Desktop File Translations"
+        files: ["io.liri.Calculator_*.desktop"]
+        prefix: "translations/"
+        fileTags: ["liri.desktop.translations"]
+    }
+
+    Group {
+        name: "Translations"
+        files: ["*_*.ts"]
+        prefix: "translations/"
     }
 
     Group {
@@ -73,5 +86,17 @@ QtGuiApplication {
         qbs.install: true
         qbs.installSourceBase: prefix
         qbs.installDir: lirideployment.dataDir + "/icons/hicolor"
+    }
+
+    Group {
+        qbs.install: true
+        qbs.installDir: lirideployment.applicationsDir
+        fileTagsFilter: "liri.desktop.file"
+    }
+
+    Group {
+        qbs.install: true
+        qbs.installDir: lirideployment.dataDir + "/liri-calculator/translations"
+        fileTagsFilter: "qm"
     }
 }
