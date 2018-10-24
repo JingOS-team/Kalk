@@ -6,13 +6,16 @@ QtGuiApplication {
     name: "liri-calculator"
     consoleApplication: false
 
-    bundle.identifierPrefix: "io.liri"
-    bundle.identifier: "io.liri.Calculator"
-    bundle.infoPlist: ({"CFBundleIconFile": "liri-calculator"})
-
     Depends { name: "lirideployment" }
     Depends { name: "Qt"; submodules: ["qml", "quick", "svg", "quickcontrols2", "widgets"] }
     Depends { name: "ib"; condition: qbs.targetOS.contains("macos") }
+
+    Properties {
+        condition: qbs.targetOS.contains("darwin")
+        bundle.identifierPrefix: "io.liri"
+        bundle.identifier: "io.liri.Calculator"
+        bundle.infoPlist: ({"CFBundleIconFile": "liri-calculator"})
+    }
 
     files: [
         "main/*.cpp",
