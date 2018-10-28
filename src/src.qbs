@@ -4,6 +4,11 @@ QtGuiApplication {
     readonly property bool isBundle: qbs.targetOS.contains("darwin") && bundle.isBundle
 
     name: "liri-calculator"
+    targetName: {
+        if (qbs.targetOS.contains("windows"))
+            return "LiriCalculator";
+        return name;
+    }
     consoleApplication: false
 
     Depends { name: "lirideployment" }
