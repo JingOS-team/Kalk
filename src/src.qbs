@@ -101,7 +101,14 @@ QtGuiApplication {
 
     Group {
         qbs.install: true
-        qbs.installDir: lirideployment.dataDir + "/liri-calculator/translations"
+        qbs.installDir: {
+            if (qbs.targetOS.contains("windows"))
+                return "translations";
+            else if (qbs.targetOS.contains("macos"))
+                return "Contents/Resources/data/translations";
+            else
+                return lirideployment.dataDir + "/liri-calculator/translations";
+        }
         fileTagsFilter: "qm"
     }
 }
