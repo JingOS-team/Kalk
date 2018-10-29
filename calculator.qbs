@@ -4,7 +4,7 @@ import qbs.Utilities
 Project {
     name: "Calculator"
 
-    readonly property string version: "1.1.1"
+    readonly property string version: "1.2.0"
 
     property bool useStaticAnalyzer: false
 
