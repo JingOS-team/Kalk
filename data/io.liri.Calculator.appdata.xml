@@ -9,10 +9,12 @@
   <description>
     <p>
       Liri Calculator is a Material Design application that solves mathematical equations.
+    </p>
+    <p>
       At first it appears to be a simple calculator with only basic arithmetic operations.
       However it features a flexible expression parser with support for symbolic
       computation, a large set of built-in functions and constants and works with different
-      data types like numbers, big numbers, complext numbers, fractions, units and matrices.
+      data types like numbers, big numbers, complex numbers, fractions, units and matrices.
     </p>
   </description>
   <launchable type="desktop-id">io.liri.Calculator.desktop</launchable>
@@ -32,9 +34,41 @@
     <kudo>ModernToolkit</kudo>
   </kudos>
   <releases>
-    <release date="2018-10-15" version="1.1.1"/>
-    <release date="2018-05-13" version="1.1.0"/>
-    <release date="2017-05-11" version="1.0.0"/>
+    <release date="2018-10-28" version="1.2.0">
+      <description>
+        <ul>
+          <li>Load translations</li>
+        </ul>
+      </description>
+    </release>
+    <release date="2018-10-15" version="1.1.1">
+      <description>
+        <ul>
+          <li>Update appdata.</li>
+        </ul>
+      </description>
+    </release>
+    <release date="2018-05-13" version="1.1.0">
+      <description>
+        <ul>
+          <li>Fix save dialog.</li>
+          <li>Follow Fluid 1.0 changes.</li>
+        </ul>
+      </description>
+    </release>
+    <release date="2017-05-11" version="1.0.0">
+      <description>
+        <ul>
+          <li>Complete rewrite.</li>
+          <li>QtQuick Controls 2.0 with Fluid framework.</li>
+          <li>MathJS backend.</li>
+          <li>New history panel.</li>
+          <li>New collapsible buttons panel.</li>
+          <li>New advanced mode, with saving and opening of .lcs file support.</li>
+          <li>New icon by Corbin Crutchley.</li>
+        </ul>
+      </description>
+    </release>
   </releases>
   <url type="homepage">https://liri.io</url>
   <url type="bugtracker">https://github.com/lirios/calculator/issues/new</url>

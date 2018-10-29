@@ -23,11 +23,15 @@
 
 #include <QtGlobal>
 #include <QApplication>
+#include <QDir>
 #include <QIcon>
+#include <QLibraryInfo>
 #include <QQmlApplicationEngine>
 #include <QtQuickControls2/QQuickStyle>
 #include <QQmlContext>
 #include <QDebug>
+#include <QStandardPaths>
+#include <QTranslator>
 
 #include "../filehandler/filehandler.h"
 
@@ -44,6 +48,30 @@ int main(int argc, char *argv[])
     app.setApplicationName(QLatin1String("Calculator"));
     app.setDesktopFileName(QLatin1String("io.liri.Calculator.desktop"));
     app.setWindowIcon(QIcon("qrc:/icons/icon.png"));
+
+    // Load Translations
+    QTranslator qtTranslator;
+    qtTranslator.load("qt_" + QLocale::system().name(),
+                      QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+    app.installTranslator(&qtTranslator);
+
+    QTranslator translator;
+#if (defined Q_OS_LINUX)
+    const QString translationsPath = QStandardPaths::locate(
+        QStandardPaths::GenericDataLocation, QLatin1String("liri-calculator/translations/"),
+        QStandardPaths::LocateDirectory);
+#elif (defined Q_OS_MACOS)
+    const QString translationsPath =
+        QDir(QCoreApplication::applicationDirPath())
+            .absoluteFilePath(QLatin1String("../Resources/data/translations/"));
+#elif (defined Q_OS_WIN)
+    const QString translationsPath = QDir(QCoreApplication::applicationDirPath())
+                                         .absoluteFilePath(QLatin1String("translations/"));
+#else
+#error "Platform not supported"
+#endif
+    if (translator.load(translationsPath + QLatin1String("liri-calculator_") + QLocale::system().name()))
+        app.installTranslator(&translator);
 
     // Set the X11 WM_CLASS so X11 desktops can find the desktop file
     qputenv("RESOURCE_NAME", "io.liri.Calculator");
