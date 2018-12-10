@@ -8,7 +8,7 @@ source /usr/local/share/liri-travis/functions
 travis_start "qbs_setup"
 msg "Setup qbs..."
 qbs setup-toolchains --detect
-qbs setup-qt $(which qmake) travis-qt5
+qbs setup-qt $(which qmake-qt5) travis-qt5
 qbs config profiles.travis-qt5.baseProfile $CC
 travis_end "qbs_setup"
 
@@ -27,9 +27,9 @@ pushd fluid >/dev/null
 qbs -d build -j $(nproc) profile:travis-qt5 \
     modules.qbs.installRoot:/ \
     modules.lirideployment.prefix:/usr \
-    modules.lirideployment.libDir:/usr/lib/x86_64-linux-gnu \
-    modules.lirideployment.qmlDir:/usr/lib/x86_64-linux-gnu/qt5/qml \
-    modules.lirideployment.pluginsDir:/usr/lib/x86_64-linux-gnu/qt5/plugins \
+    modules.lirideployment.libDir:/usr/lib64 \
+    modules.lirideployment.qmlDir:/usr/lib64/qt5/qml \
+    modules.lirideployment.pluginsDir:/usr/lib64/qt5/plugins \
     project.useSystemQbsShared:true \
     project.withDocumentation:false \
     project.withDemo:false
@@ -46,9 +46,9 @@ qbs -d build -j $(nproc) profile:travis-qt5 \
 travis_end "build_app"
 
 # Package
-travis_start "appimage"
-msg "Create AppImage..."
-/usr/local/bin/liri-build-appimage io.liri.Calculator
-mkdir -p travis-out
-mv Liri_Calculator*.AppImage travis-out/Liri_Calculator-git-$(date +%Y%m%d-%H%M%S)-$(git rev-parse --short HEAD)-x86_64.AppImage
-travis_end "appimage"
+#travis_start "appimage"
+#msg "Create AppImage..."
+#/usr/local/bin/liri-build-appimage io.liri.Calculator
+#mkdir -p travis-out
+#mv Liri_Calculator*.AppImage travis-out/Liri_Calculator-git-$(date +%Y%m%d-%H%M%S)-$(git rev-parse --short HEAD)-x86_64.AppImage
+#travis_end "appimage"
