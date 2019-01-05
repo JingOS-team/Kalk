@@ -18,8 +18,6 @@ else()
     set(LiriCalculator_OUTPUT_NAME "liri-calculator")
 endif()
 
-liri_translate_desktop(_desktop_file SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/../data/io.liri.Calculator.desktop.in")
-
 liri_add_executable(LiriCalculator
     OUTPUT_NAME
         "${LiriCalculator_OUTPUT_NAME}"
@@ -36,7 +34,7 @@ liri_add_executable(LiriCalculator
     APPDATA
         "${CMAKE_CURRENT_SOURCE_DIR}/../data/io.liri.Calculator.appdata.xml"
     DESKTOP
-        "${_desktop_file}"
+        "${CMAKE_CURRENT_SOURCE_DIR}/../data/io.liri.Calculator.desktop"
     LIBRARIES
         Qt5::Core
         Qt5::Gui
