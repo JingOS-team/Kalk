@@ -58,7 +58,7 @@
     <message>
         <location filename="../ui/Main.qml" line="173"/>
         <source>Discard unsaved?</source>
-        <translation>Supprimer les modifications non-sauvegardées ?</translation>
+        <translation>Supprimer les modifications non enregistrées ?</translation>
     </message>
     <message>
         <location filename="../ui/Main.qml" line="218"/>

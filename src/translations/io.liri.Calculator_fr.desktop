@@ -13,7 +13,7 @@ Categories=X-Liri;Qt;Utility;Calculator;
 
 
 # Translations
-Icon[fr]=io.liri.Calculatrice
+Icon[fr]=io.liri.Calculator
 Name[fr]=Calculatrice Liri
 Comment[fr]=Effectuer des calculs arithmétiques et scientifiques
 GenericName[fr]=Calculatrice
