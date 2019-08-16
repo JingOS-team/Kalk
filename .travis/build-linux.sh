@@ -54,7 +54,8 @@ for filename in $(find . -type f -name "*.desktop"); do
     desktop-file-validate $filename
 done
 for filename in $(find . -type f -name "*.appdata.xml"); do
-    appstream-util validate-relax --nonet $filename
+    flatpak run org.freedesktop.appstream-glib validate $filename
+    flatpak run org.freedesktop.appstream-glib validate-strict $filename || true
 done
 travis_end "validate"
 
