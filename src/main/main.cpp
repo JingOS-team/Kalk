@@ -38,39 +38,39 @@
 int main(int argc, char *argv[])
 {
     // Set Material Design QtQuick Controls 2 style
-    QQuickStyle::setStyle(QLatin1String("Material"));
+    QQuickStyle::setStyle(QStringLiteral("Material"));
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QApplication app(argc, argv);
-    app.setOrganizationName(QLatin1String("Liri"));
-    app.setOrganizationDomain(QLatin1String("liri.io"));
-    app.setApplicationName(QLatin1String("Calculator"));
-    app.setDesktopFileName(QLatin1String("io.liri.Calculator.desktop"));
-    app.setWindowIcon(QIcon("qrc:/icons/icon.png"));
+    app.setOrganizationName(QStringLiteral("Liri"));
+    app.setOrganizationDomain(QStringLiteral("liri.io"));
+    app.setApplicationName(QStringLiteral("Calculator"));
+    app.setDesktopFileName(QStringLiteral("io.liri.Calculator.desktop"));
+    app.setWindowIcon(QIcon(QStringLiteral("qrc:/icons/icon.png")));
 
     // Load Translations
     QTranslator qtTranslator;
-    qtTranslator.load("qt_" + QLocale::system().name(),
+    qtTranslator.load(QStringLiteral("qt_") + QLocale::system().name(),
                       QLibraryInfo::location(QLibraryInfo::TranslationsPath));
     app.installTranslator(&qtTranslator);
 
     QTranslator translator;
 #if (defined Q_OS_LINUX)
     const QString translationsPath = QStandardPaths::locate(
-        QStandardPaths::GenericDataLocation, QLatin1String("liri-calculator/translations/"),
+        QStandardPaths::GenericDataLocation, QStringLiteral("liri-calculator/translations/"),
         QStandardPaths::LocateDirectory);
 #elif (defined Q_OS_MACOS)
     const QString translationsPath =
         QDir(QCoreApplication::applicationDirPath())
-            .absoluteFilePath(QLatin1String("../Resources/data/translations/"));
+            .absoluteFilePath(QStringLiteral("../Resources/data/translations/"));
 #elif (defined Q_OS_WIN)
     const QString translationsPath = QDir(QCoreApplication::applicationDirPath())
-                                         .absoluteFilePath(QLatin1String("translations/"));
+                                         .absoluteFilePath(QStringLiteral("translations/"));
 #else
 #error "Platform not supported"
 #endif
-    if (translator.load(translationsPath + QLatin1String("liri-calculator_") + QLocale::system().name()))
+    if (translator.load(translationsPath + QStringLiteral("liri-calculator_") + QLocale::system().name()))
         app.installTranslator(&translator);
 
     // Set the X11 WM_CLASS so X11 desktops can find the desktop file
@@ -80,18 +80,18 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     #ifdef QT_DEBUG
-        engine.rootContext()->setContextProperty("debug", true);
+        engine.rootContext()->setContextProperty(QStringLiteral("debug"), true);
     #else
-       engine.rootContext()->setContextProperty("debug", false);
+       engine.rootContext()->setContextProperty(QStringLiteral("debug"), false);
     #endif
 
     qmlRegisterType<FileHandler>("filehandler", 1, 0, "FileHandler");
 
     // setup qml imports
-    engine.addImportPath("qrc:/");
+    engine.addImportPath(QStringLiteral("qrc:/"));
 
     // load main ui
-    engine.load(QUrl(QLatin1String("qrc:/ui/Main.qml")));
+    engine.load(QUrl(QStringLiteral("qrc:/ui/Main.qml")));
 
     return app.exec();
 }

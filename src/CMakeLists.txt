@@ -29,7 +29,7 @@ liri_add_executable(LiriCalculator
     RESOURCES
         calculator.qrc
     DEFINES
-        #QT_NO_CAST_FROM_ASCII
+        QT_NO_CAST_FROM_ASCII
         QT_NO_FOREACH
     APPDATA
         "${CMAKE_CURRENT_SOURCE_DIR}/../data/io.liri.Calculator.appdata.xml"
