@@ -1,10 +1,10 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="pt_BR" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="fr" version="2.1">
 <context>
     <name>CalculationLine</name>
     <message>
         <location filename="../ui/CalculationLine.qml" line="72"/>
         <source>Error</source>
-        <translation>Erro</translation>
+        <translation>Erreur</translation>
     </message>
 </context>
 <context>
@@ -12,37 +12,37 @@
     <message>
         <location filename="../ui/CalculationZone.qml" line="56"/>
         <source>Help</source>
-        <translation>Ajuda</translation>
+        <translation>Aide</translation>
     </message>
     <message>
         <location filename="../ui/CalculationZone.qml" line="64"/>
         <source>Open file</source>
-        <translation>Abrir arquivo</translation>
+        <translation>Ouvrir un fichier</translation>
     </message>
     <message>
         <location filename="../ui/CalculationZone.qml" line="74"/>
         <source>Save file</source>
-        <translation>Salvar arquivo</translation>
+        <translation>Sauvegarder un fichier</translation>
     </message>
     <message>
         <location filename="../ui/CalculationZone.qml" line="82"/>
         <source>Advanced mode</source>
-        <translation>Modo avançado</translation>
+        <translation>Mode avancé</translation>
     </message>
     <message>
         <location filename="../ui/CalculationZone.qml" line="90"/>
         <source>Close advanced mode</source>
-        <translation>Fechar modo avançado</translation>
+        <translation>Fermer le mode avancé</translation>
     </message>
     <message>
         <location filename="../ui/CalculationZone.qml" line="98"/>
         <source>Toggle history</source>
-        <translation>Alternar histórico</translation>
+        <translation>Voir l&apos;historique</translation>
     </message>
     <message>
         <location filename="../ui/CalculationZone.qml" line="106"/>
         <source>Toggle expanded</source>
-        <translation>Alternar expandido</translation>
+        <translation>Étendre</translation>
     </message>
 </context>
 <context>
@@ -50,7 +50,7 @@
     <message>
         <location filename="../filehandler/filehandler.cpp" line="85"/>
         <source>Cannot save: </source>
-        <translation>Não foi possível salvar</translation>
+        <translation>Impossible de sauvegarder : </translation>
     </message>
 </context>
 <context>
@@ -58,12 +58,12 @@
     <message>
         <location filename="../ui/Main.qml" line="173"/>
         <source>Discard unsaved?</source>
-        <translation>Descartar não salvo?</translation>
+        <translation>Supprimer les modifications non enregistrées ?</translation>
     </message>
     <message>
         <location filename="../ui/Main.qml" line="218"/>
         <source>saved</source>
-        <translation>salvo</translation>
+        <translation>sauvegardé</translation>
     </message>
 </context>
 </TS>

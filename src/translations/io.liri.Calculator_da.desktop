@@ -13,7 +13,7 @@ Categories=X-Liri;Qt;Utility;Calculator;
 
 
 # Translations
-Comment[da]=Udfør aritmetiske og videnskabelige beregninger
 Icon[da]=io.liri.Calculator
 Name[da]=Liri Lommeregner
+Comment[da]=Udfør aritmetiske og videnskabelige beregninger
 GenericName[da]=Lommeregner

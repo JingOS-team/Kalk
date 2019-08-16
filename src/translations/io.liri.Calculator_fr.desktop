@@ -13,7 +13,7 @@ Categories=X-Liri;Qt;Utility;Calculator;
 
 
 # Translations
-Icon[ru]=io.liri.Calculator
-Name[ru]=Liri Калькулятор
-Comment[ru]=Выполнение арифметических и научных расчетов
-GenericName[ru]=Калькулятор
+Icon[fr]=io.liri.Calculator
+Name[fr]=Calculatrice Liri
+Comment[fr]=Effectuer des calculs arithmétiques et scientifiques
+GenericName[fr]=Calculatrice
