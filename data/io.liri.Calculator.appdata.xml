@@ -34,6 +34,13 @@
     <kudo>ModernToolkit</kudo>
   </kudos>
   <releases>
+    <release date="2019-08-16" version="1.3.0">
+      <description>
+        <ul>
+          <li>CMake build system</li>
+        </ul>
+      </description>
+    </release>
     <release date="2018-10-28" version="1.2.0">
       <description>
         <ul>
