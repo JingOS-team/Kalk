@@ -37,6 +37,7 @@
   <releases>
     <release date="2019-08-16" version="1.3.0">
       <description>
+        <p>Notable changes:</p>
         <ul>
           <li>CMake build system</li>
         </ul>
@@ -44,6 +45,7 @@
     </release>
     <release date="2018-10-28" version="1.2.0">
       <description>
+        <p>Notable changes:</p>
         <ul>
           <li>Load translations</li>
         </ul>
@@ -51,6 +53,7 @@
     </release>
     <release date="2018-10-15" version="1.1.1">
       <description>
+        <p>Notable changes:</p>
         <ul>
           <li>Update appdata</li>
         </ul>
@@ -58,6 +61,7 @@
     </release>
     <release date="2018-05-13" version="1.1.0">
       <description>
+        <p>Notable changes:</p>
         <ul>
           <li>Fix save dialog</li>
           <li>Follow Fluid 1.0 changes</li>
@@ -66,6 +70,7 @@
     </release>
     <release date="2017-05-11" version="1.0.0">
       <description>
+        <p>Notable changes:</p>
         <ul>
           <li>Complete rewrite</li>
           <li>QtQuick Controls 2.0 with Fluid framework</li>
