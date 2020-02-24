@@ -14,5 +14,6 @@
         <file>ui/qmldir</file>
         <file>ui/Shortcuts.qml</file>
         <file>ui/Styles.qml</file>
+        <file>ui/About.qml</file>
     </qresource>
 </RCC>

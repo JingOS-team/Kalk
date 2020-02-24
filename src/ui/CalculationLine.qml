@@ -1,24 +1,24 @@
 import QtQuick 2.7
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.0
-import QtQuick.Controls.Material 2.0
-import Fluid.Controls 1.0
+// import QtQuick.Controls.Material 2.0
+// import Fluid.Controls 1.0
 
 
 Column {
     width: root.width
-    padding: Units.smallSpacing
-    spacing: Units.smallSpacing
+    padding: smallSpacing
+    spacing: smallSpacing
 
     Row {
         width: parent.width
         height: formulaEdit.height
-        spacing: Units.smallSpacing
+        spacing: smallSpacing
 
             TextEdit {
                 id: formulaEdit
                 text: formula
-                width: (root.width - 3 * Units.smallSpacing) * 2/3
+                width: (root.width - 3 * smallSpacing) * 2/3
                 font.pointSize: root.styles.advancedFontSize
                 opacity: root.styles.secondaryTextOpacity
                 selectByMouse: true
@@ -73,7 +73,7 @@ Column {
                 color: hasError ? 'red' : 'black'
                 height: formulaEdit.height
                 opacity: hasError ? root.styles.hintTextOpacity : root.styles.primaryTextOpacity
-                width: (root.width - 3 * Units.smallSpacing) * 1/3
+                width: (root.width - 3 * smallSpacing) * 1/3
                 font.pointSize: root.styles.advancedFontSize
                 horizontalAlignment: Text.AlignRight
                 clip: true
@@ -94,7 +94,7 @@ Column {
     }
 
     Rectangle {
-        width: root.width - 2 * Units.smallSpacing
+        width: root.width - 2 * smallSpacing
         height: 1
         color: formulaResult.hasError ? 'red' : 'black'
         opacity: 0.1

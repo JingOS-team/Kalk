@@ -25,32 +25,53 @@ import QtQuick 2.7
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
-import Fluid.Controls 1.0
+// import Fluid.Controls 1.0
 import ".."
 import "../engine"
 
 Rectangle {
     id: buttonsPanel
 
-    property alias computedHeight: fns.height
+    property alias computedHeight: mainButtonsView.height
 
     height: computedHeight
 
     Row {
         anchors.fill: parent
 
+//         ButtonsView {
+//             id: fns
+//             color: "#fdbc4b"
+//             labels: ['sqrt','exp','log','cos','sin','tan','acos','asin','atan','π','∞','x10^']
+//             targets: ['sqrt(','exp(','log','cos(','sin(','tan(','acos(','asin(','atan(','pi','Infinity','e']
+//             onButtonClicked: calculationZone.appendToFormula(strToAppend)
+//         }
+// 
+//         ButtonsView {
+//             id: mainButtonsView
+//             color: "#3da"
+//             labels: ['7', '8', '9', '←', '4', '5', '6', '^', '1', '2', '3', '!', '.', '0', '(', ')']
+//             targets: ['7', '8', '9', 'DEL', '4', '5', '6', '^', '1', '2', '3', '!', '.', '0', '(', ')']
+//             onButtonClicked: calculationZone.appendToFormula(strToAppend)
+//             onButtonLongPressed: {
+//                 if (strToAppend === "DEL") {
+//                     calculationZone.clearFormula();
+//                 }
+//             }
+//         }
+// 
+//         ButtonsView {
+//             color: "#3daee9"
+//             labels: ['+', '-', '×', '÷']
+//             targets: ['+', '-', '*', '/']
+//             onButtonClicked: calculationZone.appendToFormula(strToAppend)
+//         }
+        
         ButtonsView {
-            id: fns
-            color: styles.accentColor
-            labels: ['sqrt','exp','log','cos','sin','tan','acos','asin','atan','π','∞','x10^']
-            targets: ['sqrt(','exp(','log','cos(','sin(','tan(','acos(','asin(','atan(','pi','Infinity','e']
-            onButtonClicked: calculationZone.appendToFormula(strToAppend)
-        }
-
-        ButtonsView {
-            color: Material.color(Material.Grey, Material.Shade900)
-            labels: ['7', '8', '9', '←', '4', '5', '6', '^', '1', '2', '3', '!', '.', '0', '(', ')']
-            targets: ['7', '8', '9', 'DEL', '4', '5', '6', '^', '1', '2', '3', '!', '.', '0', '(', ')']
+            id: mainButtonsView
+            color: "#3da"
+            labels: ['7', '8', '9', '÷', '4', '5', '6', 'x', '1', '2', '3', '-', '.', '0', 'C', '+']
+            targets: ['7', '8', '9', '/', '4', '5', '6', '*', '1', '2', '3', '-', '.', '0', 'DEL', '+']
             onButtonClicked: calculationZone.appendToFormula(strToAppend)
             onButtonLongPressed: {
                 if (strToAppend === "DEL") {
@@ -58,12 +79,22 @@ Rectangle {
                 }
             }
         }
-
+        
         ButtonsView {
-            color: Material.color(Material.Grey, Material.Shade800)
-            labels: ['+', '-', '×', '÷']
-            targets: ['+', '-', '*', '/']
+            id: fns
+            color: "#fdbc4b"
+            opacity: 0
+            labels: ['sqrt','exp','log','cos','sin','tan','acos','asin','atan','π','∞','x10^']
+            targets: ['sqrt(','exp(','log(','cos(','sin(','tan(','acos(','asin(','atan(','pi','Infinity','e']
             onButtonClicked: calculationZone.appendToFormula(strToAppend)
         }
+
+
+//         ButtonsView {
+//             color: "#3daee9"
+//             labels: ['+', '-', '×', '']
+//             targets: ['+', '-', '*', '/']
+//             onButtonClicked: calculationZone.appendToFormula(strToAppend)
+//         }
     }
 }

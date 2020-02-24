@@ -13,9 +13,9 @@ if(DEFINED _translations_destdir)
 endif()
 
 if(APPLE OR WIN32)
-    set(LiriCalculator_OUTPUT_NAME "LiriCalculator")
+    set(LiriCalculator_OUTPUT_NAME "Kalk")
 else()
-    set(LiriCalculator_OUTPUT_NAME "liri-calculator")
+    set(LiriCalculator_OUTPUT_NAME "kalk")
 endif()
 
 liri_add_executable(LiriCalculator
@@ -32,9 +32,9 @@ liri_add_executable(LiriCalculator
         QT_NO_CAST_FROM_ASCII
         QT_NO_FOREACH
     APPDATA
-        "${CMAKE_CURRENT_SOURCE_DIR}/../data/io.liri.Calculator.appdata.xml"
+        "${CMAKE_CURRENT_SOURCE_DIR}/../data/org.kde.Kalk.appdata.xml"
     DESKTOP
-        "${CMAKE_CURRENT_SOURCE_DIR}/../data/io.liri.Calculator.desktop"
+        "${CMAKE_CURRENT_SOURCE_DIR}/../data/org.kde.Kalk.desktop"
     LIBRARIES
         Qt5::Core
         Qt5::Gui
@@ -45,7 +45,7 @@ liri_add_executable(LiriCalculator
     GUI
 )
 set_target_properties(LiriCalculator PROPERTIES
-    MACOSX_BUNDLE_GUI_IDENTIFIER "io.liri.Calculator"
-    MACOSX_BUNDLE_ICON_FILE "io.liri.Calculator"
+    MACOSX_BUNDLE_GUI_IDENTIFIER "org.kde.Kalk"
+    MACOSX_BUNDLE_ICON_FILE "org.kde.Kalk"
     MACOSX_BUNDLE_SHORT_VERSION_STRING "${PROJECT_VERSION}"
 )

@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.10.0)
 
-project("Calculator"
-    VERSION "1.3.0"
-    DESCRIPTION "Calculator application"
+project("Kalk"
+    VERSION "0.1"
+    DESCRIPTION "Kirigami Calclulator"
     LANGUAGES CXX C
 )
 

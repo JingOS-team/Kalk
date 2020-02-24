@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Kalk
+GenericName=Calculator
+Comment=Perform arithmetic and scientific calculations
+Keywords=calculation;arithmetic;scientific;
+#TRANSLATIONS
+Exec=kalk
+Icon=accessories-calculator
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=kde;Qt;Kirigami;Utility;Calculator;

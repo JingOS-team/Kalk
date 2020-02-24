@@ -38,16 +38,16 @@
 int main(int argc, char *argv[])
 {
     // Set Material Design QtQuick Controls 2 style
-    QQuickStyle::setStyle(QStringLiteral("Material"));
+//     QQuickStyle::setStyle(QStringLiteral("Material"));
 
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+//     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QApplication app(argc, argv);
-    app.setOrganizationName(QStringLiteral("Liri"));
-    app.setOrganizationDomain(QStringLiteral("liri.io"));
-    app.setApplicationName(QStringLiteral("Calculator"));
-    app.setDesktopFileName(QStringLiteral("io.liri.Calculator.desktop"));
-    app.setWindowIcon(QIcon(QStringLiteral("qrc:/icons/icon.png")));
+    app.setOrganizationName(QStringLiteral("KDE"));
+    app.setOrganizationDomain(QStringLiteral("kde.org"));
+    app.setApplicationName(QStringLiteral("Kalk"));
+    app.setDesktopFileName(QStringLiteral("io.kde.Kalk.desktop"));
+    app.setWindowIcon(QIcon(QStringLiteral("accesories-calculator")));
 
     // Load Translations
     QTranslator qtTranslator;
@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
     QTranslator translator;
 #if (defined Q_OS_LINUX)
     const QString translationsPath = QStandardPaths::locate(
-        QStandardPaths::GenericDataLocation, QStringLiteral("liri-calculator/translations/"),
+        QStandardPaths::GenericDataLocation, QStringLiteral("kalk/translations/"),
         QStandardPaths::LocateDirectory);
 #elif (defined Q_OS_MACOS)
     const QString translationsPath =
@@ -70,11 +70,11 @@ int main(int argc, char *argv[])
 #else
 #error "Platform not supported"
 #endif
-    if (translator.load(translationsPath + QStringLiteral("liri-calculator_") + QLocale::system().name()))
+    if (translator.load(translationsPath + QStringLiteral("kalk_") + QLocale::system().name()))
         app.installTranslator(&translator);
 
     // Set the X11 WM_CLASS so X11 desktops can find the desktop file
-    qputenv("RESOURCE_NAME", "io.liri.Calculator");
+    qputenv("RESOURCE_NAME", "org.kde.Kalk");
 
     // create qml app engine
     QQmlApplicationEngine engine;
