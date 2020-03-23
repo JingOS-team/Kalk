@@ -1,51 +1,30 @@
-cmake_minimum_required(VERSION 3.10.0)
+project(Kalk)
 
-project("Kalk"
-    VERSION "0.1"
-    DESCRIPTION "Kirigami Calclulator"
-    LANGUAGES CXX C
-)
+cmake_minimum_required(VERSION 2.8.12)
+set(KF5_MIN_VERSION "5.18.0")
+set(QT_MIN_VERSION "5.5.0")
 
-## Shared macros and functions:
-if(CALCULATOR_WITH_FLUID AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/fluid/CMakeLists.txt")
-    set(LIRI_LOCAL_ECM TRUE)
-    set(FLUID_WITH_DOCUMENTATION FALSE)
-    set(FLUID_WITH_DEMO FALSE)
-endif()
-if(LIRI_LOCAL_ECM)
-    list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/fluid/cmake/shared/modules")
-else()
-    find_package(LiriCMakeShared "1.0.0" REQUIRED NO_MODULE)
-    list(APPEND CMAKE_MODULE_PATH "${LCS_MODULE_PATH}")
+if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
+    message(FATAL_ERROR "This application requires an out of source build. Please
+        create a separate build directory.")
 endif()
 
-## Set minimum versions required.
-set(QT_MIN_VERSION "5.10.0")
+include(FeatureSummary)
 
-## Liri specific setup common for all modules:
-include(LiriSetup)
+find_package(ECM 5.67.0 REQUIRED NO_MODULE)
 
-## Features:
-option(CALCULATOR_WITH_FLUID "Build together with Fluid" OFF)
-add_feature_info("Calculator::WithFluid" CALCULATOR_WITH_FLUID "Build together with Fluid")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
-## Find Qt 5.
-find_package(Qt5 "${QT_MIN_VERSION}"
-    CONFIG REQUIRED
-    COMPONENTS
-        Core
-        Gui
-        Widgets
-        Svg
-        Qml
-        Quick
-        QuickControls2
-        LinguistTools
-)
+include(ECMSetupVersion)
+include(ECMGenerateHeaders)
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(ECMPoQmTools)
+include(KDECompilerSettings NO_POLICY_SCOPE)
 
-## Add subdirectories:
-if(CALCULATOR_WITH_FLUID)
-    add_subdirectory(fluid)
-endif()
-add_subdirectory(data)
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Quick Test Gui QuickControls2 Widgets)
+find_package(KF5Kirigami2 ${KF5_MIN_VERSION} REQUIRED)
+
 add_subdirectory(src)
+
+feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
