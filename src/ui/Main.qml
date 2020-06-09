@@ -69,7 +69,7 @@ Kirigami.ApplicationWindow {
                 text: qsTr('History')
                 iconName: historyPanel.visible ? "gnumeric-format-thousand-separator" : "shallow-history"
                 tooltip: qsTr('Toggle history') + ' (Ctrl+H)'
-                onTriggered: toogleHistory()
+                onTriggered: toggleHistory()
             },
             Kirigami.Action {
                 id: expandButton
@@ -77,7 +77,7 @@ Kirigami.ApplicationWindow {
                 text: qsTr('Expand')
                 iconName: root.expanded ? "draw-arrow-back" : "expand-all"
                 tooltip: qsTr('Toggle expanded') + ' (Ctrl+E)'
-                onTriggered: toogleExpanded()
+                onTriggered: toggleAdvanced()
             }
             
         ]
@@ -340,7 +340,7 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    function toogleExpanded() {
+    function toggleExpanded() {
         setExpanded(!root.expanded);
         root.advanced = false;
     }
@@ -351,12 +351,12 @@ Kirigami.ApplicationWindow {
         calculationZone.retrieveFormulaFocus();
     }
 
-    function toogleHistory() {
+    function toggleHistory() {
         historyPanel.visible = !historyPanel.visible;
         setExpanded(true);
     }
 
-    function toogleAdvanced() {
+    function toggleAdvanced() {
         setAdvanced(!root.advanced);
         setExpanded(!root.advanced);
     }
