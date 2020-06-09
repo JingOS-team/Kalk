@@ -12,7 +12,6 @@ Rectangle {
     property alias formula: formula
     property alias result: result
 
-    height: root.advanced ? root.height : getHeight()
 
 //    Rectangle {
 //        id: advancedToolbar
@@ -63,7 +62,7 @@ Rectangle {
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.right: parent.right
-            font.pointSize: root.height / 9
+            font.pointSize: root.height / 15
             wrapMode: TextInput.WrapAnywhere
             selectByMouse: true
             onTextChanged: {
@@ -83,16 +82,10 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.margins: smallSpacing
-        font.pointSize: root.height / 15
+        font.pointSize: root.height / 22
         horizontalAlignment: TextInput.AlignRight
         text: ''
     }
-
-    // Shouldn't be needed but the update isn't triggered otherwise
-    function getHeight() {
-        return calculationZone.formula.height + result.height;
-    }
-
     function loadFileContent(text) {
         var formulas = text.split('\n');
         calculationsRepeater.model.clear();

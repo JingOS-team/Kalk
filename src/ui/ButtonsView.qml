@@ -9,9 +9,8 @@ Rectangle {
     anchors.left: parent.left
     anchors.right: parent.right
     anchors.bottom: parent.bottom
+    height: root.height * 0.8
     visible: !root.advanced && root.expanded
-    implicitHeight: grid.implicitHeight
-    implicitWidth: grid.implicitWidth
     property var labels
     property var targets
     property var backgroundColor
@@ -32,8 +31,8 @@ Rectangle {
 
             Label {
                 text: modelData
-                width: root.width / columnsCount
-                height: root.height / (2*rowsCount)
+                width: buttonsView.width / columnsCount
+                height: buttonsView.height / rowsCount
                 topPadding: smallSpacing
                 bottomPadding: smallSpacing
                 horizontalAlignment: Qt.AlignHCenter
