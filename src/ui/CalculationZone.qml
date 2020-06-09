@@ -1,17 +1,13 @@
 import QtQuick 2.7
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.0
-// import QtQuick.Controls.Material 2.0
 import org.kde.kirigami 2.4 as Kirigami
-// import Fluid.Controls 1.0
-// import Fluid.Effects 1.0 as FluidEffects
 
 Rectangle {
     id: calculationZone
     color: 'white'
     layer.enabled: true
     z: 10
-//     layer.effect: FluidEffects.Elevation { elevation: 2 }
 
     property alias formula: formula
     property alias result: result
@@ -26,13 +22,6 @@ Rectangle {
         anchors.right: parent.right
         height: 40
         layer.enabled: root.advanced
-//         layer.effect: FluidEffects.Elevation {
-//             elevation: advancedView.contentY < 5 ? 0 : 2
-// 
-//             Behavior on elevation {
-//                 NumberAnimation { duration: 400 }
-//             }
-//         }
 
         Text {
             id: filename
@@ -92,7 +81,7 @@ Rectangle {
         anchors.left: parent.left
         clip: true
         anchors.bottom: result.top
-        width: root.width /*- actions.width*/
+        width: root.width
         visible: !root.advanced
         contentHeight: formula.implicitHeight
         flickableDirection: Flickable.VerticalFlick
@@ -136,7 +125,6 @@ Rectangle {
         anchors.margins: smallSpacing
         font.pixelSize: root.styles.fontSize
         horizontalAlignment: TextInput.AlignRight
-//         level: 1
         text: ''
     }
 
