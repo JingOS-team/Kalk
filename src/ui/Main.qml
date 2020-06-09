@@ -98,8 +98,6 @@ Kirigami.ApplicationWindow {
     header: Item {}
     title: 'Kalk'
     pageStack.globalToolBar.style: Kirigami.ApplicationHeaderStyle.None
-    
-    property Item styles: Styles {}
 
     Shortcuts {}
 
@@ -150,8 +148,9 @@ Kirigami.ApplicationWindow {
             Item {
                 ButtonsView {
                     id: fns
+                    fontSize: root.height / 18
                     backgroundColor: "#2ecc71"
-                    labels: ['sqrt','exp','log','sin','cos','tan','asin','acos','atan','π','∞','x10^']
+                    labels: ['sqrt','exp','log','sin','cos','tan','asin','acos','atan','π','∞','e']
                     targets: ['sqrt(','exp(','log','sin(','cos(','tan(','asin(','acos(','atan(','pi','Infinity','e']
                     onButtonClicked: calculationZone.appendToFormula(strToAppend)
                 }

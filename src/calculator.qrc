@@ -10,7 +10,7 @@
         <file>ui/HistoryPanel.qml</file>
         <file>ui/Main.qml</file>
         <file>ui/qmldir</file>
-        <file>ui/Shortcuts.qml</file>S
+        <file>ui/Shortcuts.qml</file>
         <file>ui/About.qml</file>
     </qresource>
 </RCC>
