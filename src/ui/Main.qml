@@ -38,17 +38,16 @@ Kirigami.ApplicationWindow {
     id: root
     visible: true
     controlsVisible: false
-    
+    height: Kirigami.Units.gridUnit * 45
+    width: Kirigami.Units.gridUnit * 27
+    minimumHeight: normalHeight
+    minimumWidth: normalWidth
+
     globalDrawer: Kirigami.GlobalDrawer {
         id: globalDrawer
         title: "Kalk"
         titleIcon: "accessories-calculator"
         actions: [
-//             Kirigami.PagePoolAction {
-//                 text: qsTr("About")
-//                 pagePool: mainPagePool
-//                 page: "About.qml"
-//             }
             Kirigami.Action {
                 id: helpButton
                 visible: root.advanced
@@ -71,7 +70,6 @@ Kirigami.ApplicationWindow {
                 visible: root.advanced
                 text: qsTr('Save')
                 iconName: "document-save"
-//                 opacity: enabled ? root.styles.secondaryTextOpacity : root.styles.hintTextOpacity
                 tooltip: qsTr('Save file') + ' (Ctrl+S)'
                 onTriggered: saveFile()
             },
@@ -115,14 +113,6 @@ Kirigami.ApplicationWindow {
         id: mainPagePool
     }
     
-//     pageActions: [
-//             
-//             ]
-    
-//     contextDrawer: Kirigami.ContextDrawer {
-//         id: contextDrawer
-//     }
-
     property bool expanded: true
     property bool advanced: false
 
@@ -130,19 +120,7 @@ Kirigami.ApplicationWindow {
 
     property string lastFormula
     property string lastError
-
-//     property int normalWidth: 64 * (3 + 4 + 1)
-// //     property int normalHeight: root.expanded ? buttonsPanel.height + normalCalculationZoneHeight : normalCalculationZoneHeight
-//     property int advancedWidth: 700
-//     property int advancedHeight: 800
-//     property int normalCalculationZoneHeight: 110
-    
     property int smallSpacing: 10
-
-    height: normalHeight
-    minimumHeight: normalHeight
-    width: normalWidth
-    minimumWidth: normalWidth
     header: Item {}
     title: 'Kalk'
     pageStack.globalToolBar.style: Kirigami.ApplicationHeaderStyle.None
@@ -163,210 +141,157 @@ Kirigami.ApplicationWindow {
         bottomPadding: 0.0
         leftPadding: 0.0
         rightPadding: 0
-        
-//             actions {
-//                 main: Kirigami.Action {
-//                     iconName: "document-edit"
-//                     onTriggered: {
-//                         print("Action button in buttons page clicked");
-// //                         sheet.sheetOpen = !sheet.sheetOpen
-//                     }
-//                 }
-//                 left: Kirigami.Action {
-//                     iconName: "go-previous"
-//                     onTriggered: {
-//                         print("Left action triggered")
-//                     }
-//                 }
-//                 right: Kirigami.Action {
-//                     iconName: "go-next"
-//                     onTriggered: {
-//                         print("Right action triggered")
-//                     }
-//                 }
-//                 contextualActions: [
-//                     Kirigami.Action {
-//                         text:"Action for buttons"
-//                         iconName: "bookmarks"
-//                         onTriggered: print("Action 1 clicked")
-//                     },
-//                     Kirigami.Action {
-//                         text:"Action 2"
-//                         iconName: "folder"
-//                         enabled: false
-//                     },
-//                     Kirigami.Action {
-//                         text: "Action for Sheet"
-// //                         visible: sheet.sheetOpen
-//                     }
-//                 ]
-//             }
-                
-//             ColumnLayout {
-                
-            Component.onCompleted: {
-                calculationZone.retrieveFormulaFocus();
-                retrieveHistory();
-            }
-
-            Component.onDestruction: saveHistory()
-
-            Loader {
-                id: mathJsLoader
-                source: "../engine/MathJs.qml"
-                asynchronous: true
-                active: true
-                onLoaded: {
-                    mathJs.config({
-                        number: 'BigNumber'
-                    });
-                }
-            }
-
-            CalculationZone {
-                id: calculationZone
-                anchors.top: parent.top
-                anchors.left: parent.left
-                anchors.right: parent.right
-                height: parent.height-mainButtonsView.height
-//                 anchors.bottom: root.advanced || !root.expanded ? parent.bottom : mainButtonsView.top
-            }
-            
-            Controls.SwipeView {
-                id: swipeView
-                anchors.fill: parent
-                currentIndex: 1
-                clip: true
-//                 property alias computedHeight: mainButtonsView.height
-//                 height: 250
-                Item {
-                    ButtonsView {
-                        id: fns
-                        backgroundColor: "#2ecc71"
-                        labels: ['sqrt','exp','log','sin','cos','tan','asin','acos','atan','π','∞','x10^']
-                        targets: ['sqrt(','exp(','log','sin(','cos(','tan(','asin(','acos(','atan(','pi','Infinity','e']
-                        onButtonClicked: calculationZone.appendToFormula(strToAppend)
-                    }
-                }
-                Item {
-                    ButtonsView {
-                        id: mainButtonsView
-                        backgroundColor: "#3daee9"
-                        labels: ['7', '8', '9', '÷', '4', '5', '6', 'x', '1', '2', '3', '-', '.', '0', 'C', '+']
-                        targets: ['7', '8', '9', '/', '4', '5', '6', '*', '1', '2', '3', '-', '.', '0', 'DEL', '+']
-                        onButtonClicked: calculationZone.appendToFormula(strToAppend)
-                        onButtonLongPressed: {
-                            if (strToAppend === "DEL") {
-                                calculationZone.clearFormula();
-                            }
-                        }
-                    }
-                }
-                Item {
-                    ButtonsView {
-                        backgroundColor: "#fdbc4b"
-//                         Kirigami.Theme.Complementary.neutralTextColor
-                        labels: ['^', '!', '(', ')']
-                        targets: ['^', '!', '(', ')']
-                        onButtonClicked: calculationZone.appendToFormula(strToAppend)
-                    }
-                }
-            }
-
-            HistoryPanel {
-                id: historyPanel
-                visible: false
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.bottom: parent.bottom
-                anchors.top: calculationZone.bottom
-                height: mainButtonsView.height
-            }
-
-            Timer {
-                id: addToHistoryTimer
-                running: false
-                interval: 1000
-                onTriggered: historyPanel.add()
-            }
-
-            FileHandler {
-                id: document
-                document: documentText.textDocument
-                onError: snackBar.open(message)
-                onFileUrlChanged: updateTitle()
-                onLoaded: {
-                    setAdvanced(true);
-                    calculationZone.loadFileContent(text);
-                    document.edited = false;
-                }
-
-                property bool edited: false
-                property bool unsaved: document.fileName === 'untitled.lcs'
-
-                function setEdited(edited) {
-                    this.edited = edited;
-                    root.updateTitle();
-                }
-            }
-
-            TextEdit {
-                id: documentText
-                visible: false
-            }
-
-            FileDialog {
-                id: openDialog
-                fileMode: FileDialog.OpenFile
-                selectedNameFilter.index: 1
-                nameFilters: ["Liri Calculator Script (*.lcs)"]
-                folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
-                onAccepted: document.load(file)
-            }
-
-            FileDialog {
-                id: saveDialog
-                fileMode: FileDialog.SaveFile
-                defaultSuffix: document.fileType
-                nameFilters: openDialog.nameFilters
-                selectedNameFilter.index: document.fileType === 'lcs' ? 0 : 1
-                folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
-                onAccepted: saveFile(true, file)
-            }
-            
-            // TODO: Maybe replace the OberlaySheet with an InlineMessage
-            
-            Kirigami.OverlaySheet {
-                id: alertDialog
-                property string target: ''
-                header: Kirigami.Heading {
-                    text: qsTr('Discard unsaved?')
-                }
-                ColumnLayout {
-                    Controls.Button {
-                        text: qsTr("Cancel") 
-                        Layout.alignment: Qt.AlignHCenter
-                        onClicked: alertDialog.close()
-                    }
-                    Controls.Button {
-                        text: qsTr("OK")
-                        Layout.alignment: Qt.AlignHCenter
-                        onClicked: {
-                            alertDialog.close()
-                            closeFile(true)
-                        }
-                    }
-                }
-            }
-
-        //     SnackBar {
-        //         id: snackBar
-        //         z: 99
-//             }
-//             
-// }
+        Component.onCompleted: {
+            calculationZone.retrieveFormulaFocus();
+            retrieveHistory();
         }
-//     }
+
+        Component.onDestruction: saveHistory()
+
+        Loader {
+            id: mathJsLoader
+            source: "../engine/MathJs.qml"
+            asynchronous: true
+            active: true
+            onLoaded: {
+                mathJs.config({
+                                  number: 'BigNumber'
+                              });
+            }
+        }
+
+        CalculationZone {
+            id: calculationZone
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: parent.height-mainButtonsView.height
+        }
+
+        Controls.SwipeView {
+            id: swipeView
+            anchors.fill: parent
+            currentIndex: 1
+            clip: true
+            Item {
+                ButtonsView {
+                    id: fns
+                    backgroundColor: "#2ecc71"
+                    labels: ['sqrt','exp','log','sin','cos','tan','asin','acos','atan','π','∞','x10^']
+                    targets: ['sqrt(','exp(','log','sin(','cos(','tan(','asin(','acos(','atan(','pi','Infinity','e']
+                    onButtonClicked: calculationZone.appendToFormula(strToAppend)
+                }
+            }
+            Item {
+                ButtonsView {
+                    id: mainButtonsView
+                    backgroundColor: "#3daee9"
+                    labels: ['7', '8', '9', '÷', '4', '5', '6', 'x', '1', '2', '3', '-', '.', '0', 'C', '+']
+                    targets: ['7', '8', '9', '/', '4', '5', '6', '*', '1', '2', '3', '-', '.', '0', 'DEL', '+']
+                    onButtonClicked: calculationZone.appendToFormula(strToAppend)
+                    onButtonLongPressed: {
+                        if (strToAppend === "DEL") {
+                            calculationZone.clearFormula();
+                        }
+                    }
+                }
+            }
+            Item {
+                ButtonsView {
+                    backgroundColor: "#fdbc4b"
+                    labels: ['^', '!', '(', ')']
+                    targets: ['^', '!', '(', ')']
+                    onButtonClicked: calculationZone.appendToFormula(strToAppend)
+                }
+            }
+        }
+
+        HistoryPanel {
+            id: historyPanel
+            visible: false
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            anchors.top: calculationZone.bottom
+            height: mainButtonsView.height
+        }
+
+        Timer {
+            id: addToHistoryTimer
+            running: false
+            interval: 1000
+            onTriggered: historyPanel.add()
+        }
+
+        FileHandler {
+            id: document
+            document: documentText.textDocument
+            onError: snackBar.open(message)
+            onFileUrlChanged: updateTitle()
+            onLoaded: {
+                setAdvanced(true);
+                calculationZone.loadFileContent(text);
+                document.edited = false;
+            }
+
+            property bool edited: false
+            property bool unsaved: document.fileName === 'untitled.lcs'
+
+            function setEdited(edited) {
+                this.edited = edited;
+                root.updateTitle();
+            }
+        }
+
+        TextEdit {
+            id: documentText
+            visible: false
+        }
+
+        FileDialog {
+            id: openDialog
+            fileMode: FileDialog.OpenFile
+            selectedNameFilter.index: 1
+            nameFilters: ["Liri Calculator Script (*.lcs)"]
+            folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
+            onAccepted: document.load(file)
+        }
+
+        FileDialog {
+            id: saveDialog
+            fileMode: FileDialog.SaveFile
+            defaultSuffix: document.fileType
+            nameFilters: openDialog.nameFilters
+            selectedNameFilter.index: document.fileType === 'lcs' ? 0 : 1
+            folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
+            onAccepted: saveFile(true, file)
+        }
+
+        // TODO: Maybe replace the OberlaySheet with an InlineMessage
+
+        Kirigami.OverlaySheet {
+            id: alertDialog
+            property string target: ''
+            header: Kirigami.Heading {
+                text: qsTr('Discard unsaved?')
+            }
+            ColumnLayout {
+                Controls.Button {
+                    text: qsTr("Cancel")
+                    Layout.alignment: Qt.AlignHCenter
+                    onClicked: alertDialog.close()
+                }
+                Controls.Button {
+                    text: qsTr("OK")
+                    Layout.alignment: Qt.AlignHCenter
+                    onClicked: {
+                        alertDialog.close()
+                        closeFile(true)
+                    }
+                }
+            }
+        }
+    }
     
     function retrieveHistory() {
         historyPanel.historyModel.clear();
@@ -381,9 +306,9 @@ Kirigami.ApplicationWindow {
         for (var i = 0; i < historyPanel.historyModel.count; i++) {
             var item = historyPanel.historyModel.get(i);
             historyArray.push({
-               formula: item.formula,
-               result: item.result,
-            });
+                                  formula: item.formula,
+                                  result: item.result,
+                              });
         }
         root.history = JSON.stringify(historyArray)
     }
@@ -481,34 +406,16 @@ Kirigami.ApplicationWindow {
         calculationZone.formulasLines.text = text;
     }
 
-    /*
-     * Copyright (C) 2014 Canonical Ltd
-     *
-     * This file is part of Ubuntu Calculator App
-     *
-     * Ubuntu Calculator App is free software: you can redistribute it and/or modify
-     * it under the terms of the GNU General Public License version 3 as
-     * published by the Free Software Foundation.
-     *
-     * Ubuntu Calculator App is distributed in the hope that it will be useful,
-     * but WITHOUT ANY WARRANTY; without even the implied warranty of
-     * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-     * GNU General Public License for more details.
-     *
-     * You should have received a copy of the GNU General Public License
-     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-     */
-
     function formatBigNumber(bigNumberToFormat) {
         // Maximum length of the result number
         var NUMBER_LENGTH_LIMIT = 14;
 
         if (bigNumberToFormat.toString().length > NUMBER_LENGTH_LIMIT) {
             var resultLength = mathJs.format(bigNumberToFormat, {exponential: {lower: 1e-10, upper: 1e10},
-                                            precision: NUMBER_LENGTH_LIMIT}).toString().length;
+                                                 precision: NUMBER_LENGTH_LIMIT}).toString().length;
 
             return mathJs.format(bigNumberToFormat, {exponential: {lower: 1e-10, upper: 1e10},
-                                 precision: (NUMBER_LENGTH_LIMIT - resultLength + NUMBER_LENGTH_LIMIT)}).toString();
+                                     precision: (NUMBER_LENGTH_LIMIT - resultLength + NUMBER_LENGTH_LIMIT)}).toString();
         }
         return bigNumberToFormat.toString()
     }
