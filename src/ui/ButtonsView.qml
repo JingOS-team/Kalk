@@ -2,7 +2,7 @@ import QtQuick 2.7
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.0
 import ".."
-
+import org.kde.kirigami 2.11 as Kirigami
 
 Rectangle {
     id: buttonsView
@@ -38,10 +38,11 @@ Rectangle {
                 bottomPadding: smallSpacing
                 horizontalAlignment: Qt.AlignHCenter
                 verticalAlignment: Qt.AlignVCenter
-                color: 'white'
+                Kirigami.Theme.colorSet: Kirigami.Theme.Button
+                color: Kirigami.Theme.textColor
                 font.pixelSize: buttonsView.fontSize
                 background: Rectangle {
-                    color: "0123456789.C".indexOf(modelData)!=-1 ? "#bdc3c7" : buttonsView.backgroundColor
+                    color: "0123456789.C".indexOf(modelData)!=-1 ? Kirigami.Theme.backgroundColor : Kirigami.Theme.activeBackgroundColor
                     anchors.fill: parent
                 }
                 

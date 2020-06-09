@@ -5,75 +5,34 @@ import org.kde.kirigami 2.4 as Kirigami
 
 Rectangle {
     id: calculationZone
-    color: 'white'
+    color: Kirigami.Theme.backgroundColor
     layer.enabled: true
     z: 10
 
     property alias formula: formula
     property alias result: result
-    property alias calculationsRepeater: calculationsRepeater
 
     height: root.advanced ? root.height : getHeight()
 
-    Rectangle {
-        id: advancedToolbar
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
-        height: 40
-        layer.enabled: root.advanced
+//    Rectangle {
+//        id: advancedToolbar
+//        anchors.top: parent.top
+//        anchors.left: parent.left
+//        anchors.right: parent.right
+//        height: 40
+//        layer.enabled: root.advanced
 
-        Text {
-            id: filename
-            visible: root.advanced
-            text: getDisplayableFileName()
-            anchors.top: parent.top
-            anchors.left: parent.left
-            anchors.margins: smallSpacing
-            font.pointSize: 12
-            opacity: 1
-        }
-    }
-
-    Flickable {
-        id: advancedView
-        visible: root.advanced
-        y: advancedToolbar.height
-        height: parent.height - y
-        clip: true
-        width: root.width
-        contentHeight: contentColumn.height
-        contentWidth: contentColumn.width
-        flickableDirection: Flickable.VerticalFlick
-        boundsBehavior: Flickable.StopAtBounds
-
-        Column {
-            id: contentColumn
-            spacing: smallSpacing
-            width: parent.width
-
-            property Transition transition: Transition {
-                PropertyAnimation { properties: "x,opacity"; easing.type: Easing.InOutQuad }
-            }
-
-            move: transition
-            add: transition
-
-            Repeater {
-                id: calculationsRepeater
-                width: parent.width
-
-                model: ListModel {
-                    ListElement {
-                        formula: ''
-                        result: ''
-                    }
-                }
-
-                delegate: CalculationLine {}
-            }
-        }
-    }
+//        Text {
+//            id: filename
+//            visible: root.advanced
+//            text: getDisplayableFileName()
+//            anchors.top: parent.top
+//            anchors.left: parent.left
+//            anchors.margins: smallSpacing
+//            font.pointSize: 12
+//            opacity: 1
+//        }
+//    }
 
     Flickable {
         id: formulaFlick
@@ -98,7 +57,7 @@ Rectangle {
 
         TextInput {
             id: formula
-            color: 'black'
+            color: Kirigami.Theme.focusColor
             opacity: 1
             padding: smallSpacing
             anchors.top: parent.top
@@ -117,7 +76,8 @@ Rectangle {
 
     Label {
         id: result
-        opacity: 1
+        opacity: 0.5
+        color: Kirigami.Theme.focusColor
         visible: !root.advanced
         anchors.bottom: parent.bottom
         anchors.left: parent.left
