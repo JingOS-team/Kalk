@@ -122,7 +122,7 @@ Kirigami.ApplicationWindow {
 
         Loader {
             id: mathJsLoader
-            source: "../engine/MathJs.qml"
+            source: "qrc:///engine/MathJs.qml"
             asynchronous: true
             active: true
             onLoaded: {
@@ -137,7 +137,7 @@ Kirigami.ApplicationWindow {
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.right: parent.right
-            height: parent.height-mainButtonsView.height
+            height: parent.height - mainButtonsView.height
         }
 
         Controls.SwipeView {

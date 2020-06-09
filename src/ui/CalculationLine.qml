@@ -1,7 +1,7 @@
 import QtQuick 2.7
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.0
-
+import org.kde.kirigami 2.11 as Kirigami
 Column {
     width: root.width
     padding: smallSpacing
@@ -16,8 +16,8 @@ Column {
                 id: formulaEdit
                 text: formula
                 width: (root.width - 3 * smallSpacing) * 2/3
-                font.pointSize: root.styles.advancedFontSize
-                opacity: root.styles.secondaryTextOpacity
+                font.pointSize: root.height / 9
+                opacity: 1
                 selectByMouse: true
                 wrapMode: TextEdit.WrapAnywhere
                 onTextChanged: {
@@ -71,7 +71,7 @@ Column {
                 height: formulaEdit.height
                 opacity: hasError ? root.styles.hintTextOpacity : root.styles.primaryTextOpacity
                 width: (root.width - 3 * smallSpacing) * 1/3
-                font.pointSize: root.styles.advancedFontSize
+                font.pointSize: root.height / 9
                 horizontalAlignment: Text.AlignRight
                 clip: true
                 wrapMode: TextEdit.NoWrap

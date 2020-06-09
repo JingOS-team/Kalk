@@ -12,16 +12,16 @@ Rectangle {
 
     ListView {
         id: list
-        anchors.margins: Units.smallSpacing
+        anchors.margins: smallSpacing
         anchors.fill: parent
         model: historyModel
         boundsBehavior: Flickable.StopAtBounds
         snapMode: ListView.NoSnap
-        spacing: Units.smallSpacing
+        spacing: smallSpacing
 
         delegate: Label {
             width: parent.width
-            font.pointSize: root.styles.historyFontSize
+            font.pointSize: root.height / 9
             textFormat: Text.StyledText
             wrapMode: Text.WrapAnywhere
             text: '<font color="#757575">' + formula + ' = </font><font color="#212121">' + result + '</font>'

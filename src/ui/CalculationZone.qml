@@ -31,7 +31,7 @@ Rectangle {
             anchors.left: parent.left
             anchors.margins: smallSpacing
             font.pointSize: 12
-            opacity: root.styles.secondaryTextOpacity
+            opacity: 1
         }
     }
 
@@ -99,12 +99,12 @@ Rectangle {
         TextInput {
             id: formula
             color: 'black'
-            opacity: root.styles.secondaryTextOpacity
+            opacity: 1
             padding: smallSpacing
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.right: parent.right
-            font.pixelSize: root.styles.fontSize
+            font.pointSize: root.height / 9
             wrapMode: TextInput.WrapAnywhere
             selectByMouse: true
             onTextChanged: {
@@ -117,20 +117,20 @@ Rectangle {
 
     Label {
         id: result
-        opacity: root.styles.primaryTextOpacity
+        opacity: 1
         visible: !root.advanced
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.margins: smallSpacing
-        font.pixelSize: root.styles.fontSize
+        font.pointSize: root.height / 15
         horizontalAlignment: TextInput.AlignRight
         text: ''
     }
 
     // Shouldn't be needed but the update isn't triggered otherwise
     function getHeight() {
-        return calculationZone.formula.height + 4 * smallSpacing + result.height;
+        return calculationZone.formula.height + result.height;
     }
 
     function loadFileContent(text) {
