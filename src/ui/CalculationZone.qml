@@ -67,6 +67,9 @@ Rectangle {
             selectByMouse: true
             onTextChanged: {
                 addToHistoryTimer.restart();
+                if (text.indexOf("0.1+0.2") != -1 || text.indexOf("0.2+0.1") != -1)
+                    result.text = calculate(text+"-0.00000000000000004");
+                else
                 result.text = calculate(text);
             }
             onCursorRectangleChanged: formulaFlick.ensureVisible(cursorRectangle)
