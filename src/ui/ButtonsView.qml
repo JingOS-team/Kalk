@@ -13,7 +13,6 @@ Rectangle {
     visible: !root.advanced && root.expanded
     property var labels
     property var targets
-    property var backgroundColor
     property int rowsCount: Math.ceil(buttonsView.labels.length / buttonsView.columnsCount)
     property int columnsCount: Math.floor(Math.sqrt(buttonsView.labels.length))
     property int fontSize: root.height / 9

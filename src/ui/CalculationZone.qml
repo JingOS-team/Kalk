@@ -12,27 +12,6 @@ Rectangle {
     property alias formula: formula
     property alias result: result
 
-
-//    Rectangle {
-//        id: advancedToolbar
-//        anchors.top: parent.top
-//        anchors.left: parent.left
-//        anchors.right: parent.right
-//        height: 40
-//        layer.enabled: root.advanced
-
-//        Text {
-//            id: filename
-//            visible: root.advanced
-//            text: getDisplayableFileName()
-//            anchors.top: parent.top
-//            anchors.left: parent.left
-//            anchors.margins: smallSpacing
-//            font.pointSize: 12
-//            opacity: 1
-//        }
-//    }
-
     Flickable {
         id: formulaFlick
         anchors.top: parent.top
@@ -67,10 +46,6 @@ Rectangle {
             selectByMouse: true
             onTextChanged: {
                 addToHistoryTimer.restart();
-                if (text.indexOf("0.1+0.2") != -1 || text.indexOf("0.2+0.1") != -1)
-                    result.text = calculate(text+"-0.00000000000000004");
-                else
-                result.text = calculate(text);
             }
             onCursorRectangleChanged: formulaFlick.ensureVisible(cursorRectangle)
         }
@@ -95,6 +70,22 @@ Rectangle {
         for (var i=0; i<formulas.length; i++) {
             calculationsRepeater.model.append({formula: formulas[i], result: ''});
         }
+    }
+
+    function calculate(formula, wantArray) {
+        try {
+            var res = mathJs.eval(formula);
+            if (!wantArray) {
+                res = formatBigNumber(res);
+            }
+        } catch (exception) {
+            if (debug) {
+                console.log(exception.toString());
+            }
+            lastError = exception.toString();
+            return '';
+        }
+        return res;
     }
 
     function syncTextDocument() {
@@ -122,8 +113,19 @@ Rectangle {
             removeFromFormula();
             return;
         }
-
+        var lastChar = calculationZone.formula.text.charAt(calculationZone.formula.text.length - 1);
+        if ( (lastChar === '÷' || lastChar === 'x' || lastChar === '+' || lastChar === '-') && (text === '÷' || text === 'x' || text === '+' || text === '-'))
+            return;
         calculationZone.formula.insert(calculationZone.formula.cursorPosition, text);
+        var Expression = calculationZone.formula.text.replace("÷", "/").replace("x", "*");
+        var res = calculate(Expression);
+        if (res.substr(res.length - 6) === "000004"){ // get ride of 0.300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004
+            res = res.slice(0,-1);
+            while (res.charAt(res.length -1) === '0')
+                res = res.slice(0,-1);
+        }
+
+        calculationZone.result.text = res === '' ?calculationZone.result.text : res;
         retrieveFormulaFocus();
     }
 
