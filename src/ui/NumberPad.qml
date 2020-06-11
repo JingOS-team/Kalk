@@ -25,8 +25,8 @@ Controls.SwipeView {
             columnsCount: 1
             fontSize: root.height / 12
             rowsCount: 5
-            labels: ['C', '+', '-', 'x', '÷']
-            targets: ['DEL', '+', '-', 'x', '÷']
+            labels: ['C', '+', '−', '×', '÷']
+            targets: ['DEL', '+', '-', '×', '÷']
             onButtonClicked: calculationZone.appendToFormula(strToAppend)
             onButtonLongPressed: {
                 if (strToAppend === "DEL") {

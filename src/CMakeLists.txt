@@ -1,5 +1,6 @@
 set(kalk_SRCS
     main/main.cpp
+    main/historymanager.cpp
     calculator.qrc)
 
 add_executable(kalk ${kalk_SRCS})

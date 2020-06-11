@@ -74,7 +74,7 @@ Rectangle {
 
     function calculate(formula, wantArray) {
         try {
-            var Expression = formula.replace("÷", "/").replace("x", "*");
+            var Expression = formula.replace("÷", "/").replace("×", "*");
             var gaps = getParenthesis(Expression, '(') - getParenthesis(Expression, ')');
             while(gaps--){
                 Expression += ')';
@@ -139,7 +139,7 @@ Rectangle {
             return;
         }
         var lastChar = calculationZone.formula.text.charAt(calculationZone.formula.text.length - 1);
-        if ( (lastChar === '÷' || lastChar === 'x' || lastChar === '+' || lastChar === '-') && (text === '÷' || text === 'x' || text === '+' || text === '-'))
+        if ( (lastChar === '÷' || lastChar === '×' || lastChar === '+' || lastChar === '-') && (text === '÷' || text === '×' || text === '+' || text === '-'))
             return;
         calculationZone.formula.insert(calculationZone.formula.cursorPosition, text);
         calculate(calculationZone.formula.text);
