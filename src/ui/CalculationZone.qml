@@ -161,8 +161,8 @@ Rectangle {
     }
 
     function clearFormula() {
-        historyPanel.add();
         setFormulaText('');
+        calculationZone.result.text = "";
         retrieveFormulaFocus();
     }
 

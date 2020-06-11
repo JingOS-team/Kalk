@@ -43,8 +43,8 @@ Controls.SwipeView {
             fontSize: root.height / 18
             Kirigami.Theme.colorSet: Kirigami.Theme.Selection
             backgroundColor: Kirigami.Theme.backgroundColor
-            labels: ['!','sqrt','exp','log','^','sin','cos','tan','asin','(','acos','atan',')','π','e']
-            targets: ['!','sqrt(','exp(','log','^','sin(','cos(','tan(','asin(','(','acos(','atan(',')','pi','e']
+            labels: ['!','sqrt','exp','ln','^','sin','cos','tan','asin','(','acos','atan',')','π','e']
+            targets: ['!','sqrt(','exp(','log(','^','sin(','cos(','tan(','asin(','(','acos(','atan(',')','pi','e']
             onButtonClicked: calculationZone.appendToFormula(strToAppend)
         }
     }
