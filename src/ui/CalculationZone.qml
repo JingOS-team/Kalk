@@ -35,6 +35,7 @@ Rectangle {
 
         TextInput {
             id: formula
+            Kirigami.Theme.colorSet: Kirigami.Theme.Window
             color: Kirigami.Theme.focusColor
             opacity: 1
             padding: smallSpacing
@@ -73,7 +74,13 @@ Rectangle {
 
     function calculate(formula, wantArray) {
         try {
-            var res = mathJs.eval(formula);
+            var Expression = formula.replace("÷", "/").replace("x", "*");
+            var gaps = getParenthesis(Expression, '(') - getParenthesis(Expression, ')');
+            while(gaps--){
+                Expression += ')';
+            }
+
+            var res = mathJs.eval(Expression);
             if (!wantArray) {
                 res = formatBigNumber(res);
             }
@@ -82,9 +89,27 @@ Rectangle {
                 console.log(exception.toString());
             }
             lastError = exception.toString();
-            return '';
+            return;
         }
-        return res;
+
+            res = res.substr(0,18);
+            while (res.charAt(res.length -1) === '0')
+                res = res.slice(0,-1);
+        calculationZone.result.text = res === '' ?calculationZone.result.text : res;
+    }
+
+    function getParenthesis(text, parenthesis){
+        var n = 0,
+        pos = 0;
+
+        while (true) {
+            pos = text.indexOf(parenthesis, pos);
+            if (pos >= 0) {
+                ++n;
+                pos++;
+            } else break;
+        }
+        return n;
     }
 
     function syncTextDocument() {
@@ -110,21 +135,14 @@ Rectangle {
     function appendToFormula(text) {
         if (text === "DEL") {
             removeFromFormula();
+            calculate(calculationZone.formula.text);
             return;
         }
         var lastChar = calculationZone.formula.text.charAt(calculationZone.formula.text.length - 1);
         if ( (lastChar === '÷' || lastChar === 'x' || lastChar === '+' || lastChar === '-') && (text === '÷' || text === 'x' || text === '+' || text === '-'))
             return;
         calculationZone.formula.insert(calculationZone.formula.cursorPosition, text);
-        var Expression = calculationZone.formula.text.replace("÷", "/").replace("x", "*");
-        var res = calculate(Expression);
-        if (res.substr(res.length - 6) === "000004"){ // get ride of 0.300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004
-            res = res.slice(0,-1);
-            while (res.charAt(res.length -1) === '0')
-                res = res.slice(0,-1);
-        }
-
-        calculationZone.result.text = res === '' ?calculationZone.result.text : res;
+        calculate(calculationZone.formula.text);
         retrieveFormulaFocus();
     }
 

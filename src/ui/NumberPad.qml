@@ -1,26 +1,25 @@
 import QtQuick 2.0
 import org.kde.kirigami 2.11 as Kirigami
 import QtQuick.Controls 2.1 as Controls
+import QtQuick.Layouts 1.1
 Controls.SwipeView {
-    anchors.fill: parent
     currentIndex: 0
     clip: true
-    Item {
+    Rectangle{
+        Kirigami.Theme.colorSet: Kirigami.Theme.Selection
+        color: Kirigami.Theme.backgroundColor
         ButtonsView {
             id: numericPad
+            Kirigami.Theme.colorSet: Kirigami.Theme.Selection
             width: root.width * 0.75
             labels: ['7', '8', '9', '4', '5', '6', '1', '2', '3', '.', '0', '=']
             targets: ['7', '8', '9', '4', '5', '6', '1', '2', '3', '.', '0', '=']
             onButtonClicked: calculationZone.appendToFormula(strToAppend)
-            onButtonLongPressed: {
-                if (strToAppend === "DEL") {
-                    calculationZone.clearFormula();
-                }
-            }
         }
 
         ButtonsView {
             id: controlPad
+            Kirigami.Theme.colorSet: Kirigami.Theme.Selection
             width: root.width * 0.18
             anchors.left: numericPad.right
             columnsCount: 1
@@ -35,15 +34,8 @@ Controls.SwipeView {
                 }
             }
         }
-
-        Rectangle {
-            id: rightPanelIndicator
-            anchors.left: controlPad.right
-            anchors.right: parent.right
-            Kirigami.Theme.colorSet: Kirigami.Theme.Selection
-            color: Kirigami.Theme.activeTextColor
-        }
     }
+
     Item {
         ButtonsView {
             id: fns

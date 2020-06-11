@@ -11,7 +11,7 @@ endif()
 
 include(FeatureSummary)
 
-find_package(ECM 5.67.0 REQUIRED NO_MODULE)
+find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
@@ -23,7 +23,12 @@ include(ECMPoQmTools)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Quick Test Gui QuickControls2 Widgets)
-find_package(KF5Kirigami2 ${KF5_MIN_VERSION} REQUIRED)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
+        Config
+        Kirigami2
+        I18n
+        CoreAddons
+        Notifications)
 
 add_subdirectory(src)
 

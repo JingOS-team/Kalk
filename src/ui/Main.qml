@@ -45,7 +45,6 @@ Kirigami.ApplicationWindow {
         rightPadding: 0
         Component.onCompleted: {
             calculationZone.retrieveFormulaFocus();
-            retrieveHistory();
         }
 
         Component.onDestruction: saveHistory()
@@ -67,11 +66,14 @@ Kirigami.ApplicationWindow {
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.right: parent.right
-            height: parent.height - mainButtonsView.height
+            height: parent.height - swipeView.height
         }
 
         NumberPad {
             id: swipeView
+            height: parent.height * 0.8
+            width: parent.width
+            anchors.bottom: parent.bottom
         }
 
         function toggleExpanded() {

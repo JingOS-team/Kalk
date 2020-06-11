@@ -14,7 +14,7 @@ Rectangle {
     property var targets
     property int rowsCount: Math.ceil(buttonsView.labels.length / buttonsView.columnsCount)
     property int columnsCount: Math.floor(Math.sqrt(buttonsView.labels.length))
-    property int fontSize: root.height / 9
+    property int fontSize: root.height / 12
     property color backgroundColor: Kirigami.Theme.alternateBackgroundColor
     signal buttonClicked(string strToAppend)
     signal buttonLongPressed(string strToAppend)
@@ -36,9 +36,11 @@ Rectangle {
                 bottomPadding: smallSpacing
                 horizontalAlignment: Qt.AlignHCenter
                 verticalAlignment: Qt.AlignVCenter
-                color: Kirigami.Theme.activeTextColor
+                Kirigami.Theme.colorSet: Kirigami.Theme.Window
+                color: Kirigami.Theme.textColor
                 font.pixelSize: buttonsView.fontSize
                 background: Rectangle {
+                    Kirigami.Theme.colorSet: Kirigami.Theme.Window
                     color: "0123456789.=".indexOf(modelData)!=-1 ? Kirigami.Theme.activeBackgroundColor : backgroundColor
                     anchors.fill: parent
                 }

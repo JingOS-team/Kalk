@@ -1,19 +1,21 @@
 #include <QApplication>
 #include <QDebug>
-#include <QDir>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include <QtQuickControls2/QQuickStyle>
 
+#include <KAboutData>
+#include <KLocalizedContext>
+#include <KLocalizedString>
 int main(int argc, char *argv[])
 {
+    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication app(argc, argv);
-    app.setOrganizationName(QStringLiteral("KDE"));
-    app.setOrganizationDomain(QStringLiteral("kde.org"));
-    app.setApplicationName(QStringLiteral("Kalk"));
-
     // create qml app engine
     QQmlApplicationEngine engine;
+    KLocalizedString::setApplicationDomain("kalk");
+    engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
+    KAboutData aboutData("kalk", "Calculator", "0.1", "Calculator in Kirigami", KAboutLicense::GPL, i18n("© 2020 KDE Community"));
+    KAboutData::setApplicationData(aboutData);
 
 #ifdef QT_DEBUG
     engine.rootContext()->setContextProperty(QStringLiteral("debug"), true);
