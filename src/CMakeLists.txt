@@ -1,6 +1,5 @@
 set(kalk_SRCS
     main/main.cpp
-    filehandler/filehandler.cpp
     calculator.qrc)
 
 add_executable(kalk ${kalk_SRCS})

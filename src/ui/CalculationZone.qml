@@ -45,7 +45,6 @@ Rectangle {
             wrapMode: TextInput.WrapAnywhere
             selectByMouse: true
             onTextChanged: {
-                addToHistoryTimer.restart();
             }
             onCursorRectangleChanged: formulaFlick.ensureVisible(cursorRectangle)
         }
@@ -156,5 +155,19 @@ Rectangle {
 
     function setFocusAt(index) {
         calculationsRepeater.itemAt(index).children[0].children[0].forceActiveFocus();
+    }
+
+    function formatBigNumber(bigNumberToFormat) {
+        // Maximum length of the result number
+        var NUMBER_LENGTH_LIMIT = 14;
+
+        if (bigNumberToFormat.toString().length > NUMBER_LENGTH_LIMIT) {
+            var resultLength = mathJs.format(bigNumberToFormat, {exponential: {lower: 1e-10, upper: 1e10},
+                                                 precision: NUMBER_LENGTH_LIMIT}).toString().length;
+
+            return mathJs.format(bigNumberToFormat, {exponential: {lower: 1e-10, upper: 1e10},
+                                     precision: (NUMBER_LENGTH_LIMIT - resultLength + NUMBER_LENGTH_LIMIT)}).toString();
+        }
+        return bigNumberToFormat.toString()
     }
 }

@@ -16,6 +16,7 @@ Rectangle {
     property int rowsCount: Math.ceil(buttonsView.labels.length / buttonsView.columnsCount)
     property int columnsCount: Math.floor(Math.sqrt(buttonsView.labels.length))
     property int fontSize: root.height / 9
+    property color backgroundColor: Kirigami.Theme.activeBackgroundColor
     signal buttonClicked(string strToAppend)
     signal buttonLongPressed(string strToAppend)
 
@@ -40,7 +41,7 @@ Rectangle {
                 color: Kirigami.Theme.textColor
                 font.pixelSize: buttonsView.fontSize
                 background: Rectangle {
-                    color: "0123456789.C".indexOf(modelData)!=-1 ? Kirigami.Theme.backgroundColor : Kirigami.Theme.activeBackgroundColor
+                    color: "0123456789.C".indexOf(modelData)!=-1 ? Kirigami.Theme.backgroundColor : backgroundColor
                     anchors.fill: parent
                 }
                 

@@ -7,7 +7,6 @@
         <file>ui/ButtonsView.qml</file>
         <file>ui/CalculationLine.qml</file>
         <file>ui/CalculationZone.qml</file>
-        <file>ui/HistoryPanel.qml</file>
         <file>ui/Main.qml</file>
         <file>ui/qmldir</file>
         <file>ui/Shortcuts.qml</file>
