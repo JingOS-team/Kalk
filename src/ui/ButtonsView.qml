@@ -7,7 +7,6 @@ import org.kde.kirigami 2.11 as Kirigami
 Rectangle {
     id: buttonsView
     anchors.left: parent.left
-    anchors.right: parent.right
     anchors.bottom: parent.bottom
     height: root.height * 0.8
     visible: !root.advanced && root.expanded
@@ -16,7 +15,7 @@ Rectangle {
     property int rowsCount: Math.ceil(buttonsView.labels.length / buttonsView.columnsCount)
     property int columnsCount: Math.floor(Math.sqrt(buttonsView.labels.length))
     property int fontSize: root.height / 9
-    property color backgroundColor: Kirigami.Theme.activeBackgroundColor
+    property color backgroundColor: Kirigami.Theme.alternateBackgroundColor
     signal buttonClicked(string strToAppend)
     signal buttonLongPressed(string strToAppend)
 
@@ -37,11 +36,10 @@ Rectangle {
                 bottomPadding: smallSpacing
                 horizontalAlignment: Qt.AlignHCenter
                 verticalAlignment: Qt.AlignVCenter
-                Kirigami.Theme.colorSet: Kirigami.Theme.Button
-                color: Kirigami.Theme.textColor
+                color: Kirigami.Theme.activeTextColor
                 font.pixelSize: buttonsView.fontSize
                 background: Rectangle {
-                    color: "0123456789.C".indexOf(modelData)!=-1 ? Kirigami.Theme.backgroundColor : backgroundColor
+                    color: "0123456789.=".indexOf(modelData)!=-1 ? Kirigami.Theme.activeBackgroundColor : backgroundColor
                     anchors.fill: parent
                 }
                 

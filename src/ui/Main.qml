@@ -13,9 +13,6 @@ Kirigami.ApplicationWindow {
     controlsVisible: false
     height: Kirigami.Units.gridUnit * 45
     width: Kirigami.Units.gridUnit * 27
-    minimumHeight: normalHeight
-    minimumWidth: normalWidth
-    
     Kirigami.PagePool {
         id: mainPagePool
     }
@@ -73,41 +70,8 @@ Kirigami.ApplicationWindow {
             height: parent.height - mainButtonsView.height
         }
 
-        Controls.SwipeView {
+        NumberPad {
             id: swipeView
-            anchors.fill: parent
-            currentIndex: 0
-            clip: true
-            Item {
-                ButtonsView {
-                    id: mainButtonsView
-                    labels: ['7', '8', '9', '÷', '4', '5', '6', 'x', '1', '2', '3', '-', '.', '0', 'C', '+']
-                    targets: ['7', '8', '9', '÷', '4', '5', '6', 'x', '1', '2', '3', '-', '.', '0', 'DEL', '+']
-                    onButtonClicked: calculationZone.appendToFormula(strToAppend)
-                    onButtonLongPressed: {
-                        if (strToAppend === "DEL") {
-                            calculationZone.clearFormula();
-                        }
-                    }
-                }
-            }
-            Item {
-                ButtonsView {
-                    id: fns
-                    fontSize: root.height / 18
-                    backgroundColor: Kirigami.Theme.complementaryBackgroundColor
-                    labels: ['!','sqrt','exp','log','^','sin','cos','tan','asin','(','acos','atan',')','π','e']
-                    targets: ['!','sqrt(','exp(','log','^','sin(','cos(','tan(','asin(','(','acos(','atan(',')','pi','e']
-                    onButtonClicked: calculationZone.appendToFormula(strToAppend)
-                }
-            }
-        }
-
-        function updateTitle() {
-            root.title = 'Kalk';
-            if (root.advanced) {
-                root.title += ' - ' + getDisplayableFileName();
-            }
         }
 
         function toggleExpanded() {
