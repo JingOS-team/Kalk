@@ -34,6 +34,7 @@ Kirigami.ApplicationWindow {
 
             ToolBarBtn {
                 text: i18n("Units Conversion")
+                page: unitConversion
             }
 
             ToolBarBtn {
@@ -92,6 +93,10 @@ Kirigami.ApplicationWindow {
 
     HistoryView {
         id: historyView
+    }
+
+    UnitConversion {
+        id: unitConversion
     }
 
     function switchToPage(page) {
