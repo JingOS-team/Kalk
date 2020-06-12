@@ -24,6 +24,7 @@ Kirigami.ApplicationWindow {
     property string lastError
     property int smallSpacing: 10
     header: Controls.ToolBar {
+        id: globalToolBar
         RowLayout {
             anchors.fill: parent
             ToolBarBtn {
@@ -78,12 +79,12 @@ Kirigami.ApplicationWindow {
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.right: parent.right
-            height: parent.height - swipeView.height
+            height: parent.height - globalToolBar.height - swipeView.height
         }
 
         NumberPad {
             id: swipeView
-            height: parent.height * 0.8
+            height: ( parent.height - globalToolBar.height ) * 0.8
             width: parent.width
             anchors.bottom: parent.bottom
         }

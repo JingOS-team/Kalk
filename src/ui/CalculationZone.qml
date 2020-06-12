@@ -41,7 +41,7 @@ Rectangle {
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.right: parent.right
-            font.pointSize: root.height / 15
+            font.pointSize: root.height / 20
             wrapMode: TextInput.WrapAnywhere
             selectByMouse: true
             onTextChanged: {

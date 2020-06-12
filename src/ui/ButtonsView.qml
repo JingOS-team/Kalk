@@ -8,7 +8,7 @@ Rectangle {
     id: buttonsView
     anchors.left: parent.left
     anchors.bottom: parent.bottom
-    height: root.height * 0.8
+    height: parent.height
     property var labels
     property var targets
     property int rowsCount: Math.ceil(buttonsView.labels.length / buttonsView.columnsCount)

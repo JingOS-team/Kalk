@@ -15,8 +15,10 @@ Controls.SwipeView {
             labels: ['7', '8', '9', '4', '5', '6', '1', '2', '3', '.', '0', '=']
             targets: ['7', '8', '9', '4', '5', '6', '1', '2', '3', '.', '0', '=']
             onButtonClicked: {
-                if (strToAppend === '=')
+                if (strToAppend === '='){
                     calculationZone.save();
+                    calculationZone.setFormulaText('');
+                }
                 else
                     calculationZone.appendToFormula(strToAppend)
             }
