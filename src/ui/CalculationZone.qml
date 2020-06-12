@@ -11,6 +11,7 @@ Rectangle {
 
     property alias formula: formula
     property alias result: result
+    property bool isNewCalculation: true
 
     Flickable {
         id: formulaFlick
@@ -70,7 +71,7 @@ Rectangle {
 
     function calculate(formula, wantArray) {
         try {
-            var Expression = formula.replace("÷", "/").replace("×", "*");
+            var Expression = formula.replace(/÷/g, "/").replace(/×/g, "*");
             var gaps = getParenthesis(Expression, '(') - getParenthesis(Expression, ')');
             while(gaps--){
                 Expression += ')';
@@ -125,6 +126,8 @@ Rectangle {
     }
 
     function appendToFormula(text) {
+        if (isNewCalculation)
+            calculationZone.formula.text = "";
         if (text === "DEL") {
             removeFromFormula();
             calculate(calculationZone.formula.text);
@@ -148,6 +151,8 @@ Rectangle {
 
     function removeFromFormula() {
         var index = calculationZone.formula.cursorPosition;
+        if (index === 0)
+            return;
         calculationZone.formula.remove(index - 1, index);
         retrieveFormulaFocus();
     }

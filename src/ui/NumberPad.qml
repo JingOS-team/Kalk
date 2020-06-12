@@ -17,10 +17,12 @@ Controls.SwipeView {
             onButtonClicked: {
                 if (strToAppend === '='){
                     calculationZone.save();
-                    calculationZone.setFormulaText('');
+                    calculationZone.isNewCalculation = true;
                 }
-                else
+                else {
                     calculationZone.appendToFormula(strToAppend)
+                    calculationZone.isNewCalculation = false;
+                }
             }
         }
 

@@ -7,7 +7,7 @@ Kirigami.ScrollablePage {
     title: i18n("history")
     Button {
         id: clearHistoryBtn
-        enabled: historyManager.rowCount() !== 0
+        enabled: listView.count !== 0
         anchors.right: parent.right
         text: i18n("Clear History")
         width: root.width / 4
