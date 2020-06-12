@@ -29,6 +29,7 @@ void HistoryManager::clearHistory()
     QFile file(dir.path() + "history.json");
     file.remove();
     emit layoutChanged();
+    this->save();
 }
 
 void HistoryManager::save()

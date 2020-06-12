@@ -28,7 +28,7 @@ Controls.SwipeView {
             width: root.width * 0.18
             anchors.left: numericPad.right
             columnsCount: 1
-            fontSize: root.height / 12
+            fontSize: root.height / 15
             rowsCount: 5
             labels: ['C', '+', '−', '×', '÷']
             targets: ['DEL', '+', '-', '×', '÷']

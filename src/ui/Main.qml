@@ -9,6 +9,7 @@ import org.kde.kirigami 2.11 as Kirigami
 
 Kirigami.ApplicationWindow {
     id: root
+    title: 'Kalk'
     visible: true
     controlsVisible: false
     height: Kirigami.Units.gridUnit * 45
@@ -23,21 +24,24 @@ Kirigami.ApplicationWindow {
     property string lastError
     property int smallSpacing: 10
     header: Controls.ToolBar {
-                RowLayout {
-                    anchors.fill: parent
-                    Controls.ToolButton {
-                        text: i18n("Calculation")
-                        onClicked: switchToPage(initialPage)
-                    }
-
-                    Controls.ToolButton {
-                        text: i18n("History")
-                        onClicked:switchToPage(historyView)
-                    }
-                }
+        RowLayout {
+            anchors.fill: parent
+            ToolBarBtn {
+                checked: true
+                text: i18n("Calculation")
             }
 
-    title: 'Kalk'
+            ToolBarBtn {
+                text: i18n("Units Conversion")
+            }
+
+            ToolBarBtn {
+                text: i18n("History")
+                page: historyView
+            }
+        }
+    }
+
     pageStack.globalToolBar.style: Kirigami.ApplicationHeaderStyle.None
 
     Shortcuts {}
