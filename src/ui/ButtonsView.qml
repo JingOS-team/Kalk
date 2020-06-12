@@ -9,7 +9,6 @@ Rectangle {
     anchors.left: parent.left
     anchors.bottom: parent.bottom
     height: root.height * 0.8
-    visible: !root.advanced && root.expanded
     property var labels
     property var targets
     property int rowsCount: Math.ceil(buttonsView.labels.length / buttonsView.columnsCount)

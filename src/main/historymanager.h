@@ -3,18 +3,22 @@
 
 #include <QObject>
 
-class HistoryManager
+class HistoryManager : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString expression WRITE addExpression)
     Q_PROPERTY(QList<QString> history READ history)
 public:
     HistoryManager();
-    inline void addExpression(QString string) {
+    inline void addExpression(QString string)
+    {
         historyList.append(string);
         this->save();
     };
-    inline QList<QString> history() {return historyList;}
+    inline QList<QString> history()
+    {
+        return historyList;
+    }
     Q_INVOKABLE void clearHistory();
 
 private:

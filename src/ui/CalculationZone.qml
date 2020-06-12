@@ -19,7 +19,6 @@ Rectangle {
         clip: true
         anchors.bottom: result.top
         width: root.width
-        visible: !root.advanced
         contentHeight: formula.implicitHeight
         flickableDirection: Flickable.VerticalFlick
         ScrollIndicator.vertical: ScrollIndicator {}
@@ -55,7 +54,6 @@ Rectangle {
         id: result
         opacity: 0.5
         color: Kirigami.Theme.focusColor
-        visible: !root.advanced
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
@@ -64,12 +62,10 @@ Rectangle {
         horizontalAlignment: TextInput.AlignRight
         text: ''
     }
-    function loadFileContent(text) {
-        var formulas = text.split('\n');
-        calculationsRepeater.model.clear();
-        for (var i=0; i<formulas.length; i++) {
-            calculationsRepeater.model.append({formula: formulas[i], result: ''});
-        }
+
+    function save(){
+        if (calculationZone.formula.text.length != 0)
+        historyManager.expression = calculationZone.formula.text + " = " + calculationZone.result.text;
     }
 
     function calculate(formula, wantArray) {
@@ -92,9 +88,9 @@ Rectangle {
             return;
         }
 
-            res = res.substr(0,18);
-            while (res.charAt(res.length -1) === '0')
-                res = res.slice(0,-1);
+        res = res.substr(0,18);
+        while (res.charAt(res.length -1) === '0')
+            res = res.slice(0,-1);
         calculationZone.result.text = res === '' ?calculationZone.result.text : res;
     }
 
@@ -125,11 +121,7 @@ Rectangle {
     }
 
     function retrieveFormulaFocus() {
-        if (advanced) {
-            calculationZone.formulasLines.forceActiveFocus();
-        } else {
-            calculationZone.formula.forceActiveFocus();
-        }
+        calculationZone.formula.forceActiveFocus();
     }
 
     function appendToFormula(text) {

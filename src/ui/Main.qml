@@ -17,9 +17,6 @@ Kirigami.ApplicationWindow {
         id: mainPagePool
     }
     
-    property bool expanded: true
-    property bool advanced: false
-
     property string history: ''
 
     property string lastFormula
@@ -31,11 +28,6 @@ Kirigami.ApplicationWindow {
 
     Shortcuts {}
 
-    Settings {
-        property alias expanded: root.expanded
-        property alias history: root.history
-    }
-    
     property var mathJs: mathJsLoader.item ? mathJsLoader.item.mathJs : null;
     
     pageStack.initialPage: Kirigami.Page {
@@ -74,40 +66,6 @@ Kirigami.ApplicationWindow {
             height: parent.height * 0.8
             width: parent.width
             anchors.bottom: parent.bottom
-        }
-
-        function toggleExpanded() {
-            setExpanded(!root.expanded);
-            root.advanced = false;
-        }
-
-        function setExpanded(expanded) {
-            root.expanded = expanded;
-            updateTitle();
-            calculationZone.retrieveFormulaFocus();
-        }
-
-        function toggleAdvanced() {
-            setAdvanced(!root.advanced);
-            setExpanded(!root.advanced);
-        }
-
-        function setAdvanced(advanced) {
-            root.advanced = advanced;
-            root.width = advanced ? advancedWidth : normalWidth;
-            root.height = advanced ? advancedHeight : normalHeight;
-
-            if (advanced) {
-                calculationZone.loadFileContent(calculationZone.formula.text);
-                calculationZone.setFocusAt(0);
-            } else {
-                calculationZone.retrieveFormulaFocus();
-            }
-            updateTitle();
-        }
-
-        function setAdvancedContent(text) {
-            calculationZone.formulasLines.text = text;
         }
     }
 }

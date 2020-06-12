@@ -14,7 +14,12 @@ Controls.SwipeView {
             width: root.width * 0.75
             labels: ['7', '8', '9', '4', '5', '6', '1', '2', '3', '.', '0', '=']
             targets: ['7', '8', '9', '4', '5', '6', '1', '2', '3', '.', '0', '=']
-            onButtonClicked: calculationZone.appendToFormula(strToAppend)
+            onButtonClicked: {
+                if (strToAppend === '=')
+                    calculationZone.save();
+                else
+                    calculationZone.appendToFormula(strToAppend)
+            }
         }
 
         ButtonsView {
