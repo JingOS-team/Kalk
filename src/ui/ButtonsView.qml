@@ -37,7 +37,7 @@ Rectangle {
                 verticalAlignment: Qt.AlignVCenter
                 Kirigami.Theme.colorSet: Kirigami.Theme.Window
                 color: Kirigami.Theme.textColor
-                font.pixelSize: buttonsView.fontSize
+                font.pointSize: buttonsView.fontSize
                 background: Rectangle {
                     Kirigami.Theme.colorSet: Kirigami.Theme.Window
                     color: "0123456789.=".indexOf(modelData)!=-1 ? Kirigami.Theme.activeBackgroundColor : backgroundColor

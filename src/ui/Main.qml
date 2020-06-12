@@ -16,13 +16,27 @@ Kirigami.ApplicationWindow {
     Kirigami.PagePool {
         id: mainPagePool
     }
-    
+
     property string history: ''
 
     property string lastFormula
     property string lastError
     property int smallSpacing: 10
-    header: Item {}
+    header: Controls.ToolBar {
+                RowLayout {
+                    anchors.fill: parent
+                    Controls.ToolButton {
+                        text: i18n("Calculation")
+                        onClicked: switchToPage(initialPage)
+                    }
+
+                    Controls.ToolButton {
+                        text: i18n("History")
+                        onClicked:switchToPage(historyView)
+                    }
+                }
+            }
+
     title: 'Kalk'
     pageStack.globalToolBar.style: Kirigami.ApplicationHeaderStyle.None
 
@@ -30,7 +44,11 @@ Kirigami.ApplicationWindow {
 
     property var mathJs: mathJsLoader.item ? mathJsLoader.item.mathJs : null;
     
-    pageStack.initialPage: Kirigami.Page {
+    pageStack.initialPage: initialPage
+
+
+    Kirigami.Page {
+        id: initialPage
         topPadding: 0.0
         bottomPadding: 0.0
         leftPadding: 0.0
@@ -38,8 +56,6 @@ Kirigami.ApplicationWindow {
         Component.onCompleted: {
             calculationZone.retrieveFormulaFocus();
         }
-
-        Component.onDestruction: saveHistory()
 
         Loader {
             id: mathJsLoader
@@ -67,5 +83,14 @@ Kirigami.ApplicationWindow {
             width: parent.width
             anchors.bottom: parent.bottom
         }
+    }
+
+    HistoryView {
+        id: historyView
+    }
+
+    function switchToPage(page) {
+        while (pageStack.depth > 0) pageStack.pop();
+        pageStack.push(page);
     }
 }

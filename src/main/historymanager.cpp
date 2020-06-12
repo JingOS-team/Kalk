@@ -11,7 +11,7 @@ HistoryManager::HistoryManager()
     QDir dir(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + "/kalk");
     if (!dir.exists())
         dir.mkpath(".");
-    QFile file(dir.path() + "history.json");
+    QFile file(dir.path() + "/history.json");
     if (file.exists()) {
         file.open(QIODevice::ReadOnly);
         QJsonDocument doc(QJsonDocument::fromJson(file.readAll()));
@@ -28,6 +28,7 @@ void HistoryManager::clearHistory()
     QDir dir(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + "/kalk");
     QFile file(dir.path() + "history.json");
     file.remove();
+    emit layoutChanged();
 }
 
 void HistoryManager::save()
