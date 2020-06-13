@@ -15,5 +15,6 @@
         <file>ui/ToolBarBtn.qml</file>
         <file>ui/UnitConversion.qml</file>
         <file>ui/NumericInputPad.qml</file>
+        <file>ui/AutoResizeComboBox.qml</file>
     </qresource>
 </RCC>

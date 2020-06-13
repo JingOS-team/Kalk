@@ -33,9 +33,11 @@ Kirigami.ScrollablePage {
     ListView{
         id: listView
         model: historyManager
-        delegate: Label {
+        delegate: Text {
+            width: parent.width
             font.pointSize: root.height / 36
             text: model.display
+            wrapMode: Text.Wrap
         }
     }
 }

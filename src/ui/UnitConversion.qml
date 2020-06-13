@@ -10,12 +10,12 @@ Kirigami.Page {
     visible: false
     ColumnLayout {
         width: parent.width
-        Controls.ComboBox {
+        spacing: root.height / 36
+        AutoResizeComboBox {
             id: unitTypeSelection
-            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignHCenter
             model: unitTypeSelectionModel
             textRole: "type"
-            currentIndex: 0
             onCurrentTextChanged: {
                 fromComboBox.model = determineModel(currentText);
                 toComboBox.model = determineModel(currentText);
@@ -24,16 +24,18 @@ Kirigami.Page {
         Kirigami.Separator {}
         RowLayout {
             width: parent.width * 0.5
+            Layout.alignment: Qt.AlignHCenter
             ColumnLayout {
                 Controls.TextField {
                     id: input
+                    Layout.preferredHeight: root.height / 16
                     Kirigami.Theme.colorSet: Kirigami.Theme.Selection
                     color: Kirigami.Theme.activeTextColor
                     wrapMode: TextInput.WrapAnywhere
                     validator: DoubleValidator{}
                     focus: true
                 }
-                Controls.ComboBox {
+                AutoResizeComboBox {
                     id: fromComboBox
                     model: angleModel
                     textRole: "type"
@@ -44,6 +46,7 @@ Kirigami.Page {
             ColumnLayout {
                 Controls.TextField {
                     id: output
+                    Layout.preferredHeight: root.height / 16
                     readOnly: true
                     Kirigami.Theme.colorSet: Kirigami.Theme.Selection
                     color: Kirigami.Theme.activeTextColor
@@ -51,7 +54,7 @@ Kirigami.Page {
                     validator: DoubleValidator{}
                     focus: true
                 }
-                Controls.ComboBox {
+                AutoResizeComboBox {
                     id: toComboBox
                     model: angleModel
                     textRole: "type"
@@ -150,10 +153,10 @@ Kirigami.Page {
         case "Area":
             fromModel = areaModel;
             break;
-        case "DataTransferRate":
+        case "Data Transfer Rate":
             fromModel = dataTransferRateModel;
             break;
-        case "DigitalStoreage":
+        case "Digital Storage":
             fromModel = digitalStoreageModel;
             break;
         case "Duration":

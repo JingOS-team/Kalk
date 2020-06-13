@@ -11,7 +11,7 @@ Controls.ToolButton {
     checkable: true
     contentItem: Text {
         text: btn.text
-        font: btn.font
+        font.bold: true
         color: Kirigami.Theme.textColor
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
