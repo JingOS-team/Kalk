@@ -19,6 +19,7 @@ Kirigami.Page {
             onCurrentTextChanged: {
                 fromComboBox.model = determineModel(currentText);
                 toComboBox.model = determineModel(currentText);
+                toComboBox.currentIndex = 1;
             }
         }
         Kirigami.Separator {}
@@ -60,7 +61,7 @@ Kirigami.Page {
                     id: toComboBox
                     model: angleModel
                     textRole: "type"
-                    currentIndex: 0
+                    currentIndex: 1
                 }
             }
         }
@@ -95,9 +96,6 @@ Kirigami.Page {
         ListElement {type: "Degree"}
         ListElement {type: "Turn"}
         ListElement {type: "π"}
-        ListElement {type: "Quadrant"}
-        ListElement {type: "Sextant"}
-        ListElement {type: "Hexacontade"}
         ListElement {type: "Binary degree"}
         ListElement {type: "Grad"}
         ListElement {type: "Minute of arc"}
@@ -113,10 +111,8 @@ Kirigami.Page {
         ListElement {type: "Square Feet"}
         ListElement {type: "Square Yard"}
         ListElement {type: "Square Mile"}
-        ListElement {type: "Are"}
         ListElement {type: "Hectare"}
         ListElement {type: "Acre"}
-        ListElement {type: "Barn"}
     }
     ListModel {
         id: dataTransferRateModel
@@ -154,7 +150,6 @@ Kirigami.Page {
     }
     ListModel {
         id: durationModel
-        ListElement {type: "Planck time unit"}
         ListElement {type: "Picosecond"}
         ListElement {type: "Nanosecond"}
         ListElement {type: "Microsecond"}
@@ -166,13 +161,10 @@ Kirigami.Page {
         ListElement {type: "Week"}
         ListElement {type: "Fortnight"}
         ListElement {type: "Month"}
-        ListElement {type: "Quarter and season"}
-        ListElement {type: "Semester"}
         ListElement {type: "Year"}
         ListElement {type: "Decade"}
         ListElement {type: "Century"}
         ListElement {type: "Millennium"}
-        ListElement {type: "Galactic year"}
     }
     ListModel {
         id: energyModel
@@ -181,7 +173,6 @@ Kirigami.Page {
         ListElement {type: "Celsius heat unit"}
         ListElement {type: "Joule"}
         ListElement {type: "Horsepower-hour"}
-        ListElement {type: "Ton of TNT"}
     }
     ListModel {
         id: forceModel
@@ -215,21 +206,56 @@ Kirigami.Page {
     }
     ListModel {
         id: massModel
+        ListElement {type: "Gram"}
+        ListElement {type: "Kilogram"}
+        ListElement {type: "Ton"}
+        ListElement {type: "Milligram"}
+        ListElement {type: "Microgram"}
+        ListElement {type: "Long ton"}
+        ListElement {type: "Ounce"}
+        ListElement {type: "Pound"}
+        ListElement {type: "Stone"}
     }
     ListModel {
         id: powerModel
+        ListElement {type: "Watt"}
+        ListElement {type: "HP"}
+        ListElement {type: "Kilowatt"}
+        ListElement {type: "Megawatt"}
+        ListElement {type: "Gigawatt"}
+        ListElement {type: "Terawatt"}
     }
     ListModel {
         id: pressureModel
+        ListElement {type: "Atmospheres"}
+        ListElement {type: "mmHg"}
+        ListElement {type: "mmH2O"}
     }
     ListModel {
         id: speedModel
+        ListElement {type: "Miles/hour"}
+        ListElement {type: "Kilometres/hour"}
+        ListElement {type: "Knot"}
+        ListElement {type: "Metres/second"}
     }
     ListModel {
         id: temperatureModel
+        ListElement {type: "Celsius"}
+        ListElement {type: "Fahrenheit"}
+        ListElement {type: "Kelvin"}
     }
     ListModel {
         id: volumeModel
+        ListElement {type: "Litre"}
+        ListElement {type: "Millilitre"}
+        ListElement {type: "US Gallon"}
+        ListElement {type: "Imperial Gallon"}
+        ListElement {type: "US Pint"}
+        ListElement {type: "US Quart"}
+        ListElement {type: "Imperial Quart"}
+        ListElement {type: "US Ounce"}
+        ListElement {type: "Imperial Ounce"}
+        ListElement {type: "Cubic Centimeter"}
     }
 
     function determineModel(type) {
