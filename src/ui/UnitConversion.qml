@@ -24,24 +24,32 @@ Kirigami.Page {
         }
         Kirigami.Separator {}
         RowLayout {
-            width: parent.width * 0.5
             Layout.alignment: Qt.AlignHCenter
             ColumnLayout {
                 Controls.TextField {
                     id: input
                     Layout.preferredHeight: root.height / 16
+                    Layout.preferredWidth: root.width * 0.4
                     font.pointSize: root.height / 36
                     Kirigami.Theme.colorSet: Kirigami.Theme.Selection
                     color: Kirigami.Theme.activeTextColor
                     wrapMode: TextInput.WrapAnywhere
                     validator: DoubleValidator{}
                     focus: true
+                    onTextChanged: {
+                        output.text = converter(unitTypeSelection.currentText, fromComboBox.currentText, toComboBox.currentText, parseFloat(input.text));
+                        output.cursorPosition = 0; // force align left
+                    }
                 }
                 AutoResizeComboBox {
                     id: fromComboBox
                     model: angleModel
                     textRole: "type"
                     currentIndex: 0
+                    onCurrentTextChanged: {
+                        output.text = converter(unitTypeSelection.currentText, fromComboBox.currentText, toComboBox.currentText, parseFloat(input.text));
+                        output.cursorPosition = 0; // force align left
+                    }
                 }
             }
 
@@ -49,19 +57,22 @@ Kirigami.Page {
                 Controls.TextField {
                     id: output
                     Layout.preferredHeight: root.height / 16
+                    Layout.preferredWidth: root.width * 0.4
                     font.pointSize: root.height / 36
                     readOnly: true
                     Kirigami.Theme.colorSet: Kirigami.Theme.Selection
                     color: Kirigami.Theme.activeTextColor
-                    wrapMode: TextInput.WrapAnywhere
                     validator: DoubleValidator{}
-                    focus: true
                 }
                 AutoResizeComboBox {
                     id: toComboBox
                     model: angleModel
                     textRole: "type"
                     currentIndex: 1
+                    onCurrentTextChanged: {
+                        output.text = converter(unitTypeSelection.currentText, fromComboBox.currentText, toComboBox.currentText, parseFloat(input.text));
+                        output.cursorPosition = 0; // force align left
+                    }
                 }
             }
         }
@@ -92,15 +103,63 @@ Kirigami.Page {
 
     ListModel {
         id: angleModel
-        ListElement {type: "Radian"}
-        ListElement {type: "Degree"}
-        ListElement {type: "Turn"}
+        ListElement {type: "Radian";}
+        ListElement {type: "Degree";}
+        ListElement {type: "Turn";}
         ListElement {type: "π"}
         ListElement {type: "Binary degree"}
         ListElement {type: "Grad"}
         ListElement {type: "Minute of arc"}
         ListElement {type: "Second of arc"}
     }
+    function angleConverter(fromUnit, value, toUnit) {
+        var fromToStandard;
+        switch(fromUnit){
+        case "Radian":
+            fromToStandard = value * 57.29577951308;
+            break;
+        case "Degree":
+            fromToStandard = value;
+            break;
+        case "Turn":
+            fromToStandard = value * 360;
+            break;
+        case "π":
+            fromToStandard = value * 180;
+            break;
+        case "Binary degree":
+            fromToStandard = value * 1.40625;
+            break;
+        case "Grad":
+            fromToStandard = value * 0.9;
+            break;
+        case "Minute of arc":
+            fromToStandard = value * 0.0166666666666;
+            break;
+        case "Second of arc":
+            fromToStandard = value * 0.0016666666666;
+            break;
+        }
+        switch(toUnit){
+        case "Radian":
+            return fromToStandard / 57.29577951308;
+        case "Degree":
+            return fromToStandard;
+        case "Turn":
+            return fromToStandard / 360;
+        case "π":
+            return fromToStandard / 180;
+        case "Binary degree":
+            return fromToStandard / 1.40625;
+        case "Grad":
+            return fromToStandard / 0.9;
+        case "Minute of arc":
+            return fromToStandard / 0.0166666666666;
+        case "Second of arc":
+            return fromToStandard / 0.0016666666666;
+        }
+    }
+
     ListModel {
         id: areaModel
         ListElement {type: "Square Metre"}
@@ -310,6 +369,43 @@ Kirigami.Page {
             fromModel = angleModel;
         }
         return fromModel;
+    }
+
+    function converter(unitType, fromUnit, toUnit, value) {
+        switch(unitType){
+        case "Angle":
+            return angleConverter(fromUnit, value, toUnit);
+        case "Area":
+            return angleConverter(fromUnit, value, toUnit);
+        case "Data Transfer Rate":
+            return angleConverter(fromUnit, value, toUnit);
+        case "Digital Storage":
+            return angleConverter(fromUnit, value, toUnit);
+        case "Duration":
+            return angleConverter(fromUnit, value, toUnit);
+        case "Energy":
+            return angleConverter(fromUnit, value, toUnit);
+        case "Force":
+            return angleConverter(fromUnit, value, toUnit);
+        case "Frequency":
+            return angleConverter(fromUnit, value, toUnit);
+        case "Length":
+            return angleConverter(fromUnit, value, toUnit);
+        case "Mass":
+            return angleConverter(fromUnit, value, toUnit);
+        case "Power":
+            return angleConverter(fromUnit, value, toUnit);
+        case "Pressure":
+            return angleConverter(fromUnit, value, toUnit);
+        case "Speed":
+            return angleConverter(fromUnit, value, toUnit);
+        case "Temperature":
+            return angleConverter(fromUnit, value, toUnit);
+        case "Volume":
+            return angleConverter(fromUnit, value, toUnit);
+        default:
+            fromModel = angleModel;
+        }
     }
 
     function append(text){

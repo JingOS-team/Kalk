@@ -57,10 +57,6 @@ Kirigami.ApplicationWindow {
         bottomPadding: 0.0
         leftPadding: 0.0
         rightPadding: 0
-        Component.onCompleted: {
-            calculationZone.retrieveFormulaFocus();
-        }
-
         Loader {
             id: mathJsLoader
             source: "qrc:///engine/MathJs.qml"

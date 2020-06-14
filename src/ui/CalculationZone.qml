@@ -121,10 +121,6 @@ Rectangle {
         document.setEdited(true);
     }
 
-    function retrieveFormulaFocus() {
-        calculationZone.formula.forceActiveFocus();
-    }
-
     function appendToFormula(text) {
         if (isNewCalculation)
             calculationZone.formula.text = "";
@@ -138,7 +134,6 @@ Rectangle {
             return;
         calculationZone.formula.insert(calculationZone.formula.cursorPosition, text);
         calculate(calculationZone.formula.text);
-        retrieveFormulaFocus();
     }
 
     function setFormulaText(formula) {
@@ -154,22 +149,15 @@ Rectangle {
         if (index === 0)
             return;
         calculationZone.formula.remove(index - 1, index);
-        retrieveFormulaFocus();
     }
 
     function clearFormula() {
         setFormulaText('');
         calculationZone.result.text = "";
-        retrieveFormulaFocus();
     }
 
     function replaceFormula(formulaStr) {
         setFormulaText(formulaStr);
-        retrieveFormulaFocus();
-    }
-
-    function setFocusAt(index) {
-        calculationsRepeater.itemAt(index).children[0].children[0].forceActiveFocus();
     }
 
     function formatBigNumber(bigNumberToFormat) {

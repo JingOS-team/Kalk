@@ -12,58 +12,14 @@ Column {
         height: formulaEdit.height
         spacing: smallSpacing
 
-            TextEdit {
-                id: formulaEdit
-                text: formula
-                width: (root.width - 3 * smallSpacing) * 2/3
-                font.pointSize: root.height / 9
-                opacity: 1
-                selectByMouse: true
-                wrapMode: TextEdit.WrapAnywhere
-                onTextChanged: {
-                    formula = text;
-                    var calculations = [];
-                    for (var i=0; i<calculationsRepeater.model.count; i++) {
-                        calculations.push(calculationsRepeater.model.get(i).formula);
-                    }
-                    var results = calculate(calculations, true);
-                    for (var i=0; i<calculationsRepeater.model.count; i++) {
-                        calculationsRepeater.model.setProperty( i, 'result', results[i] + '');
-                    }
-                    syncTextDocument();
-                }
-                Keys.onDownPressed: {
-                    if (index < calculationsRepeater.model.count - 1) {
-                        setFocusAt(index + 1)
-                    }
-                }
-                Keys.onUpPressed: {
-                    if (index > 0) {
-                        setFocusAt(index - 1)
-                    }
-                }
-                Keys.onPressed: {
-                    switch (event.key) {
-                        case Qt.Key_Enter:
-                        case Qt.Key_Return:
-                            event.accepted = true;
-                            calculationsRepeater.model.insert(index + 1,{ formula: '', result: '' });
-                            setFocusAt(index + 1);
-                            if (index + 2 === calculationsRepeater.model.count && advancedView.contentHeight >= advancedView.height) {
-                                advancedView.contentY = advancedView.contentHeight - advancedView.height;
-                            }
-                            break;
-                        case Qt.Key_Backspace:
-                            if (index > 0 && event.key === Qt.Key_Backspace && text === '') {
-                                setFocusAt(index - 1);
-                                calculationsRepeater.model.remove(index, 1);
-                            }
-                            break;
-                        default: return;
-                    }
-                }
-            }
-
+        TextEdit {
+            id: formulaEdit
+            text: formula
+            width: (root.width - 3 * smallSpacing) * 2/3
+            font.pointSize: root.height / 9
+            opacity: 1
+            selectByMouse: true
+            wrapMode: TextEdit.WrapAnywhere
             Text {
                 id: formulaResult
                 text: hasError ? qsTr('Error') : formula === '' ? '' : result
@@ -88,12 +44,13 @@ Column {
                     onClicked: snackBar.open(root.lastError)
                 }
             }
-    }
+        }
 
-    Rectangle {
-        width: root.width - 2 * smallSpacing
-        height: 1
-        color: formulaResult.hasError ? 'red' : 'black'
-        opacity: 0.1
+        Rectangle {
+            width: root.width - 2 * smallSpacing
+            height: 1
+            color: formulaResult.hasError ? 'red' : 'black'
+            opacity: 0.1
+        }
     }
 }
