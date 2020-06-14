@@ -29,6 +29,7 @@ Kirigami.Page {
                 Controls.TextField {
                     id: input
                     Layout.preferredHeight: root.height / 16
+                    font.pointSize: root.height / 36
                     Kirigami.Theme.colorSet: Kirigami.Theme.Selection
                     color: Kirigami.Theme.activeTextColor
                     wrapMode: TextInput.WrapAnywhere
@@ -47,6 +48,7 @@ Kirigami.Page {
                 Controls.TextField {
                     id: output
                     Layout.preferredHeight: root.height / 16
+                    font.pointSize: root.height / 36
                     readOnly: true
                     Kirigami.Theme.colorSet: Kirigami.Theme.Selection
                     color: Kirigami.Theme.activeTextColor
@@ -103,27 +105,113 @@ Kirigami.Page {
     }
     ListModel {
         id: areaModel
+        ListElement {type: "Square Metre"}
+        ListElement {type: "Square Centimetre"}
+        ListElement {type: "Square Millimetre"}
+        ListElement {type: "Square Kilometre"}
+        ListElement {type: "Square Inch"}
+        ListElement {type: "Square Feet"}
+        ListElement {type: "Square Yard"}
+        ListElement {type: "Square Mile"}
+        ListElement {type: "Are"}
+        ListElement {type: "Hectare"}
+        ListElement {type: "Acre"}
+        ListElement {type: "Barn"}
     }
     ListModel {
         id: dataTransferRateModel
+        ListElement {type: "kb/s"}
+        ListElement {type: "Mb/s"}
+        ListElement {type: "Gb/s"}
+        ListElement {type: "Tb/s"}
+        ListElement {type: "kB/s"}
+        ListElement {type: "MB/s"}
+        ListElement {type: "GB/s"}
+        ListElement {type: "TB/s"}
+        ListElement {type: "bit/s"}
+        ListElement {type: "B/s"}
+        ListElement {type: "KiB/s"}
+        ListElement {type: "MiB/s"}
+        ListElement {type: "GiB/s"}
+        ListElement {type: "TiB/s"}
     }
     ListModel {
         id: digitalStoreageModel
+        ListElement {type: "Kilobit(kb)"}
+        ListElement {type: "Megabit(Mb)"}
+        ListElement {type: "Gigabit(Gb)"}
+        ListElement {type: "Terabit(Tb)"}
+        ListElement {type: "Kilobyte(kB)"}
+        ListElement {type: "Megabyte(MB)"}
+        ListElement {type: "Gigabyte(GB)"}
+        ListElement {type: "Terabyte(TB)"}
+        ListElement {type: "Bit(bit)"}
+        ListElement {type: "Byte(B)"}
+        ListElement {type: "Kibibyte(KiB)"}
+        ListElement {type: "Mebibyte(MiB)"}
+        ListElement {type: "Gibibyte(GiB)"}
+        ListElement {type: "Tebibyte(TiB)"}
     }
     ListModel {
         id: durationModel
+        ListElement {type: "Planck time unit"}
+        ListElement {type: "Picosecond"}
+        ListElement {type: "Nanosecond"}
+        ListElement {type: "Microsecond"}
+        ListElement {type: "Millisecond"}
+        ListElement {type: "Second"}
+        ListElement {type: "Minute"}
+        ListElement {type: "Hour"}
+        ListElement {type: "Day"}
+        ListElement {type: "Week"}
+        ListElement {type: "Fortnight"}
+        ListElement {type: "Month"}
+        ListElement {type: "Quarter and season"}
+        ListElement {type: "Semester"}
+        ListElement {type: "Year"}
+        ListElement {type: "Decade"}
+        ListElement {type: "Century"}
+        ListElement {type: "Millennium"}
+        ListElement {type: "Galactic year"}
     }
     ListModel {
         id: energyModel
+        ListElement {type: "BTU"}
+        ListElement {type: "Calorie"}
+        ListElement {type: "Celsius heat unit"}
+        ListElement {type: "Joule"}
+        ListElement {type: "Horsepower-hour"}
+        ListElement {type: "Ton of TNT"}
     }
     ListModel {
         id: forceModel
+        ListElement {type: "Newton"}
+        ListElement {type: "Kilo Newton"}
+        ListElement {type: "Pound force"}
     }
     ListModel {
         id: frequencyModel
+        ListElement {type: "Hertz"}
+        ListElement {type: "Kilohertz"}
+        ListElement {type: "Megahertz"}
+        ListElement {type: "Gigahertz"}
+        ListElement {type: "Petahertz"}
+        ListElement {type: "Terahertz"}
     }
     ListModel {
         id: lengthModel
+        ListElement {type: "Feet"}
+        ListElement {type: "Inch"}
+        ListElement {type: "Millimeter"}
+        ListElement {type: "Centimeter"}
+        ListElement {type: "Meter"}
+        ListElement {type: "Kilometer"}
+        ListElement {type: "Mile"}
+        ListElement {type: "Yard"}
+        ListElement {type: "Light year"}
+        ListElement {type: "Micrometer"}
+        ListElement {type: "Nanometer"}
+        ListElement {type: "Picometer"}
     }
     ListModel {
         id: massModel

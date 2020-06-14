@@ -8,7 +8,6 @@
         <file>ui/CalculationZone.qml</file>
         <file>ui/Main.qml</file>
         <file>ui/qmldir</file>
-        <file>ui/Shortcuts.qml</file>
         <file>ui/About.qml</file>
         <file>ui/NumberPad.qml</file>
         <file>ui/HistoryView.qml</file>

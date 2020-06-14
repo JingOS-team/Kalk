@@ -46,8 +46,6 @@ Kirigami.ApplicationWindow {
 
     pageStack.globalToolBar.style: Kirigami.ApplicationHeaderStyle.None
 
-    Shortcuts {}
-
     property var mathJs: mathJsLoader.item ? mathJsLoader.item.mathJs : null;
     
     pageStack.initialPage: initialPage
