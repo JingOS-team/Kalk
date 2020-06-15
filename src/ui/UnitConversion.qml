@@ -173,6 +173,63 @@ Kirigami.Page {
         ListElement {type: "Hectare"}
         ListElement {type: "Acre"}
     }
+    function areaConverter(fromUnit, value, toUnit) {
+        var fromToStandard;
+        switch(fromUnit){
+        case "Square Metre":
+            fromToStandard = value;
+            break;
+        case "Square Centimetre":
+            fromToStandard = value / 10000;
+            break;
+        case "Square Millimetre":
+            fromToStandard = value / 1000000;
+            break;
+        case "Square Kilometre":
+            fromToStandard = value * 1000000;
+            break;
+        case "Square Inch":
+            fromToStandard = value * 0.00064516;
+            break;
+        case "Square Feet":
+            fromToStandard = value * 0.09290304;
+            break;
+        case "Square Yard":
+            fromToStandard = value * 0.83612736;
+            break;
+        case "Square Mile":
+            fromToStandard = value * 2589988.110336;
+            break;
+        case "Hectare":
+            fromToStandard = value * 10000;
+            break;
+        case "Acre":
+            fromToStandard = value * 4046.856422;
+            break;
+        }
+        switch(toUnit){
+        case "Square Metre":
+            return fromToStandard;
+        case "Square Centimetre":
+            return fromToStandard * 10000;
+        case "Square Millimetre":
+            return fromToStandard * 1000000;
+        case "Square Kilometre":
+            return fromToStandard / 1000000;
+        case "Square Inch":
+            return fromToStandard / 0.00064516;
+        case "Square Feet":
+            return fromToStandard / 0.09290304;
+        case "Square Yard":
+            return fromToStandard / 0.83612736;
+        case "Square Mile":
+            return fromToStandard / 2589988.110336;
+        case "Hectare":
+            return fromToStandard / 10000;
+        case "Acre":
+            return fromToStandard / 4046.856422;
+        }
+    }
     ListModel {
         id: dataTransferRateModel
         ListElement {type: "kb/s"}
@@ -190,8 +247,99 @@ Kirigami.Page {
         ListElement {type: "GiB/s"}
         ListElement {type: "TiB/s"}
     }
+    function dataTransferRateConverter(fromUnit, value, toUnit) {
+        var fromToStandard;
+        switch(fromUnit){
+        case "kb/s":
+            fromToStandard = value * 1000;
+            break;
+        case "Mb/s":
+            fromToStandard = value * 1000000;
+            break;
+        case "Gb/s":
+            fromToStandard = value * 1000000000;
+            break;
+        case "Tb/s":
+            fromToStandard = value * 1000000000000;
+            break;
+        case "kB/s":
+            fromToStandard = value * 8000;
+            break;
+        case "MB/s":
+            fromToStandard = value * 8000000;
+            break;
+        case "GB/s":
+            fromToStandard = value * 8000000000;
+            break;
+        case "TB/s":
+            fromToStandard = value * 8000000000000;
+            break;
+        case "bit/s":
+            fromToStandard = value;
+            break;
+        case "B/s":
+            fromToStandard = value * 8;
+            break;
+        case "KiB/s":
+            fromToStandard = value * 8192;
+            break;
+        case "MiB/s":
+            fromToStandard = value * 8388608;
+            break;
+        case "GiB/s":
+            fromToStandard = value * 8589934592;
+            break;
+        case "TiB/s":
+            fromToStandard = value * 8796093022208;
+            break;
+        }
+        switch(toUnit){
+        case "kb/s":
+            return fromToStandard / 1000;
+
+        case "Mb/s":
+            return fromToStandard / 1000000;
+
+        case "Gb/s":
+            return fromToStandard / 1000000000;
+
+        case "Tb/s":
+            return fromToStandard / 1000000000000;
+
+        case "kB/s":
+            return fromToStandard / 8000;
+
+        case "MB/s":
+            return fromToStandard / 8000000;
+
+        case "GB/s":
+            return fromToStandard / 8000000000;
+
+        case "TB/s":
+            return fromToStandard / 8000000000000;
+
+        case "bit/s":
+            return fromToStandard;
+
+        case "B/s":
+            return fromToStandard / 8;
+
+        case "KiB/s":
+            return fromToStandard / 8192;
+
+        case "MiB/s":
+            return fromToStandard / 8388608;
+
+        case "GiB/s":
+            return fromToStandard / 8589934592;
+
+        case "TiB/s":
+            return fromToStandard / 8796093022208;
+
+        }
+    }
     ListModel {
-        id: digitalStoreageModel
+        id: digitalStorageModel
         ListElement {type: "Kilobit(kb)"}
         ListElement {type: "Megabit(Mb)"}
         ListElement {type: "Gigabit(Gb)"}
@@ -207,10 +355,99 @@ Kirigami.Page {
         ListElement {type: "Gibibyte(GiB)"}
         ListElement {type: "Tebibyte(TiB)"}
     }
+    function digitalStorageConverter(fromUnit, value, toUnit) {
+        var fromToStandard;
+        switch(fromUnit){
+        case "Kilobit(kb)":
+            fromToStandard = value * 1000;
+            break;
+        case "Megabit(Mb)":
+            fromToStandard = value * 1000000;
+            break;
+        case "Gigabit(Gb)":
+            fromToStandard = value * 1000000000;
+            break;
+        case "Terabit(Tb)":
+            fromToStandard = value * 1000000000000;
+            break;
+        case "Kilobyte(kB)":
+            fromToStandard = value * 8000;
+            break;
+        case "Megabyte(MB)":
+            fromToStandard = value * 8000000;
+            break;
+        case "Gigabyte(GB)":
+            fromToStandard = value * 8000000000;
+            break;
+        case "Terabyte(TB)":
+            fromToStandard = value * 8000000000000;
+            break;
+        case "Bit(bit)":
+            fromToStandard = value;
+            break;
+        case "Byte(B)":
+            fromToStandard = value * 8;
+            break;
+        case "Kibibyte(KiB)":
+            fromToStandard = value * 8192;
+            break;
+        case "Mebibyte(MiB)":
+            fromToStandard = value * 8388608;
+            break;
+        case "Gibibyte(GiB)":
+            fromToStandard = value * 8589934592;
+            break;
+        case "Tebibyte(TiB)":
+            fromToStandard = value * 8796093022208;
+            break;
+        }
+        switch(toUnit){
+        case "Kilobit(kb)":
+            return fromToStandard / 1000;
+
+        case "Megabit(Mb)":
+            return fromToStandard / 1000000;
+
+        case "Gigabit(Gb)":
+            return fromToStandard / 1000000000;
+
+        case "Terabit(Tb)":
+            return fromToStandard / 1000000000000;
+
+        case "Kilobyte(kB)":
+            return fromToStandard / 8000;
+
+        case "Megabyte(MB)":
+            return fromToStandard / 8000000;
+
+        case "Gigabyte(GB)":
+            return fromToStandard / 8000000000;
+
+        case "Terabyte(TB)":
+            return fromToStandard / 8000000000000;
+
+        case "Bit(bit)":
+            return fromToStandard;
+
+        case "Byte(B)":
+            return fromToStandard / 8;
+
+        case "Kibibyte(KiB)":
+            return fromToStandard / 8192;
+
+        case "Mebibyte(MiB)":
+            return fromToStandard / 8388608;
+
+        case "Gibibyte(GiB)":
+            return fromToStandard / 8589934592;
+
+        case "Tebibyte(TiB)":
+            return fromToStandard / 8796093022208;
+
+        }
+    }
     ListModel {
         id: durationModel
-        ListElement {type: "Picosecond"}
-        ListElement {type: "Nanosecond"}
         ListElement {type: "Microsecond"}
         ListElement {type: "Millisecond"}
         ListElement {type: "Second"}
@@ -218,26 +455,116 @@ Kirigami.Page {
         ListElement {type: "Hour"}
         ListElement {type: "Day"}
         ListElement {type: "Week"}
-        ListElement {type: "Fortnight"}
         ListElement {type: "Month"}
         ListElement {type: "Year"}
-        ListElement {type: "Decade"}
-        ListElement {type: "Century"}
-        ListElement {type: "Millennium"}
+    }
+    function durationConverter(fromUnit, value, toUnit) {
+        var fromToStandard;
+        switch(fromUnit){
+        case "Microsecond":
+            fromToStandard = value / 1000000;
+            break;
+        case "Millisecond":
+            fromToStandard = value / 1000;
+            break;
+        case "Second":
+            fromToStandard = value;
+            break;
+        case "Minute":
+            fromToStandard = value * 60;
+            break;
+        case "Hour":
+            fromToStandard = value * 3600;
+            break;
+        case "Day":
+            fromToStandard = value * 86400;
+            break;
+        case "Week":
+            fromToStandard = value * 604800;
+            break;
+        case "Month":
+            fromToStandard = value * 18144000;
+            break;
+        case "Year":
+            fromToStandard = value * 6622560000;
+            break;
+        }
+        switch(toUnit){
+        case "Microsecond":
+            return fromToStandard * 1000000;
+        case "Millisecond":
+            return fromToStandard * 1000;
+        case "Second":
+            return fromToStandard;
+        case "Minute":
+            return fromToStandard / 60;
+        case "Hour":
+            return fromToStandard / 3600;
+        case "Day":
+            return fromToStandard / 86400;
+        case "Week":
+            return fromToStandard / 604800;
+        case "Month":
+            return fromToStandard / 18144000;
+        case "Year":
+            return fromToStandard / 6622560000;
+        }
     }
     ListModel {
         id: energyModel
-        ListElement {type: "BTU"}
-        ListElement {type: "Calorie"}
-        ListElement {type: "Celsius heat unit"}
         ListElement {type: "Joule"}
-        ListElement {type: "Horsepower-hour"}
+        ListElement {type: "kWh"}
+        ListElement {type: "Calorie"}
+        ListElement {type: "One ton of TNT"}
+    }
+    function energyConverter(fromUnit, value, toUnit) {
+        var fromToStandard;
+        switch(fromUnit){
+        case "Joule":
+            fromToStandard = value;
+            break;
+        case "kWh":
+            fromToStandard = value * 3600000;
+            break;
+        case "Calorie":
+            fromToStandard = value *  4.184;
+            break;
+        case "One ton of TNT":
+            fromToStandard = value * 4184000000000;
+            break;
+        }
+        switch(toUnit){
+        case "Joule":
+            return fromToStandard;
+        case "kWh":
+            return fromToStandard / 3600000;
+        case "Calorie":
+            return fromToStandard /  4.184;
+        case "One ton of TNT":
+            return fromToStandard / 4184000000000;
+        }
     }
     ListModel {
         id: forceModel
         ListElement {type: "Newton"}
-        ListElement {type: "Kilo Newton"}
         ListElement {type: "Pound force"}
+    }
+    function forceConverter(fromUnit, value, toUnit) {
+        var fromToStandard;
+        switch(fromUnit){
+        case "Newton":
+            fromToStandard = value;
+            break;
+        case "Pound force":
+            fromToStandard = value * 4.448222;
+            break;
+        }
+        switch(toUnit){
+        case "Joule":
+            return fromToStandard;
+        case "kWh":
+            return fromToStandard / 4.448222;
+        }
     }
     ListModel {
         id: frequencyModel
@@ -245,31 +572,98 @@ Kirigami.Page {
         ListElement {type: "Kilohertz"}
         ListElement {type: "Megahertz"}
         ListElement {type: "Gigahertz"}
-        ListElement {type: "Petahertz"}
-        ListElement {type: "Terahertz"}
+    }
+    function frequencyConverter(fromUnit, value, toUnit) {
+        var fromToStandard;
+        switch(fromUnit){
+        case "Hertz":
+            fromToStandard = value;
+            break;
+        case "Kilohertz":
+            fromToStandard = value * 1000;
+            break;
+        case "Megahertz":
+            fromToStandard = value * 1000000;
+            break;
+        case "Gigahertz":
+            fromToStandard = value * 1000000000;
+            break;
+        }
+        switch(toUnit){
+        case "Hertz":
+            return fromToStandard;
+        case "Kilohertz":
+            return fromToStandard / 1000;
+        case "Megahertz":
+            return fromToStandard / 1000000;
+        case "Gigahertz":
+            return fromToStandard / 1000000000;
+        }
     }
     ListModel {
         id: lengthModel
         ListElement {type: "Feet"}
         ListElement {type: "Inch"}
+        ListElement {type: "Yard"}
+        ListElement {type: "Mile"}
         ListElement {type: "Millimeter"}
         ListElement {type: "Centimeter"}
         ListElement {type: "Meter"}
         ListElement {type: "Kilometer"}
-        ListElement {type: "Mile"}
-        ListElement {type: "Yard"}
-        ListElement {type: "Light year"}
-        ListElement {type: "Micrometer"}
-        ListElement {type: "Nanometer"}
-        ListElement {type: "Picometer"}
+    }
+    function lengthConverter(fromUnit, value, toUnit) {
+        var fromToStandard;
+        switch(fromUnit){
+        case "Feet":
+            fromToStandard = value * 30.48;
+            break;
+        case "Inch":
+            fromToStandard = value * 2.54;
+            break;
+        case "Yard":
+            fromToStandard = value * 91.44;
+            break;
+        case "Mile":
+            fromToStandard = value * 160934.4;
+            break;
+        case "Millimeter":
+            fromToStandard = value / 10;
+            break;
+        case "Centimeter":
+            fromToStandard = value;
+            break;
+        case "Meter":
+            fromToStandard = value * 100;
+            break;
+        case "Kilometer":
+            fromToStandard = value * 1000;
+            break;
+        }
+        switch(toUnit){
+        case "Feet":
+            return fromToStandard / 30.48;
+        case "Inch":
+            return fromToStandard / 2.54;
+        case "Yard":
+            return fromToStandard / 91.44;
+        case "Mile":
+            return fromToStandard / 160934.4;
+        case "Millimeter":
+            return fromToStandard * 10;
+        case "Centimeter":
+            return fromToStandard;
+        case "Meter":
+            return fromToStandard / 100;
+        case "Kilometer":
+            return fromToStandard / 1000;
+        }
     }
     ListModel {
         id: massModel
+        ListElement {type: "Milligram"}
         ListElement {type: "Gram"}
         ListElement {type: "Kilogram"}
         ListElement {type: "Ton"}
-        ListElement {type: "Milligram"}
-        ListElement {type: "Microgram"}
         ListElement {type: "Long ton"}
         ListElement {type: "Ounce"}
         ListElement {type: "Pound"}
@@ -292,10 +686,10 @@ Kirigami.Page {
     }
     ListModel {
         id: speedModel
+        ListElement {type: "Metres/second"}
         ListElement {type: "Miles/hour"}
         ListElement {type: "Kilometres/hour"}
         ListElement {type: "Knot"}
-        ListElement {type: "Metres/second"}
     }
     ListModel {
         id: temperatureModel
@@ -330,7 +724,7 @@ Kirigami.Page {
             fromModel = dataTransferRateModel;
             break;
         case "Digital Storage":
-            fromModel = digitalStoreageModel;
+            fromModel = digitalStorageModel;
             break;
         case "Duration":
             fromModel = durationModel;
@@ -376,33 +770,33 @@ Kirigami.Page {
         case "Angle":
             return angleConverter(fromUnit, value, toUnit);
         case "Area":
-            return angleConverter(fromUnit, value, toUnit);
+            return areaConverter(fromUnit, value, toUnit);
         case "Data Transfer Rate":
-            return angleConverter(fromUnit, value, toUnit);
+            return dataTransferRateConverter(fromUnit, value, toUnit);
         case "Digital Storage":
-            return angleConverter(fromUnit, value, toUnit);
+            return digitalStorageConverter(fromUnit, value, toUnit);
         case "Duration":
-            return angleConverter(fromUnit, value, toUnit);
+            return durationConverter(fromUnit, value, toUnit);
         case "Energy":
-            return angleConverter(fromUnit, value, toUnit);
+            return energyConverter(fromUnit, value, toUnit);
         case "Force":
-            return angleConverter(fromUnit, value, toUnit);
+            return forceConverter(fromUnit, value, toUnit);
         case "Frequency":
-            return angleConverter(fromUnit, value, toUnit);
+            return frequencyConverter(fromUnit, value, toUnit);
         case "Length":
-            return angleConverter(fromUnit, value, toUnit);
+            return lengthConverter(fromUnit, value, toUnit);
         case "Mass":
-            return angleConverter(fromUnit, value, toUnit);
+            return massConverter(fromUnit, value, toUnit);
         case "Power":
-            return angleConverter(fromUnit, value, toUnit);
+            return powerConverter(fromUnit, value, toUnit);
         case "Pressure":
-            return angleConverter(fromUnit, value, toUnit);
+            return pressureConverter(fromUnit, value, toUnit);
         case "Speed":
-            return angleConverter(fromUnit, value, toUnit);
+            return speedConverter(fromUnit, value, toUnit);
         case "Temperature":
-            return angleConverter(fromUnit, value, toUnit);
+            return temperatureConverter(fromUnit, value, toUnit);
         case "Volume":
-            return angleConverter(fromUnit, value, toUnit);
+            return volumeConverter(fromUnit, value, toUnit);
         default:
             fromModel = angleModel;
         }
