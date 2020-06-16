@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.2
 import org.kde.kirigami 2.12 as Kirigami
 
 Kirigami.ScrollablePage {
-    title: i18n("history")
+    title: i18n("History")
     Button {
         id: clearHistoryBtn
         enabled: listView.count !== 0
@@ -36,6 +36,7 @@ Kirigami.ScrollablePage {
         delegate: Text {
             width: parent.width
             font.pointSize: root.height / 36
+            color: Kirigami.Theme.activeTextColor
             text: model.display
             wrapMode: Text.Wrap
         }

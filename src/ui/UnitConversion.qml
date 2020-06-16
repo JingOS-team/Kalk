@@ -6,7 +6,7 @@ import org.kde.kirigami 2.11 as Kirigami
 Kirigami.Page {
     id: conversionPage
     property var inputField: input
-    title: i18n("units conversion")
+    title: i18n("Units Conversion")
     visible: false
     ColumnLayout {
         width: parent.width
@@ -78,7 +78,7 @@ Kirigami.Page {
         }
     }
     NumericInputPad {
-        height: ( parent.height - globalToolBar.height ) * 0.8
+        height: parent.height * 0.7
         width: parent.width
         anchors.bottom: parent.bottom
     }
@@ -660,7 +660,6 @@ Kirigami.Page {
     }
     ListModel {
         id: massModel
-        ListElement {type: "Milligram"}
         ListElement {type: "Gram"}
         ListElement {type: "Kilogram"}
         ListElement {type: "Ton"}
@@ -668,6 +667,48 @@ Kirigami.Page {
         ListElement {type: "Ounce"}
         ListElement {type: "Pound"}
         ListElement {type: "Stone"}
+    }
+    function massConverter(fromUnit, value, toUnit) {
+        var fromToStandard;
+        switch(fromUnit){
+        case "Gram":
+            fromToStandard = value;
+            break;
+        case "Kilogram":
+            fromToStandard = value * 1000;
+            break;
+        case "Ton":
+            fromToStandard = value * 1000000;
+            break;
+        case "Long ton":
+            fromToStandard = value * 1016047;
+            break;
+        case "Ounce":
+            fromToStandard = value * 28.349523125;
+            break;
+        case "Pound":
+            fromToStandard = value * 453.59237;
+            break;
+        case "Stone":
+            fromToStandard = value * 6350;
+            break;
+        }
+        switch(toUnit){
+        case "Gram":
+            return fromToStandard;
+        case "Kilogram":
+            return fromToStandard / 1000;
+        case "Ton":
+            return fromToStandard / 1000000;
+        case "Long ton":
+            return fromToStandard / 1016047;
+        case "Ounce":
+            return fromToStandard / 28.349523125;
+        case "Pound":
+            return fromToStandard / 453.59237;
+        case "Stone":
+            return fromToStandard / 6350;
+        }
     }
     ListModel {
         id: powerModel
