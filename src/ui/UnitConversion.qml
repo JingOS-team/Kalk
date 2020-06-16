@@ -713,17 +713,76 @@ Kirigami.Page {
     ListModel {
         id: powerModel
         ListElement {type: "Watt"}
-        ListElement {type: "HP"}
+        ListElement {type: "HP(Metric)"}
         ListElement {type: "Kilowatt"}
         ListElement {type: "Megawatt"}
         ListElement {type: "Gigawatt"}
-        ListElement {type: "Terawatt"}
+    }
+    function powerConverter(fromUnit, value, toUnit) {
+        var fromToStandard;
+        switch(fromUnit){
+        case "Watt":
+            fromToStandard = value;
+            break;
+        case "HP(Metric)":
+            fromToStandard = value * 735.49875;
+            break;
+        case "Kilowatt":
+            fromToStandard = value * 1000;
+            break;
+        case "Megawatt":
+            fromToStandard = value * 1000000;
+            break;
+        case "Gigawatt":
+            fromToStandard = value * 1000000000;
+            break;
+        }
+        switch(toUnit){
+        case "Watt":
+            return fromToStandard;
+        case "HP(Metric)":
+            return fromToStandard / 735.49875;
+        case "Kilowatt":
+            return fromToStandard / 1000;
+        case "Megawatt":
+            return fromToStandard / 1000000;
+        case "Gigawatt":
+            return fromToStandard / 1000000000;
+        }
     }
     ListModel {
         id: pressureModel
         ListElement {type: "Atmospheres"}
+        ListElement {type: "Pa"}
         ListElement {type: "mmHg"}
         ListElement {type: "mmH2O"}
+    }
+    function pressureConverter(fromUnit, value, toUnit) {
+        var fromToStandard;
+        switch(fromUnit){
+        case "Atmospheres":
+            fromToStandard = value * 101325;
+            break;
+        case "Pa":
+            fromToStandard = value;
+            break;
+        case "mmHg":
+            fromToStandard = value * 133.322368421053;
+            break;
+        case "mmH2O":
+            fromToStandard = value * 9.80665;
+            break;
+        }
+        switch(toUnit){
+        case "Atmospheres":
+            return fromToStandard / 101325;
+        case "Pa":
+            return fromToStandard;
+        case "mmHg":
+            return fromToStandard / 133.322368421053;
+        case "mmH2O":
+            return fromToStandard / 9.80665;
+        }
     }
     ListModel {
         id: speedModel
@@ -732,26 +791,137 @@ Kirigami.Page {
         ListElement {type: "Kilometres/hour"}
         ListElement {type: "Knot"}
     }
+    function speedConverter(fromUnit, value, toUnit) {
+        var fromToStandard;
+        switch(fromUnit){
+        case "Metres/second":
+            fromToStandard = value / 3.6;
+            break;
+        case "Miles/hour":
+            fromToStandard = value * 1.609344;
+            break;
+        case "Kilometres/hour":
+            fromToStandard = value;
+            break;
+        case "Knot":
+            fromToStandard = value * 1.852;
+            break;
+        }
+        switch(toUnit){
+        case "Metres/second":
+            return fromToStandard * 3.6;
+        case "Miles/hour":
+            return fromToStandard / 1.609344;
+        case "Kilometres/hour":
+            return fromToStandard;
+        case "Knot":
+            return fromToStandard / 1.852;
+        }
+    }
     ListModel {
         id: temperatureModel
         ListElement {type: "Celsius"}
         ListElement {type: "Fahrenheit"}
         ListElement {type: "Kelvin"}
     }
+    function temperatureConverter(fromUnit, value, toUnit) {
+        var fromToStandard;
+        switch(fromUnit){
+        case "Celsius":
+            fromToStandard = value;
+            break;
+        case "Fahrenheit":
+            fromToStandard = (value - 32) / 1.8;
+            break;
+        case "Kelvin":
+            fromToStandard = value - 273.15;
+            break;
+        }
+        switch(toUnit){
+        case "Celsius":
+            return fromToStandard;
+        case "Fahrenheit":
+            return fromToStandard * 1.8 + 32;
+        case "Kelvin":
+            return fromToStandard + 273.15;
+        }
+    }
     ListModel {
         id: volumeModel
+        ListElement {type: "mL"}
         ListElement {type: "Litre"}
-        ListElement {type: "Millilitre"}
+        ListElement {type: "Cubic Metre"}
         ListElement {type: "US Gallon"}
         ListElement {type: "Imperial Gallon"}
         ListElement {type: "US Pint"}
+        ListElement {type: "Imperial Pint"}
         ListElement {type: "US Quart"}
         ListElement {type: "Imperial Quart"}
         ListElement {type: "US Ounce"}
         ListElement {type: "Imperial Ounce"}
-        ListElement {type: "Cubic Centimeter"}
     }
-
+    function volumeConverter(fromUnit, value, toUnit) {
+        var fromToStandard;
+        switch(fromUnit){
+        case "mL":
+            fromToStandard = value;
+            break;
+        case "Litre":
+            fromToStandard = value * 1000;
+            break;
+        case "Cubic Metre":
+            fromToStandard = value * 1000000;
+            break;
+        case "US Gallon":
+            fromToStandard = value * 3785;
+            break;
+        case "Imperial Gallon":
+            fromToStandard = value * 4546;
+            break;
+        case "US Pint":
+            fromToStandard = value * 473;
+            break;
+        case "Imperial Pint":
+            fromToStandard = value * 568;
+            break;
+        case "US Quart":
+            fromToStandard = value * 946;
+            break;
+        case "Imperial Quart":
+            fromToStandard = value * 1137;
+            break;
+        case "US Ounce":
+            fromToStandard = value * 29.5735295625;
+            break;
+        case "Imperial Ounce":
+            fromToStandard = value * 28.4130625;
+            break;
+        }
+        switch(toUnit){
+        case "mL":
+            return fromToStandard ;
+        case "Litre":
+            return fromToStandard / 1000;
+        case "Cubic Metre":
+            return fromToStandard / 1000000;
+        case "US Gallon":
+            return fromToStandard / 3785;
+        case "Imperial Gallon":
+            return fromToStandard / 4546;
+        case "US Pint":
+            return fromToStandard / 473;
+        case "Imperial Pint":
+            return fromToStandard / 568;
+        case "US Quart":
+            return fromToStandard / 946;
+        case "Imperial Quart":
+            return fromToStandard / 1137;
+        case "US Ounce":
+            return fromToStandard / 29.5735295625;
+        case "Imperial Ounce":
+            return fromToStandard / 28.4130625;
+        }
+    }
     function determineModel(type) {
         var fromModel;
         switch(type){
