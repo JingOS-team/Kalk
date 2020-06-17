@@ -65,16 +65,52 @@ Kirigami.ApplicationWindow {
             visible: false
         }
 
+        Kirigami.AboutPage {
+                id: aboutPage
+                visible: false
+                title: i18n("About")
+                aboutData: {
+                    "displayName": "Calculator",
+                    "productName": "kirigami/calculator",
+                    "componentName": "kalk",
+                    "shortDescription": "A mobile friendly calculator built with Kirigami.",
+                    "homepage": "",
+                    "bugAddress": "",
+                    "version": "0.1",
+                    "otherText": "",
+                    "copyrightStatement": "© 2020 Plasma Development Team",
+                    "desktopFileName": "org.kde.kalk",
+//                    "authors": [
+//                        {
+//                            "name": "Han Young",
+//                            "emailAddress": "hanyoung@protonmail.com",
+//                        },
+//                        {
+//                            "name": "Devin Lin",
+//                            "emailAddress": "espidev@gmail.com",
+//                            "webAddress": "https://espi.dev"
+//                        }
+//                    ],
+//                    "licenses": [
+//                        {
+//                            "name": "GPL v2",
+//                            "text": "long, boring, license text",
+//                            "spdx": "GPL-v2.0",
+//                        }
+//                    ]
+                }
+            }
+
     }
 
-    pageStack.globalToolBar.style: Kirigami.ApplicationHeaderStyle.None
+    //pageStack.globalToolBar.style: Kirigami.ApplicationHeaderStyle.None
 
     property var mathJs: mathJsLoader.item ? mathJsLoader.item.mathJs : null;
     
-    pageStack.initialPage: initialPage
+    //pageStack.initialPage: initialPage
 
-    function switchToPage(page) {
-        while (pageStack.depth > 0) pageStack.pop();
-        pageStack.push(page);
-    }
+//    function switchToPage(page) {
+//        while (pageStack.depth > 0) pageStack.pop();
+//        pageStack.push(page);
+//    }
 }
