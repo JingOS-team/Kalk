@@ -31,9 +31,6 @@ Default is `/usr/local`.
 ## Todo
 * [ ]  about page
 * [ ]  properly integrate history
-* [ ]  add visual indicator that side button panels with functions and more special signs are available
-* [ ]  debug error "Segmentation fault (core dumped)"
-* [ ]  own app icon
 * [ ]  discuss the design with the VDG
 * [ ]  make the UI and UX follow the Kirigami HIG
 * [ ]  write own math expression parser

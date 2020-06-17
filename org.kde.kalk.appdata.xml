@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component type="desktop-application">
+  <id>org.kde.kalk</id>
+  <name>Calculator</name>
+  <name xml:lang="x-test">xxCalculatorxx</name>
+  <summary>A feature rich calculator.</summary>
+  <summary xml:lang="x-test">xxA feature rich calculator.xx</summary>
+  <developer_name>KDE Community</developer_name>
+  <developer_name xml:lang="ca">La comunitat KDE</developer_name>
+  <developer_name xml:lang="cs">Komunita KDE</developer_name>
+  <developer_name xml:lang="es">Comunidad KDE</developer_name>
+  <developer_name xml:lang="et">KDE kogukond</developer_name>
+  <developer_name xml:lang="fr">Communauté KDE</developer_name>
+  <developer_name xml:lang="nl">KDE gemeenschap</developer_name>
+  <developer_name xml:lang="nn">KDE-fellesskapet</developer_name>
+  <developer_name xml:lang="pt">Comunidade do KDE</developer_name>
+  <developer_name xml:lang="pt-BR">Comunidade KDE</developer_name>
+  <developer_name xml:lang="sk">KDE komunita</developer_name>
+  <developer_name xml:lang="sl">Skupnost KDE</developer_name>
+  <developer_name xml:lang="sv">KDE-gemenskapen</developer_name>
+  <developer_name xml:lang="uk">Спільнота KDE</developer_name>
+  <developer_name xml:lang="x-test">xxKDE Communityxx</developer_name>
+  <description>
+    <p>Kalk is a powerful calculator designed for mobile platform.</p>
+    <p xml:lang="x-test">xxKalk is a powerful calculator designed for mobile platform.xx</p>
+  </description>
+</component>
