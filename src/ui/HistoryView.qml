@@ -10,22 +10,24 @@ Kirigami.ScrollablePage {
         enabled: listView.count !== 0
         anchors.right: parent.right
         text: i18n("Clear History")
+        icon.name: "edit-clear-history"
         width: root.width / 4
         height: root.height / 20
-        contentItem: Text {
-            text: clearHistoryBtn.text
-            opacity: enabled ? 1 : 0.3
-            font.pointSize: root.height / 72
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-        }
+//        contentItem: Text {
+//            text: clearHistoryBtn.text
+//            opacity: enabled ? 1 : 0.3
+//            font.pointSize: root.height / 72
+//            horizontalAlignment: Text.AlignHCenter
+//            verticalAlignment: Text.AlignVCenter
+//        }
 
-        background: Rectangle {
-            border.color: Kirigami.Theme.activeBackgroundColor
-            border.width: root.height / 144
-            radius: root.height / 10
-            opacity: enabled ? 1 : 0.3
-        }
+//        background: Rectangle {
+//            border.color: Kirigami.Theme.activeBackgroundColor
+//            border.width: root.height / 144
+//            color: "transparent"
+//            radius: root.height / 10
+//            opacity: enabled ? 1 : 0.3
+//        }
 
         onClicked: historyManager.clearHistory()
     }

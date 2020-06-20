@@ -11,7 +11,6 @@
         <file>ui/About.qml</file>
         <file>ui/NumberPad.qml</file>
         <file>ui/HistoryView.qml</file>
-        <file>ui/ToolBarBtn.qml</file>
         <file>ui/UnitConversion.qml</file>
         <file>ui/NumericInputPad.qml</file>
         <file>ui/AutoResizeComboBox.qml</file>
