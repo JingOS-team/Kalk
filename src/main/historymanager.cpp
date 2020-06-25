@@ -1,4 +1,5 @@
 #include "historymanager.h"
+#include <QDebug>
 #include <QDir>
 #include <QJsonArray>
 #include <QJsonDocument>
