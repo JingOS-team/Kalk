@@ -1,6 +1,7 @@
 set(kalk_SRCS
     main/main.cpp
     main/historymanager.cpp
+    main/unitmodel.cpp
     calculator.qrc)
 
 add_executable(kalk ${kalk_SRCS})
@@ -9,6 +10,7 @@ target_link_libraries(kalk
     Qt5::Widgets
     Qt5::Qml
     Qt5::QuickControls2
+    KF5::UnitConverstion
     KF5::ConfigCore
     KF5::I18n
     KF5::CoreAddons)

@@ -28,6 +28,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
         Kirigami2
         I18n
         CoreAddons
+        UnitConversion
         Notifications)
 
 add_subdirectory(src)
