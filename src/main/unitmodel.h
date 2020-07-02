@@ -15,6 +15,7 @@ public:
     QVariant data(const QModelIndex &index, int role) const override;
     QHash<int, QByteArray> roleNames() const override;
     Q_INVOKABLE void changeType(QString type);
+    Q_INVOKABLE double getRet(double val, QString fromType, QString toType);
 };
 
 static const std::array<QString, 25> unitsType = {"Acceleration",
