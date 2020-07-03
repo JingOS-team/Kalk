@@ -10,7 +10,7 @@ target_link_libraries(kalk
     Qt5::Widgets
     Qt5::Qml
     Qt5::QuickControls2
-    KF5::UnitConverstion
+    KF5::UnitConversion
     KF5::ConfigCore
     KF5::I18n
     KF5::CoreAddons)
