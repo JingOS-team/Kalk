@@ -13,10 +13,12 @@ public:
     int rowCount(const QModelIndex &parent) const override;
     QVariant data(const QModelIndex &index, int role) const override;
     QHash<int, QByteArray> roleNames() const override;
-    Q_INVOKABLE void changeType(QString type);
     Q_INVOKABLE double getRet(double val, QString fromType, QString toType);
+public slots:
+    void changeUnit(QString type);
 
 private:
     QList<KUnitConversion::Unit> units_;
+    static const std::unordered_map<QString, int> categoryToEnum;
 };
 #endif // UNITMODEL_H
