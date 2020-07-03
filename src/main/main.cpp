@@ -8,17 +8,21 @@
 #include <KLocalizedString>
 
 #include "historymanager.h"
+#include "typemodel.h"
 int main(int argc, char *argv[])
 {
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication app(argc, argv);
 
     auto *historyManager = new HistoryManager();
+    auto *typeModel = new TypeModel();
     // create qml app engine
     QQmlApplicationEngine engine;
     KLocalizedString::setApplicationDomain("kalk");
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
+
     engine.rootContext()->setContextProperty("historyManager", historyManager);
+    engine.rootContext()->setContextProperty("typeModel", typeModel);
     KAboutData aboutData("kalk", "Calculator", "0.1", "Calculator in Kirigami", KAboutLicense::GPL, i18n("© 2020 KDE Community"));
     KAboutData::setApplicationData(aboutData);
 

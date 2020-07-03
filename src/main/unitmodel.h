@@ -1,10 +1,10 @@
 #ifndef UNITMODEL_H
 #define UNITMODEL_H
 
-#include <KUnitConversion/kunitconversion/unit.h>
 #include <QAbstractListModel>
 #include <QObject>
 #include <array>
+#include <kunitconversion/unit.h>
 #include <unordered_map>
 using namespace KUnitConversion;
 class UnitModel : public QAbstractListModel
@@ -18,31 +18,6 @@ public:
     Q_INVOKABLE double getRet(double val, QString fromType, QString toType);
 };
 
-static const std::array<QString, 25> unitsType = {"Acceleration",
-                                                  "Angle",
-                                                  "Area",
-                                                  "Binary Data",
-                                                  "Currency",
-                                                  "Density",
-                                                  "Electrical Current",
-                                                  "Electrical Resistance",
-                                                  "Energy",
-                                                  "Force",
-                                                  "Frequency",
-                                                  "Fuel efficiency",
-                                                  "Length",
-                                                  "Mass",
-                                                  "Permeability",
-                                                  "Power",
-                                                  "Pressure",
-                                                  "Temperature",
-                                                  "Thermal Conductivity",
-                                                  "Thermal Flux",
-                                                  "Thermal Generation",
-                                                  "Time",
-                                                  "Velocity",
-                                                  "Volume",
-                                                  "Voltage"};
 static const std::unordered_map<QString, int> unitsToEnum({
     {"SquareYottameter", UnitId::SquareYottameter},
     {"SquareZettameter", UnitId::SquareZettameter},

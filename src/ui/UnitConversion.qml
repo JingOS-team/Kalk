@@ -14,13 +14,14 @@ Kirigami.Page {
         AutoResizeComboBox {
             id: unitTypeSelection
             Layout.alignment: Qt.AlignHCenter
-            model: unitTypeSelectionModel
-            textRole: "type"
-            onCurrentTextChanged: {
-                fromComboBox.model = determineModel(currentText);
-                toComboBox.model = determineModel(currentText);
-                toComboBox.currentIndex = 1;
-            }
+            Layout.fillWidth: parent.width
+            model: typeModel
+            textRole: "name"
+//            onCurrentTextChanged: {
+//                fromComboBox.model = determineModel(currentText);
+//                toComboBox.model = determineModel(currentText);
+//                toComboBox.currentIndex = 1;
+//            }
         }
         Kirigami.Separator {}
         RowLayout {

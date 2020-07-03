@@ -1,8 +1,5 @@
 #include "unitmodel.h"
 #include <kunitconversion/value.h>
-UnitModel::UnitModel()
-{
-}
 
 double UnitModel::getRet(double val, QString fromType, QString toType)
 {

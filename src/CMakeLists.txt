@@ -2,6 +2,7 @@ set(kalk_SRCS
     main/main.cpp
     main/historymanager.cpp
     main/unitmodel.cpp
+    main/typemodel.cpp
     calculator.qrc)
 
 add_executable(kalk ${kalk_SRCS})
