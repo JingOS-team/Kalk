@@ -5,6 +5,7 @@
 
 UnitModel::UnitModel()
 {
+    units_ = KUnitConversion::Converter().category(KUnitConversion::AccelerationCategory).units();
 }
 QVariant UnitModel::data(const QModelIndex &index, int role) const
 {
@@ -23,9 +24,15 @@ QHash<int, QByteArray> UnitModel::roleNames() const
 void UnitModel::changeUnit(QString type)
 {
     emit layoutAboutToBeChanged();
-    units_ = KUnitConversion::UnitCategory().units();
+    units_ = KUnitConversion::Converter().category(static_cast<KUnitConversion::CategoryId>(categoryToEnum.find(type)->second)).units();
+    emit layoutChanged();
 }
 
+double UnitModel::getRet(double val, int fromType, int toType)
+{
+    KUnitConversion::Value fromVal(val, units_.at(fromType));
+    return fromVal.convertTo(units_.at(toType)).number();
+};
 const std::unordered_map<QString, int> UnitModel::categoryToEnum = {{"Acceleration", KUnitConversion::AccelerationCategory},
                                                                     {"Angle", KUnitConversion::AngleCategory},
                                                                     {"Area", KUnitConversion::AreaCategory},
