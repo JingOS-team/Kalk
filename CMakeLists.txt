@@ -28,8 +28,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
         Kirigami2
         I18n
         CoreAddons
-        UnitConversion
-        Notifications)
+        UnitConversion)
 
 add_subdirectory(src)
 install(PROGRAMS org.kde.kalk.desktop DESTINATION ${KDE_INSTALL_APPDIR})
