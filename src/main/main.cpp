@@ -9,6 +9,7 @@
 
 #include "historymanager.h"
 #include "typemodel.h"
+#include "unitmodel.h"
 int main(int argc, char *argv[])
 {
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -16,6 +17,7 @@ int main(int argc, char *argv[])
 
     auto *historyManager = new HistoryManager();
     auto *typeModel = new TypeModel();
+
     // create qml app engine
     QQmlApplicationEngine engine;
     KLocalizedString::setApplicationDomain("kalk");
