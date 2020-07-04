@@ -27,7 +27,7 @@ import QtQuick 2.7
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.0
 import ".."
-import org.kde.kirigami 2.11 as Kirigami
+import org.kde.kirigami 2.13 as Kirigami
 
 Rectangle {
     id: buttonsView
@@ -61,7 +61,7 @@ Rectangle {
                 horizontalAlignment: Qt.AlignHCenter
                 verticalAlignment: Qt.AlignVCenter
                 Kirigami.Theme.colorSet: Kirigami.Theme.Window
-                color: Kirigami.Theme.textColor
+                color: Kirigami.Theme.activeTextColor
                 font.pointSize: buttonsView.fontSize
                 background: Rectangle {
                     Kirigami.Theme.colorSet: Kirigami.Theme.Window

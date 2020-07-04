@@ -24,26 +24,31 @@
 import QtQuick 2.7
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.15 as Controls
-import org.kde.kirigami 2.11 as Kirigami
+import org.kde.kirigami 2.13 as Kirigami
 
 Kirigami.Page {
     id: conversionPage
     property var inputField: input
     title: i18n("Units Conversion")
     visible: false
+    leftPadding: 0
+    rightPadding: 0
+    bottomPadding: 0
     ColumnLayout {
         width: parent.width
         spacing: root.height / 36
         AutoResizeComboBox {
             id: unitTypeSelection
             Layout.alignment: Qt.AlignHCenter
-            Layout.fillWidth: parent.width
+            Layout.fillWidth: true
             model: typeModel
             textRole: "name"
             onCurrentIndexChanged: {
                 input.text = "";
                 output.text = "";
                 typeModel.currentIndex(currentIndex);
+                fromComboBox.currentIndex = 0;
+                toComboBox.currentIndex = 1;
             }
         }
         Kirigami.Separator {}
@@ -69,7 +74,7 @@ Kirigami.Page {
                 }
                 AutoResizeComboBox {
                     id: fromComboBox
-                    Layout.fillWidth: parent.width
+                    Layout.fillWidth: true
                     model: unitModel
                     textRole: "name"
                     currentIndex: 0
@@ -95,7 +100,7 @@ Kirigami.Page {
                 }
                 AutoResizeComboBox {
                     id: toComboBox
-                    Layout.fillWidth: parent.width
+                    Layout.fillWidth: true
                     model: unitModel
                     textRole: "name"
                     currentIndex: 1

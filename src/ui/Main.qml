@@ -39,9 +39,6 @@ Kirigami.ApplicationWindow {
     controlsVisible: false
     height: Kirigami.Units.gridUnit * 45
     width: Kirigami.Units.gridUnit * 27
-    Kirigami.PagePool {
-        id: mainPagePool
-    }
 
     property string history: ''
 
@@ -54,6 +51,9 @@ Kirigami.ApplicationWindow {
             icon.name: "accessories-calculator"
             id: initialPage
             title: i18n("Calculation")
+            leftPadding: 0
+            rightPadding: 0
+            bottomPadding: 0
             Loader {
                 id: mathJsLoader
                 source: "qrc:///engine/MathJs.qml"
@@ -132,14 +132,5 @@ Kirigami.ApplicationWindow {
 
     }
 
-    //pageStack.globalToolBar.style: Kirigami.ApplicationHeaderStyle.None
-
     property var mathJs: mathJsLoader.item ? mathJsLoader.item.mathJs : null;
-    
-    //pageStack.initialPage: initialPage
-
-    //    function switchToPage(page) {
-    //        while (pageStack.depth > 0) pageStack.pop();
-    //        pageStack.push(page);
-    //    }
 }

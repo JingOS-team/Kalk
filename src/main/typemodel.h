@@ -1,8 +1,7 @@
 /*
  * This file is part of Kalk
  *
- * Copyright (C) Han Young
- * hanyoung@protonmail.com
+ * Copyright (C) 2020 Han Young <hanyoung@protonmail.com>
  *
  * $BEGIN_LICENSE:GPL3+$
  *

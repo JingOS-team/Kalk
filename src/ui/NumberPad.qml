@@ -22,19 +22,18 @@
  * $END_LICENSE$
  */
 import QtQuick 2.0
-import org.kde.kirigami 2.11 as Kirigami
+import org.kde.kirigami 2.13 as Kirigami
 import QtQuick.Controls 2.1 as Controls
 import QtQuick.Layouts 1.1
 Controls.SwipeView {
     currentIndex: 0
     clip: true
     Rectangle{
-        Kirigami.Theme.colorSet: Kirigami.Theme.Selection
-        color: Kirigami.Theme.backgroundColor
+        color: Kirigami.Theme.alternateBackgroundColor
         ButtonsView {
             id: numericPad
             Kirigami.Theme.colorSet: Kirigami.Theme.Selection
-            width: root.width * 0.75
+            width: root.width * 0.7
             labels: ['7', '8', '9', '4', '5', '6', '1', '2', '3', '.', '0', '=']
             targets: ['7', '8', '9', '4', '5', '6', '1', '2', '3', '.', '0', '=']
             onButtonClicked: {
@@ -52,7 +51,8 @@ Controls.SwipeView {
         ButtonsView {
             id: controlPad
             Kirigami.Theme.colorSet: Kirigami.Theme.Selection
-            width: root.width * 0.18
+            backgroundColor: Kirigami.Theme.neutralTextColor
+            width: root.width * 0.15
             anchors.left: numericPad.right
             columnsCount: 1
             fontSize: root.height / 15
@@ -74,7 +74,7 @@ Controls.SwipeView {
             anchors.right: parent.right
             fontSize: root.height / 18
             Kirigami.Theme.colorSet: Kirigami.Theme.Selection
-            backgroundColor: Kirigami.Theme.backgroundColor
+            backgroundColor: Kirigami.Theme.alternateBackgroundColor
             labels: ['!','sqrt','exp','ln','^','sin','cos','tan','asin','(','acos','atan',')','π','e']
             targets: ['!','sqrt(','exp(','log(','^','sin(','cos(','tan(','asin(','(','acos(','atan(',')','pi','e']
             onButtonClicked: calculationZone.appendToFormula(strToAppend)
