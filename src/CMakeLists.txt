@@ -25,6 +25,10 @@ set(kalk_SRCS
     main/historymanager.cpp
     main/unitmodel.cpp
     main/typemodel.cpp
+    main/mathengine.cpp
+    Parser/driver.cc
+    Parser/scanner.cc
+    Parser/parser.cc
     calculator.qrc)
 add_executable(kalk ${kalk_SRCS})
 

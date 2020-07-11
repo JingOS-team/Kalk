@@ -26,7 +26,7 @@ project(Kalk)
 find_program(flex QUIET)
 find_program(bison QUIET)
 execute_process(
-    COMMAND bison -o ${CMAKE_CURRENT_SOURCE_DIR}/src/Parser/parser.hh ${CMAKE_CURRENT_SOURCE_DIR}/src/Parser/parser.yy
+    COMMAND bison -o ${CMAKE_CURRENT_SOURCE_DIR}/src/Parser/parser.cc ${CMAKE_CURRENT_SOURCE_DIR}/src/Parser/parser.yy
     COMMAND flex -o ${CMAKE_CURRENT_SOURCE_DIR}/src/Parser/scanner.cc ${CMAKE_CURRENT_SOURCE_DIR}/src/Parser/scanner.ll
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     )
@@ -51,7 +51,7 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(ECMPoQmTools)
 include(KDECompilerSettings NO_POLICY_SCOPE)
-
+kde_enable_exceptions()
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Quick Test Gui QuickControls2 Widgets)
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
         Config

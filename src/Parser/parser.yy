@@ -38,8 +38,8 @@
 ;
 
 %token <std::string> IDENTIFIER "identifier"
-%token <int> NUMBER "number"
-%nterm <int> exp
+%token <double> NUMBER "number"
+%nterm <double> exp
 
 %printer { yyo << $$; } <*>;
 

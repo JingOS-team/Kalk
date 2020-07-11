@@ -12,6 +12,7 @@
 # bison and flex files
 scanner.cc
 parser.hh
+parser.cc
 location.hh
 
 # Qt-es
