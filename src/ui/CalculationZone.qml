@@ -159,6 +159,7 @@ Rectangle {
             return;
         calculationZone.formula.insert(calculationZone.formula.cursorPosition, text);
         calculate(calculationZone.formula.text);
+        mathEngine.parse(calculationZone.formula.text);
     }
 
     function setFormulaText(formula) {
