@@ -20,13 +20,6 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 #  $END_LICENSE$
-add_library(parser)
-file(MAKE_DIRECTORY parser)
-set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS parser.cpp scanner.cpp)
-execute_process (COMMAND bison -o parser.cpp ${CMAKE_CURRENT_SOURCE_DIR}/Parser/parser.yy  WORKING_DIRECTORY parser)
-file ( GLOB OUTPUT_CPP_FILES "parser/*.cpp")
-target_sources(parser PRIVATE ${OUTPUT_CPP_FILES})
-
 set(kalk_SRCS
     main/main.cpp
     main/historymanager.cpp
@@ -43,6 +36,5 @@ target_link_libraries(kalk
     KF5::UnitConversion
     KF5::ConfigCore
     KF5::I18n
-    KF5::CoreAddons
-    parser)
+    KF5::CoreAddons)
 install(TARGETS kalk ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})

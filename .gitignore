@@ -9,6 +9,10 @@
 *.so
 *.dll
 *.dylib
+# bison and flex files
+scanner.cc
+parser.hh
+location.hh
 
 # Qt-es
 
