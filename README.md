@@ -10,7 +10,7 @@ Kalk is a fork of [Liri calculator](https://github.com/lirios/calculator)
 
 
 ## Dependencies
-Qt5, cmake, KI18n, KUnitConversion, Kirigami , KConfig
+Qt5, Cmake, KI18n, KUnitConversion, Kirigami, KConfig, GNU Bison, Flex
 ## Build, Install
 
 ```sh
