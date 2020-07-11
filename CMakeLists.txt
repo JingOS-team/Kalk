@@ -25,7 +25,6 @@ project(Kalk)
 cmake_minimum_required(VERSION 2.8.12)
 set(KF5_MIN_VERSION "5.18.0")
 set(QT_MIN_VERSION "5.5.0")
-
 if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
     message(FATAL_ERROR "This application requires an out of source build. Please
         create a separate build directory.")
@@ -51,7 +50,6 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
         I18n
         CoreAddons
         UnitConversion)
-
 add_subdirectory(src)
 install(PROGRAMS org.kde.kalk.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 install(FILES org.kde.kalk.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})

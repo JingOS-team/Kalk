@@ -31,6 +31,7 @@
 #include <KLocalizedContext>
 #include <KLocalizedString>
 
+#include "Parser/driver.h"
 #include "historymanager.h"
 #include "typemodel.h"
 #include "unitmodel.h"

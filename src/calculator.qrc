@@ -6,7 +6,7 @@
         <file>ui/ButtonsView.qml</file>
         <file>ui/CalculationLine.qml</file>
         <file>ui/CalculationZone.qml</file>
-        <file>ui/Main.qml</file>
+        <file>ui/main.qml</file>
         <file>ui/qmldir</file>
         <file>ui/NumberPad.qml</file>
         <file>ui/HistoryView.qml</file>
