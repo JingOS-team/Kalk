@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
     engine.addImportPath(QStringLiteral("qrc:/"));
 
     // load main ui
-    engine.load(QUrl(QStringLiteral("qrc:/ui/Main.qml")));
+    engine.load(QUrl(QStringLiteral("qrc:/ui/main.qml")));
 
     return app.exec();
 }
