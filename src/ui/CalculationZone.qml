@@ -86,38 +86,12 @@ Rectangle {
         anchors.margins: smallSpacing
         font.pointSize: root.height / 22
         horizontalAlignment: TextInput.AlignRight
-        text: ''
+        text: mathEngine.result
     }
 
     function save(){
         if (calculationZone.formula.text.length != 0)
         historyManager.expression = calculationZone.formula.text + " = " + calculationZone.result.text;
-    }
-
-    function calculate(formula, wantArray) {
-        try {
-            var Expression = formula.replace(/÷/g, "/").replace(/×/g, "*");
-            var gaps = getParenthesis(Expression, '(') - getParenthesis(Expression, ')');
-            while(gaps--){
-                Expression += ')';
-            }
-
-            var res = mathJs.eval(Expression);
-            if (!wantArray) {
-                res = formatBigNumber(res);
-            }
-        } catch (exception) {
-            if (debug) {
-                console.log(exception.toString());
-            }
-            lastError = exception.toString();
-            return;
-        }
-
-        res = res.substr(0,18);
-        while (res.charAt(res.length -1) === '0')
-            res = res.slice(0,-1);
-        calculationZone.result.text = res === '' ?calculationZone.result.text : res;
     }
 
     function getParenthesis(text, parenthesis){
@@ -151,14 +125,12 @@ Rectangle {
             calculationZone.formula.text = "";
         if (text === "DEL") {
             removeFromFormula();
-            calculate(calculationZone.formula.text);
+            mathEngine.parse(calculationZone.formula.text);
             return;
         }
-        var lastChar = calculationZone.formula.text.charAt(calculationZone.formula.text.length - 1);
-        if ( (lastChar === '÷' || lastChar === '×' || lastChar === '+' || lastChar === '-') && (text === '÷' || text === '×' || text === '+' || text === '-'))
-            return;
         calculationZone.formula.insert(calculationZone.formula.cursorPosition, text);
-        calculate(calculationZone.formula.text);
+        mathEngine.parse(calculationZone.formula.text);
+        console.log(calculationZone.formula.text);
     }
 
     function setFormulaText(formula) {
@@ -183,19 +155,5 @@ Rectangle {
 
     function replaceFormula(formulaStr) {
         setFormulaText(formulaStr);
-    }
-
-    function formatBigNumber(bigNumberToFormat) {
-        // Maximum length of the result number
-        var NUMBER_LENGTH_LIMIT = 14;
-
-        if (bigNumberToFormat.toString().length > NUMBER_LENGTH_LIMIT) {
-            var resultLength = mathJs.format(bigNumberToFormat, {exponential: {lower: 1e-10, upper: 1e10},
-                                                 precision: NUMBER_LENGTH_LIMIT}).toString().length;
-
-            return mathJs.format(bigNumberToFormat, {exponential: {lower: 1e-10, upper: 1e10},
-                                     precision: (NUMBER_LENGTH_LIMIT - resultLength + NUMBER_LENGTH_LIMIT)}).toString();
-        }
-        return bigNumberToFormat.toString()
     }
 }

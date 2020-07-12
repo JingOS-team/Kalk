@@ -1,8 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>engine/math.js</file>
-        <file>engine/MathJs.qml</file>
-        <file>engine/qmldir</file>
         <file>ui/ButtonsView.qml</file>
         <file>ui/CalculationLine.qml</file>
         <file>ui/CalculationZone.qml</file>

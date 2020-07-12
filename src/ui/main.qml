@@ -28,8 +28,6 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1 as Controls
 import Qt.labs.platform 1.0
 import Qt.labs.settings 1.0
-import ".."
-import "../engine"
 import org.kde.kirigami 2.13 as Kirigami
 
 Kirigami.ApplicationWindow {
@@ -54,17 +52,6 @@ Kirigami.ApplicationWindow {
             leftPadding: 0
             rightPadding: 0
             bottomPadding: 0
-            Loader {
-                id: mathJsLoader
-                source: "qrc:///engine/MathJs.qml"
-                asynchronous: true
-                active: true
-                onLoaded: {
-                    mathJs.config({
-                                      number: 'BigNumber'
-                                  });
-                }
-            }
 
             CalculationZone {
                 id: calculationZone
@@ -131,6 +118,4 @@ Kirigami.ApplicationWindow {
         }
 
     }
-
-    property var mathJs: mathJsLoader.item ? mathJsLoader.item.mathJs : null;
 }

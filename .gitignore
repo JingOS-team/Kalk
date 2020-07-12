@@ -9,7 +9,11 @@
 *.so
 *.dll
 *.dylib
-
+# bison and flex files
+scanner.hh
+scanner.cc
+parser.hh
+parser.cc
 # Qt-es
 
 /.qmake.cache
