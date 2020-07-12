@@ -22,15 +22,6 @@
 #  $END_LICENSE$
 project(Kalk)
 
-##########################Pre-Build######################################
-find_program(flex QUIET)
-find_program(bison QUIET)
-execute_process(
-    COMMAND bison -o ${CMAKE_CURRENT_SOURCE_DIR}/src/Parser/parser.cc ${CMAKE_CURRENT_SOURCE_DIR}/src/Parser/parser.yy
-    COMMAND flex -o ${CMAKE_CURRENT_SOURCE_DIR}/src/Parser/scanner.cc ${CMAKE_CURRENT_SOURCE_DIR}/src/Parser/scanner.ll
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    )
-##########################END############################################
 cmake_minimum_required(VERSION 2.8.12)
 set(KF5_MIN_VERSION "5.18.0")
 set(QT_MIN_VERSION "5.5.0")
