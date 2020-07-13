@@ -1,14 +1,12 @@
 <RCC>
     <qresource prefix="/">
-        <file>ui/ButtonsView.qml</file>
-        <file>ui/CalculationLine.qml</file>
-        <file>ui/CalculationZone.qml</file>
         <file>ui/main.qml</file>
         <file>ui/qmldir</file>
         <file>ui/NumberPad.qml</file>
         <file>ui/HistoryView.qml</file>
         <file>ui/UnitConversion.qml</file>
-        <file>ui/NumericInputPad.qml</file>
         <file>ui/AutoResizeComboBox.qml</file>
+        <file>ui/NumberButton.qml</file>
+        <file>ui/CalculationPage.qml</file>
     </qresource>
 </RCC>

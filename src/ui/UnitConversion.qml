@@ -114,7 +114,8 @@ Kirigami.Page {
             }
         }
     }
-    NumericInputPad {
+    NumberPad {
+        pureNumber: true
         height: parent.height * 0.6
         width: parent.width
         anchors.bottom: parent.bottom

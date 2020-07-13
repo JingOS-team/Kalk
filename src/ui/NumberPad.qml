@@ -23,61 +23,32 @@
  */
 import QtQuick 2.0
 import org.kde.kirigami 2.13 as Kirigami
-import QtQuick.Controls 2.1 as Controls
 import QtQuick.Layouts 1.1
-Controls.SwipeView {
-    currentIndex: 0
-    clip: true
-    Rectangle{
-        color: Kirigami.Theme.alternateBackgroundColor
-        ButtonsView {
-            id: numericPad
-            Kirigami.Theme.colorSet: Kirigami.Theme.Selection
-            width: root.width * 0.7
-            labels: ['7', '8', '9', '4', '5', '6', '1', '2', '3', '.', '0', '=']
-            targets: ['7', '8', '9', '4', '5', '6', '1', '2', '3', '.', '0', '=']
-            onButtonClicked: {
-                if (strToAppend === '='){
-                    calculationZone.save();
-                    calculationZone.isNewCalculation = true;
-                }
-                else {
-                    calculationZone.appendToFormula(strToAppend)
-                    calculationZone.isNewCalculation = false;
-                }
-            }
-        }
-
-        ButtonsView {
-            id: controlPad
-            Kirigami.Theme.colorSet: Kirigami.Theme.Selection
-            backgroundColor: Kirigami.Theme.neutralTextColor
-            width: root.width * 0.15
-            anchors.left: numericPad.right
-            columnsCount: 1
-            fontSize: root.height / 15
-            rowsCount: 5
-            labels: ['C', '+', '−', '×', '÷']
-            targets: ['DEL', '+', '-', '×', '÷']
-            onButtonClicked: calculationZone.appendToFormula(strToAppend)
-            onButtonLongPressed: {
-                if (strToAppend === "DEL") {
-                    calculationZone.clearFormula();
-                }
-            }
-        }
-    }
-
-    Item {
-        ButtonsView {
-            id: fns
-            anchors.right: parent.right
-            fontSize: root.height / 18
-            Kirigami.Theme.colorSet: Kirigami.Theme.Selection
-            backgroundColor: Kirigami.Theme.alternateBackgroundColor
-            labels: ['!','sqrt','exp','ln','^','sin','cos','tan','asin','(','acos','atan',')','π','e']
-            targets: ['!','sqrt(','exp(','log(','^','sin(','cos(','tan(','asin(','(','acos(','atan(',')','pi','e']
-            onButtonClicked: calculationZone.appendToFormula(strToAppend)
-        }
-    }
+GridLayout {
+    property string expression
+    property bool pureNumber: false
+    columns: pureNumber ? 3 : 4
+    Layout.fillHeight: true
+    Layout.fillWidth: true
+    NumberButton {text: "7" ; onClicked: expression += text;}
+    NumberButton {text: "8" ; onClicked: expression += text;}
+    NumberButton {text: "9" ; onClicked: expression += text;}
+    NumberButton {text: "+" ; onClicked: expression += text; special: true; visible: !pureNumber}
+    NumberButton {text: "4" ; onClicked: expression += text;}
+    NumberButton {text: "5" ; onClicked: expression += text;}
+    NumberButton {text: "6" ; onClicked: expression += text;}
+    NumberButton {text: "-" ; onClicked: expression += text; special: true; visible: !pureNumber}
+    NumberButton {text: "1" ; onClicked: expression += text;}
+    NumberButton {text: "2" ; onClicked: expression += text;}
+    NumberButton {text: "3" ; onClicked: expression += text;}
+    NumberButton {text: "×" ; onClicked: expression += text; special: true; visible: !pureNumber}
+    NumberButton {text: "0" ; onClicked: expression += text;}
+    NumberButton {text: "." ; onClicked: expression += text;}
+    NumberButton {text: "^" ; onClicked: expression += text; visible: !pureNumber}
+    NumberButton {text: "÷" ; onClicked: expression += text; special: true; visible: !pureNumber}
+    NumberButton {text: "(" ; onClicked: expression += text; special: true; visible: !pureNumber}
+    NumberButton {text: ")" ; onClicked: expression += text; special: true; visible: !pureNumber}
+    NumberButton {text: "DEL" ; onClicked: expression += text; special: true; visible: !pureNumber}
+    NumberButton {text: "=" ; onClicked: expression += text; special: true; }
 }
+
