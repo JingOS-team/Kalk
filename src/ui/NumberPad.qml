@@ -48,7 +48,7 @@ GridLayout {
     NumberButton {text: "÷" ; onClicked: expression += text; special: true; visible: !pureNumber}
     NumberButton {text: "(" ; onClicked: expression += text; special: true; visible: !pureNumber}
     NumberButton {text: ")" ; onClicked: expression += text; special: true; visible: !pureNumber}
-    NumberButton {text: "DEL" ; onClicked: expression += text; special: true; visible: !pureNumber}
-    NumberButton {text: "=" ; onClicked: expression += text; special: true; }
+    NumberButton {text: "DEL" ; onClicked: expression = expression.slice(0,expression.length - 1); special: true;}
+    NumberButton {text: "=" ; onClicked: historyManager.expression = expression; special: true; visible: !pureNumber}
 }
 

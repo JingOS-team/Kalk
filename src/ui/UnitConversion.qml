@@ -66,6 +66,7 @@ Kirigami.Page {
                     validator: DoubleValidator{}
                     focus: true
                     onTextChanged: {
+                        console.log(unitNumberPad.expression);
                         if(text != "") {
                             output.text = unitModel.getRet(Number(text), fromComboBox.currentIndex, toComboBox.currentIndex);
                             output.cursorPosition = 0; // force align left
@@ -115,23 +116,11 @@ Kirigami.Page {
         }
     }
     NumberPad {
+        id: unitNumberPad
         pureNumber: true
         height: parent.height * 0.6
         width: parent.width
         anchors.bottom: parent.bottom
-    }
-    function append(text){
-        if (text === "DEL") {
-            var index = conversionPage.inputField.cursorPosition;
-            if (index === 0)
-                return;
-            conversionPage.inputField.remove(index - 1, index);
-            return;
-        }
-        conversionPage.inputField.insert(conversionPage.inputField.cursorPosition,text);
-    }
-
-    function clear(){
-        conversionPage.inputField.clear();
+        onExpressionChanged: input.text = this.expression
     }
 }

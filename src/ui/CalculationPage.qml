@@ -32,7 +32,7 @@ import org.kde.kirigami 2.13 as Kirigami
 Kirigami.Page {
     icon.name: "accessories-calculator"
     id: initialPage
-    title: i18n("Calculation")
+    title: i18n("Calculator")
     leftPadding: 0
     rightPadding: 0
     bottomPadding: 0
