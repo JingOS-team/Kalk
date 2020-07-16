@@ -42,9 +42,9 @@ Kirigami.Page {
         Controls.Label {
             id: expressionRow
             anchors.top: parent.top
+            anchors.margins: 0
             width: parent.width
-            height: parent.height * 0.2
-            font.pixelSize: Kirigami.Units.gridUnit * 2.3
+            font.pixelSize: Kirigami.Units.gridUnit * 2
             text: numberPad.expression
             onTextChanged: {
                 mathEngine.parse(this.text);
@@ -53,9 +53,10 @@ Kirigami.Page {
         Controls.Label {
             id: result
             anchors.top: expressionRow.bottom
-            width: parent.width
-            height: parent.height * 0.2
-            font.pixelSize: Kirigami.Units.gridUnit * 2.3
+            horizontalAlignment: Text.AlignRight
+            anchors.left: parent.left
+            anchors.right: parent.right
+            font.pixelSize: Kirigami.Units.gridUnit * 3
             text: mathEngine.result
         }
 
@@ -64,7 +65,7 @@ Kirigami.Page {
             Layout.fillWidth: true
         }
         Rectangle {
-            height: parent.height * 0.7
+            height: parent.height - result.height - expressionRow.height
             width: parent.width
             Kirigami.Theme.colorSet: Kirigami.Theme.View
             Kirigami.Theme.inherit: false
