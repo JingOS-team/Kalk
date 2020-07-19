@@ -103,7 +103,17 @@ blank [ \t\r]
 "÷"        return yy::parser::make_SLASH  (loc);
 "("        return yy::parser::make_LPAREN (loc);
 ")"        return yy::parser::make_RPAREN (loc);
-"^"        return yy::parser::make_EXPONTENTIAL (loc);
+"^"        return yy::parser::make_POWER (loc);
+"sin"      return yy::parser::make_SIN (loc);
+"cos"      return yy::parser::make_COS (loc);
+"tan"      return yy::parser::make_TAN (loc);
+"log"      return yy::parser::make_LOG (loc);
+"log10"      return yy::parser::make_LOG10 (loc);
+"log2"      return yy::parser::make_LOG2 (loc);
+"√"      return yy::parser::make_SQUAREROOT (loc);
+"π"      return yy::parser::make_NUMBER (3.14159265358, loc);
+"e"      return yy::parser::make_NUMBER (2.71828182845, loc);
+"%"      return yy::parser::make_PERCENTAGE (loc);
 ":="       return yy::parser::make_ASSIGN (loc);
 
 {double}      return make_NUMBER (yytext, loc);

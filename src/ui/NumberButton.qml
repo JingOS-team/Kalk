@@ -59,9 +59,7 @@ Item {
         onClicked: root.clicked(parent.text)
 
         onPressAndHold: {
-            if (text.length === 1) {
-                root.clicked(text);
-            }
+                root.clicked("longPressed");
         }
     }
 

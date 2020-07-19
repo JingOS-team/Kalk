@@ -121,6 +121,13 @@ Kirigami.Page {
         height: parent.height * 0.6
         width: parent.width
         anchors.bottom: parent.bottom
-        onExpressionChanged: input.text = this.expression
+        onPressed: {
+            if(text == "DEL")
+                input.text = input.text.slice(0, input.text.length - 1);
+            else if(text == "longPressed")
+                input.text = "";
+            else
+                input.text += text;
+        }
     }
 }

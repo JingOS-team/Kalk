@@ -41,40 +41,54 @@ Kirigami.Page {
         spacing: 0
         Controls.Label {
             id: expressionRow
-            anchors.top: parent.top
-            anchors.margins: 0
+            Layout.alignment: Qt.AlignTop
             width: parent.width
             font.pixelSize: Kirigami.Units.gridUnit * 2
-            text: numberPad.expression
+            text: inputPad.expression
             onTextChanged: {
                 mathEngine.parse(this.text);
             }
         }
         Controls.Label {
             id: result
-            anchors.top: expressionRow.bottom
             horizontalAlignment: Text.AlignRight
-            anchors.left: parent.left
-            anchors.right: parent.right
+            Layout.fillWidth: true
             font.pixelSize: Kirigami.Units.gridUnit * 3
             text: mathEngine.result
         }
 
         Kirigami.Separator {
-            anchors.top: result.bottom
             Layout.fillWidth: true
         }
         Rectangle {
-            height: parent.height - result.height - expressionRow.height
-            width: parent.width
+            Layout.fillHeight: true
+            Layout.fillWidth: true
             Kirigami.Theme.colorSet: Kirigami.Theme.View
             Kirigami.Theme.inherit: false
             color: Kirigami.Theme.backgroundColor
-            anchors.bottom: parent.bottom
-            NumberPad {
-                id: numberPad
-                height: parent.height
+            Layout.alignment: Qt.AlignBottom
+            Controls.SwipeView{
+                property string expression: ""
+                id: inputPad
                 width: parent.width
+                height: parent.height
+                NumberPad {
+                    id: numberPad
+                    onPressed: {
+                        if(text == "DEL")
+                            inputPad.expression = inputPad.expression.slice(0, inputPad.expression.length - 1);
+                        else if(text == "longPressed")
+                            inputPad.expression = "";
+                        else if(text == "=")
+                            historyManager.expression = inputPad.expression;
+                        else
+                            inputPad.expression += text;
+                    }
+                }
+                FunctionPad {
+                    id: functionPad
+                    onPressed: inputPad.expression += text;
+                }
             }
         }
     }

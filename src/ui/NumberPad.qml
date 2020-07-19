@@ -25,30 +25,30 @@ import QtQuick 2.0
 import org.kde.kirigami 2.13 as Kirigami
 import QtQuick.Layouts 1.1
 GridLayout {
-    property string expression
+    signal pressed(string text)
     property bool pureNumber: false
     columns: pureNumber ? 3 : 4
     Layout.fillHeight: true
     Layout.fillWidth: true
-    NumberButton {text: "7" ; onClicked: expression += text;}
-    NumberButton {text: "8" ; onClicked: expression += text;}
-    NumberButton {text: "9" ; onClicked: expression += text;}
-    NumberButton {text: "+" ; onClicked: expression += text; special: true; visible: !pureNumber}
-    NumberButton {text: "4" ; onClicked: expression += text;}
-    NumberButton {text: "5" ; onClicked: expression += text;}
-    NumberButton {text: "6" ; onClicked: expression += text;}
-    NumberButton {text: "-" ; onClicked: expression += text; special: true; visible: !pureNumber}
-    NumberButton {text: "1" ; onClicked: expression += text;}
-    NumberButton {text: "2" ; onClicked: expression += text;}
-    NumberButton {text: "3" ; onClicked: expression += text;}
-    NumberButton {text: "×" ; onClicked: expression += text; special: true; visible: !pureNumber}
-    NumberButton {text: "0" ; onClicked: expression += text;}
-    NumberButton {text: "." ; onClicked: expression += text;}
-    NumberButton {text: "^" ; onClicked: expression += text; visible: !pureNumber}
-    NumberButton {text: "÷" ; onClicked: expression += text; special: true; visible: !pureNumber}
-    NumberButton {text: "(" ; onClicked: expression += text; special: true; visible: !pureNumber}
-    NumberButton {text: ")" ; onClicked: expression += text; special: true; visible: !pureNumber}
-    NumberButton {text: "DEL" ; onClicked: expression = expression.slice(0,expression.length - 1); special: true;}
-    NumberButton {text: "=" ; onClicked: historyManager.expression = expression; special: true; visible: !pureNumber}
+    NumberButton {text: "7" ; onClicked: pressed(text);}
+    NumberButton {text: "8" ; onClicked: pressed(text);}
+    NumberButton {text: "9" ; onClicked: pressed(text);}
+    NumberButton {text: "+" ; onClicked: pressed(text); special: true; visible: !pureNumber}
+    NumberButton {text: "4" ; onClicked: pressed(text);}
+    NumberButton {text: "5" ; onClicked: pressed(text);}
+    NumberButton {text: "6" ; onClicked: pressed(text);}
+    NumberButton {text: "-" ; onClicked: pressed(text); special: true; visible: !pureNumber}
+    NumberButton {text: "1" ; onClicked: pressed(text);}
+    NumberButton {text: "2" ; onClicked: pressed(text);}
+    NumberButton {text: "3" ; onClicked: pressed(text);}
+    NumberButton {text: "×" ; onClicked: pressed(text); special: true; visible: !pureNumber}
+    NumberButton {text: "0" ; onClicked: pressed(text);}
+    NumberButton {text: "." ; onClicked: pressed(text);}
+    NumberButton {text: "^" ; onClicked: pressed(text); visible: !pureNumber}
+    NumberButton {text: "÷" ; onClicked: pressed(text); special: true; visible: !pureNumber}
+    NumberButton {text: "(" ; onClicked: pressed(text); special: true; visible: !pureNumber}
+    NumberButton {text: ")" ; onClicked: pressed(text); special: true; visible: !pureNumber}
+    NumberButton {text: "DEL" ; onClicked: pressed(text); special: true;}
+    NumberButton {text: "=" ; onClicked: pressed(text); special: true; visible: !pureNumber}
 }
 

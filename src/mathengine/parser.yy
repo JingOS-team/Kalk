@@ -36,7 +36,15 @@
   SLASH   "/"
   LPAREN  "("
   RPAREN  ")"
-  EXPONTENTIAL "^"
+  POWER   "^"
+  SIN     "SIN"
+  COS     "COS"
+  TAN     "TAN"
+  LOG     "LOG"
+  LOG10   "LOG10"
+  LOG2    "LOG2"
+  SQUAREROOT    "SQUAREROOT"
+  PERCENTAGE    "%"
 ;
 
 %token <std::string> IDENTIFIER "identifier"
@@ -68,6 +76,21 @@ exp:
 | exp "/" exp   { $$ = $1 / $3; }
 | "(" exp ")"   { $$ = $2; }
 | exp "^" exp   { $$ = pow($1, $3); }
+| "SIN" "(" exp     { $$ = sin($3); }
+| "SIN" "(" exp ")" { $$ = sin($3); }
+| "COS" "(" exp     { $$ = cos($3); }
+| "COS" "(" exp ")" { $$ = cos($3); }
+| "TAN" "(" exp     { $$ = tan($3); }
+| "TAN" "(" exp ")" { $$ = tan($3); }
+| "LOG" "(" exp     { $$ = log($3); }
+| "LOG" "(" exp ")" { $$ = log($3); }
+| "LOG10" "(" exp   { $$ = log10($3); }
+| "LOG10" "(" exp ")" { $$ = log10($3); }
+| "LOG2" "(" exp    { $$ = log2($3); }
+| "LOG2" "(" exp ")" { $$ = log2($3); }
+| "SQUAREROOT" "(" exp   { $$ = sqrt($3); }
+| "SQUAREROOT" "(" exp ")"  { $$ = sqrt($3); }
+| exp "%" { $$ = $1 / 100; }
 %%
 
 void

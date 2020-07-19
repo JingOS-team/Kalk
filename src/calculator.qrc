@@ -8,5 +8,6 @@
         <file>ui/AutoResizeComboBox.qml</file>
         <file>ui/NumberButton.qml</file>
         <file>ui/CalculationPage.qml</file>
+        <file>ui/FunctionPad.qml</file>
     </qresource>
 </RCC>
