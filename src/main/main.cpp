@@ -32,6 +32,7 @@
 #include <KLocalizedString>
 
 #include "historymanager.h"
+#include "mathengine.h"
 #include "typemodel.h"
 #include "unitmodel.h"
 int main(int argc, char *argv[])
@@ -42,6 +43,7 @@ int main(int argc, char *argv[])
     auto *historyManager = new HistoryManager();
     auto *typeModel = new TypeModel();
     auto *unitModel = new UnitModel();
+    auto *mathEngine = new MathEngine();
     QObject::connect(typeModel, &TypeModel::categoryChanged, unitModel, &UnitModel::changeUnit);
     // create qml app engine
     QQmlApplicationEngine engine;
@@ -51,6 +53,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("historyManager", historyManager);
     engine.rootContext()->setContextProperty("typeModel", typeModel);
     engine.rootContext()->setContextProperty("unitModel", unitModel);
+    engine.rootContext()->setContextProperty("mathEngine", mathEngine);
     KAboutData aboutData("kalk", "Calculator", "0.1", "Calculator in Kirigami", KAboutLicense::GPL, i18n("© 2020 KDE Community"));
     KAboutData::setApplicationData(aboutData);
 

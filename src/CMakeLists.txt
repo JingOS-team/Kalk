@@ -26,9 +26,9 @@ set(kalk_SRCS
     main/unitmodel.cpp
     main/typemodel.cpp
     main/mathengine.cpp
-    Parser/driver.cc
-    Parser/scanner.cc
-    Parser/parser.cc
+    mathengine/parser.cc
+    mathengine/scanner.cc
+    mathengine/driver.cc
     calculator.qrc)
 add_executable(kalk ${kalk_SRCS})
 

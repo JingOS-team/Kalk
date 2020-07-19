@@ -28,8 +28,6 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1 as Controls
 import Qt.labs.platform 1.0
 import Qt.labs.settings 1.0
-import ".."
-import "../engine"
 import org.kde.kirigami 2.13 as Kirigami
 
 Kirigami.ApplicationWindow {
@@ -47,40 +45,7 @@ Kirigami.ApplicationWindow {
     property int smallSpacing: 10
     Kirigami.SwipeNavigator {
         anchors.fill: parent
-        Kirigami.Page {
-            icon.name: "accessories-calculator"
-            id: initialPage
-            title: i18n("Calculation")
-            leftPadding: 0
-            rightPadding: 0
-            bottomPadding: 0
-            Loader {
-                id: mathJsLoader
-                source: "qrc:///engine/MathJs.qml"
-                asynchronous: true
-                active: true
-                onLoaded: {
-                    mathJs.config({
-                                      number: 'BigNumber'
-                                  });
-                }
-            }
-
-            CalculationZone {
-                id: calculationZone
-                anchors.top: parent.top
-                anchors.left: parent.left
-                anchors.right: parent.right
-                height: parent.height - swipeView.height
-            }
-
-            NumberPad {
-                id: swipeView
-                height: parent.height * 0.8
-                width: parent.width
-                anchors.bottom: parent.bottom
-            }
-        }
+        CalculationPage {}
 
         UnitConversion {
             icon.name: "gtk-convert"
@@ -131,6 +96,4 @@ Kirigami.ApplicationWindow {
         }
 
     }
-
-    property var mathJs: mathJsLoader.item ? mathJsLoader.item.mathJs : null;
 }
