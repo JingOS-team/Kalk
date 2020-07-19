@@ -10,6 +10,7 @@
 
 %code requires {
   # include <string>
+  #include <cmath>
   class driver;
 }
 
@@ -35,6 +36,7 @@
   SLASH   "/"
   LPAREN  "("
   RPAREN  ")"
+  EXPONTENTIAL "^"
 ;
 
 %token <std::string> IDENTIFIER "identifier"
@@ -65,6 +67,7 @@ exp:
 | exp "*" exp   { $$ = $1 * $3; }
 | exp "/" exp   { $$ = $1 / $3; }
 | "(" exp ")"   { $$ = $2; }
+| exp "^" exp   { $$ = pow($1, $3); }
 %%
 
 void
