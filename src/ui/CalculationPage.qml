@@ -42,8 +42,8 @@ Kirigami.Page {
         Controls.Label {
             id: expressionRow
             Layout.alignment: Qt.AlignTop
-            width: parent.width
-            font.pixelSize: Kirigami.Units.gridUnit * 2
+            Layout.fillWidth: true
+            font.pointSize: Kirigami.Units.gridUnit * 2
             text: inputPad.expression
             onTextChanged: {
                 mathEngine.parse(this.text);
@@ -53,7 +53,7 @@ Kirigami.Page {
             id: result
             horizontalAlignment: Text.AlignRight
             Layout.fillWidth: true
-            font.pixelSize: Kirigami.Units.gridUnit * 3
+            font.pointSize: Kirigami.Units.gridUnit * 3
             text: mathEngine.result
         }
 

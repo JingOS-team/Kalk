@@ -29,18 +29,17 @@ import org.kde.kirigami 2.13 as Kirigami
 Kirigami.Page {
     id: conversionPage
     property var inputField: input
-    title: i18n("Units Conversion")
+    title: i18n("Units Converter")
     visible: false
     leftPadding: 0
     rightPadding: 0
     bottomPadding: 0
     ColumnLayout {
         width: parent.width
-        spacing: root.height / 36
         AutoResizeComboBox {
             id: unitTypeSelection
             Layout.alignment: Qt.AlignHCenter
-            Layout.fillWidth: true
+            Layout.preferredWidth: parent.width * 0.8
             model: typeModel
             textRole: "name"
             onCurrentIndexChanged: {
@@ -51,16 +50,16 @@ Kirigami.Page {
                 toComboBox.currentIndex = 1;
             }
         }
-        Kirigami.Separator {}
         ColumnLayout {
             Layout.alignment: Qt.AlignHCenter
-            ColumnLayout {
+            Layout.preferredWidth: parent.width * 0.9
+            RowLayout {
                 Controls.TextField {
                     id: input
-                    Layout.preferredHeight: root.height / 16
-                    Layout.preferredWidth: root.width * 0.4
-                    font.pointSize: root.height / 36
+                    Layout.preferredHeight: Kirigami.Units.gridUnit * 3
+                    Layout.preferredWidth: parent.width * 0.4
                     Kirigami.Theme.colorSet: Kirigami.Theme.Selection
+                    font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.5
                     color: Kirigami.Theme.activeTextColor
                     wrapMode: TextInput.WrapAnywhere
                     validator: DoubleValidator{}
@@ -76,6 +75,9 @@ Kirigami.Page {
                 AutoResizeComboBox {
                     id: fromComboBox
                     Layout.fillWidth: true
+                    Layout.preferredHeight: Kirigami.Units.gridUnit * 3
+                    fontSize: Kirigami.Theme.defaultFont.pointSize * 1.5
+                    popupWidth: parent.width
                     model: unitModel
                     textRole: "name"
                     currentIndex: 0
@@ -88,12 +90,12 @@ Kirigami.Page {
                 }
             }
 
-            ColumnLayout {
+            RowLayout {
                 Controls.TextField {
                     id: output
-                    Layout.preferredHeight: root.height / 16
-                    Layout.preferredWidth: root.width * 0.4
-                    font.pointSize: root.height / 36
+                    Layout.preferredHeight: Kirigami.Units.gridUnit * 3
+                    Layout.preferredWidth: parent.width * 0.4
+                    font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.5
                     readOnly: true
                     Kirigami.Theme.colorSet: Kirigami.Theme.Selection
                     color: Kirigami.Theme.activeTextColor
@@ -102,6 +104,9 @@ Kirigami.Page {
                 AutoResizeComboBox {
                     id: toComboBox
                     Layout.fillWidth: true
+                    Layout.preferredHeight: Kirigami.Units.gridUnit * 3
+                    fontSize: Kirigami.Theme.defaultFont.pointSize * 1.5
+                    popupWidth: parent.width
                     model: unitModel
                     textRole: "name"
                     currentIndex: 1
@@ -118,7 +123,7 @@ Kirigami.Page {
     NumberPad {
         id: unitNumberPad
         pureNumber: true
-        height: parent.height * 0.6
+        height: parent.height * 0.7
         width: parent.width
         anchors.bottom: parent.bottom
         onPressed: {

@@ -26,39 +26,54 @@ import QtQuick.Controls 2.0
 import org.kde.kirigami 2.13 as Kirigami
 ComboBox {
     id: groupSelect
+    property real fontSize: Kirigami.Theme.defaultFont.pointSize * 2
+    property real popupFontSize: Kirigami.Theme.defaultFont.pointSize * 2
+    property real popupWidth: groupSelect.width
     y: 3
-    Kirigami.Theme.colorSet: Kirigami.Theme.Selection
     contentItem: Text {
-        color : Kirigami.Theme.textColor
         text: parent.displayText
-        font.pointSize: root.height / 48
-        verticalAlignment: Text.AlignTop
-        horizontalAlignment: Text.AlignLeft;
+        verticalAlignment: Text.AlignVCenter
+        elide: Text.ElideRight
+        font.pointSize: fontSize
+        color: Kirigami.Theme.textColor
     }
     background: Rectangle {
-        Kirigami.Theme.colorSet: Kirigami.Theme.Window
-        color: Kirigami.Theme.alternateBackgroundColor
-        height: root.height / 22
-        radius: root.height / 72
-        Text {
-            text: "⌄"
-            font.pointSize: root.height / 48
-            anchors.right: parent.right
-            Kirigami.Theme.colorSet: Kirigami.Theme.Selection
-            color : Kirigami.Theme.textColor
-        }
-    }
+           implicitWidth: popupWidth
+           implicitHeight: parent.height
+           color: Kirigami.Theme.backgroundColor
+           radius: 5
+       }
+    indicator: Canvas {
+            id: canvas
+            x: groupSelect.width - width - groupSelect.rightPadding
+            y: groupSelect.topPadding + (groupSelect.availableHeight - height) / 2
+            width: 12
+            height: 8
+            contextType: "2d"
 
-    indicator: Rectangle { }
+            Connections {
+                target: groupSelect
+                function onPressedChanged() { canvas.requestPaint(); }
+            }
+
+            onPaint: {
+                context.reset();
+                context.moveTo(0, 0);
+                context.lineTo(width, 0);
+                context.lineTo(width / 2, height);
+                context.closePath();
+                context.fillStyle = groupSelect.pressed ? Kirigami.Theme.textColor : Kirigami.Theme.activeTextColor;
+                context.fill();
+            }
+        }
     delegate: ItemDelegate {
-        width: groupSelect.width
+        width: popupWidth
         contentItem: Text {
             id: delegateText
             text:modelData;
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            font.pointSize: root.height / 48
-            //Kirigami.Theme.colorSet: Kirigami.Theme.Selection
+            font.pointSize: popupFontSize
             color: Kirigami.Theme.textColor
         }
         hoverEnabled: true
@@ -70,24 +85,22 @@ ComboBox {
         }
         onHoveredChanged: {
             if (hovered) {
-                Kirigami.Theme.colorSet = Kirigami.Theme.Selection;
                 delegateText.color = Kirigami.Theme.activeTextColor
             }
             else {
-                Kirigami.Theme.colorSet = Kirigami.Theme.Window;
                 delegateText.color = Kirigami.Theme.textColor
             }
         }
     }
     popup: Popup {
         id: groupPopup
-        width: parent.width
+        width: popupWidth
         height: parent.height * parent.count
         implicitHeight: listview.contentHeight
         margins: 0
         background: Rectangle {
             color: Kirigami.Theme.alternateBackgroundColor
-            radius: root.height / 72
+            radius: Kirigami.Theme.defaultFont.pointSize
         }
         contentItem: ListView {
             id: listview
