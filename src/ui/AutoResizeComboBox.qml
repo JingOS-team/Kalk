@@ -38,7 +38,6 @@ ComboBox {
         color: Kirigami.Theme.textColor
     }
     background: Rectangle {
-           implicitWidth: popupWidth
            implicitHeight: parent.height
            color: Kirigami.Theme.backgroundColor
            radius: 5
@@ -95,7 +94,6 @@ ComboBox {
     popup: Popup {
         id: groupPopup
         width: popupWidth
-        height: parent.height * parent.count
         implicitHeight: listview.contentHeight
         margins: 0
         background: Rectangle {

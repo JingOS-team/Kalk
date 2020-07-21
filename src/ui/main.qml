@@ -64,32 +64,30 @@ Kirigami.ApplicationWindow {
             visible: false
             title: i18n("About")
             aboutData: {
-                "displayName": "Calculator",
+                "displayName": i18n("Calculator"),
                 "productName": "kirigami/calculator",
                 "componentName": "kalk",
-                "shortDescription": "A mobile friendly calculator built with Kirigami.",
-                "homepage": "",
-                "bugAddress": "",
-                "version": "0.1",
-                "otherText": "Kalk started as a fork of Liri calculator, many components have
-                been rewritten since then.",
-                "copyrightStatement": "© 2020 Plasma Development Team",
-                "desktopFileName": "org.kde.kalk",
+                "shortDescription": i18n("Calculator built with Kirigami."),
+                "homepage": "https://invent.kde.org/hanyoung/kalk",
+                "bugAddress": "https://invent.kde.org/hanyoung/kalk",
+                "version": "v0.1",
+                "otherText": "",
+                "copyrightStatement": i18n("© 2020 Plasma Development Team"),
+                "desktopFileName": "org.kde.calculator",
                 "authors": [
                             {
-                                "name": "cahfofpai",
-                                //"emailAddress": "",
+                                "name": i18n("Han Young"),
+                                "emailAddress": "hanyoung@protonmail.com",
                             },
                             {
-                                "name": "Han Young",
-                                "emailAddress": "hanyoung@protonmail.com",
+                                "name": i18n("Cahfofpai"),
                             }
                         ],
                 "licenses": [
                             {
-                                "name" : "GPL v3.0",
-                                //"text" : "https://fsf.org",
-                                "spdx" : "GPL-v3.0",
+                                "name": "GPL v3",
+                                "text": "long, boring, license text",
+                                "spdx": "GPL-v3.0",
                             }
                         ]
             }
