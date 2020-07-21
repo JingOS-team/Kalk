@@ -79,8 +79,10 @@ Kirigami.Page {
                             inputPad.expression = inputPad.expression.slice(0, inputPad.expression.length - 1);
                         else if(text == "longPressed")
                             inputPad.expression = "";
-                        else if(text == "=")
-                            historyManager.expression = inputPad.expression;
+                        else if(text == "="){
+                            historyManager.expression = inputPad.expression + "=" + result.text;
+                            inputPad.expression = ""
+                        }
                         else
                             inputPad.expression += text;
                     }

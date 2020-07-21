@@ -27,20 +27,23 @@ import org.kde.kirigami 2.12 as Kirigami
 
 Kirigami.ScrollablePage {
     title: i18n("History")
-    actions.main: Kirigami.Action {
-        onTriggered: historyManager.clearHistory()
-        enabled: listView.count !== 0
-        text: "Clear history"
-        icon.name: "edit-clear-history"
-    }
     Kirigami.PlaceholderMessage {
         anchors.centerIn: parent
         text: i18n("History is empty")
         visible: listView.count == 0
     }
-
+    RoundButton {
+        text: i18n("Clear History")
+        font.pointSize: Kirigami.Theme.defaultFont.pointSize * 2
+        width: Kirigami.Units.gridUnit * 6
+        height: width
+        anchors.bottom: parent.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        onClicked: historyManager.clearHistory();
+    }
     ListView{
         id: listView
+        Layout.fillWidth: true
         model: historyManager
         delegate: Kirigami.AbstractListItem {
             highlighted: false

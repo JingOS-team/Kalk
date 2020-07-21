@@ -38,11 +38,6 @@ Kirigami.ApplicationWindow {
     height: Kirigami.Units.gridUnit * 45
     width: Kirigami.Units.gridUnit * 27
 
-    property string history: ''
-
-    property string lastFormula
-    property string lastError
-    property int smallSpacing: 10
     Kirigami.SwipeNavigator {
         anchors.fill: parent
         CalculationPage {}
