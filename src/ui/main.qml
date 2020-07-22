@@ -75,7 +75,7 @@ Kirigami.ApplicationWindow {
                                 "emailAddress": "hanyoung@protonmail.com",
                             },
                             {
-                                "name": i18n("Cahfofpai"),
+                                "name": i18n("cahfofpai"),
                             }
                         ],
                 "licenses": [
