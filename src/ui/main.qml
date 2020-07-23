@@ -40,17 +40,18 @@ Kirigami.ApplicationWindow {
 
     Kirigami.SwipeNavigator {
         anchors.fill: parent
+        
         CalculationPage {}
-
-        UnitConversion {
-            icon.name: "gtk-convert"
-            id: unitConversion
-        }
 
         HistoryView {
             icon.name: "shallow-history"
             id: historyView
             visible: false
+        }
+        
+        UnitConversion {
+            icon.name: "gtk-convert"
+            id: unitConversion
         }
 
         Kirigami.AboutPage {
