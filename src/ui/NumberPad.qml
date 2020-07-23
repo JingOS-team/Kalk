@@ -28,8 +28,6 @@ GridLayout {
     signal pressed(string text)
     property bool pureNumber: false
     columns: pureNumber ? 3 : 4
-    Layout.fillHeight: true
-    Layout.fillWidth: true
     NumberButton {text: "7" ; onClicked: pressed(text);}
     NumberButton {text: "8" ; onClicked: pressed(text);}
     NumberButton {text: "9" ; onClicked: pressed(text);}

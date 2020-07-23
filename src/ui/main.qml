@@ -40,7 +40,6 @@ Kirigami.ApplicationWindow {
 
     Kirigami.SwipeNavigator {
         anchors.fill: parent
-        
         CalculationPage {}
 
         HistoryView {

@@ -25,11 +25,10 @@
 import QtQuick 2.7
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1 as Controls
-import Qt.labs.platform 1.0
-import Qt.labs.settings 1.0
 import org.kde.kirigami 2.13 as Kirigami
 
 Kirigami.Page {
+    readonly property bool inPortrait: initialPage.width < initialPage.height
     icon.name: "accessories-calculator"
     id: initialPage
     title: i18n("Calculator")
@@ -61,33 +60,43 @@ Kirigami.Page {
             Layout.fillWidth: true
         }
         Rectangle {
+            property string expression: ""
+            id: inputPad
             Layout.fillHeight: true
-            Layout.fillWidth: true
+            Layout.preferredWidth: inPortrait? initialPage.width : initialPage.width * 0.5
+            Layout.alignment: Qt.AlignRight
             Kirigami.Theme.colorSet: Kirigami.Theme.View
             Kirigami.Theme.inherit: false
             color: Kirigami.Theme.backgroundColor
-            Layout.alignment: Qt.AlignBottom
-            Controls.SwipeView{
-                property string expression: ""
-                id: inputPad
-                width: parent.width
-                height: parent.height
-                NumberPad {
-                    id: numberPad
-                    onPressed: {
-                        if(text == "DEL")
-                            inputPad.expression = inputPad.expression.slice(0, inputPad.expression.length - 1);
-                        else if(text == "longPressed")
-                            inputPad.expression = "";
-                        else if(text == "="){
-                            historyManager.expression = inputPad.expression + "=" + result.text;
-                            inputPad.expression = ""
-                        }
-                        else
-                            inputPad.expression += text;
+            NumberPad {
+                id: numberPad
+                anchors.fill: parent
+                onPressed: {
+                    if(text == "DEL")
+                        inputPad.expression = inputPad.expression.slice(0, inputPad.expression.length - 1);
+                    else if(text == "longPressed")
+                        inputPad.expression = "";
+                    else if(text == "="){
+                        historyManager.expression = inputPad.expression + "=" + result.text;
+                        inputPad.expression = ""
                     }
+                    else
+                        inputPad.expression += text;
                 }
+            }
+            Controls.Drawer {
+                parent: initialPage
+                y: initialPage.height - inputPad.height
+                height: inputPad.height
+                width: inPortrait? initialPage.width * 0.8 : initialPage.width * 0.5
+                modal: inPortrait
+                interactive: inPortrait
+                position: inPortrait ? 0 : 1
+                visible: !inPortrait
                 FunctionPad {
+                    height: inputPad.height
+                    width: parent.width
+                    anchors.bottom: parent.Bottom
                     id: functionPad
                     onPressed: inputPad.expression += text;
                 }

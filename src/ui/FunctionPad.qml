@@ -27,8 +27,6 @@ import QtQuick.Layouts 1.1
 GridLayout {
     signal pressed(string text)
     columns: 3
-    Layout.fillHeight: true
-    Layout.fillWidth: true
     NumberButton {text: "sin(" ; onClicked: pressed(text);}
     NumberButton {text: "cos(" ; onClicked: pressed(text);}
     NumberButton {text: "tan(" ; onClicked: pressed(text);}
