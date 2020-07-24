@@ -26,6 +26,7 @@ import QtQuick 2.7
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1 as Controls
 import org.kde.kirigami 2.13 as Kirigami
+import QtGraphicalEffects 1.15
 
 Kirigami.Page {
     readonly property bool inPortrait: initialPage.width < initialPage.height
@@ -64,7 +65,7 @@ Kirigami.Page {
             id: inputPad
             Layout.fillHeight: true
             Layout.preferredWidth: inPortrait? initialPage.width : initialPage.width * 0.5
-            Layout.alignment: Qt.AlignRight
+            Layout.alignment: Qt.AlignLeft
             Kirigami.Theme.colorSet: Kirigami.Theme.View
             Kirigami.Theme.inherit: false
             color: Kirigami.Theme.backgroundColor
@@ -84,15 +85,18 @@ Kirigami.Page {
                         inputPad.expression += text;
                 }
             }
+
             Controls.Drawer {
                 parent: initialPage
                 y: initialPage.height - inputPad.height
                 height: inputPad.height
                 width: inPortrait? initialPage.width * 0.8 : initialPage.width * 0.5
                 modal: inPortrait
+                dragMargin: Kirigami.Units.gridUnit * 2
                 interactive: inPortrait
                 position: inPortrait ? 0 : 1
                 visible: !inPortrait
+                edge: Qt.RightEdge
                 FunctionPad {
                     height: inputPad.height
                     width: parent.width

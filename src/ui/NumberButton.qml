@@ -34,11 +34,13 @@ Item {
     signal clicked(string text)
 
     property string text
+    property alias backgroundColor: background.color
+    property alias textColor: main.color
     property string display
-    property string subdisplay
     property bool special: false
 
     Rectangle {
+        id: background
         anchors.fill: parent
         z: -1
         color: Kirigami.Theme.highlightColor
@@ -72,17 +74,8 @@ Item {
             id: main
 
             font.pointSize: Kirigami.Units.gridUnit * 2
-            text: root.display || root.text
+            text: root.display == ""? root.text : root.display
             opacity: special ? 0.4 : 1.0
-            Layout.minimumWidth: parent.width
-            horizontalAlignment: Text.AlignHCenter
-        }
-
-        Controls.Label {
-            id: longHold
-
-            text: root.subdisplay
-            opacity: 0.4
             Layout.minimumWidth: parent.width
             horizontalAlignment: Text.AlignHCenter
         }
