@@ -85,23 +85,40 @@ Kirigami.Page {
                         inputPad.expression += text;
                 }
             }
+            Rectangle {
+                id: drawerIndicator
+                visible: inPortrait
+                height: inputPad.height
+                width: Kirigami.Units.gridUnit * 1.5
+                radius: 5
+                x: parent.width - this.width + this.radius
+                color: Kirigami.Theme.textColor
+                Rectangle {
+                    anchors.centerIn: parent
+                    height: parent.height / 20
+                    width: parent.width / 5
+                    radius: 3
+                    color: Kirigami.Theme.activeTextColor
+                }
+            }
 
             Controls.Drawer {
+                id: functionDrawer
                 parent: initialPage
                 y: initialPage.height - inputPad.height
                 height: inputPad.height
                 width: inPortrait? initialPage.width * 0.8 : initialPage.width * 0.5
                 modal: inPortrait
-                dragMargin: Kirigami.Units.gridUnit * 2
+                dragMargin: Kirigami.Units.gridUnit * 1.5
                 interactive: inPortrait
                 position: inPortrait ? 0 : 1
                 visible: !inPortrait
                 edge: Qt.RightEdge
+                onXChanged: drawerIndicator.x = this.x - drawerIndicator.width + drawerIndicator.radius
                 FunctionPad {
                     height: inputPad.height
                     width: parent.width
                     anchors.bottom: parent.Bottom
-                    id: functionPad
                     onPressed: inputPad.expression += text;
                 }
             }

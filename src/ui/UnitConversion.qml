@@ -91,15 +91,13 @@ Kirigami.Page {
             }
 
             RowLayout {
-                Controls.TextField {
+                Controls.Label {
                     id: output
                     Layout.preferredHeight: Kirigami.Units.gridUnit * 3
                     Layout.preferredWidth: parent.width * 0.4
                     font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.5
-                    readOnly: true
                     Kirigami.Theme.colorSet: Kirigami.Theme.Selection
                     color: Kirigami.Theme.activeTextColor
-                    validator: DoubleValidator{}
                 }
                 AutoResizeComboBox {
                     id: toComboBox
@@ -119,6 +117,12 @@ Kirigami.Page {
                 }
             }
         }
+    }
+
+
+    Kirigami.Separator {
+        width: parent.width
+        anchors.bottom: unitNumberPad.top
     }
     NumberPad {
         id: unitNumberPad

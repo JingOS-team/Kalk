@@ -107,7 +107,7 @@ ComboBox {
             boundsBehavior: Flickable.StopAtBounds
             highlight: Rectangle {
                 Kirigami.Theme.colorSet: Kirigami.Theme.Selection
-                color: Kirigami.Theme.activeBackgroundColor
+                color: Kirigami.Theme.alternateBackgroundColor
             }
             spacing: 0
             highlightFollowsCurrentItem: true
