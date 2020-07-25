@@ -33,14 +33,18 @@ Kirigami.ScrollablePage {
         visible: listView.count == 0
     }
     RoundButton {
-        text: i18n("Clear History")
-        font.pointSize: Kirigami.Theme.defaultFont.pointSize * 2
-        width: Kirigami.Units.gridUnit * 6
+        Kirigami.Icon {
+            anchors.fill: parent
+            source: "edit-clear-history"
+        }
+        width: Kirigami.Units.gridUnit * 4
+        anchors.bottomMargin: Kirigami.Units.gridUnit
         height: width
         anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
         onClicked: historyManager.clearHistory();
     }
+
     ListView{
         id: listView
         Layout.fillWidth: true

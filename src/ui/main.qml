@@ -49,7 +49,7 @@ Kirigami.ApplicationWindow {
         }
         
         UnitTypeGrid {
-            icon.name: "gtk-convert"
+            icon.name: "media-playlist-repeat"
             id: unitConversion
         }
 

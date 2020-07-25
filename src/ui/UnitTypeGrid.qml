@@ -34,7 +34,7 @@ Kirigami.ScrollablePage {
         anchors.fill: parent
         topMargin: Kirigami.Units.gridUnit
         model: typeModel
-        spacing: 10
+        spacing: Kirigami.Units.gridUnit
         anchors.horizontalCenter: parent.horizontalCenter
         delegate: Rectangle {
             color: Kirigami.Theme.highlightColor
