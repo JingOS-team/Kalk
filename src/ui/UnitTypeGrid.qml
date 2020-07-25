@@ -72,7 +72,7 @@ Kirigami.ScrollablePage {
     }
     UnitConversionDrawer {
         id: drawer
-        y: parent.height - typeView.height
+        y: Kirigami.Settings.isMobile ? 0 : parent.height - typeView.height
         height: root.height
         width: parent.width * 0.9
     }
