@@ -4,10 +4,10 @@
         <file>ui/qmldir</file>
         <file>ui/NumberPad.qml</file>
         <file>ui/HistoryView.qml</file>
-        <file>ui/UnitConversion.qml</file>
-        <file>ui/AutoResizeComboBox.qml</file>
         <file>ui/NumberButton.qml</file>
         <file>ui/CalculationPage.qml</file>
         <file>ui/FunctionPad.qml</file>
+        <file>ui/UnitTypeGrid.qml</file>
+        <file>ui/UnitConversionDrawer.qml</file>
     </qresource>
 </RCC>

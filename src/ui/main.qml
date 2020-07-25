@@ -48,7 +48,7 @@ Kirigami.ApplicationWindow {
             visible: false
         }
         
-        UnitConversion {
+        UnitTypeGrid {
             icon.name: "gtk-convert"
             id: unitConversion
         }

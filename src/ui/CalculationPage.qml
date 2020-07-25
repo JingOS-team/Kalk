@@ -26,7 +26,6 @@ import QtQuick 2.7
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1 as Controls
 import org.kde.kirigami 2.13 as Kirigami
-import QtGraphicalEffects 1.15
 
 Kirigami.Page {
     readonly property bool inPortrait: initialPage.width < initialPage.height
@@ -92,13 +91,13 @@ Kirigami.Page {
                 width: Kirigami.Units.gridUnit * 1.5
                 radius: 5
                 x: parent.width - this.width + this.radius
-                color: Kirigami.Theme.textColor
+                color: Kirigami.Theme.highlightColor
                 Rectangle {
                     anchors.centerIn: parent
                     height: parent.height / 20
-                    width: parent.width / 5
+                    width: parent.width / 4
                     radius: 3
-                    color: Kirigami.Theme.activeTextColor
+                    color: Kirigami.Theme.textColor
                 }
             }
 

@@ -46,7 +46,7 @@ GridLayout {
     NumberButton {text: "÷" ; onClicked: pressed(text); special: true; visible: !pureNumber}
     NumberButton {text: "(" ; onClicked: pressed(text); special: true; visible: !pureNumber}
     NumberButton {text: ")" ; onClicked: pressed(text); special: true; visible: !pureNumber}
-    NumberButton {text: "DEL" ; onClicked: pressed(text); special: true;}
+    NumberButton {text: "DEL"; display: "⌫"; onClicked: pressed(text); special: true;}
     NumberButton {text: "=" ; onClicked: pressed(text); special: true; visible: !pureNumber}
 }
 
