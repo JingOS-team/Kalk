@@ -34,7 +34,6 @@ Kirigami.ApplicationWindow {
     id: root
     title: 'Kalk'
     visible: true
-    controlsVisible: false
     height: Kirigami.Units.gridUnit * 45
     width: Kirigami.Units.gridUnit * 27
 
