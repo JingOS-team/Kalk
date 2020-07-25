@@ -32,15 +32,36 @@ Controls.Drawer {
     property alias outputText: output.text
     property alias from: fromComboBox
     property alias to: toComboBox
+    id: root
     ColumnLayout {
         anchors.fill: parent
-        Controls.Label {
-            id: headerLabel
-            text: "Acceleration"
-            leftPadding: Kirigami.Units.largeSpacing
-            font.pointSize: Kirigami.Theme.defaultFont.pointSize * 3
+        RowLayout {
             Layout.alignment: Qt.AlignTop
+            Layout.preferredWidth: parent.width
+            Controls.Label {
+                id: headerLabel
+                text: "Acceleration"
+                leftPadding: Kirigami.Units.largeSpacing
+                font.pointSize: Kirigami.Theme.defaultFont.pointSize * 3
+            }
+            Kirigami.Icon {
+                width: Kirigami.Units.gridUnit * 3
+                height: width
+                Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                source: "window-close-symbolic"
+                MouseArea {
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    onClicked: {
+                        root.close()
+                    }
+                    onEntered: parent.opacity = 0.6
+                    onExited: parent.opacity = 1
+
+                }
+            }
         }
+
         Kirigami.Separator{
             Layout.fillWidth: true
         }
