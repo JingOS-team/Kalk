@@ -1,6 +1,7 @@
 /*
  * This file is part of Kalk
  * Copyright (C) 2020 Han Young <hanyoung@protonmail.com>
+ *                    cahfofpai
  *
  *
  * $BEGIN_LICENSE:GPL3+$
@@ -32,17 +33,12 @@ Kirigami.ScrollablePage {
         text: i18n("History is empty")
         visible: listView.count == 0
     }
-    RoundButton {
-        Kirigami.Icon {
-            anchors.fill: parent
-            source: "edit-clear-history"
+    actions {
+        main: Kirigami.Action {
+            iconName: "edit-clear-history"
+            text: i18n("Clear history")
+            onTriggered: historyManager.clearHistory();
         }
-        width: Kirigami.Units.gridUnit * 4
-        anchors.bottomMargin: Kirigami.Units.gridUnit
-        height: width
-        anchors.bottom: parent.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
-        onClicked: historyManager.clearHistory();
     }
 
     ListView{
