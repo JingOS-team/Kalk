@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>ui/main.qml</file>
-        <file>ui/qmldir</file>
         <file>ui/NumberPad.qml</file>
         <file>ui/HistoryView.qml</file>
         <file>ui/NumberButton.qml</file>
