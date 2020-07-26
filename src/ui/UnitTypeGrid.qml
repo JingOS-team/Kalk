@@ -28,36 +28,29 @@ import org.kde.kirigami 2.13 as Kirigami
 
 Kirigami.ScrollablePage {
     title: i18n("Units Converter")
-    id: root
     ListView {
         id: typeView
         anchors.fill: parent
         topMargin: Kirigami.Units.gridUnit
         model: typeModel
         spacing: Kirigami.Units.gridUnit
-        anchors.horizontalCenter: parent.horizontalCenter
-        delegate: Rectangle {
-            color: Kirigami.Theme.highlightColor
-            width: root.width * 0.8
-            height: Kirigami.Units.gridUnit * 3
-            radius: 5
-            opacity: mouse.pressed ? 0.4 : 1
-            anchors.horizontalCenter: parent.horizontalCenter
-            Behavior on opacity {
-                OpacityAnimator {
-                    duration: Kirigami.Units.longDuration
-                    easing.type: Easing.InOutQuad
-                }
-            }
-            Text {
+        anchors.right: parent.right
+        delegate: Kirigami.AbstractCard {
+            id: listItem
+            width: root.inPortrait ? parent.width * 0.9 : (parent.width - drawer.width) * 0.9
+            anchors.right: parent.right
+            anchors.rightMargin: root.inPortrait ? parent.width * 0.05 : (parent.width - drawer.width) * 0.05
+            contentItem: Text {
                 text: name
-                anchors.centerIn: parent
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                elide: Text.ElideRight
                 font.pointSize: Kirigami.Theme.defaultFont.pointSize * 2
-                color: Kirigami.Theme.textColor
             }
             MouseArea {
                 id: mouse
                 anchors.fill: parent
+                hoverEnabled: true
                 onClicked: {
                     drawer.inputText = "";
                     drawer.outputText = "0";
@@ -67,14 +60,25 @@ Kirigami.ScrollablePage {
                     drawer.header = modelData;
                     drawer.open();
                 }
+                onEntered: {
+                    listItem.highlighted = true;
+                }
+                onExited: {
+                    listItem.highlighted = false;
+                }
             }
         }
     }
     UnitConversionDrawer {
         id: drawer
+        parent: parent
         dragMargin: 0
         y: Kirigami.Settings.isMobile ? 0 : parent.height - typeView.height
         height: root.height
-        width: parent.width
+        width: root.inPortrait ? parent.width : parent.width / 2
+        interactive: root.inPortrait
+        position: root.inPortrait ? 0 : 1
+        visible: !root.inPortrait
+        modal: root.inPortrait
     }
 }

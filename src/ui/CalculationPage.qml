@@ -28,7 +28,6 @@ import QtQuick.Controls 2.1 as Controls
 import org.kde.kirigami 2.13 as Kirigami
 
 Kirigami.Page {
-    readonly property bool inPortrait: initialPage.width < initialPage.height
     icon.name: "accessories-calculator"
     id: initialPage
     title: i18n("Calculator")
@@ -63,7 +62,7 @@ Kirigami.Page {
             property string expression: ""
             id: inputPad
             Layout.fillHeight: true
-            Layout.preferredWidth: inPortrait? initialPage.width : initialPage.width * 0.5
+            Layout.preferredWidth: root.inPortrait? initialPage.width : initialPage.width * 0.5
             Layout.alignment: Qt.AlignLeft
             Kirigami.Theme.colorSet: Kirigami.Theme.View
             Kirigami.Theme.inherit: false
@@ -86,7 +85,7 @@ Kirigami.Page {
             }
             Rectangle {
                 id: drawerIndicator
-                visible: inPortrait
+                visible: root.inPortrait
                 height: inputPad.height
                 width: Kirigami.Units.gridUnit * 1.5
                 radius: 5
@@ -106,12 +105,12 @@ Kirigami.Page {
                 parent: initialPage
                 y: initialPage.height - inputPad.height
                 height: inputPad.height
-                width: inPortrait? initialPage.width * 0.8 : initialPage.width * 0.5
-                modal: inPortrait
+                width: root.inPortrait? initialPage.width * 0.8 : initialPage.width * 0.5
+                modal: root.inPortrait
                 dragMargin: Kirigami.Units.gridUnit * 1.5
-                interactive: inPortrait
-                position: inPortrait ? 0 : 1
-                visible: !inPortrait
+                interactive: root.inPortrait
+                position: root.inPortrait ? 0 : 1
+                visible: !root.inPortrait
                 edge: Qt.RightEdge
                 onXChanged: drawerIndicator.x = this.x - drawerIndicator.width + drawerIndicator.radius
                 FunctionPad {

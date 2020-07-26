@@ -36,7 +36,7 @@ Kirigami.ApplicationWindow {
     visible: true
     height: Kirigami.Units.gridUnit * 45
     width: Kirigami.Units.gridUnit * 27
-
+    readonly property bool inPortrait: root.width < root.height
     Kirigami.SwipeNavigator {
         anchors.fill: parent
         CalculationPage {}
