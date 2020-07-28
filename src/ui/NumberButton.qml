@@ -61,7 +61,7 @@ Item {
         onClicked: root.clicked(parent.text)
 
         onPressAndHold: {
-                root.clicked("longPressed");
+                root.clicked("longPressed" + parent.text);
         }
     }
 

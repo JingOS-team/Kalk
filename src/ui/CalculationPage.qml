@@ -74,9 +74,10 @@ Kirigami.Page {
                 onPressed: {
                     if(text == "DEL")
                         inputPad.expression = inputPad.expression.slice(0, inputPad.expression.length - 1);
-                    else if(text == "longPressed")
-                        inputPad.expression = "";
-                    else if(text == "="){
+                    else if(text.indexOf("longPressed")==0) {
+                        if(text == "longPressedDEL")
+                            inputPad.expression = "";
+                    } else if(text == "="){
                         historyManager.expression = inputPad.expression + "=" + result.text;
                         inputPad.expression = ""
                     }
