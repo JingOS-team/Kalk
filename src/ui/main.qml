@@ -37,6 +37,22 @@ Kirigami.ApplicationWindow {
     height: Kirigami.Units.gridUnit * 45
     width: Kirigami.Units.gridUnit * 27
     readonly property bool inPortrait: root.width < root.height
+    Connections {
+        target: Qt.application
+        function onStateChanged() {
+            if(Qt.application.state === Qt.ApplicationActive)
+            {
+                console.log("active");
+            }
+            else if(Qt.application.state === Qt.ApplicationInactive)
+                console.log("inactive")
+            else if(Qt.application.state === Qt.ApplicationSuspended)
+                console.log("suspened")
+            else if(Qt.application.state === Qt.ApplicationHidden)
+                console.log("hidden")
+        }
+    }
+
     Kirigami.SwipeNavigator {
         anchors.fill: parent
         CalculationPage {}
@@ -46,7 +62,7 @@ Kirigami.ApplicationWindow {
             id: historyView
             visible: false
         }
-        
+
         UnitTypeGrid {
             icon.name: "media-playlist-repeat"
             id: unitConversion
@@ -62,8 +78,8 @@ Kirigami.ApplicationWindow {
                 "productName": "kirigami/calculator",
                 "componentName": "kalk",
                 "shortDescription": i18n("Calculator built with Kirigami."),
-                "homepage": "https://invent.kde.org/hanyoung/kalk",
-                "bugAddress": "https://invent.kde.org/hanyoung/kalk",
+                "homepage": "https://invent.kde.org/plasma-mobile/kalk",
+                "bugAddress": "https://invent.kde.org/plasma-mobile/kalk",
                 "version": "v0.1",
                 "otherText": "",
                 "copyrightStatement": i18n("© 2020 Plasma Development Team"),

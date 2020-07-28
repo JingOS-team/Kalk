@@ -41,6 +41,7 @@ Kirigami.Page {
             id: expressionRow
             Layout.alignment: Qt.AlignTop
             Layout.fillWidth: true
+            horizontalAlignment: Text.AlignRight
             font.pointSize: Kirigami.Units.gridUnit * 2
             text: inputPad.expression
             onTextChanged: {

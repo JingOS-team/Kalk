@@ -84,7 +84,7 @@ Controls.Drawer {
                         Layout.fillWidth: true
                         Controls.Label {
                             id: input
-                            Layout.alignment: Qt.AlignHCenter
+                            Layout.alignment: Qt.AlignLeft
                             font.pointSize: Kirigami.Theme.defaultFont.pointSize * 2
                             onTextChanged: {
                                 console.log(unitNumberPad.expression);
@@ -125,7 +125,7 @@ Controls.Drawer {
                         Layout.fillWidth: true
                         Controls.Label {
                             id: output
-                            Layout.alignment: Qt.AlignHCenter
+                            Layout.alignment: Qt.AlignLeft
                             font.pointSize: Kirigami.Theme.defaultFont.pointSize * 2
                             text: "0"
                         }
