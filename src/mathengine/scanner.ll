@@ -101,9 +101,7 @@
   make_NUMBER (const std::string &s, const yy::parser::location_type& loc);
 %}
 
-id    [a-zA-Z][a-zA-Z_0-9]*
 double   -?[0-9]+|[0-9]+"."[0-9]+
-blank [ \t\r]
 
 %{
   // Code run each time a pattern is matched.
@@ -116,8 +114,6 @@ blank [ \t\r]
   // Code run each time yylex is called.
   loc.step ();
 %}
-{blank}+   loc.step ();
-\n+        loc.lines (yyleng); loc.step ();
 
 "-"        return yy::parser::make_MINUS  (loc);
 "+"        return yy::parser::make_PLUS   (loc);
@@ -136,14 +132,9 @@ blank [ \t\r]
 "π"      return yy::parser::make_NUMBER (3.14159265358, loc);
 "e"      return yy::parser::make_NUMBER (2.71828182845, loc);
 "%"      return yy::parser::make_PERCENTAGE (loc);
-":="       return yy::parser::make_ASSIGN (loc);
+"="       loc.step ();
 
 {double}      return make_NUMBER (yytext, loc);
-{id}       return yy::parser::make_IDENTIFIER (yytext, loc);
-.          {
-             throw yy::parser::syntax_error
-               (loc, "invalid character: " + std::string(yytext));
-}
 <<EOF>>    return yy::parser::make_YYEOF (loc);
 %%
 
@@ -159,9 +150,4 @@ void
 driver::scan_begin (std::string s)
 {
   yy_switch_to_buffer(yy_scan_string(s.c_str()));
-}
-
-void
-driver::scan_end ()
-{
 }

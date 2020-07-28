@@ -47,7 +47,6 @@ public:
 
     // Handling the scanner.
     void scan_begin(std::string s);
-    void scan_end();
     // Whether to generate scanner debug traces.
     bool trace_scanning;
     // The token's location used by the scanner.

@@ -52,7 +52,6 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(ECMPoQmTools)
 include(KDECompilerSettings NO_POLICY_SCOPE)
-kde_enable_exceptions()
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Quick Test Gui QuickControls2 Widgets)
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
         Config
