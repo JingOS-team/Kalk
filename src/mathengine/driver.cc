@@ -28,14 +28,12 @@ driver::driver()
     , trace_scanning(false)
 {
 }
-
 int driver::parse(const std::string expr)
 {
+    syntaxError_ = false;
     scan_begin(expr);
     yy::parser parse(*this);
     parse.set_debug_level(trace_parsing);
     int res = parse();
-    for(auto it: variables)
-        std::cout << it.first << " " << it.second << std::endl;
     return res;
 }

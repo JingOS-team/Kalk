@@ -93,7 +93,7 @@
 #endif
 %}
 
-%option noyywrap nounput noinput batch debug
+%option noyywrap nounput noinput batch
 
 %{
   // A number symbol corresponding to the value in S.

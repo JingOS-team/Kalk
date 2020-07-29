@@ -28,12 +28,16 @@ class MathEngine : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString result READ result NOTIFY resultChanged)
+    Q_PROPERTY(bool error READ error NOTIFY resultChanged)
 public:
     MathEngine();
     Q_INVOKABLE void parse(QString expr);
     inline QString result()
     {
         return result_;
+    };
+    inline bool error(){
+        return mDriver.syntaxError_;
     };
 signals:
     void resultChanged();

@@ -51,7 +51,6 @@
 
 %define api.token.prefix {TOK_}
 %token
-  ASSIGN  ":="
   MINUS   "-"
   PLUS    "+"
   STAR    "*"
@@ -76,11 +75,7 @@
 
 %%
 %start unit;
-unit: assignments exp  { drv.result = $2; };
-
-assignments:
-  %empty                 {}
-| assignments assignment {};
+unit: exp  { drv.result = $1; };
 
 %left "+" "-";
 %left "*" "/";
@@ -114,4 +109,6 @@ void
 yy::parser::error (const location_type& l, const std::string& m)
 {
   std::cerr << l << ": " << m << '\n';
+  if(m != "syntax error, unexpected end of file")
+    drv.syntaxError_ = true;
 }

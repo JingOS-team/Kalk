@@ -44,9 +44,6 @@ Kirigami.Page {
             horizontalAlignment: Text.AlignRight
             font.pointSize: Kirigami.Units.gridUnit * 2
             text: inputPad.expression
-            onTextChanged: {
-                mathEngine.parse(this.text);
-            }
         }
         Controls.Label {
             id: result
@@ -81,7 +78,7 @@ Kirigami.Page {
                         inputPad.expression = ""
                     }
                     else
-                        inputPad.expression += text;
+                        expressionAdd(text);
                 }
             }
             Rectangle {
@@ -118,9 +115,14 @@ Kirigami.Page {
                     height: inputPad.height
                     width: parent.width
                     anchors.bottom: parent.Bottom
-                    onPressed: inputPad.expression += text;
+                    onPressed: expressionAdd(text);
                 }
             }
         }
+    }
+    function expressionAdd(text){
+        mathEngine.parse(inputPad.expression + text);
+        if(!mathEngine.error)
+            inputPad.expression += text;
     }
 }

@@ -25,7 +25,6 @@
 #include "parser.hh"
 #include <map>
 #include <string>
-
 // Give Flex the prototype of yylex we want ...
 #define YY_DECL yy::parser::symbol_type yylex(driver &drv)
 // ... and declare it for the parser's sake.
@@ -36,7 +35,6 @@ class driver
 {
 public:
     driver();
-
     std::map<std::string, int> variables;
 
     double result;
@@ -51,5 +49,6 @@ public:
     bool trace_scanning;
     // The token's location used by the scanner.
     yy::location location;
+    bool syntaxError_ = false;
 };
 #endif // ! DRIVER_HH
