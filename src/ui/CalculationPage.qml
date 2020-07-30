@@ -37,20 +37,45 @@ Kirigami.Page {
     ColumnLayout {
         anchors.fill: parent
         spacing: 0
-        Controls.Label {
-            id: expressionRow
+        Rectangle {
+            Layout.fillWidth: true
             Layout.alignment: Qt.AlignTop
-            Layout.fillWidth: true
-            horizontalAlignment: Text.AlignRight
-            font.pointSize: Kirigami.Units.gridUnit * 2
-            text: inputPad.expression
+            Layout.preferredHeight: Kirigami.Units.gridUnit * 4
+            color: Kirigami.Theme.backgroundColor
+            Controls.Label {
+                id: expressionRow
+                anchors.right: parent.right
+                horizontalAlignment: Text.AlignRight
+                font.pointSize: Kirigami.Units.gridUnit * 2
+                text: inputPad.expression
+            }
         }
-        Controls.Label {
-            id: result
-            horizontalAlignment: Text.AlignRight
+        Rectangle {
             Layout.fillWidth: true
-            font.pointSize: Kirigami.Units.gridUnit * 3
-            text: mathEngine.result
+            Layout.alignment: Qt.AlignTop
+            Layout.preferredHeight: Kirigami.Units.gridUnit * 6
+            color: Kirigami.Theme.backgroundColor
+            Controls.Label {
+                id: result
+                anchors.right: parent.right
+                horizontalAlignment: Text.AlignRight
+                font.pointSize: Kirigami.Units.gridUnit * 3
+                text: mathEngine.result
+                NumberAnimation on opacity {
+                    id: resultFadeInAnimation
+                    from: 0.5
+                    to: 1
+                    duration: Kirigami.Units.shortDuration
+                }
+                NumberAnimation on opacity {
+                    id: resultFadeOutAnimation
+                    from: 1
+                    to: 0
+                    duration: Kirigami.Units.shortDuration
+                }
+
+                onTextChanged: resultFadeInAnimation.start()
+            }
         }
 
         Kirigami.Separator {
@@ -69,14 +94,17 @@ Kirigami.Page {
                 id: numberPad
                 anchors.fill: parent
                 onPressed: {
-                    if(text == "DEL")
+                    if(text == "DEL"){
                         inputPad.expression = inputPad.expression.slice(0, inputPad.expression.length - 1);
+                        expressionAdd("");
+                    }
                     else if(text.indexOf("longPressed")==0) {
                         if(text == "longPressedDEL")
                             inputPad.expression = "";
                     } else if(text == "="){
-                        historyManager.expression = inputPad.expression + "=" + result.text;
-                        inputPad.expression = ""
+                        historyManager.expression = inputPad.expression + " = " + result.text;
+                        inputPad.expression = mathEngine.result;
+                        resultFadeOutAnimation.start();
                     }
                     else
                         expressionAdd(text);
