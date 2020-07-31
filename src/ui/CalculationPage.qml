@@ -125,6 +125,10 @@ Kirigami.Page {
                     radius: 3
                     color: Kirigami.Theme.textColor
                 }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: functionDrawer.open()
+                }
             }
 
             Controls.Drawer {
@@ -134,11 +138,12 @@ Kirigami.Page {
                 height: inputPad.height
                 width: root.inPortrait? initialPage.width * 0.8 : initialPage.width * 0.5
                 modal: root.inPortrait
-                dragMargin: Kirigami.Units.gridUnit * 1.5
+                dragMargin: 0
                 interactive: root.inPortrait
                 position: root.inPortrait ? 0 : 1
                 visible: !root.inPortrait
                 edge: Qt.RightEdge
+                dim: false
                 onXChanged: drawerIndicator.x = this.x - drawerIndicator.width + drawerIndicator.radius
                 FunctionPad {
                     height: inputPad.height
