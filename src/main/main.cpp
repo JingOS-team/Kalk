@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("typeModel", typeModel);
     engine.rootContext()->setContextProperty("unitModel", unitModel);
     engine.rootContext()->setContextProperty("mathEngine", mathEngine);
-    KAboutData aboutData("kalk", "Calculator", "0.1", "Calculator in Kirigami", KAboutLicense::GPL, i18n("© 2020 KDE Community"));
+    KAboutData aboutData("kalk", i18n("Calculator"), "0.1", i18n("Calculator in Kirigami"), KAboutLicense::GPL, i18n("© 2020 KDE Community"));
     KAboutData::setApplicationData(aboutData);
 
 #ifdef QT_DEBUG
