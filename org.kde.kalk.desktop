@@ -1,6 +1,14 @@
 [Desktop Entry]
 Name=Calculator
+Name[es]=Calculadora
+Name[pt_BR]=Calculadora
+Name[uk]=Калькулятор
+Name[x-test]=xxCalculatorxx
 Comment=A Calculator in Kirigami.
+Comment[es]=Una calculadora en Kirigami.
+Comment[pt_BR]=Uma calculadora feito com o Kirigami.
+Comment[uk]=Калькулятор на Kirigami.
+Comment[x-test]=xxA Calculator in Kirigami.xx
 Version=1.0
 Exec=kalk
 Icon=kalk
