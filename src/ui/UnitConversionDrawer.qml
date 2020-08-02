@@ -74,6 +74,7 @@ Controls.Drawer {
                 Layout.fillWidth: true
                 Layout.leftMargin: Kirigami.Units.gridUnit
                 Layout.rightMargin: Kirigami.Units.gridUnit
+                Layout.bottomMargin: Kirigami.Units.gridUnit * 2
                 RowLayout {
                     Layout.fillWidth: true
                     Controls.Label {
@@ -112,6 +113,7 @@ Controls.Drawer {
                     }
                 }
             }
+
             ColumnLayout {
                 Layout.fillWidth: true
                 Layout.leftMargin: Kirigami.Units.gridUnit
@@ -155,13 +157,13 @@ Controls.Drawer {
             NumberPad {
                 id: unitNumberPad
                 pureNumber: true
-                height: parent.height * 0.5
-                width: parent.width
+                //height: parent.height * 0.4
+                //width: parent.width
                 Layout.alignment: Qt.AlignBottom
                 onPressed: {
                     if(text == "DEL")
                         input.text = input.text.slice(0, input.text.length - 1);
-                    else if(text == "longPressed")
+                    else if(text == "longPressedDEL")
                         input.text = "";
                     else
                         input.text += text;

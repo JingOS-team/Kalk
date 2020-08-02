@@ -54,6 +54,7 @@ Kirigami.ApplicationWindow {
     }
 
     Kirigami.SwipeNavigator {
+        id: navigator
         anchors.fill: parent
         CalculationPage {}
 

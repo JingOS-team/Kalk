@@ -74,7 +74,7 @@ Kirigami.ScrollablePage {
         parent: parent
         dragMargin: 0
         y: Kirigami.Settings.isMobile ? 0 : parent.height - typeView.height
-        height: root.height
+        height: parent.height
         width: root.inPortrait ? parent.width : parent.width / 2
         interactive: root.inPortrait
         position: root.inPortrait ? 0 : 1
