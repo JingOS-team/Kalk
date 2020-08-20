@@ -22,7 +22,7 @@
  */
 #ifndef MATHENGINE_H
 #define MATHENGINE_H
-#include "../mathengine/driver.hh"
+#include "mathengine/driver.hh"
 #include <QObject>
 class MathEngine : public QObject
 {
@@ -30,13 +30,13 @@ class MathEngine : public QObject
     Q_PROPERTY(QString result READ result NOTIFY resultChanged)
     Q_PROPERTY(bool error READ error NOTIFY resultChanged)
 public:
-    MathEngine();
     Q_INVOKABLE void parse(QString expr);
     inline QString result()
     {
         return result_;
     };
-    inline bool error(){
+    inline bool error()
+    {
         return mDriver.syntaxError_;
     };
 signals:

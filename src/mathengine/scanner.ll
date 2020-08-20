@@ -101,7 +101,7 @@
   make_NUMBER (const std::string &s, const yy::parser::location_type& loc);
 %}
 
-double   -?[0-9]+|[0-9]+"."[0-9]+
+double   [0-9]+|[0-9]+"."[0-9]+
 
 %{
   // Code run each time a pattern is matched.

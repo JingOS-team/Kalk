@@ -21,11 +21,11 @@
 #
 #  $END_LICENSE$
 set(kalk_SRCS
-    main/main.cpp
-    main/historymanager.cpp
-    main/unitmodel.cpp
-    main/typemodel.cpp
-    main/mathengine.cpp
+    main.cpp
+    historymanager.cpp
+    unitmodel.cpp
+    typemodel.cpp
+    mathengine.cpp
     mathengine/parser.cc
     mathengine/scanner.cc
     mathengine/driver.cc

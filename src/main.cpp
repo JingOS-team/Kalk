@@ -62,11 +62,8 @@ int main(int argc, char *argv[])
 #else
     engine.rootContext()->setContextProperty(QStringLiteral("debug"), false);
 #endif
-    // setup qml imports
-    engine.addImportPath(QStringLiteral("qrc:/"));
-
     // load main ui
-    engine.load(QUrl(QStringLiteral("qrc:/ui/main.qml")));
+    engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 
     return app.exec();
 }

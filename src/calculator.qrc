@@ -1,12 +1,12 @@
 <RCC>
     <qresource prefix="/">
-        <file>ui/main.qml</file>
-        <file>ui/NumberPad.qml</file>
-        <file>ui/HistoryView.qml</file>
-        <file>ui/NumberButton.qml</file>
-        <file>ui/CalculationPage.qml</file>
-        <file>ui/FunctionPad.qml</file>
-        <file>ui/UnitTypeGrid.qml</file>
-        <file>ui/UnitConversionDrawer.qml</file>
+        <file>qml/main.qml</file>
+        <file>qml/NumberPad.qml</file>
+        <file>qml/HistoryView.qml</file>
+        <file>qml/NumberButton.qml</file>
+        <file>qml/CalculationPage.qml</file>
+        <file>qml/FunctionPad.qml</file>
+        <file>qml/UnitTypeGrid.qml</file>
+        <file>qml/UnitConversionDrawer.qml</file>
     </qresource>
 </RCC>

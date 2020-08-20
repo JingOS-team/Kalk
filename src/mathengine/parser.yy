@@ -70,6 +70,7 @@
 
 %token <double> NUMBER "number"
 %nterm <double> exp
+%nterm <double> factor
 
 %printer { yyo << $$; } <*>;
 
@@ -80,13 +81,12 @@ unit: exp  { drv.result = $1; };
 %left "+" "-";
 %left "*" "/";
 exp:
-  "number"
+  factor
 | exp "+" exp   { $$ = $1 + $3; }
 | exp "-" exp   { $$ = $1 - $3; }
 | exp exp       { $$ = $1 + $2; }
 | exp "*" exp   { $$ = $1 * $3; }
 | exp "/" exp   { $$ = $1 / $3; }
-| "(" exp ")"   { $$ = $2; }
 | exp "^" exp   { $$ = pow($1, $3); }
 | "SIN" "(" exp     { $$ = sin($3); }
 | "SIN" "(" exp ")" { $$ = sin($3); }
@@ -102,7 +102,16 @@ exp:
 | "LOG2" "(" exp ")" { $$ = log2($3); }
 | "SQUAREROOT" "(" exp   { $$ = sqrt($3); }
 | "SQUAREROOT" "(" exp ")"  { $$ = sqrt($3); }
-| exp "%" { $$ = $1 / 100; }
+;
+
+factor: "(" exp ")" { $$ = $2; }
+| "(" exp      { $$ = $2; }
+| "number"
+| "-" "number" { $$ = -$2; }
+| "+" "number" { $$ = $2; }
+| factor "%" { $$ = $1 / 100; }
+;
+    
 %%
 
 void

@@ -21,7 +21,6 @@
  * $END_LICENSE$
  */
 #include "mathengine.h"
-MathEngine::MathEngine() {};
 
 void MathEngine::parse(QString expr)
 {
