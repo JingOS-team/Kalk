@@ -32,7 +32,7 @@ UnitModel::UnitModel()
 }
 QVariant UnitModel::data(const QModelIndex &index, int role) const
 {
-    return i18n(units_.at(index.row()).description().toLatin1());
+    return units_.at(index.row()).description();
 }
 
 int UnitModel::rowCount(const QModelIndex &parent) const
