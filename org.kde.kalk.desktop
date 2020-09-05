@@ -2,6 +2,7 @@
 Name=Calculator
 Name[ca]=Calculadora
 Name[ca@valencia]=Calculadora
+Name[cs]=Kalkulačka
 Name[es]=Calculadora
 Name[fr]=Calculatrice
 Name[it]=Calcolatrice
@@ -16,6 +17,7 @@ Name[x-test]=xxCalculatorxx
 Comment=A Calculator in Kirigami.
 Comment[ca]=Una calculadora escrita en Kirigami.
 Comment[ca@valencia]=Una calculadora escrita en Kirigami.
+Comment[cs]=Kalkulačka v Kirigami.
 Comment[es]=Una calculadora en Kirigami.
 Comment[fr]=Une calculatrice dans Kirigami.
 Comment[it]=Una calcolatrice in Kirigami.
