@@ -1,14 +1,18 @@
-Kalk
-====
-### Kalk is a calculator application built with the [Kirigami framework](https://kde.org/products/kirigami/). Though mainly targeted to mobile platform, the UI/UX is also smooth on desktop.
+# Kalk <img src="kalk.png" width="40"/>
+Kalk is a convergent calculator application built with the [Kirigami framework](https://kde.org/products/kirigami/). Although it is mainly targeted for mobile platforms, it can also be used on the desktop.
 
-### Starting as a fork of [Liri calculator](https://github.com/lirios/calculator), Kalk went through heavy development, and we current share no code with Liri calculator.
+Originally starting as a fork of [Liri calculator](https://github.com/lirios/calculator), Kalk has gone through heavy development, and no longer shares the same codebase with Liri calculator.
 
-### features
-* basic calculation
-* history
-* unit conversion 
-* currency coversion
+## Features
+* Basic calculation
+* History
+* Unit conversion 
+* Currency conversion
+
+## Links
+* Project page: https://invent.kde.org/plasma-mobile/kalk
+* Issues: https://invent.kde.org/plasma-mobile/kalk/-/issues
+* Development channel: https://matrix.to/#/#plasmamobile:matrix.org
 
 ## Dependencies
 * Qt5 
@@ -19,7 +23,8 @@ Kalk
 * KConfig
 * GNU Bison
 * Flex
-## Build, Install
+
+## Building and Installing
 
 ```sh
 mkdir build
@@ -32,16 +37,4 @@ Replace `/path/to/prefix` to your installation prefix.
 Default is `/usr/local`.
 
 ## Licensing
-### GPL 3
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+GPLv3, see [this page](https://www.gnu.org/licenses/gpl-3.0.en.html).
