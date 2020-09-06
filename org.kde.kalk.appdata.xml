@@ -4,6 +4,7 @@
   <name>Calculator</name>
   <name xml:lang="ca">Calculadora</name>
   <name xml:lang="ca-valencia">Calculadora</name>
+  <name xml:lang="cs">Kalkulačka</name>
   <name xml:lang="es">Calculadora</name>
   <name xml:lang="fr">Calculatrice</name>
   <name xml:lang="it">Calcolatrice</name>
@@ -32,6 +33,7 @@
   <developer_name>KDE Community</developer_name>
   <developer_name xml:lang="ca">La comunitat KDE</developer_name>
   <developer_name xml:lang="ca-valencia">La comunitat KDE</developer_name>
+  <developer_name xml:lang="cs">Komunita KDE</developer_name>
   <developer_name xml:lang="es">Comunidad KDE</developer_name>
   <developer_name xml:lang="fr">Communauté KDE</developer_name>
   <developer_name xml:lang="it">© 2020 La comunità KDE</developer_name>
