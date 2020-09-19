@@ -11,6 +11,7 @@
   <name xml:lang="nl">Rekenmachine</name>
   <name xml:lang="pt">Calculadora</name>
   <name xml:lang="pt-BR">Calculadora</name>
+  <name xml:lang="ro">Calculator</name>
   <name xml:lang="sk">Kalkulačka</name>
   <name xml:lang="sl">Kalkulator</name>
   <name xml:lang="sv">Räknare</name>
@@ -25,6 +26,7 @@
   <summary xml:lang="nl">Een rekenmachine rijk aan mogelijkheden</summary>
   <summary xml:lang="pt">Uma calculadora rica em funcionalidades</summary>
   <summary xml:lang="pt-BR">Uma calculadora cheia de recursos</summary>
+  <summary xml:lang="ro">Calculator cu multe funcții</summary>
   <summary xml:lang="sk">Kalkulačka plná funkcií</summary>
   <summary xml:lang="sl">Kalkulator z veliko možnostmi</summary>
   <summary xml:lang="sv">En funktionsrik räknare</summary>
@@ -40,6 +42,7 @@
   <developer_name xml:lang="nl">KDE gemeenschap</developer_name>
   <developer_name xml:lang="pt">Comunidade do KDE</developer_name>
   <developer_name xml:lang="pt-BR">Comunidade KDE</developer_name>
+  <developer_name xml:lang="ro">Comunitatea KDE</developer_name>
   <developer_name xml:lang="sk">KDE komunita</developer_name>
   <developer_name xml:lang="sl">Skupnost KDE</developer_name>
   <developer_name xml:lang="sv">KDE-gemenskapen</developer_name>
@@ -55,6 +58,7 @@
     <p xml:lang="nl">Kalk is een krachtige rekenmachine ontworpen voor het mobiele platform.</p>
     <p xml:lang="pt">O Kalk é uma calculadora poderosa desenhada para plataformas móveis.</p>
     <p xml:lang="pt-BR">Kalk é uma poderosa calculadora desenhada para a plataforma móvel.</p>
+    <p xml:lang="ro">Kalk e un calculator puternic, proiectat pentru platforma mobilă.</p>
     <p xml:lang="sk">Kalk je silná kalkulačka zavrhnutá pre mobilnú platformu.</p>
     <p xml:lang="sl">Kalk je zmogljiv kalkulator zasnovan za mobilne platforme.</p>
     <p xml:lang="sv">Kalk är en kraftfull räknare konstruerad för mobilplattformar.</p>
