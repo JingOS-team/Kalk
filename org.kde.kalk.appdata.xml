@@ -5,6 +5,7 @@
   <name xml:lang="ca">Calculadora</name>
   <name xml:lang="ca-valencia">Calculadora</name>
   <name xml:lang="cs">Kalkulačka</name>
+  <name xml:lang="de">Calculator</name>
   <name xml:lang="en-GB">Calculator</name>
   <name xml:lang="es">Calculadora</name>
   <name xml:lang="fr">Calculatrice</name>
@@ -21,6 +22,7 @@
   <summary>A feature rich calculator</summary>
   <summary xml:lang="ca">Una calculadora rica en característiques</summary>
   <summary xml:lang="ca-valencia">Una calculadora rica en característiques</summary>
+  <summary xml:lang="de">Ein leistungsfähiger Rechner</summary>
   <summary xml:lang="en-GB">A feature rich calculator</summary>
   <summary xml:lang="es">Una calculadora con numerosas funciones</summary>
   <summary xml:lang="fr">Une calculatrice avec de nombreuses fonctionnalités.</summary>
@@ -38,6 +40,7 @@
   <developer_name xml:lang="ca">La comunitat KDE</developer_name>
   <developer_name xml:lang="ca-valencia">La comunitat KDE</developer_name>
   <developer_name xml:lang="cs">Komunita KDE</developer_name>
+  <developer_name xml:lang="de">KDE-Gemeinschaft</developer_name>
   <developer_name xml:lang="en-GB">KDE Community</developer_name>
   <developer_name xml:lang="es">Comunidad KDE</developer_name>
   <developer_name xml:lang="fr">Communauté KDE</developer_name>
@@ -55,6 +58,7 @@
     <p>Kalk is a powerful calculator designed for mobile platform.</p>
     <p xml:lang="ca">El Kalk és una potent calculadora dissenyada per a plataformes mòbils.</p>
     <p xml:lang="ca-valencia">El Kalk és una potent calculadora dissenyada per a plataformes mòbils.</p>
+    <p xml:lang="de">Kalk ist ein leistungsfähiger Rechner für Mobil-Plattformen.</p>
     <p xml:lang="en-GB">Kalk is a powerful calculator designed for mobile platform.</p>
     <p xml:lang="es">Kalk es una potente calculadora designada para la plataforma móvil.</p>
     <p xml:lang="fr">Kalk est une calculatrice puissante conçue pour les plateformes mobiles.</p>
