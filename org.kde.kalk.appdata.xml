@@ -10,6 +10,7 @@
   <name xml:lang="es">Calculadora</name>
   <name xml:lang="fr">Calculatrice</name>
   <name xml:lang="it">Calcolatrice</name>
+  <name xml:lang="ko">계산기</name>
   <name xml:lang="nl">Rekenmachine</name>
   <name xml:lang="pt">Calculadora</name>
   <name xml:lang="pt-BR">Calculadora</name>
@@ -27,6 +28,7 @@
   <summary xml:lang="es">Una calculadora con numerosas funciones</summary>
   <summary xml:lang="fr">Une calculatrice avec de nombreuses fonctionnalités.</summary>
   <summary xml:lang="it">Una calcolatrice ricca di funzionalità</summary>
+  <summary xml:lang="ko">다기능 계산기</summary>
   <summary xml:lang="nl">Een rekenmachine rijk aan mogelijkheden</summary>
   <summary xml:lang="pt">Uma calculadora rica em funcionalidades</summary>
   <summary xml:lang="pt-BR">Uma calculadora cheia de recursos</summary>
@@ -45,6 +47,7 @@
   <developer_name xml:lang="es">Comunidad KDE</developer_name>
   <developer_name xml:lang="fr">Communauté KDE</developer_name>
   <developer_name xml:lang="it">© 2020 La comunità KDE</developer_name>
+  <developer_name xml:lang="ko">KDE 커뮤니티</developer_name>
   <developer_name xml:lang="nl">KDE gemeenschap</developer_name>
   <developer_name xml:lang="pt">Comunidade do KDE</developer_name>
   <developer_name xml:lang="pt-BR">Comunidade KDE</developer_name>
@@ -63,6 +66,7 @@
     <p xml:lang="es">Kalk es una potente calculadora designada para la plataforma móvil.</p>
     <p xml:lang="fr">Kalk est une calculatrice puissante conçue pour les plateformes mobiles.</p>
     <p xml:lang="it">Kalk è una potente calcolatrice progettata per piattaforma mobile.</p>
+    <p xml:lang="ko">Kalk는 모바일 플랫폼용 다기능 계산기입니다.</p>
     <p xml:lang="nl">Kalk is een krachtige rekenmachine ontworpen voor het mobiele platform.</p>
     <p xml:lang="pt">O Kalk é uma calculadora poderosa desenhada para plataformas móveis.</p>
     <p xml:lang="pt-BR">Kalk é uma poderosa calculadora desenhada para a plataforma móvel.</p>
