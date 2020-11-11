@@ -34,10 +34,12 @@ Item {
     signal clicked(string text)
 
     property string text
+    property alias fontSize: main.font.pointSize
     property alias backgroundColor: background.color
     property alias textColor: main.color
     property string display
     property bool special: false
+    property bool longPress: false
 
     Rectangle {
         id: background
@@ -61,6 +63,7 @@ Item {
         onClicked: root.clicked(parent.text)
 
         onPressAndHold: {
+            if(longPress)
                 root.clicked("longPressed" + parent.text);
         }
     }

@@ -30,12 +30,11 @@ GridLayout {
     NumberButton {text: "sin(" ; display: "sin"; onClicked: pressed(text); textColor: Kirigami.Theme.activeTextColor;}
     NumberButton {text: "cos(" ; display: "cos"; onClicked: pressed(text); textColor: Kirigami.Theme.activeTextColor;}
     NumberButton {text: "tan(" ; display: "tan"; onClicked: pressed(text); textColor: Kirigami.Theme.activeTextColor;}
-    NumberButton {text: "log(" ; display: "log"; onClicked: pressed(text); textColor: Kirigami.Theme.activeTextColor;}
-    NumberButton {text: "log10(" ; display: "log10"; onClicked: pressed(text); textColor: Kirigami.Theme.activeTextColor;}
-    NumberButton {text: "log2(" ; display: "log2"; onClicked: pressed(text); textColor: Kirigami.Theme.activeTextColor;}
+    NumberButton {text: "log(" ; fontSize: Kirigami.Theme.defaultFont.pointSize * 1.5; display: "log"; onClicked: pressed(text); textColor: Kirigami.Theme.activeTextColor;}
+    NumberButton {text: "log10(" ; fontSize: Kirigami.Theme.defaultFont.pointSize * 1.5; display: "log10"; onClicked: pressed(text); textColor: Kirigami.Theme.activeTextColor;}
+    NumberButton {text: "log2(" ; fontSize: Kirigami.Theme.defaultFont.pointSize * 1.5; display: "log2"; onClicked: pressed(text); textColor: Kirigami.Theme.activeTextColor;}
     NumberButton {text: "√(" ; display: "√"; onClicked: pressed(text); textColor: Kirigami.Theme.activeTextColor;}
     NumberButton {text: "π" ; onClicked: pressed(text); textColor: Kirigami.Theme.activeTextColor;}
     NumberButton {text: "e" ; onClicked: pressed(text); textColor: Kirigami.Theme.activeTextColor;}
     NumberButton {text: "%" ; onClicked: pressed(text); textColor: Kirigami.Theme.activeTextColor;}
 }
-

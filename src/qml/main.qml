@@ -37,21 +37,6 @@ Kirigami.ApplicationWindow {
     height: Kirigami.Units.gridUnit * 45
     width: Kirigami.Units.gridUnit * 27
     readonly property bool inPortrait: root.width < root.height
-    Connections {
-        target: Qt.application
-        function onStateChanged() {
-            if(Qt.application.state === Qt.ApplicationActive)
-            {
-                console.log("active");
-            }
-            else if(Qt.application.state === Qt.ApplicationInactive)
-                console.log("inactive")
-            else if(Qt.application.state === Qt.ApplicationSuspended)
-                console.log("suspened")
-            else if(Qt.application.state === Qt.ApplicationHidden)
-                console.log("hidden")
-        }
-    }
 
     Kirigami.SwipeNavigator {
         id: navigator
