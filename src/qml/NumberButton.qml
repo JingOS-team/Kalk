@@ -56,7 +56,7 @@ Item {
         }
     }
 
-    MouseArea {
+    Controls.AbstractButton {
         id: mouse
         anchors.fill: parent
 
