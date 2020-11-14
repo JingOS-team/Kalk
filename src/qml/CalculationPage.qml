@@ -161,11 +161,16 @@ Kirigami.Page {
                 edge: Qt.RightEdge
                 dim: false
                 onXChanged: drawerIndicator.x = this.x - drawerIndicator.width + drawerIndicator.radius
+                opacity: 1 // for plasma style
                 FunctionPad {
-                    height: inputPad.height
-                    width: parent.width
+                    anchors.fill: parent
                     anchors.bottom: parent.Bottom
-                    onPressed: expressionAdd(text);
+                    onPressed: expressionAdd(text)
+                }
+                // for plasma style
+                background: Rectangle {
+                    color: Kirigami.Theme.backgroundColor
+                    anchors.fill: parent
                 }
             }
         }

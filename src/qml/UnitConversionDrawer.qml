@@ -171,5 +171,9 @@ Controls.Drawer {
             }
         }
     }
+    background: Rectangle {
+        color: Kirigami.Theme.backgroundColor
+        anchors.fill: parent
+    }
 }
 
