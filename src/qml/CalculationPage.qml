@@ -42,12 +42,23 @@ Kirigami.Page {
             Layout.alignment: Qt.AlignTop
             Layout.preferredHeight: Kirigami.Units.gridUnit * 4
             color: Kirigami.Theme.backgroundColor
-            Controls.Label {
-                id: expressionRow
+            Flickable {
                 anchors.right: parent.right
-                horizontalAlignment: Text.AlignRight
-                font.pointSize: Kirigami.Units.gridUnit * 2
-                text: inputPad.expression
+                height: parent.height
+                width: Math.min(parent.width, contentWidth)
+                contentHeight: expressionRow.height
+                contentWidth: expressionRow.width
+                flickableDirection: Flickable.HorizontalFlick
+                Controls.Label {
+                    id: expressionRow
+                    horizontalAlignment: Text.AlignRight
+                    font.pointSize: Kirigami.Units.gridUnit * 2
+                    text: inputPad.expression
+                }
+                onContentWidthChanged: {
+                    if(contentWidth > width)
+                       contentX = contentWidth - width;
+                }
             }
         }
         Rectangle {
@@ -55,26 +66,33 @@ Kirigami.Page {
             Layout.alignment: Qt.AlignTop
             Layout.preferredHeight: Kirigami.Units.gridUnit * 6
             color: Kirigami.Theme.backgroundColor
-            Controls.Label {
-                id: result
+            Flickable {
                 anchors.right: parent.right
-                horizontalAlignment: Text.AlignRight
-                font.pointSize: Kirigami.Units.gridUnit * 3
-                text: mathEngine.result
-                NumberAnimation on opacity {
-                    id: resultFadeInAnimation
-                    from: 0.5
-                    to: 1
-                    duration: Kirigami.Units.shortDuration
-                }
-                NumberAnimation on opacity {
-                    id: resultFadeOutAnimation
-                    from: 1
-                    to: 0
-                    duration: Kirigami.Units.shortDuration
-                }
+                height: parent.height
+                width: Math.min(parent.width, contentWidth)
+                contentHeight: result.height
+                contentWidth: result.width
+                flickableDirection: Flickable.HorizontalFlick
+                Controls.Label {
+                    id: result
+                    horizontalAlignment: Text.AlignRight
+                    font.pointSize: Kirigami.Units.gridUnit * 3
+                    text: mathEngine.result
+                    NumberAnimation on opacity {
+                        id: resultFadeInAnimation
+                        from: 0.5
+                        to: 1
+                        duration: Kirigami.Units.shortDuration
+                    }
+                    NumberAnimation on opacity {
+                        id: resultFadeOutAnimation
+                        from: 1
+                        to: 0
+                        duration: Kirigami.Units.shortDuration
+                    }
 
-                onTextChanged: resultFadeInAnimation.start()
+                    onTextChanged: resultFadeInAnimation.start()
+                }
             }
         }
 
