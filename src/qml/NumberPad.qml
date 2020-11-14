@@ -26,6 +26,7 @@ import org.kde.kirigami 2.13 as Kirigami
 import QtQuick.Layouts 1.1
 GridLayout {
     signal pressed(string text)
+    signal clear()
     property bool pureNumber: false
     columns: pureNumber ? 3 : 4
     NumberButton {text: "7" ; onClicked: pressed(text);}
@@ -46,7 +47,7 @@ GridLayout {
     NumberButton {text: "÷" ; onClicked: pressed(text); special: true; visible: !pureNumber}
     NumberButton {text: "(" ; onClicked: pressed(text); special: true; visible: !pureNumber}
     NumberButton {text: ")" ; onClicked: pressed(text); special: true; visible: !pureNumber}
-    NumberButton {text: "DEL"; display: "⌫"; onClicked: pressed(text); special: true; longPress: true}
+    NumberButton {text: "DEL"; display: "⌫"; onClicked: pressed(text); onLongClicked: clear(); special: true; }
     NumberButton {text: "=" ; onClicked: pressed(text); special: true; visible: !pureNumber}
 }
 

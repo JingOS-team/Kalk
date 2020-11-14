@@ -98,10 +98,7 @@ Kirigami.Page {
                         inputPad.expression = inputPad.expression.slice(0, inputPad.expression.length - 1);
                         expressionAdd("");
                     }
-                    else if(text.indexOf("longPressed")==0) {
-                        if(text == "longPressedDEL")
-                            inputPad.expression = "";
-                    } else if(text == "="){
+                    else if(text == "="){
                         historyManager.expression = inputPad.expression + " = " + result.text;
                         inputPad.expression = mathEngine.result;
                         resultFadeOutAnimation.start();
@@ -109,6 +106,7 @@ Kirigami.Page {
                     else
                         expressionAdd(text);
                 }
+                onClear: inputPad.expression = ""
             }
             Rectangle {
                 id: drawerIndicator

@@ -32,14 +32,14 @@ Item {
     Layout.fillHeight: true
 
     signal clicked(string text)
+    signal longClicked()
 
     property string text
     property alias fontSize: main.font.pointSize
     property alias backgroundColor: background.color
     property alias textColor: main.color
-    property string display
+    property string display: text
     property bool special: false
-    property bool longPress: false
 
     Rectangle {
         id: background
@@ -63,8 +63,7 @@ Item {
         onClicked: root.clicked(parent.text)
 
         onPressAndHold: {
-            if(longPress)
-                root.clicked("longPressed" + parent.text);
+            root.longClicked()
         }
     }
 
@@ -77,7 +76,7 @@ Item {
             id: main
 
             font.pointSize: Kirigami.Units.gridUnit * 2
-            text: root.display == ""? root.text : root.display
+            text: root.display
             opacity: special ? 0.4 : 1.0
             Layout.minimumWidth: parent.width
             horizontalAlignment: Text.AlignHCenter
