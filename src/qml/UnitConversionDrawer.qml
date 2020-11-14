@@ -28,10 +28,8 @@ import org.kde.kirigami 2.13 as Kirigami
 
 Controls.Drawer {
     property alias header: headerLabel.text
-    property alias inputText: input.text
-    property alias outputText: output.text
-    property alias from: fromComboBox
-    property alias to: toComboBox
+    property alias from: fromListView
+    property alias to: toListView
     id: unitConversionDrawer
     ColumnLayout {
         anchors.fill: parent
@@ -67,108 +65,139 @@ Controls.Drawer {
             Layout.fillWidth: true
         }
 
-        ColumnLayout {
-            Layout.fillHeight: true
-
-            ColumnLayout {
+        RowLayout {
+            Layout.fillWidth: true
+            Layout.leftMargin: Kirigami.Units.gridUnit
+            Layout.rightMargin: Kirigami.Units.gridUnit
+            Layout.bottomMargin: Kirigami.Units.gridUnit * 2
+            RowLayout {
                 Layout.fillWidth: true
-                Layout.leftMargin: Kirigami.Units.gridUnit
-                Layout.rightMargin: Kirigami.Units.gridUnit
-                Layout.bottomMargin: Kirigami.Units.gridUnit * 2
-                RowLayout {
+                Controls.Label {
+                    text: i18n("From: ")
+                    font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.5
+                }
+                ColumnLayout {
                     Layout.fillWidth: true
-                    Controls.Label {
-                        text: i18n("From: ")
-                        font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.5
-                    }
-                    ColumnLayout {
+                    Kirigami.SearchField {
+                        id: fromSearchField
                         Layout.fillWidth: true
-                        Controls.Label {
-                            id: input
-                            Layout.alignment: Qt.AlignLeft
-                            font.pointSize: Kirigami.Theme.defaultFont.pointSize * 2
-                            onTextChanged: {
-                                console.log(unitNumberPad.expression);
-                                if(text != "") {
-                                    output.text = unitModel.getRet(Number(text), fromComboBox.currentIndex, toComboBox.currentIndex);
+                        onAccepted: console.log("Search text is " + fromSearchField.text)
+                        onTextEdited: {
+                            fromListView.model = unitModel.search(fromSearchField.text);
+                            fromListViewPopup.open();
+                        }
+
+                        onPressed: {
+                            fromListView.model = unitModel.search("");
+                            fromListViewPopup.open();
+                        }
+                    }
+
+                    Controls.Popup {
+                        id: fromListViewPopup
+                        height: fromListView.height
+                        width: fromSearchField.width
+                        ListView {
+                            id: fromListView
+                            width: parent.width
+                            height: unitNumberPad.height
+                            delegate: Kirigami.BasicListItem {
+                                    text: modelData
+                                    onClicked: {
+                                        fromSearchField.text = modelData;
+                                        result.text = unitModel.getRet(Number(value.text),fromSearchField.text.split(" ", 1),toSearchField.text.split(" ",1));
+                                        fromListViewPopup.close();
+                                    }
+                            }
+                        }
+                    }
+                }
+            }
+
+            RowLayout {
+                Layout.fillWidth: true
+                Controls.Label {
+                    text: i18n("To: ")
+                    font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.5
+                }
+                ColumnLayout {
+                    Layout.fillWidth: true
+                    Kirigami.SearchField {
+                        id: toSearchField
+                        Layout.fillWidth: true
+                        onAccepted: console.log("Search text is " + toSearchField.text)
+                        onTextEdited: {
+                            toListView.model = unitModel.search(toSearchField.text);
+                            toListViewPopup.open();
+                        }
+                        onPressed: {
+                            toListView.model = unitModel.search("");
+                            toListViewPopup.open();
+                        }
+                    }
+
+                    Controls.Popup {
+                        id: toListViewPopup
+                        height: toListView.height
+                        width: toSearchField.width
+                        ListView {
+                            id: toListView
+                            width: parent.width
+                            height: contentHeight + Kirigami.Units.gridUnit
+                            delegate: Kirigami.BasicListItem {
+                                text: modelData
+                                onClicked: {
+                                    toSearchField.text = modelData;
+                                    result.text = unitModel.getRet(Number(value.text),fromSearchField.text.split(" ", 1),toSearchField.text.split(" ",1));
+                                    toListViewPopup.close();
                                 }
                             }
                         }
-                        Kirigami.Separator {
-                            Layout.fillWidth: true
-                        }
                     }
                 }
-                Controls.ComboBox {
-                    id: fromComboBox
-                    Layout.fillWidth: true
-                    Layout.alignment: Qt.AlignTop
-                    model: unitModel
-                    textRole: "name"
-                    currentIndex: 0
-                    onCurrentIndexChanged: {
-                        if(input.text != "") {
-                            output.text = unitModel.getRet(Number(input.text), fromComboBox.currentIndex, toComboBox.currentIndex);
-                        }
-                    }
+            }
+        }
+
+        RowLayout {
+            Layout.fillWidth: true
+            Layout.leftMargin: Kirigami.Units.largeSpacing
+            Controls.Label {
+                id: value
+                font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.5
+                onTextChanged: {
+                    result.text = unitModel.getRet(Number(value.text),fromSearchField.text.split(" ", 1),toSearchField.text.split(" ",1));
                 }
+            }
+            Controls.Label {
+                text: fromSearchField.text.split(" ", 1) + " = "
+                font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.5
             }
 
-            ColumnLayout {
-                Layout.fillWidth: true
-                Layout.leftMargin: Kirigami.Units.gridUnit
-                Layout.rightMargin: Kirigami.Units.gridUnit
-                RowLayout {
-                    Controls.Label {
-                        text: i18n("To: ")
-                        font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.5
-                    }
-                    ColumnLayout {
-                        Layout.fillWidth: true
-                        Controls.Label {
-                            id: output
-                            Layout.alignment: Qt.AlignLeft
-                            font.pointSize: Kirigami.Theme.defaultFont.pointSize * 2
-                            text: "0"
-                        }
-                        Kirigami.Separator {
-                            Layout.fillWidth: true
-                        }
-                    }
-                }
+            Controls.Label {
+                id: result
+                font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.5
+            }
+            Controls.Label {
+                text: toSearchField.text.split(" ",1)
+                font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.5
+            }
+        }
 
-                Controls.ComboBox {
-                    id: toComboBox
-                    Layout.fillWidth: true
-                    model: unitModel
-                    textRole: "name"
-                    currentIndex: 1
-                    onCurrentIndexChanged: {
-                        if(input.text != "") {
-                            output.text = unitModel.getRet(Number(input.text), fromComboBox.currentIndex, toComboBox.currentIndex);
-                        }
-                    }
-                }
-            }
-            Kirigami.Separator {
-                Layout.fillWidth: true
-            }
+        Kirigami.Separator {
+            Layout.fillWidth: true
+        }
 
-            NumberPad {
-                id: unitNumberPad
-                pureNumber: true
-                //height: parent.height * 0.4
-                //width: parent.width
-                Layout.alignment: Qt.AlignBottom
-                onPressed: {
-                    if(text == "DEL")
-                        input.text = input.text.slice(0, input.text.length - 1);
-                    else if(text == "longPressedDEL")
-                        input.text = "";
-                    else
-                        input.text += text;
-                }
+        NumberPad {
+            id: unitNumberPad
+            pureNumber: true
+            Layout.alignment: Qt.AlignBottom
+            onPressed: {
+                if(text == "DEL")
+                    value.text = value.text.slice(0, value.text.length - 1);
+                else
+                    value.text += text;
             }
+            onClear: value.text = ""
         }
     }
     background: Rectangle {

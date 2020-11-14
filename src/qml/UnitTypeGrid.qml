@@ -52,8 +52,6 @@ Kirigami.ScrollablePage {
                 anchors.fill: parent
                 hoverEnabled: true
                 onClicked: {
-                    drawer.inputText = "";
-                    drawer.outputText = "0";
                     typeModel.currentIndex(index);
                     drawer.from.currentIndex = 0;
                     drawer.to.currentIndex = 1;

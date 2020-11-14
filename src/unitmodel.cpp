@@ -28,16 +28,19 @@
 
 UnitModel::UnitModel()
 {
-    units_ = KUnitConversion::Converter().category(KUnitConversion::AccelerationCategory).units();
+    m_units = KUnitConversion::Converter().category(KUnitConversion::AccelerationCategory).units();
 }
 QVariant UnitModel::data(const QModelIndex &index, int role) const
 {
-    return units_.at(index.row()).description();
+    if (index.row() >= 0 && index.row() < m_units.count())
+        return m_units.at(index.row()).symbol() + " " + m_units.at(index.row()).description();
+    else
+        return QVariant();
 }
 
 int UnitModel::rowCount(const QModelIndex &parent) const
 {
-    return units_.count();
+    return m_units.count();
 }
 QHash<int, QByteArray> UnitModel::roleNames() const
 {
@@ -46,16 +49,26 @@ QHash<int, QByteArray> UnitModel::roleNames() const
 
 void UnitModel::changeUnit(QString type)
 {
-    emit layoutAboutToBeChanged();
-    units_ = KUnitConversion::Converter().category(static_cast<KUnitConversion::CategoryId>(categoryToEnum.find(type)->second)).units();
-    emit layoutChanged();
+    Q_EMIT layoutAboutToBeChanged();
+    m_units = KUnitConversion::Converter().category(static_cast<KUnitConversion::CategoryId>(categoryToEnum.find(type)->second)).units();
+    Q_EMIT layoutChanged();
 }
 
-double UnitModel::getRet(double val, int fromType, int toType)
+double UnitModel::getRet(double val, QString fromType, QString toType)
 {
-    KUnitConversion::Value fromVal(val, units_.at(fromType));
-    return fromVal.convertTo(units_.at(toType)).number();
+    KUnitConversion::Value fromVal(val, fromType);
+    return fromVal.convertTo(KUnitConversion::Value(0, toType).unit()).number();
 };
+
+QStringList UnitModel::search(QString keyword)
+{
+    QStringList list;
+    for (auto unit : m_units) {
+        if (unit.description().indexOf(keyword) != -1 || unit.symbol().indexOf(keyword) != -1)
+            list.append(unit.symbol() + " " + unit.description());
+    }
+    return list;
+}
 const std::unordered_map<QString, int> UnitModel::categoryToEnum = {{"Acceleration", KUnitConversion::AccelerationCategory},
                                                                     {"Angle", KUnitConversion::AngleCategory},
                                                                     {"Area", KUnitConversion::AreaCategory},

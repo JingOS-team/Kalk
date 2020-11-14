@@ -36,12 +36,14 @@ public:
     int rowCount(const QModelIndex &parent) const override;
     QVariant data(const QModelIndex &index, int role) const override;
     QHash<int, QByteArray> roleNames() const override;
-    Q_INVOKABLE double getRet(double val, int fromType, int toType); // use int index because text may be localized
+    Q_INVOKABLE double getRet(double val, QString fromType, QString toType); // use int index because text may be localized
+    Q_INVOKABLE QStringList search(QString keyword);
 public slots:
     void changeUnit(QString type);
 
 private:
-    QList<KUnitConversion::Unit> units_;
+    QList<KUnitConversion::Unit> m_units;
+    QVector<QString> m_displayString;
     static const std::unordered_map<QString, int> categoryToEnum;
 };
 #endif // UNITMODEL_H
