@@ -96,7 +96,7 @@ Controls.Drawer {
                     Controls.Popup {
                         id: fromListViewPopup
                         height: fromListView.height
-                        width: fromSearchField.width
+                        width: parent.width * 1.8
                         ListView {
                             id: fromListView
                             width: parent.width
@@ -139,7 +139,7 @@ Controls.Drawer {
                     Controls.Popup {
                         id: toListViewPopup
                         height: toListView.height
-                        width: toSearchField.width
+                        width: parent.width * 1.8
                         ListView {
                             id: toListView
                             width: parent.width
