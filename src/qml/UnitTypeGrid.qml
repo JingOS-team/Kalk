@@ -42,6 +42,7 @@ Kirigami.ScrollablePage {
             anchors.rightMargin: root.inPortrait ? parent.width * 0.05 : (parent.width - drawer.width) * 0.05
             contentItem: Text {
                 text: name
+                color: Kirigami.Theme.textColor
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 elide: Text.ElideRight
