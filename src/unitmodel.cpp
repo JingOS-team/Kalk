@@ -54,18 +54,31 @@ void UnitModel::changeUnit(QString type)
     Q_EMIT layoutChanged();
 }
 
-double UnitModel::getRet(double val, QString fromType, QString toType)
+QString UnitModel::getRet(double val, int fromTypeIndex, int toTypeIndex)
 {
-    KUnitConversion::Value fromVal(val, fromType);
-    return fromVal.convertTo(KUnitConversion::Value(0, toType).unit()).number();
+    if (fromTypeIndex < 0 || toTypeIndex < 0 || fromTypeIndex >= m_fromUnitID.size() || toTypeIndex >= m_toUnitID.size())
+        return {};
+
+    KUnitConversion::Value fromVal(val, m_fromUnitID.at(fromTypeIndex));
+    return fromVal.convertTo(m_toUnitID.at(toTypeIndex)).toString();
 };
 
-QStringList UnitModel::search(QString keyword)
+QStringList UnitModel::search(QString keyword, int field)
 {
     QStringList list;
+    QVector<KUnitConversion::UnitId> *vec;
+    if (field == 0)
+        vec = &m_fromUnitID;
+    else
+        vec = &m_toUnitID;
+
+    vec->clear();
+
     for (auto unit : m_units) {
-        if (unit.description().indexOf(keyword) != -1 || unit.symbol().indexOf(keyword) != -1)
+        if (unit.description().indexOf(keyword) != -1 || unit.symbol().indexOf(keyword) != -1) {
             list.append(unit.symbol() + " " + unit.description());
+            vec->append(unit.id());
+        }
     }
     return list;
 }

@@ -83,32 +83,13 @@ Controls.Drawer {
                         Layout.fillWidth: true
                         onAccepted: console.log("Search text is " + fromSearchField.text)
                         onTextEdited: {
-                            fromListView.model = unitModel.search(fromSearchField.text);
+                            fromListView.model = unitModel.search(fromSearchField.text, 0);
                             fromListViewPopup.open();
                         }
 
                         onPressed: {
-                            fromListView.model = unitModel.search("");
+                            fromListView.model = unitModel.search(fromSearchField.text, 0);
                             fromListViewPopup.open();
-                        }
-                    }
-
-                    Controls.Popup {
-                        id: fromListViewPopup
-                        height: fromListView.height
-                        width: parent.width * 1.8
-                        ListView {
-                            id: fromListView
-                            width: parent.width
-                            height: unitNumberPad.height
-                            delegate: Kirigami.BasicListItem {
-                                    text: modelData
-                                    onClicked: {
-                                        fromSearchField.text = modelData;
-                                        result.text = unitModel.getRet(Number(value.text),fromSearchField.text.split(" ", 1),toSearchField.text.split(" ",1));
-                                        fromListViewPopup.close();
-                                    }
-                            }
                         }
                     }
                 }
@@ -127,58 +108,74 @@ Controls.Drawer {
                         Layout.fillWidth: true
                         onAccepted: console.log("Search text is " + toSearchField.text)
                         onTextEdited: {
-                            toListView.model = unitModel.search(toSearchField.text);
+                            toListView.model = unitModel.search(toSearchField.text, 1);
                             toListViewPopup.open();
                         }
                         onPressed: {
-                            toListView.model = unitModel.search("");
+                            toListView.model = unitModel.search(toSearchField.text, 1);
                             toListViewPopup.open();
-                        }
-                    }
-
-                    Controls.Popup {
-                        id: toListViewPopup
-                        height: toListView.height
-                        width: parent.width * 1.8
-                        ListView {
-                            id: toListView
-                            width: parent.width
-                            height: contentHeight + Kirigami.Units.gridUnit
-                            delegate: Kirigami.BasicListItem {
-                                text: modelData
-                                onClicked: {
-                                    toSearchField.text = modelData;
-                                    result.text = unitModel.getRet(Number(value.text),fromSearchField.text.split(" ", 1),toSearchField.text.split(" ",1));
-                                    toListViewPopup.close();
-                                }
-                            }
                         }
                     }
                 }
             }
         }
-
-        RowLayout {
-            Layout.fillWidth: true
-            Layout.leftMargin: Kirigami.Units.largeSpacing
-            Controls.Label {
-                id: value
-                font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.5
-                onTextChanged: {
-                    result.text = unitModel.getRet(Number(value.text),fromSearchField.text.split(" ", 1),toSearchField.text.split(" ",1));
+        Controls.Popup {
+            id: fromListViewPopup
+            height: fromListView.height
+            width: parent.width * 0.8
+            ListView {
+                id: fromListView
+                width: parent.width
+                height: Math.min(contentHeight, unitNumberPad.height) + Kirigami.Units.gridUnit
+                delegate: Kirigami.BasicListItem {
+                    text: modelData
+                    onClicked: {
+                        fromSearchField.text = modelData;
+                        result.text = unitModel.getRet(Number(value.text),fromListView.currentIndex,toListView.currentIndex);
+                        fromListViewPopup.close();
+                    }
                 }
             }
-            Controls.Label {
-                text: fromSearchField.text.split(" ", 1) + " = "
-                font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.5
+        }
+        Controls.Popup {
+            id: toListViewPopup
+            height: toListView.height
+            width: parent.width * 0.8
+            ListView {
+                id: toListView
+                width: parent.width
+                height: Math.min(contentHeight, unitNumberPad.height) + Kirigami.Units.gridUnit
+                delegate: Kirigami.BasicListItem {
+                    text: modelData
+                    onClicked: {
+                        toSearchField.text = modelData;
+                        result.text = unitModel.getRet(Number(value.text),fromListView.currentIndex,toListView.currentIndex);
+                        toListViewPopup.close();
+                    }
+                }
+            }
+        }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            Layout.leftMargin: Kirigami.Units.largeSpacing
+            RowLayout {
+                Layout.fillWidth: true
+                Controls.Label {
+                    id: value
+                    font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.5
+                    onTextChanged: {
+                        result.text = unitModel.getRet(Number(value.text),fromListView.currentIndex, toListView.currentIndex);
+                    }
+                }
+                Controls.Label {
+                    text: fromSearchField.text
+                    font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.5
+                }
             }
 
             Controls.Label {
                 id: result
-                font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.5
-            }
-            Controls.Label {
-                text: toSearchField.text.split(" ",1)
                 font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.5
             }
         }
