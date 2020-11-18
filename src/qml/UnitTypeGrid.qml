@@ -27,7 +27,15 @@ import QtQuick.Controls 2.15 as Controls
 import org.kde.kirigami 2.13 as Kirigami
 
 Kirigami.ScrollablePage {
+    property alias load: unitConvertorLoader.active
     title: i18n("Units Converter")
+
+    Loader {
+        id: unitConvertorLoader
+        active: false
+        source: "qrc:/qml/UnitConversion.qml"
+    }
+
     ListView {
         id: typeView
         anchors.fill: parent
@@ -37,9 +45,9 @@ Kirigami.ScrollablePage {
         anchors.right: parent.right
         delegate: Kirigami.AbstractCard {
             id: listItem
-            width: root.inPortrait ? parent.width * 0.9 : (parent.width - drawer.width) * 0.9
+            width: parent.width * 0.9
             anchors.right: parent.right
-            anchors.rightMargin: root.inPortrait ? parent.width * 0.05 : (parent.width - drawer.width) * 0.05
+            anchors.rightMargin: parent.width * 0.05
             contentItem: Text {
                 text: name
                 color: Kirigami.Theme.textColor
@@ -54,10 +62,8 @@ Kirigami.ScrollablePage {
                 hoverEnabled: true
                 onClicked: {
                     typeModel.currentIndex(index);
-                    drawer.from.currentIndex = 0;
-                    drawer.to.currentIndex = 1;
-                    drawer.header = modelData;
-                    drawer.open();
+                    unitConvertorLoader.item["title"] = name;
+                    switchToPage(unitConvertorLoader.item);
                 }
                 onEntered: {
                     listItem.highlighted = true;
@@ -67,17 +73,5 @@ Kirigami.ScrollablePage {
                 }
             }
         }
-    }
-    UnitConversionDrawer {
-        id: drawer
-        parent: parent
-        dragMargin: 0
-        y: Kirigami.Settings.isMobile ? 0 : parent.height - typeView.height
-        height: parent.height
-        width: root.inPortrait ? parent.width : parent.width / 2
-        interactive: root.inPortrait
-        position: root.inPortrait ? 0 : 1
-        visible: !root.inPortrait
-        modal: root.inPortrait
     }
 }

@@ -36,58 +36,82 @@ Kirigami.ApplicationWindow {
     visible: true
     height: Kirigami.Units.gridUnit * 45
     width: Kirigami.Units.gridUnit * 27
-    readonly property bool inPortrait: root.width < root.height
 
-    Kirigami.SwipeNavigator {
-        id: navigator
-        anchors.fill: parent
-        CalculationPage {}
+    function switchToPage(page) {
+        while (pageStack.depth > 0) pageStack.pop();
+        pageStack.push(page);
+    }
 
-        HistoryView {
-            icon.name: "shallow-history"
-            id: historyView
-            visible: false
-        }
+    globalDrawer: Kirigami.GlobalDrawer {
+        actions: [
+            Kirigami.Action {
+                text: i18n("Calculator")
+                iconName: "accessories-calculator"
+                onTriggered: switchToPage(calculator);
+            },
+            Kirigami.Action {
+                text: i18n("History")
+                iconName: "shallow-history"
+                onTriggered: switchToPage(historyView);
+            },
+            Kirigami.Action {
+                text: i18n("Convertor")
+                iconName: "gtk-convert" // ????
+                onTriggered: {
+                    if(convertorLoader.status == Loader.Null)
+                        convertorLoader.active = true;
 
-        UnitTypeGrid {
-            icon.name: "media-playlist-repeat"
-            id: unitConversion
-        }
-
-        Kirigami.AboutPage {
-            icon.name: "help-about"
-            id: aboutPage
-            visible: false
-            title: i18n("About")
-            aboutData: {
-                "displayName": i18n("Calculator"),
-                "productName": "kirigami/calculator",
-                "componentName": "kalk",
-                "shortDescription": i18n("Calculator built with Kirigami."),
-                "homepage": "https://invent.kde.org/plasma-mobile/kalk",
-                "bugAddress": "https://invent.kde.org/plasma-mobile/kalk",
-                "version": "v0.1",
-                "otherText": "",
-                "copyrightStatement": i18n("© 2020 Plasma Development Team"),
-                "desktopFileName": "org.kde.calculator",
-                "authors": [
-                            {
-                                "name": i18n("Han Young"),
-                                "emailAddress": "hanyoung@protonmail.com",
-                            },
-                            {
-                                "name": i18n("cahfofpai"),
-                            }
-                        ],
-                "licenses": [
-                            {
-                                "name": "GPL v3",
-                                "text": "long, boring, license text",
-                                "spdx": "GPL-v3.0",
-                            }
-                        ]
+                    switchToPage(convertorLoader.item);
+                }
             }
-        }
+        ]
+    }
 
+    pageStack.initialPage: calculator
+    CalculationPage {
+        id: calculator
+    }
+
+    HistoryView {
+        id: historyView
+        visible: false
+    }
+
+    ConvertorLoader {
+        id: convertorLoader
+    }
+
+    Kirigami.AboutPage {
+        id: aboutPage
+        visible: false
+        title: i18n("About")
+        aboutData: {
+            "displayName": i18n("Calculator"),
+            "productName": "kirigami/calculator",
+            "componentName": "kalk",
+            "shortDescription": i18n("Calculator built with Kirigami."),
+            "homepage": "https://invent.kde.org/plasma-mobile/kalk",
+            "bugAddress": "https://invent.kde.org/plasma-mobile/kalk",
+            "version": "v0.1",
+            "otherText": "",
+            "copyrightStatement": i18n("© 2020 Plasma Development Team"),
+            "desktopFileName": "org.kde.calculator",
+            "authors": [
+                        {
+                            "name": i18n("Han Young"),
+                            "emailAddress": "hanyoung@protonmail.com",
+                        },
+                        {
+                            "name": i18n("cahfofpai"),
+                        }
+                    ],
+            "licenses": [
+                        {
+                            "name": "GPL v3",
+                            "text": "long, boring, license text",
+                            "spdx": "GPL-v3.0",
+                        }
+                    ]
+        }
     }
 }
