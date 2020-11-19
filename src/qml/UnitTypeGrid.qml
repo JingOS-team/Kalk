@@ -63,7 +63,7 @@ Kirigami.ScrollablePage {
                 onClicked: {
                     typeModel.currentIndex(index);
                     unitConvertorLoader.item["title"] = name;
-                    switchToPage(unitConvertorLoader.item);
+                    root.pageStack.layers.push(unitConvertorLoader.item);
                 }
                 onEntered: {
                     listItem.highlighted = true;
