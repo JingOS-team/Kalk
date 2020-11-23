@@ -36,9 +36,9 @@ Item {
     signal longClicked()
 
     property string text
-    property alias fontSize: main.font.pointSize
+    property alias fontSize: label.font.pointSize
     property alias backgroundColor: keyRect.color
-    property alias textColor: main.color
+    property alias textColor: label.color
     property string display: text
     property bool special: false
     
@@ -64,7 +64,7 @@ Item {
                 }
             }
 
-            onClicked: root.clicked(parent.text)
+            onClicked: root.clicked(root.text)
             onPressAndHold: root.longClicked()
         }
     }
@@ -81,10 +81,10 @@ Item {
     }
 
     Controls.Label {
-        id: main
+        id: label
         anchors.centerIn: keyRect
 
-        font.pointSize: Math.min(keyRect.width * 0.4, Kirigami.Theme.defaultFont.pointSize * 2)
+        font.pointSize: keyRect.height * 0.3
         text: root.display
         opacity: special ? 0.4 : 1.0
         horizontalAlignment: Text.AlignHCenter

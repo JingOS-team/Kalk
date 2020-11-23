@@ -34,8 +34,8 @@ Kirigami.ApplicationWindow {
     id: root
     title: 'Kalk'
     visible: true
-    height: Kirigami.Units.gridUnit * 45
-    width: Kirigami.Units.gridUnit * 27
+    height: Kirigami.Units.gridUnit * 30
+    width: Kirigami.Units.gridUnit * 20
 
     function switchToPage(page) {
         while (pageStack.depth > 0) pageStack.pop();

@@ -25,79 +25,95 @@
 import QtQuick 2.7
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1 as Controls
+import QtGraphicalEffects 1.12
 import org.kde.kirigami 2.13 as Kirigami
 
 Kirigami.Page {
     id: initialPage
     title: i18n("Calculator")
+    topPadding: 0
     leftPadding: 0
     rightPadding: 0
     bottomPadding: 0
+    
+    property color dropShadowColor: Qt.darker(Kirigami.Theme.backgroundColor, 1.15)
+    
+    function expressionAdd(text){
+        mathEngine.parse(inputPad.expression + text);
+        if (!mathEngine.error) {
+            inputPad.expression += text;
+        }
+    }
+    
     ColumnLayout {
         anchors.fill: parent
         spacing: 0
+        
         Rectangle {
+            id: outputScreen
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignTop
-            Layout.preferredHeight: Kirigami.Units.gridUnit * 4
+            Layout.preferredHeight: Kirigami.Units.gridUnit * 7
             color: Kirigami.Theme.backgroundColor
-            Flickable {
-                anchors.right: parent.right
-                height: parent.height
-                width: Math.min(parent.width, contentWidth)
-                contentHeight: expressionRow.height
-                contentWidth: expressionRow.width
-                flickableDirection: Flickable.HorizontalFlick
-                Controls.Label {
-                    id: expressionRow
-                    horizontalAlignment: Text.AlignRight
-                    font.pointSize: Kirigami.Units.gridUnit * 2
-                    text: inputPad.expression
+            
+            Column {
+                id: outputColumn
+                anchors.fill: parent
+                anchors.margins: Kirigami.Units.largeSpacing
+                spacing: Kirigami.Units.gridUnit
+                
+                Flickable {
+                    anchors.right: parent.right
+                    height: Kirigami.Units.gridUnit * 1.5
+                    width: Math.min(parent.width, contentWidth)
+                    contentHeight: expressionRow.height
+                    contentWidth: expressionRow.width
+                    flickableDirection: Flickable.HorizontalFlick
+                    Controls.Label {
+                        id: expressionRow
+                        horizontalAlignment: Text.AlignRight
+                        font.pointSize: Kirigami.Units.gridUnit
+                        text: inputPad.expression
+                        color: Kirigami.Theme.disabledTextColor
+                    }
+                    onContentWidthChanged: {
+                        if(contentWidth > width)
+                        contentX = contentWidth - width;
+                    }
                 }
-                onContentWidthChanged: {
-                    if(contentWidth > width)
-                       contentX = contentWidth - width;
+                
+                Flickable {
+                    anchors.right: parent.right
+                    height: Kirigami.Units.gridUnit * 4
+                    width: Math.min(parent.width, contentWidth)
+                    contentHeight: result.height
+                    contentWidth: result.width
+                    flickableDirection: Flickable.HorizontalFlick
+                    Controls.Label {
+                        id: result
+                        horizontalAlignment: Text.AlignRight
+                        font.pointSize: Kirigami.Units.gridUnit * 2
+                        text: mathEngine.result
+                        NumberAnimation on opacity {
+                            id: resultFadeInAnimation
+                            from: 0.5
+                            to: 1
+                            duration: Kirigami.Units.shortDuration
+                        }
+                        NumberAnimation on opacity {
+                            id: resultFadeOutAnimation
+                            from: 1
+                            to: 0
+                            duration: Kirigami.Units.shortDuration
+                        }
+
+                        onTextChanged: resultFadeInAnimation.start()
+                    }
                 }
             }
         }
-        Rectangle {
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignTop
-            Layout.preferredHeight: Kirigami.Units.gridUnit * 6
-            color: Kirigami.Theme.backgroundColor
-            Flickable {
-                anchors.right: parent.right
-                height: parent.height
-                width: Math.min(parent.width, contentWidth)
-                contentHeight: result.height
-                contentWidth: result.width
-                flickableDirection: Flickable.HorizontalFlick
-                Controls.Label {
-                    id: result
-                    horizontalAlignment: Text.AlignRight
-                    font.pointSize: Kirigami.Units.gridUnit * 3
-                    text: mathEngine.result
-                    NumberAnimation on opacity {
-                        id: resultFadeInAnimation
-                        from: 0.5
-                        to: 1
-                        duration: Kirigami.Units.shortDuration
-                    }
-                    NumberAnimation on opacity {
-                        id: resultFadeOutAnimation
-                        from: 1
-                        to: 0
-                        duration: Kirigami.Units.shortDuration
-                    }
-
-                    onTextChanged: resultFadeInAnimation.start()
-                }
-            }
-        }
-
-        Kirigami.Separator {
-            Layout.fillWidth: true
-        }
+        
+        // keypad area
         Rectangle {
             property string expression: ""
             id: inputPad
@@ -107,32 +123,48 @@ Kirigami.Page {
             Kirigami.Theme.colorSet: Kirigami.Theme.View
             Kirigami.Theme.inherit: false
             color: Kirigami.Theme.backgroundColor
+            
             NumberPad {
                 id: numberPad
                 anchors.fill: parent
-                anchors.margins: Kirigami.Units.smallSpacing
+                anchors.topMargin: Kirigami.Units.gridUnit * 0.7
+                anchors.bottomMargin: Kirigami.Units.smallSpacing
+                anchors.leftMargin: Kirigami.Units.smallSpacing
+                anchors.rightMargin: Kirigami.Units.gridUnit * 1.5 // for right side drawer indicator
                 onPressed: {
-                    if(text == "DEL"){
+                    if (text == "DEL") {
                         inputPad.expression = inputPad.expression.slice(0, inputPad.expression.length - 1);
                         expressionAdd("");
-                    }
-                    else if(text == "="){
+                    } else if (text == "=") {
                         historyManager.expression = inputPad.expression + " = " + result.text;
                         inputPad.expression = mathEngine.result;
                         resultFadeOutAnimation.start();
-                    }
-                    else
+                    } else {
                         expressionAdd(text);
+                    }
                 }
                 onClear: inputPad.expression = ""
             }
+            
             Rectangle {
                 id: drawerIndicator
-                height: inputPad.height
-                width: Kirigami.Units.gridUnit * 1.5
-                radius: 5
-                x: parent.width - this.width + this.radius
-                color: Kirigami.Theme.highlightColor
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                width: Kirigami.Units.gridUnit
+                x: parent.width - this.width
+                
+                Kirigami.Theme.colorSet: Kirigami.Theme.View
+                color: Kirigami.Theme.backgroundColor
+                
+                layer.enabled: true
+                layer.effect: DropShadow {
+                    horizontalOffset: -2
+                    verticalOffset: 0
+                    radius: 4
+                    samples: 6
+                    color: initialPage.dropShadowColor
+                }
+                
                 Rectangle {
                     anchors.centerIn: parent
                     height: parent.height / 20
@@ -160,19 +192,31 @@ Kirigami.Page {
                 FunctionPad {
                     anchors.fill: parent
                     anchors.bottom: parent.Bottom
+                    anchors.leftMargin: Kirigami.Units.largeSpacing
+                    anchors.rightMargin: Kirigami.Units.largeSpacing
+                    anchors.topMargin: Kirigami.Units.largeSpacing
+                    anchors.bottomMargin: parent.height / 4
                     onPressed: expressionAdd(text)
                 }
                 // for plasma style
                 background: Rectangle {
+                    Kirigami.Theme.colorSet: Kirigami.Theme.View
                     color: Kirigami.Theme.backgroundColor
                     anchors.fill: parent
                 }
             }
         }
+        
+        // top panel drop shadow (has to be above the keypad)
+        DropShadow {
+            anchors.fill: outputScreen
+            source: outputScreen
+            horizontalOffset: 0
+            verticalOffset: 1
+            radius: 4
+            samples: 6
+            color: initialPage.dropShadowColor
+        }
     }
-    function expressionAdd(text){
-        mathEngine.parse(inputPad.expression + text);
-        if(!mathEngine.error)
-            inputPad.expression += text;
-    }
+    
 }
