@@ -21,6 +21,7 @@
 
 import QtQuick 2.4
 import QtQuick.Layouts 1.1
+import QtGraphicalEffects 1.12
 import QtQuick.Controls 2.2 as Controls
 
 import org.kde.kirigami 2.2 as Kirigami
@@ -36,50 +37,57 @@ Item {
 
     property string text
     property alias fontSize: main.font.pointSize
-    property alias backgroundColor: background.color
+    property alias backgroundColor: keyRect.color
     property alias textColor: main.color
     property string display: text
     property bool special: false
+    
+    property color buttonColor: Qt.lighter(Kirigami.Theme.backgroundColor, 1.3)
+    property color buttonPressedColor: Qt.darker(Kirigami.Theme.backgroundColor, 1.08)
+    property color buttonTextColor: Kirigami.Theme.textColor
+    property color dropShadowColor: Qt.darker(Kirigami.Theme.backgroundColor, 1.15)
 
     Rectangle {
-        id: background
+        id: keyRect
         anchors.fill: parent
-        z: -1
-        color: Kirigami.Theme.highlightColor
+        anchors.margins: Kirigami.Units.smallSpacing * 0.5
         radius: Kirigami.Units.smallSpacing
-        opacity: mouse.pressed ? 0.4 : 0
-        Behavior on opacity {
-            OpacityAnimator {
-                duration: Kirigami.Units.longDuration
-                easing.type: Easing.InOutQuad
+        color: root.buttonColor
+        
+        Controls.AbstractButton {
+            anchors.fill: parent
+            onPressedChanged: {
+                if (pressed) {
+                    parent.color = root.buttonPressedColor;
+                } else {
+                    parent.color = root.buttonColor;
+                }
             }
+
+            onClicked: root.clicked(parent.text)
+            onPressAndHold: root.longClicked()
         }
     }
 
-    Controls.AbstractButton {
-        id: mouse
-        anchors.fill: parent
-
-        onClicked: root.clicked(parent.text)
-
-        onPressAndHold: {
-            root.longClicked()
-        }
+    DropShadow {
+        anchors.fill: keyRect
+        source: keyRect
+        cached: true
+        horizontalOffset: 0
+        verticalOffset: 1
+        radius: 4
+        samples: 6
+        color: root.dropShadowColor
     }
 
-    ColumnLayout {
-        spacing: -5
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
+    Controls.Label {
+        id: main
+        anchors.centerIn: keyRect
 
-        Controls.Label {
-            id: main
-
-            font.pointSize: Kirigami.Units.gridUnit * 2
-            text: root.display
-            opacity: special ? 0.4 : 1.0
-            Layout.minimumWidth: parent.width
-            horizontalAlignment: Text.AlignHCenter
-        }
+        font.pointSize: Math.min(keyRect.width * 0.4, Kirigami.Theme.defaultFont.pointSize * 2)
+        text: root.display
+        opacity: special ? 0.4 : 1.0
+        horizontalAlignment: Text.AlignHCenter
+        color: root.buttonTextColor
     }
 }

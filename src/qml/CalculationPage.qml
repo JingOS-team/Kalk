@@ -110,6 +110,7 @@ Kirigami.Page {
             NumberPad {
                 id: numberPad
                 anchors.fill: parent
+                anchors.margins: Kirigami.Units.smallSpacing
                 onPressed: {
                     if(text == "DEL"){
                         inputPad.expression = inputPad.expression.slice(0, inputPad.expression.length - 1);
