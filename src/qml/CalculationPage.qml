@@ -37,8 +37,17 @@ Kirigami.Page {
     bottomPadding: 0
     
     property color dropShadowColor: Qt.darker(Kirigami.Theme.backgroundColor, 1.15)
+    property int keypadHeight: {
+        let rows = 4, columns = 3;
+        // restrict keypad so that the height of buttons never go past 0.85 times their width
+        if ((initialPage.height - Kirigami.Units.gridUnit * 7) / rows > 0.85 * initialPage.width / columns) {
+            return rows * 0.85 * initialPage.width / columns;
+        } else {
+            return initialPage.height - Kirigami.Units.gridUnit * 7;
+        }
+    }
     
-    function expressionAdd(text){
+    function expressionAdd(text) {
         mathEngine.parse(inputPad.expression + text);
         if (!mathEngine.error) {
             inputPad.expression += text;
@@ -53,7 +62,7 @@ Kirigami.Page {
             id: outputScreen
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignTop
-            Layout.preferredHeight: Kirigami.Units.gridUnit * 7
+            Layout.preferredHeight: initialPage.height - initialPage.keypadHeight
             color: Kirigami.Theme.backgroundColor
             
             Column {
@@ -172,10 +181,6 @@ Kirigami.Page {
                     radius: 3
                     color: Kirigami.Theme.textColor
                 }
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: functionDrawer.open()
-                }
             }
 
             Controls.Drawer {
@@ -184,7 +189,7 @@ Kirigami.Page {
                 y: initialPage.height - inputPad.height
                 height: inputPad.height
                 width: initialPage.width * 0.8
-                dragMargin: 0
+                dragMargin: drawerIndicator.width
                 edge: Qt.RightEdge
                 dim: false
                 onXChanged: drawerIndicator.x = this.x - drawerIndicator.width + drawerIndicator.radius
