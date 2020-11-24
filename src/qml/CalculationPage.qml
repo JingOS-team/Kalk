@@ -55,6 +55,51 @@ Kirigami.Page {
         }
     }
     
+    Keys.onPressed: {
+        switch(event.key) {
+        case Qt.Backspace || Qt.Delete:
+            expressionAdd("DEL"); break;
+        case Qt.Key_0:
+            expressionAdd("0"); break;
+        case Qt.Key_1:
+            expressionAdd("1"); break;
+        case Qt.Key_2:
+            expressionAdd("2"); break;
+        case Qt.Key_3:
+            expressionAdd("3"); break;
+        case Qt.Key_4:
+            expressionAdd("4"); break;
+        case Qt.Key_5:
+            expressionAdd("5"); break;
+        case Qt.Key_6:
+            expressionAdd("6"); break;
+        case Qt.Key_7:
+            expressionAdd("7"); break;
+        case Qt.Key_8:
+            expressionAdd("8"); break;
+        case Qt.Key_9:
+            expressionAdd("9"); break;
+        case Qt.Key_Plus:
+            expressionAdd("+"); break;
+        case Qt.Key_Minus:
+            expressionAdd("-"); break;
+        case Qt.Key_multiply:
+            expressionAdd("×"); break;
+        case Qt.Key_division:
+            expressionAdd("÷"); break;
+        case Qt.Key_AsciiCircum:
+            expressionAdd("^"); break;
+        case Qt.Key_Period:
+            expressionAdd("."); break;
+        case Qt.Key_Equal:
+            expressionAdd("="); break;
+        case Qt.Key_Return:
+            expressionAdd("="); break;
+        case Qt.Key_Enter:
+            expressionAdd("="); break;
+        }
+    }
+    
     ColumnLayout {
         anchors.fill: parent
         spacing: 0
@@ -88,7 +133,7 @@ Kirigami.Page {
                     }
                     onContentWidthChanged: {
                         if(contentWidth > width)
-                        contentX = contentWidth - width;
+                            contentX = contentWidth - width;
                     }
                 }
                 

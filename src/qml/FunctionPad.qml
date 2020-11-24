@@ -32,7 +32,7 @@ GridLayout {
     NumberButton {text: "sin(" ; display: "sin"; onClicked: pressed(text);}
     NumberButton {text: "cos(" ; display: "cos"; onClicked: pressed(text);}
     NumberButton {text: "tan(" ; display: "tan"; onClicked: pressed(text);}
-    NumberButton {text: "log(" ; display: "log"; onClicked: pressed(text);}
+    NumberButton {text: "log(" ; display: "ln"; onClicked: pressed(text);}
     NumberButton {text: "log10(" ; display: "log10"; onClicked: pressed(text);}
     NumberButton {text: "log2(" ; display: "log2"; onClicked: pressed(text);}
     NumberButton {text: "√(" ; display: "√"; onClicked: pressed(text);}
