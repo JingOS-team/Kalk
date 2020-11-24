@@ -3,6 +3,7 @@
  * Copyright (C) 2016 Pierre Jacquier <pierrejacquier39@gmail.com>
  *
  *               2020 Han Young <hanyoung@protonmail.com>
+ *               2020 Devin Lin <espidev@gmail.com>
  *
  *
  * $BEGIN_LICENSE:GPL3+$
