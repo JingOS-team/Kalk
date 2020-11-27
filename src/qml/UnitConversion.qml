@@ -150,17 +150,36 @@ Kirigami.Page {
             Layout.fillWidth: true
         }
 
-        NumberPad {
+        GridLayout {
             id: unitNumberPad
-            pureNumber: true
-            Layout.alignment: Qt.AlignBottom
-            onPressed: {
-                if(text == "DEL")
+            columns: 3
+            
+            function pressed(text) {
+                if (text == "DEL") {
                     value.text = value.text.slice(0, value.text.length - 1);
-                else
+                } else {
                     value.text += text;
+                }
             }
-            onClear: value.text = ""
+            function clear() {
+                value.text = "";
+            }
+            
+            NumberButton {text: "7" ; onClicked: unitNumberPad.pressed(text);}
+            NumberButton {text: "8" ; onClicked: unitNumberPad.pressed(text);}
+            NumberButton {text: "9" ; onClicked: unitNumberPad.pressed(text);}
+            
+            NumberButton {text: "4" ; onClicked: unitNumberPad.pressed(text);}
+            NumberButton {text: "5" ; onClicked: unitNumberPad.pressed(text);}
+            NumberButton {text: "6" ; onClicked: unitNumberPad.pressed(text);}
+            
+            NumberButton {text: "1" ; onClicked: unitNumberPad.pressed(text);}
+            NumberButton {text: "2" ; onClicked: unitNumberPad.pressed(text);}
+            NumberButton {text: "3" ; onClicked: unitNumberPad.pressed(text);}
+            
+            NumberButton {text: "." ; onClicked: unitNumberPad.pressed(text);}
+            NumberButton {text: "0" ; onClicked: unitNumberPad.pressed(text);}
+            NumberButton {text: "DEL"; display: "⌫"; onClicked: unitNumberPad.pressed(text); onLongClicked: unitNumberPad.clear(); special: true; }
         }
     }
     background: Rectangle {
