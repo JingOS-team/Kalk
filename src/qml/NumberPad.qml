@@ -30,8 +30,13 @@ GridLayout {
     property bool pureNumber: false
     columns: pureNumber ? 3 : 4
     
+    NumberButton {text: "√(" ; display: "√"; onClicked: pressed(text);}
+    NumberButton {text: "sqr(" ; display: "x^2"; onClicked: pressed(text);}
     NumberButton {text: "(" ; onClicked: pressed(text); special: true; visible: !pureNumber}
-    NumberButton {text: ")" ; onClicked: pressed(text); special: true; visible: !pureNumber}
+    NumberButton {text: ")" ; onClicked: pressed(text); special: true; }
+    
+    NumberButton {text: "%" ; onClicked: pressed(text);}
+    NumberButton {text: "CLEAR"; display: "C"; onClicked: clear(); special: true; }
     NumberButton {text: "DEL"; display: "⌫"; onClicked: pressed(text); onLongClicked: clear(); special: true; }
     NumberButton {text: "÷" ; onClicked: pressed(text); special: true; visible: !pureNumber}
     
