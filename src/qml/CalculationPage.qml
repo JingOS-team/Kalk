@@ -234,7 +234,7 @@ Kirigami.Page {
                 parent: initialPage
                 y: initialPage.height - inputPad.height
                 height: inputPad.height
-                width: initialPage.width * 0.8
+                width: initialPage.width * 0.6
                 dragMargin: drawerIndicator.width
                 edge: Qt.RightEdge
                 dim: false

@@ -31,7 +31,7 @@ GridLayout {
     columns: pureNumber ? 3 : 4
     
     NumberButton {text: "√(" ; display: "√"; onClicked: pressed(text);}
-    NumberButton {text: "sqr(" ; display: "x^2"; onClicked: pressed(text);}
+    NumberButton {text: "^2" ; display: "x²"; onClicked: pressed(text);}
     NumberButton {text: "(" ; onClicked: pressed(text); special: true; visible: !pureNumber}
     NumberButton {text: ")" ; onClicked: pressed(text); special: true; }
     
