@@ -27,25 +27,19 @@ import QtQuick.Controls 2.15 as Controls
 import org.kde.kirigami 2.13 as Kirigami
 
 Kirigami.ScrollablePage {
+    id: root
     title: i18n("Units Converter")
 
-    Loader {
-        id: unitConvertorLoader
-        source: "qrc:/qml/UnitConversion.qml"
-    }
-
-    ListView {
+    Kirigami.CardsListView {
         id: typeView
-        anchors.fill: parent
+        Loader {
+            id: unitConvertorLoader
+            source: "qrc:/qml/UnitConversion.qml"
+        }
         topMargin: Kirigami.Units.gridUnit
         model: typeModel
-        spacing: Kirigami.Units.gridUnit
-        anchors.right: parent.right
         delegate: Kirigami.AbstractCard {
             id: listItem
-            width: parent.width * 0.9
-            anchors.right: parent.right
-            anchors.rightMargin: parent.width * 0.05
             contentItem: Text {
                 text: name
                 color: Kirigami.Theme.textColor
@@ -61,7 +55,7 @@ Kirigami.ScrollablePage {
                 onClicked: {
                     typeModel.currentIndex(index);
                     unitConvertorLoader.item["title"] = name;
-                    root.pageStack.layers.push(unitConvertorLoader.item);
+                    applicationWindow().pageStack.layers.push(unitConvertorLoader.item);
                 }
                 onEntered: {
                     listItem.highlighted = true;
