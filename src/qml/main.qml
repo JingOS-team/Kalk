@@ -36,60 +36,47 @@ Kirigami.ApplicationWindow {
     visible: true
     height: Kirigami.Units.gridUnit * 30
     width: Kirigami.Units.gridUnit * 20
+    readonly property int columnWidth: Kirigami.Units.gridUnit * 13
+    wideScreen: width > columnWidth * 3
 
     function switchToPage(page) {
         while (pageStack.depth > 0) pageStack.pop();
         pageStack.push(page);
     }
 
+    Kirigami.PagePool {
+        id: mainPagePool
+    }
+
     globalDrawer: Kirigami.GlobalDrawer {
         isMenu: true
         actions: [
-            Kirigami.Action {
+            Kirigami.PagePoolAction {
                 text: i18n("Calculator")
                 iconName: "accessories-calculator"
-                onTriggered: switchToPage(calculator);
+                pagePool: mainPagePool
+                page: "qrc:/qml/CalculationPage.qml"
             },
-            Kirigami.Action {
+            Kirigami.PagePoolAction {
                 text: i18n("History")
                 iconName: "shallow-history"
-                onTriggered: {
-                    if(aboutPageLoader.status == Loader.Null)
-                        aboutPageLoader.active = true;
-
-                    switchToPage(historyView);
-                }
+                page: "qrc:/qml/HistoryView.qml"
+                pagePool: mainPagePool
             },
-            Kirigami.Action {
+            Kirigami.PagePoolAction {
                 text: i18n("Convertor")
-                iconName: "gtk-convert" // ????
-                onTriggered: {
-                    if(convertorLoader.status == Loader.Null)
-                        convertorLoader.active = true;
-
-                    switchToPage(convertorLoader.item);
-                }
+                iconName: "gtk-convert"
+                page: "qrc:/qml/UnitTypeGrid.qml"
+                pagePool: mainPagePool
+            },
+            Kirigami.PagePoolAction {
+                text: i18n("About")
+                iconName: "help-about"
+                page: "qrc:/qml/AboutPage.qml"
+                pagePool: mainPagePool
             }
         ]
     }
 
-    pageStack.initialPage: calculator
-    CalculationPage {
-        id: calculator
-    }
-
-    HistoryView {
-        id: historyView
-        visible: false
-    }
-
-    ConvertorLoader {
-        id: convertorLoader
-    }
-
-    Loader {
-        id: aboutPageLoader
-        active: false
-        source: "qrc:/qml/AboutPage.qml"
-    }
+    pageStack.initialPage: mainPagePool.loadPage("qrc:/qml/CalculationPage.qml")
 }

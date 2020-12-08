@@ -27,12 +27,10 @@ import QtQuick.Controls 2.15 as Controls
 import org.kde.kirigami 2.13 as Kirigami
 
 Kirigami.ScrollablePage {
-    property alias load: unitConvertorLoader.active
     title: i18n("Units Converter")
 
     Loader {
         id: unitConvertorLoader
-        active: false
         source: "qrc:/qml/UnitConversion.qml"
     }
 

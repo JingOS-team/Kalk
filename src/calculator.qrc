@@ -8,7 +8,6 @@
         <file>qml/FunctionPad.qml</file>
         <file>qml/UnitTypeGrid.qml</file>
         <file>qml/UnitConversion.qml</file>
-        <file>qml/ConvertorLoader.qml</file>
         <file>qml/AboutPage.qml</file>
     </qresource>
 </RCC>
