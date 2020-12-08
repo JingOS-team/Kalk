@@ -43,6 +43,7 @@ Kirigami.ApplicationWindow {
     }
 
     globalDrawer: Kirigami.GlobalDrawer {
+        isMenu: true
         actions: [
             Kirigami.Action {
                 text: i18n("Calculator")
