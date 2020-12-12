@@ -22,15 +22,8 @@
 #  $END_LICENSE$
 project(Kalk)
 
-##########################Pre-Build######################################
-find_program(flex QUIET)
-find_program(bison QUIET)
-execute_process(
-    COMMAND bison -o ${CMAKE_CURRENT_SOURCE_DIR}/src/mathengine/parser.cc ${CMAKE_CURRENT_SOURCE_DIR}/src/mathengine/parser.yy
-    COMMAND flex -o ${CMAKE_CURRENT_SOURCE_DIR}/src/mathengine/scanner.cc ${CMAKE_CURRENT_SOURCE_DIR}/src/mathengine/scanner.ll
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    )
-##########################END############################################
+find_package(BISON REQUIRED)
+find_package(FLEX REQUIRED)
 
 cmake_minimum_required(VERSION 2.8.12)
 set(KF5_MIN_VERSION "5.18.0")

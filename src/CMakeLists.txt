@@ -20,17 +20,23 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 #  $END_LICENSE$
+
+bison_target(MyParser ${CMAKE_CURRENT_SOURCE_DIR}/mathengine/parser.yy ${CMAKE_CURRENT_BINARY_DIR}/parser.cc)
+flex_target(MyScanner ${CMAKE_CURRENT_SOURCE_DIR}/mathengine/scanner.ll ${CMAKE_CURRENT_BINARY_DIR}/scanner.cc)
+
 set(kalk_SRCS
     main.cpp
     historymanager.cpp
     unitmodel.cpp
     typemodel.cpp
     mathengine.cpp
-    mathengine/parser.cc
-    mathengine/scanner.cc
+    ${CMAKE_CURRENT_BINARY_DIR}/parser.cc
+    ${CMAKE_CURRENT_BINARY_DIR}/scanner.cc
     mathengine/driver.cc
     calculator.qrc)
 add_executable(kalk ${kalk_SRCS})
+
+add_flex_bison_dependency(MyScanner MyParser)
 
 target_link_libraries(kalk
     Qt5::Core
@@ -41,4 +47,7 @@ target_link_libraries(kalk
     KF5::ConfigCore
     KF5::I18n
     KF5::CoreAddons)
+
+target_include_directories(kalk PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/mathengine)
+
 install(TARGETS kalk ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
