@@ -3,8 +3,7 @@
  * Copyright (C) 2016 Pierre Jacquier <pierrejacquier39@gmail.com>
  *
  *               2020 Han Young <hanyoung@protonmail.com>
- *               2020 Devin Lin <espidev@gmail.com>
- *
+ *               2021 Rui Wang  <wangrui@jingos.com>
  *
  * $BEGIN_LICENSE:GPL3+$
  *
@@ -26,206 +25,113 @@
 import QtQuick 2.7
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1 as Controls
-import QtGraphicalEffects 1.12
 import org.kde.kirigami 2.13 as Kirigami
 
 Kirigami.Page {
     id: initialPage
-    title: i18n("Calculator")
-    topPadding: 0
     leftPadding: 0
     rightPadding: 0
     bottomPadding: 0
-    
-    property color dropShadowColor: Qt.darker(Kirigami.Theme.backgroundColor, 1.15)
-    property int keypadHeight: {
-        let rows = 4, columns = 3;
-        // restrict keypad so that the height of buttons never go past 0.85 times their width
-        if ((initialPage.height - Kirigami.Units.gridUnit * 7) / rows > 0.85 * initialPage.width / columns) {
-            return rows * 0.85 * initialPage.width / columns;
-        } else {
-            return initialPage.height - Kirigami.Units.gridUnit * 7;
-        }
-    }
-    
-    function expressionAdd(text) {
-        mathEngine.parse(inputPad.expression + text);
-        if (!mathEngine.error) {
-            inputPad.expression += text;
-        }
-    }
-    
-    Keys.onPressed: {
-        switch(event.key) {
-        case Qt.Backspace || Qt.Delete:
-            expressionAdd("DEL"); break;
-        case Qt.Key_0:
-            expressionAdd("0"); break;
-        case Qt.Key_1:
-            expressionAdd("1"); break;
-        case Qt.Key_2:
-            expressionAdd("2"); break;
-        case Qt.Key_3:
-            expressionAdd("3"); break;
-        case Qt.Key_4:
-            expressionAdd("4"); break;
-        case Qt.Key_5:
-            expressionAdd("5"); break;
-        case Qt.Key_6:
-            expressionAdd("6"); break;
-        case Qt.Key_7:
-            expressionAdd("7"); break;
-        case Qt.Key_8:
-            expressionAdd("8"); break;
-        case Qt.Key_9:
-            expressionAdd("9"); break;
-        case Qt.Key_Plus:
-            expressionAdd("+"); break;
-        case Qt.Key_Minus:
-            expressionAdd("-"); break;
-        case Qt.Key_multiply:
-            expressionAdd("×"); break;
-        case Qt.Key_division:
-            expressionAdd("÷"); break;
-        case Qt.Key_AsciiCircum:
-            expressionAdd("^"); break;
-        case Qt.Key_Period:
-            expressionAdd("."); break;
-        case Qt.Key_Equal:
-            expressionAdd("="); break;
-        case Qt.Key_Return:
-            expressionAdd("="); break;
-        case Qt.Key_Enter:
-            expressionAdd("="); break;
-        }
-    }
-    
+
+
     ColumnLayout {
         anchors.fill: parent
         spacing: 0
-        
+
         Rectangle {
-            id: outputScreen
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignTop
-            Layout.preferredHeight: initialPage.height - initialPage.keypadHeight
-            color: Kirigami.Theme.backgroundColor
-            
-            Column {
-                id: outputColumn
-                anchors.fill: parent
-                anchors.margins: Kirigami.Units.largeSpacing
-                spacing: Kirigami.Units.gridUnit
-                
-                Flickable {
-                    anchors.right: parent.right
-                    height: Kirigami.Units.gridUnit * 1.5
-                    width: Math.min(parent.width, contentWidth)
-                    contentHeight: expressionRow.height
-                    contentWidth: expressionRow.width
-                    flickableDirection: Flickable.HorizontalFlick
-                    Controls.Label {
-                        id: expressionRow
-                        horizontalAlignment: Text.AlignRight
-                        font.pointSize: Kirigami.Units.gridUnit
-                        text: inputPad.expression
-                        color: Kirigami.Theme.disabledTextColor
-                    }
-                    onContentWidthChanged: {
-                        if(contentWidth > width)
-                            contentX = contentWidth - width;
-                    }
-                }
-                
-                Flickable {
-                    anchors.right: parent.right
-                    height: Kirigami.Units.gridUnit * 4
-                    width: Math.min(parent.width, contentWidth)
-                    contentHeight: result.height
-                    contentWidth: result.width
-                    flickableDirection: Flickable.HorizontalFlick
-                    Controls.Label {
-                        id: result
-                        horizontalAlignment: Text.AlignRight
-                        font.pointSize: Kirigami.Units.gridUnit * 2
-                        text: mathEngine.result
-                        NumberAnimation on opacity {
-                            id: resultFadeInAnimation
-                            from: 0.5
-                            to: 1
-                            duration: Kirigami.Units.shortDuration
-                        }
-                        NumberAnimation on opacity {
-                            id: resultFadeOutAnimation
-                            from: 1
-                            to: 0
-                            duration: Kirigami.Units.shortDuration
-                        }
-
-                        onTextChanged: resultFadeInAnimation.start()
-                    }
-                }
+            Layout.preferredHeight: Kirigami.Units.gridUnit * 6
+            color: "#f2fbfbfb"
+            Controls.Label {
+                id: expressionRow
+                anchors.right: parent.right
+                horizontalAlignment: Text.AlignRight
+                font.pointSize: Kirigami.Units.gridUnit * 3
+                text: inputPad.expression
             }
         }
-        
-        // keypad area
+
+        Rectangle {
+            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignTop
+            Layout.preferredHeight: Kirigami.Units.gridUnit * 4
+            color: "#f2fbfbfb"
+            Controls.Label {
+                id: result
+                anchors.right: parent.right
+                horizontalAlignment: Text.AlignRight
+                font.pointSize: Kirigami.Units.gridUnit * 2
+                text: mathEngine.result
+                NumberAnimation on opacity {
+                    id: resultFadeInAnimation
+                    from: 0.5
+                    to: 1
+                    duration: Kirigami.Units.shortDuration
+                }
+                NumberAnimation on opacity {
+                    id: resultFadeOutAnimation
+                    from: 1
+                    to: 0
+                    duration: Kirigami.Units.shortDuration
+                }
+
+                onTextChanged: resultFadeInAnimation.start()
+            }
+        }
+
+        Kirigami.Separator {
+            Layout.fillWidth: true
+        }
+
         Rectangle {
             property string expression: ""
             id: inputPad
             Layout.fillHeight: true
-            Layout.preferredWidth: initialPage.width
+            Layout.preferredWidth: root.inPortrait? initialPage.width : initialPage.width * 0.5
             Layout.alignment: Qt.AlignLeft
             Kirigami.Theme.colorSet: Kirigami.Theme.View
             Kirigami.Theme.inherit: false
             color: Kirigami.Theme.backgroundColor
-            
             NumberPad {
                 id: numberPad
                 anchors.fill: parent
-                anchors.topMargin: Kirigami.Units.gridUnit * 0.7
-                anchors.bottomMargin: Kirigami.Units.smallSpacing
-                anchors.leftMargin: Kirigami.Units.smallSpacing
-                anchors.rightMargin: Kirigami.Units.gridUnit * 1.5 // for right side drawer indicator
                 onPressed: {
-                    if (text == "DEL") {
+                    if(text == "DEL"){
                         inputPad.expression = inputPad.expression.slice(0, inputPad.expression.length - 1);
                         expressionAdd("");
-                    } else if (text == "=") {
+                    }
+                    else if(text.indexOf("longPressed")==0) {
+                        if(text == "longPressedDEL")
+                            inputPad.expression = "";
+                    } else if(text == "="){
                         historyManager.expression = inputPad.expression + " = " + result.text;
                         inputPad.expression = mathEngine.result;
                         resultFadeOutAnimation.start();
-                    } else {
-                        expressionAdd(text);
                     }
+                    else
+                        expressionAdd(text);
                 }
-                onClear: inputPad.expression = ""
             }
-            
+
             Rectangle {
                 id: drawerIndicator
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                width: Kirigami.Units.gridUnit
-                x: parent.width - this.width
-                
-                Kirigami.Theme.colorSet: Kirigami.Theme.View
-                color: Kirigami.Theme.backgroundColor
-                
-                layer.enabled: true
-                layer.effect: DropShadow {
-                    horizontalOffset: -2
-                    verticalOffset: 0
-                    radius: 4
-                    samples: 6
-                    color: initialPage.dropShadowColor
-                }
-                
+                visible: root.inPortrait
+                height: inputPad.height
+                width: Kirigami.Units.gridUnit * 1.5
+                radius: 5
+                x: parent.width - this.width + this.radius
+                color: Kirigami.Theme.highlightColor
                 Rectangle {
                     anchors.centerIn: parent
                     height: parent.height / 20
                     width: parent.width / 4
                     radius: 3
                     color: Kirigami.Theme.textColor
+                }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: functionDrawer.open()
                 }
             }
 
@@ -234,40 +140,27 @@ Kirigami.Page {
                 parent: initialPage
                 y: initialPage.height - inputPad.height
                 height: inputPad.height
-                width: initialPage.width * 0.6
-                dragMargin: drawerIndicator.width
+                width: root.inPortrait? initialPage.width * 0.8 : initialPage.width * 0.5
+                modal: root.inPortrait
+                dragMargin: 0
+                interactive: root.inPortrait
+                position: root.inPortrait ? 0 : 1
+                visible: !root.inPortrait
                 edge: Qt.RightEdge
                 dim: false
                 onXChanged: drawerIndicator.x = this.x - drawerIndicator.width + drawerIndicator.radius
-                opacity: 1 // for plasma style
                 FunctionPad {
-                    anchors.fill: parent
+                    height: inputPad.height
+                    width: parent.width
                     anchors.bottom: parent.Bottom
-                    anchors.leftMargin: Kirigami.Units.largeSpacing
-                    anchors.rightMargin: Kirigami.Units.largeSpacing
-                    anchors.topMargin: Kirigami.Units.largeSpacing
-                    anchors.bottomMargin: parent.height / 4
-                    onPressed: expressionAdd(text)
-                }
-                // for plasma style
-                background: Rectangle {
-                    Kirigami.Theme.colorSet: Kirigami.Theme.View
-                    color: Kirigami.Theme.backgroundColor
-                    anchors.fill: parent
+                    onPressed: expressionAdd(text);
                 }
             }
         }
-        
-        // top panel drop shadow (has to be above the keypad)
-        DropShadow {
-            anchors.fill: outputScreen
-            source: outputScreen
-            horizontalOffset: 0
-            verticalOffset: 1
-            radius: 4
-            samples: 6
-            color: initialPage.dropShadowColor
-        }
     }
-    
+    function expressionAdd(text){
+        mathEngine.parse(inputPad.expression + text);
+        if(!mathEngine.error)
+            inputPad.expression += text;
+    }
 }

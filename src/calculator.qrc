@@ -7,7 +7,9 @@
         <file>qml/CalculationPage.qml</file>
         <file>qml/FunctionPad.qml</file>
         <file>qml/UnitTypeGrid.qml</file>
-        <file>qml/UnitConversion.qml</file>
-        <file>qml/AboutPage.qml</file>
+        <file>qml/UnitConversionDrawer.qml</file>
+        <file>qml/JingCalculationPage.qml</file>
+        <file>qml/JingKeyboard.qml</file>
+        <file>qml/StringUtils.js</file>
     </qresource>
 </RCC>

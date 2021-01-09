@@ -1,8 +1,7 @@
 /*
  * This file is part of Kalk
  *
- * Copyright (C) 2020 Han Young <hanyoung@protonmail.com>
- *               2021 Rui Wang  <wangrui@jingos.com>
+ * Copyright (C) 2021 Rui Wang  <wangrui@jingos.com>
  *
  * $BEGIN_LICENSE:GPL3+$
  *
@@ -22,34 +21,18 @@
  * $END_LICENSE$
  */
 
-#ifndef MATHENGINE_H
-#define MATHENGINE_H
-#include "mathengine/driver.hh"
-#include <QObject>
+var subString= function(string , start , end){
+    return string.substring(start , end)
+}
 
-class MathEngine : public QObject
-{
-    Q_OBJECT
-    Q_PROPERTY(QString result READ result NOTIFY resultChanged)
-    Q_PROPERTY(bool error READ error NOTIFY resultChanged)
-public:
-    Q_INVOKABLE bool parse(QString expr);
+var getCharAt = function(string , position){
+    return string.charAt(position)
+}
 
-    inline QString result()
-    {
-        return result_;
-    };
-    inline bool error()
-    {
-        return mDriver.syntaxError_;
-    };
-signals:
-    void resultChanged();
+var contains = function(string , val){
+    return string.contains(val)
+}
 
-private:
-    bool containExpression(QString expr);
-    driver mDriver;
-    QString result_;
-};
-
-#endif
+var getLastIndexOf = function(string , val){
+    return string.lastIndexOf(val)
+}

@@ -2,6 +2,7 @@
  * This file is part of Kalk
  *
  * Copyright (C) 2020 Han Young <hanyoung@protonmail.com>
+ *               2021 Wang Rui <wangrui@jingos.com>   
  *
  * $BEGIN_LICENSE:GPL3+$
  *
@@ -101,7 +102,7 @@
   make_NUMBER (const std::string &s, const yy::parser::location_type& loc);
 %}
 
-double   [0-9]+|[0-9]+"."[0-9]+
+double   [0-9]|[1-9][0-9]+|[1-9][0-9]+"."[0-9]+|[0-9]"."[0-9]+
 
 %{
   // Code run each time a pattern is matched.
@@ -142,6 +143,7 @@ yy::parser::symbol_type
 make_NUMBER (const std::string &s, const yy::parser::location_type& loc)
 {
   errno = 0;
+
   double n = strtod (s.c_str(), NULL);
   return yy::parser::make_NUMBER ((double) n, loc);
 }

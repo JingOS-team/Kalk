@@ -2,6 +2,7 @@
  * This file is part of Kalk
  *
  * Copyright (C) 2020 Han Young <hanyoung@protonmail.com>
+ *               2021 Rui Wang  <wangrui@jingos.com>     
  *
  * $BEGIN_LICENSE:GPL3+$
  *
@@ -20,11 +21,53 @@
  *
  * $END_LICENSE$
  */
-#include "mathengine.h"
 
-void MathEngine::parse(QString expr)
+#include "mathengine.h"
+#include <QDebug>
+
+bool MathEngine::parse(QString expr)
 {
-    mDriver.parse(expr.toStdString());
-    result_ = QString::number(mDriver.result);
+    if(expr.count() == 0)
+        return false ;
+    
+    bool haveExpr = containExpression(expr);
+    if(expr.count() > 25 && !haveExpr){
+        return false;
+    }
+
+    int parseResult = mDriver.parse(expr.toStdString());
+    result_ = QString::number(mDriver.result , 'g' , 15);
+
+    if (expr[expr.size() - 1] == QChar('.')){  
+        if (expr.size() == 1)
+            return false;
+        if (!(expr[expr.size() - 2] >= QChar('0') && expr[expr.size() - 2] <= QChar('9')))
+            return false;
+        for (int i = (expr.size() - 2);i >= 0; i--){
+            if (expr[i] == QChar('.'))
+                return false;
+            else if (expr[i] >= QChar('0') && expr[i] <= QChar('9')) 
+                continue;
+            else 
+                break;
+        }
+    }
+    
     emit resultChanged();
+    return true;
+}
+
+
+bool MathEngine::containExpression(QString content)
+{
+    if(content.contains("+") 
+            || content.contains("-") 
+            || content.contains("x")
+            || content.contains("÷")
+            || content.contains("/")
+            || content.contains("^")
+            || content.contains("%")){
+        return true ;
+    }
+    return false;
 }

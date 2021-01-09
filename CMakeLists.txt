@@ -2,7 +2,7 @@
 #
 #  Copyright (C) 2020 Cahfofpai
 #                     Han Young <hanyoung@protonmail.com>
-#
+#                2021 Rui Wang  <wangrui@jingos.com>
 #
 #  $BEGIN_LICENSE:GPL3+$
 #
@@ -22,8 +22,15 @@
 #  $END_LICENSE$
 project(Kalk)
 
-find_package(BISON REQUIRED)
-find_package(FLEX REQUIRED)
+##########################Pre-Build######################################
+find_program(flex QUIET)
+find_program(bison QUIET)
+execute_process(
+    COMMAND bison -o ${CMAKE_CURRENT_SOURCE_DIR}/src/mathengine/parser.cc ${CMAKE_CURRENT_SOURCE_DIR}/src/mathengine/parser.yy
+    COMMAND flex -o ${CMAKE_CURRENT_SOURCE_DIR}/src/mathengine/scanner.cc ${CMAKE_CURRENT_SOURCE_DIR}/src/mathengine/scanner.ll
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    )
+##########################END############################################
 
 cmake_minimum_required(VERSION 2.8.12)
 set(KF5_MIN_VERSION "5.18.0")
@@ -53,7 +60,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
         CoreAddons
         UnitConversion)
 add_subdirectory(src)
-install(PROGRAMS org.kde.kalk.desktop DESTINATION ${KDE_INSTALL_APPDIR})
-install(FILES org.kde.kalk.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
-install(FILES kalk.svg DESTINATION ${KDE_INSTALL_FULL_ICONDIR}/hicolor/scalable/apps/)
+install(PROGRAMS org.kde.jkalk.desktop DESTINATION ${KDE_INSTALL_APPDIR})
+install(FILES org.kde.jkalk.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
+install(FILES jcalicon.svg DESTINATION ${KDE_INSTALL_FULL_ICONDIR}/hicolor/scalable/apps/)
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)

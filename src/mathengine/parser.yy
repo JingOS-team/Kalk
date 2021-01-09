@@ -2,6 +2,7 @@
  * This file is part of Kalk
  *
  * Copyright (C) 2020 Han Young <hanyoung@protonmail.com>
+ *               2021 Rui Wang  <wangrui@jingos.com>
  *
  * $BEGIN_LICENSE:GPL3+$
  *
@@ -84,7 +85,7 @@ exp:
   factor
 | exp "+" exp   { $$ = $1 + $3; }
 | exp "-" exp   { $$ = $1 - $3; }
-| exp exp       { $$ = $1 * $2; }
+| exp exp       { $$ = $1 + $2; }
 | exp "*" exp   { $$ = $1 * $3; }
 | exp "/" exp   { $$ = $1 / $3; }
 | exp "^" exp   { $$ = pow($1, $3); }
@@ -110,6 +111,7 @@ factor: "(" exp ")" { $$ = $2; }
 | "-" "number" { $$ = -$2; }
 | "+" "number" { $$ = $2; }
 | factor "%" { $$ = $1 / 100; }
+| "-"
 ;
     
 %%

@@ -3,7 +3,8 @@
  *
  * Copyright (C) 2020 Han Young <hanyoung@protonmail.com>
  *                    Cahfofpai
- *
+ *               2021 Rui Wang  <wangrui@jingos.com>
+ * 
  * $BEGIN_LICENSE:GPL3+$
  *
  * This program is free software: you can redistribute it and/or modify
@@ -21,11 +22,13 @@
  *
  * $END_LICENSE$
  */
+
 #include <QApplication>
 #include <QDebug>
 #include <QObject>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QSurfaceFormat>
 
 #include <KAboutData>
 #include <KLocalizedContext>
@@ -35,10 +38,16 @@
 #include "mathengine.h"
 #include "typemodel.h"
 #include "unitmodel.h"
+
 int main(int argc, char *argv[])
 {
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication app(argc, argv);
+
+    QSurfaceFormat format = QSurfaceFormat::defaultFormat();
+    format.setDepthBufferSize(0);
+    format.setStencilBufferSize(0);
+    QSurfaceFormat::setDefaultFormat(format);
 
     auto *historyManager = new HistoryManager();
     auto *typeModel = new TypeModel();
@@ -48,13 +57,20 @@ int main(int argc, char *argv[])
     // create qml app engine
     QQmlApplicationEngine engine;
     KLocalizedString::setApplicationDomain("kalk");
-    engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
 
+    engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
     engine.rootContext()->setContextProperty("historyManager", historyManager);
     engine.rootContext()->setContextProperty("typeModel", typeModel);
     engine.rootContext()->setContextProperty("unitModel", unitModel);
     engine.rootContext()->setContextProperty("mathEngine", mathEngine);
-    KAboutData aboutData("kalk", i18n("Calculator"), "0.1", i18n("Calculator in Kirigami"), KAboutLicense::GPL, i18n("© 2020 KDE Community"));
+
+    KAboutData aboutData("kalk",
+                         i18n("Calculator"),
+                         "0.1",
+                         i18n("Calculator in Kirigami"),
+                         KAboutLicense::GPL,
+                         i18n("© 2020 KDE Community"));
+
     KAboutData::setApplicationData(aboutData);
 
 #ifdef QT_DEBUG

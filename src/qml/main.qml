@@ -1,9 +1,11 @@
+
 /*
  * This file is part of Kalk
  * Copyright (C) 2016 Pierre Jacquier <pierrejacquier39@gmail.com>
  *
  *               2020 Cahfofpai
  *                    Han Young <hanyoung@protonmail.com>
+ *               2021 Rui Wang  <wangrui@jingos.com>
  *
  *
  * $BEGIN_LICENSE:GPL3+$
@@ -23,60 +25,43 @@
  *
  * $END_LICENSE$
  */
+
 import QtQuick 2.7
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1 as Controls
 import Qt.labs.platform 1.0
 import Qt.labs.settings 1.0
-import org.kde.kirigami 2.13 as Kirigami
+import org.kde.kirigami 2.15 as Kirigami
 
 Kirigami.ApplicationWindow {
-    id: root
-    title: 'Kalk'
+    id: appWindow
+
+    property int fontSize: theme.defaultFont.pointSize
+    property int officalWidth: 1920
+    property int officalHeight: 1200
+    property int deviceWidth: screen.width 
+    property int deviceHeight: screen.height 
+    property real officalScale: deviceWidth / officalWidth
+    readonly property bool inPortrait: appWindow.width < appWindow.height
+
+    width: deviceWidth
+    height: deviceHeight
+
+    title: 'JingOS Kalk'
     visible: true
-    height: Kirigami.Units.gridUnit * 30
-    width: Kirigami.Units.gridUnit * 20
-    readonly property int columnWidth: Kirigami.Units.gridUnit * 13
-    wideScreen: width > columnWidth * 3
 
-    function switchToPage(page) {
-        while (pageStack.depth > 0) pageStack.pop();
-        pageStack.push(page);
+    fastBlurMode: true
+    fastBlurColor: "#a0ffffff"
+
+    pageStack.initialPage: jingCalculationPage
+
+    JingCalculationPage {
+        id: jingCalculationPage
+        objectName: "calculation"
+        visible: true
     }
 
-    Kirigami.PagePool {
-        id: mainPagePool
+    onVisibleChanged: {
+        appWindow.globalToolBarStyle = ApplicationHeaderStyle.None
     }
-
-    globalDrawer: Kirigami.GlobalDrawer {
-        isMenu: true
-        actions: [
-            Kirigami.PagePoolAction {
-                text: i18n("Calculator")
-                iconName: "accessories-calculator"
-                pagePool: mainPagePool
-                page: "qrc:/qml/CalculationPage.qml"
-            },
-            Kirigami.PagePoolAction {
-                text: i18n("History")
-                iconName: "shallow-history"
-                page: "qrc:/qml/HistoryView.qml"
-                pagePool: mainPagePool
-            },
-            Kirigami.PagePoolAction {
-                text: i18n("Convertor")
-                iconName: "gtk-convert"
-                page: "qrc:/qml/UnitTypeGrid.qml"
-                pagePool: mainPagePool
-            },
-            Kirigami.PagePoolAction {
-                text: i18n("About")
-                iconName: "help-about"
-                page: "qrc:/qml/AboutPage.qml"
-                pagePool: mainPagePool
-            }
-        ]
-    }
-
-    pageStack.initialPage: mainPagePool.loadPage("qrc:/qml/CalculationPage.qml")
 }

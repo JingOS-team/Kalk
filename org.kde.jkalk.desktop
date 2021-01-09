@@ -1,3 +1,4 @@
+#!/usr/bin/env xdg-open
 [Desktop Entry]
 Name=Calculator
 Name[ca]=Calculadora
@@ -38,8 +39,9 @@ Comment[sv]=En räknare i Kirigami.
 Comment[uk]=Калькулятор на Kirigami.
 Comment[x-test]=xxA Calculator in Kirigami.xx
 Version=1.0
-Exec=kalk
-Icon=kalk
+Exec=jkalk
+Icon=jcalicon
 Type=Application
 Terminal=false
 Categories=Qt;KDE;Utility;
+PanelBehavor=3

@@ -2,7 +2,7 @@
  * This file is part of Kalk
  *
  * Copyright (C) 2020 Han Young <hanyoung@protonmail.com>
- *
+ *               2021 Rui Wang  <wangrui@jingos.com>
  *
  * $BEGIN_LICENSE:GPL3+$
  *
@@ -27,22 +27,21 @@ import QtQuick.Controls 2.15 as Controls
 import org.kde.kirigami 2.13 as Kirigami
 
 Kirigami.ScrollablePage {
-    id: root
     title: i18n("Units Converter")
-
-    Kirigami.CardsListView {
+    ListView {
         id: typeView
-        Loader {
-            id: unitConvertorLoader
-            source: "qrc:/qml/UnitConversion.qml"
-        }
+        anchors.fill: parent
         topMargin: Kirigami.Units.gridUnit
         model: typeModel
+        spacing: Kirigami.Units.gridUnit
+        anchors.right: parent.right
         delegate: Kirigami.AbstractCard {
             id: listItem
+            width: root.inPortrait ? parent.width * 0.9 : (parent.width - drawer.width) * 0.9
+            anchors.right: parent.right
+            anchors.rightMargin: root.inPortrait ? parent.width * 0.05 : (parent.width - drawer.width) * 0.05
             contentItem: Text {
                 text: name
-                color: Kirigami.Theme.textColor
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 elide: Text.ElideRight
@@ -53,9 +52,13 @@ Kirigami.ScrollablePage {
                 anchors.fill: parent
                 hoverEnabled: true
                 onClicked: {
+                    drawer.inputText = "";
+                    drawer.outputText = "0";
                     typeModel.currentIndex(index);
-                    unitConvertorLoader.item["title"] = name;
-                    applicationWindow().pageStack.layers.push(unitConvertorLoader.item);
+                    drawer.from.currentIndex = 0;
+                    drawer.to.currentIndex = 1;
+                    drawer.header = modelData;
+                    drawer.open();
                 }
                 onEntered: {
                     listItem.highlighted = true;
@@ -65,5 +68,17 @@ Kirigami.ScrollablePage {
                 }
             }
         }
+    }
+    UnitConversionDrawer {
+        id: drawer
+        parent: parent
+        dragMargin: 0
+        y: Kirigami.Settings.isMobile ? 0 : parent.height - typeView.height
+        height: parent.height
+        width: root.inPortrait ? parent.width : parent.width / 2
+        interactive: root.inPortrait
+        position: root.inPortrait ? 0 : 1
+        visible: !root.inPortrait
+        modal: root.inPortrait
     }
 }
