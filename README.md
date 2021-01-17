@@ -1,5 +1,5 @@
 # Jing-Kalk <img src="jcalculator.png" width="40"/>
-Jing-Kalk is based on Kalk [github](https://invent.kde.org/plasma-mobile/kalk).
+Jing-Kalk is based on Kalk [gitlab](https://invent.kde.org/plasma-mobile/kalk).
 
 Jing-Kalk is a beautifully designed calculator that conforms to the JingOS style and Integrating the interactive experience of pad and PC.
 
