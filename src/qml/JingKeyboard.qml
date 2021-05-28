@@ -1,7 +1,9 @@
+
 /*
  * This file is part of Kalk
  *
- * Copyright (C) 2021 Rui Wang  <wangrui@jingos.com>
+ * Copyright (C) 2020 Han Young <hanyoung@protonmail.com>
+ *
  *
  * $BEGIN_LICENSE:GPL3+$
  *
@@ -20,26 +22,30 @@
  *
  * $END_LICENSE$
  */
-
 import QtQuick 2.0
 import org.kde.kirigami 2.13 as Kirigami
 import QtQuick.Layouts 1.1
 
 GridLayout {
-
+    id:gridLayout
+    signal pressed(string text)
+    signal pressedAndHold(string text)
+    signal release(string text)
     property bool pureNumber: false
     property real mScale: appWindow.officalScale
-    property int leftFontSize: appWindow.fontSize + 12
-    property int leftSingleFontSize: appWindow.fontSize + 18
-    property int numFontSize: appWindow.fontSize + 31
-    property int calFontSize: appWindow.fontSize + 34
 
-    signal pressed(string text)
+    property int leftFontSize: 21
+    property int leftSingleFontSize: 25
+    property int numFontSize: 33
+    property int calFontSize: 35
+
+//    4dc1c1c1
 
     columns: 8
     rows: 4
     columnSpacing: 0
     rowSpacing: 0
+
 
     // first row
     NumberButton {
@@ -47,21 +53,27 @@ GridLayout {
         display: "sin"
         onClicked: pressed(text)
         textColor: Kirigami.Theme.textColor
-        backgroundColor: "#bdffffff"
+        textSize: leftFontSize
+        // backgroundColor: "#bdffffff"
+        backgroundColor: "transparent"
     }
     NumberButton {
         text: "cos("
         display: "cos"
         onClicked: pressed(text)
         textColor: Kirigami.Theme.textColor
-        backgroundColor: "#bdffffff"
+        textSize: leftFontSize
+        // backgroundColor: "#bdffffff"
+        backgroundColor: "transparent"
     }
     NumberButton {
         text: "tan("
         display: "tan"
         onClicked: pressed(text)
         textColor: Kirigami.Theme.textColor
-        backgroundColor: "#bdffffff"
+        textSize: leftFontSize
+        // backgroundColor: "#bdffffff"
+        backgroundColor: "transparent"
     }
     NumberButton {
         text: "7"
@@ -100,6 +112,8 @@ GridLayout {
         visible: !pureNumber
         textColor: "#e97503"
         iWidth: 221 * mScale
+        onPressAndHold: gridLayout.pressedAndHold(text)
+        onRelease: gridLayout.release(text)
         backgroundColor: "#f8f8f8"
     }
 
@@ -109,21 +123,27 @@ GridLayout {
         display: "log"
         onClicked: pressed(text)
         textColor: Kirigami.Theme.textColor
-        backgroundColor: "#bdffffff"
+        textSize: leftFontSize
+        // backgroundColor: "#bdffffff"
+        backgroundColor: "transparent"
     }
     NumberButton {
         text: "log10("
         display: "log10"
         onClicked: pressed(text)
         textColor: Kirigami.Theme.textColor
-        backgroundColor: "#bdffffff"
+        textSize: leftFontSize
+        // backgroundColor: "#bdffffff"
+        backgroundColor: "transparent"
     }
     NumberButton {
         text: "log2("
         display: "log2"
         onClicked: pressed(text)
         textColor: Kirigami.Theme.textColor
-        backgroundColor: "#bdffffff"
+        textSize: leftFontSize
+        // backgroundColor: "#bdffffff"
+        backgroundColor: "transparent"
     }
     NumberButton {
         text: "4"
@@ -171,21 +191,24 @@ GridLayout {
         textSize: leftSingleFontSize
         onClicked: pressed(text)
         textColor: Kirigami.Theme.textColor
-        backgroundColor: "#bdffffff"
+        // backgroundColor: "#bdffffff"
+        backgroundColor: "transparent"
     }
     NumberButton {
         text: "π"
         textSize: leftSingleFontSize
         onClicked: pressed(text)
         textColor: Kirigami.Theme.textColor
-        backgroundColor: "#bdffffff"
+        // backgroundColor: "#bdffffff"
+        backgroundColor: "transparent"
     }
     NumberButton {
         text: "e"
         textSize: leftSingleFontSize
         onClicked: pressed(text)
         textColor: Kirigami.Theme.textColor
-        backgroundColor: "#bdffffff"
+        // backgroundColor: "#bdffffff"
+        backgroundColor: "transparent"
     }
     NumberButton {
         text: "1"
@@ -225,6 +248,7 @@ GridLayout {
         backgroundColor: "#e97503"
         textColor: "#ffffff"
         iWidth: 221 * mScale
+        //        iHeight: 185 * 2 * mScale
         iHeight: appWindow.height * 3 / 5 / 2
     }
 
@@ -234,20 +258,24 @@ GridLayout {
         textSize: leftSingleFontSize
         onClicked: pressed(text)
         textColor: Kirigami.Theme.textColor
-        backgroundColor: "#bdffffff"
+        // backgroundColor: "#bdffffff"
+        backgroundColor: "transparent"
     }
     NumberButton {
         text: "("
         textSize: leftSingleFontSize
         onClicked: pressed(text)
-        backgroundColor: "#bdffffff"
+        // backgroundColor: "#bdffffff"
+        backgroundColor: "transparent"
     }
     NumberButton {
         text: ")"
         textSize: leftSingleFontSize
         onClicked: pressed(text)
-        backgroundColor: "#bdffffff"
+        // backgroundColor: "#bdffffff"
+        backgroundColor: "transparent"
     }
+
     NumberButton {
         text: "^"
         display: "xʸ"
@@ -264,6 +292,7 @@ GridLayout {
         onClicked: pressed(text)
         backgroundColor: "#ffffff"
     }
+
     NumberButton {
         text: "."
         textSize: numFontSize
@@ -271,6 +300,7 @@ GridLayout {
         onClicked: pressed(text)
         backgroundColor: "#ffffff"
     }
+
     NumberButton {
         iWidth: 221 * mScale
         text: "÷"

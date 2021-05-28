@@ -5,7 +5,6 @@
  *
  *               2020 Cahfofpai
  *                    Han Young <hanyoung@protonmail.com>
- *               2021 Rui Wang  <wangrui@jingos.com>
  *
  *
  * $BEGIN_LICENSE:GPL3+$
@@ -25,43 +24,47 @@
  *
  * $END_LICENSE$
  */
-
 import QtQuick 2.7
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1 as Controls
 import Qt.labs.platform 1.0
 import Qt.labs.settings 1.0
+
+//import org.kde.kirigami 2.13 as Kirigami
 import org.kde.kirigami 2.15 as Kirigami
 
 Kirigami.ApplicationWindow {
     id: appWindow
+    title: 'JingOS Calc'
+    visible: true
 
     property int fontSize: theme.defaultFont.pointSize
     property int officalWidth: 1920
     property int officalHeight: 1200
-    property int deviceWidth: screen.width 
-    property int deviceHeight: screen.height 
+
+    //    property int deviceWidth: screen.width /*1954*/
+    //    property int deviceHeight: screen.height /*1303*/
+    property int deviceWidth: 1954
+    property int deviceHeight: 1303
     property real officalScale: deviceWidth / officalWidth
-    readonly property bool inPortrait: appWindow.width < appWindow.height
+
+    onVisibleChanged: {
+        appWindow.globalToolBarStyle = ApplicationHeaderStyle.None
+    }
+
+    pageStack.initialPage: jingCalculationPage
+    // remove blur
+    // fastBlurMode: true
+    // fastBlurColor: "#a0ffffff"
 
     width: deviceWidth
     height: deviceHeight
 
-    title: 'JingOS Kalk'
-    visible: true
-
-    fastBlurMode: true
-    fastBlurColor: "#a0ffffff"
-
-    pageStack.initialPage: jingCalculationPage
+    readonly property bool inPortrait: appWindow.width < appWindow.height
 
     JingCalculationPage {
         id: jingCalculationPage
         objectName: "calculation"
         visible: true
-    }
-
-    onVisibleChanged: {
-        appWindow.globalToolBarStyle = ApplicationHeaderStyle.None
     }
 }

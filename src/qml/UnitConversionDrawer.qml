@@ -2,7 +2,7 @@
  * This file is part of Kalk
  *
  * Copyright (C) 2020 Han Young <hanyoung@protonmail.com>
- *               2021 Rui Wang  <wangrui@jingos.com>
+ *
  *
  * $BEGIN_LICENSE:GPL3+$
  *

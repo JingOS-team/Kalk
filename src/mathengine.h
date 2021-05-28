@@ -2,7 +2,6 @@
  * This file is part of Kalk
  *
  * Copyright (C) 2020 Han Young <hanyoung@protonmail.com>
- *               2021 Rui Wang  <wangrui@jingos.com>
  *
  * $BEGIN_LICENSE:GPL3+$
  *
@@ -21,24 +20,31 @@
  *
  * $END_LICENSE$
  */
-
 #ifndef MATHENGINE_H
 #define MATHENGINE_H
 #include "mathengine/driver.hh"
 #include <QObject>
-
 class MathEngine : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString result READ result NOTIFY resultChanged)
+    Q_PROPERTY(QString result READ result WRITE setResult NOTIFY resultChanged)
     Q_PROPERTY(bool error READ error NOTIFY resultChanged)
 public:
     Q_INVOKABLE bool parse(QString expr);
+
+
 
     inline QString result()
     {
         return result_;
     };
+
+    inline void setResult(QString result)
+    {
+        result_ = result;
+        mDriver.result = 0;
+    };
+
     inline bool error()
     {
         return mDriver.syntaxError_;

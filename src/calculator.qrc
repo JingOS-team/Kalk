@@ -10,6 +10,8 @@
         <file>qml/UnitConversionDrawer.qml</file>
         <file>qml/JingCalculationPage.qml</file>
         <file>qml/JingKeyboard.qml</file>
+        <file>qml/JBackground.qml</file>
         <file>qml/StringUtils.js</file>
+        <file>qml/JTmp.qml</file>
     </qresource>
 </RCC>

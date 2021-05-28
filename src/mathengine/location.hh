@@ -1,4 +1,4 @@
-// A Bison parser, made by GNU Bison 3.7.2.
+// A Bison parser, made by GNU Bison 3.7.
 
 // Locations for Bison parsers in C++
 
@@ -31,12 +31,12 @@
 // version 2.2 of Bison.
 
 /**
- ** \file /mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/location.hh
+ ** \file /home/jingos/dev/calculator/src/mathengine/location.hh
  ** Define the yy::location class.
  */
 
-#ifndef YY_YY_MNT_HGFS_HOST_WORKSPACE_1231_KALK_OPEN_SRC_MATHENGINE_LOCATION_HH_INCLUDED
-# define YY_YY_MNT_HGFS_HOST_WORKSPACE_1231_KALK_OPEN_SRC_MATHENGINE_LOCATION_HH_INCLUDED
+#ifndef YY_YY_HOME_JINGOS_DEV_CALCULATOR_SRC_MATHENGINE_LOCATION_HH_INCLUDED
+# define YY_YY_HOME_JINGOS_DEV_CALCULATOR_SRC_MATHENGINE_LOCATION_HH_INCLUDED
 
 # include <iostream>
 # include <string>
@@ -54,7 +54,7 @@
 # endif
 
 namespace yy {
-#line 58 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/location.hh"
+#line 58 "/home/jingos/dev/calculator/src/mathengine/location.hh"
 
   /// A point in a source file.
   class position
@@ -299,6 +299,6 @@ namespace yy {
   }
 
 } // yy
-#line 303 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/location.hh"
+#line 303 "/home/jingos/dev/calculator/src/mathengine/location.hh"
 
-#endif // !YY_YY_MNT_HGFS_HOST_WORKSPACE_1231_KALK_OPEN_SRC_MATHENGINE_LOCATION_HH_INCLUDED
+#endif // !YY_YY_HOME_JINGOS_DEV_CALCULATOR_SRC_MATHENGINE_LOCATION_HH_INCLUDED

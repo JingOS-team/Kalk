@@ -3,8 +3,7 @@
  *
  * Copyright (C) 2020 Han Young <hanyoung@protonmail.com>
  *                    Cahfofpai
- *               2021 Rui Wang  <wangrui@jingos.com>
- * 
+ *
  * $BEGIN_LICENSE:GPL3+$
  *
  * This program is free software: you can redistribute it and/or modify
@@ -22,7 +21,6 @@
  *
  * $END_LICENSE$
  */
-
 #include <QApplication>
 #include <QDebug>
 #include <QObject>
@@ -38,7 +36,6 @@
 #include "mathengine.h"
 #include "typemodel.h"
 #include "unitmodel.h"
-
 int main(int argc, char *argv[])
 {
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
