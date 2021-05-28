@@ -1,6 +1,6 @@
-#line 1 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.cc"
+#line 2 "/home/jingos/dev/calculator/src/mathengine/scanner.cc"
 
-#line 3 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.cc"
+#line 4 "/home/jingos/dev/calculator/src/mathengine/scanner.cc"
 
 #define  YY_INT_ALIGNED short int
 
@@ -475,12 +475,11 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.ll"
+#line 1 "/home/jingos/dev/calculator/src/mathengine/scanner.ll"
 /*
  * This file is part of Kalk
  *
  * Copyright (C) 2020 Han Young <hanyoung@protonmail.com>
- *               2021 Wang Rui <wangrui@jingos.com>   
  *
  * $BEGIN_LICENSE:GPL3+$
  *
@@ -499,7 +498,7 @@ char *yytext;
  *
  * $END_LICENSE$
  */
-#line 25 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.ll"
+#line 24 "/home/jingos/dev/calculator/src/mathengine/scanner.ll"
 # include <cerrno>
 # include <climits>
 # include <cstdlib>
@@ -507,8 +506,8 @@ char *yytext;
 # include <string>
 # include "driver.hh"
 # include "parser.hh"
-#line 510 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.cc"
-#line 35 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.ll"
+#line 510 "/home/jingos/dev/calculator/src/mathengine/scanner.cc"
+#line 34 "/home/jingos/dev/calculator/src/mathengine/scanner.ll"
 #if defined __clang__
 # define CLANG_VERSION (__clang_major__ * 100 + __clang_minor__)
 #endif
@@ -569,18 +568,18 @@ char *yytext;
 #  pragma GCC diagnostic ignored "-Wsign-conversion"
 # endif
 #endif
-#line 572 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.cc"
+#line 572 "/home/jingos/dev/calculator/src/mathengine/scanner.cc"
 #define YY_NO_INPUT 1
-#line 100 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.ll"
+#line 99 "/home/jingos/dev/calculator/src/mathengine/scanner.ll"
   // A number symbol corresponding to the value in S.
   yy::parser::symbol_type
   make_NUMBER (const std::string &s, const yy::parser::location_type& loc);
-#line 578 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.cc"
-#line 108 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.ll"
+#line 578 "/home/jingos/dev/calculator/src/mathengine/scanner.cc"
+#line 107 "/home/jingos/dev/calculator/src/mathengine/scanner.ll"
   // Code run each time a pattern is matched.
   # define YY_USER_ACTION  loc.columns (yyleng);
-#line 582 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.cc"
-#line 583 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.cc"
+#line 582 "/home/jingos/dev/calculator/src/mathengine/scanner.cc"
+#line 583 "/home/jingos/dev/calculator/src/mathengine/scanner.cc"
 
 #define INITIAL 0
 
@@ -795,17 +794,17 @@ YY_DECL
 		}
 
 	{
-#line 111 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.ll"
+#line 110 "/home/jingos/dev/calculator/src/mathengine/scanner.ll"
 
 
-#line 114 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.ll"
+#line 113 "/home/jingos/dev/calculator/src/mathengine/scanner.ll"
   // A handy shortcut to the location held by the driver.
   yy::location& loc = drv.location;
   // Code run each time yylex is called.
   loc.step ();
 
 
-#line 808 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.cc"
+#line 808 "/home/jingos/dev/calculator/src/mathengine/scanner.cc"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -860,109 +859,109 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 120 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.ll"
+#line 119 "/home/jingos/dev/calculator/src/mathengine/scanner.ll"
 return yy::parser::make_MINUS  (loc);
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 121 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.ll"
+#line 120 "/home/jingos/dev/calculator/src/mathengine/scanner.ll"
 return yy::parser::make_PLUS   (loc);
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 122 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.ll"
+#line 121 "/home/jingos/dev/calculator/src/mathengine/scanner.ll"
 return yy::parser::make_STAR   (loc);
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 123 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.ll"
+#line 122 "/home/jingos/dev/calculator/src/mathengine/scanner.ll"
 return yy::parser::make_SLASH  (loc);
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 124 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.ll"
+#line 123 "/home/jingos/dev/calculator/src/mathengine/scanner.ll"
 return yy::parser::make_LPAREN (loc);
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 125 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.ll"
+#line 124 "/home/jingos/dev/calculator/src/mathengine/scanner.ll"
 return yy::parser::make_RPAREN (loc);
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 126 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.ll"
+#line 125 "/home/jingos/dev/calculator/src/mathengine/scanner.ll"
 return yy::parser::make_POWER (loc);
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 127 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.ll"
+#line 126 "/home/jingos/dev/calculator/src/mathengine/scanner.ll"
 return yy::parser::make_SIN (loc);
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 128 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.ll"
+#line 127 "/home/jingos/dev/calculator/src/mathengine/scanner.ll"
 return yy::parser::make_COS (loc);
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 129 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.ll"
+#line 128 "/home/jingos/dev/calculator/src/mathengine/scanner.ll"
 return yy::parser::make_TAN (loc);
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 130 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.ll"
+#line 129 "/home/jingos/dev/calculator/src/mathengine/scanner.ll"
 return yy::parser::make_LOG (loc);
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 131 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.ll"
+#line 130 "/home/jingos/dev/calculator/src/mathengine/scanner.ll"
 return yy::parser::make_LOG10 (loc);
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 132 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.ll"
+#line 131 "/home/jingos/dev/calculator/src/mathengine/scanner.ll"
 return yy::parser::make_LOG2 (loc);
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 133 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.ll"
+#line 132 "/home/jingos/dev/calculator/src/mathengine/scanner.ll"
 return yy::parser::make_SQUAREROOT (loc);
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 134 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.ll"
+#line 133 "/home/jingos/dev/calculator/src/mathengine/scanner.ll"
 return yy::parser::make_NUMBER (3.14159265358, loc);
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 135 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.ll"
+#line 134 "/home/jingos/dev/calculator/src/mathengine/scanner.ll"
 return yy::parser::make_NUMBER (2.71828182845, loc);
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 136 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.ll"
+#line 135 "/home/jingos/dev/calculator/src/mathengine/scanner.ll"
 return yy::parser::make_PERCENTAGE (loc);
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 137 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.ll"
+#line 136 "/home/jingos/dev/calculator/src/mathengine/scanner.ll"
 loc.step ();
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 139 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.ll"
+#line 138 "/home/jingos/dev/calculator/src/mathengine/scanner.ll"
 return make_NUMBER (yytext, loc);
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
-#line 140 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.ll"
+#line 139 "/home/jingos/dev/calculator/src/mathengine/scanner.ll"
 return yy::parser::make_YYEOF (loc);
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 141 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.ll"
+#line 140 "/home/jingos/dev/calculator/src/mathengine/scanner.ll"
 ECHO;
 	YY_BREAK
-#line 965 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.cc"
+#line 965 "/home/jingos/dev/calculator/src/mathengine/scanner.cc"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1929,7 +1928,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 141 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/scanner.ll"
+#line 140 "/home/jingos/dev/calculator/src/mathengine/scanner.ll"
 
 
 yy::parser::symbol_type

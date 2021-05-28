@@ -2,7 +2,7 @@
 #
 #  Copyright (C) 2020 Cahfofpai
 #                     Han Young <hanyoung@protonmail.com>
-#                2021 Rui Wang  <wangrui@jingos.com>
+#
 #
 #  $BEGIN_LICENSE:GPL3+$
 #
@@ -20,7 +20,7 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 #  $END_LICENSE$
-set(jkalk_SRCS
+set(kalk_SRCS
     main.cpp
     historymanager.cpp
     unitmodel.cpp
@@ -30,9 +30,9 @@ set(jkalk_SRCS
     mathengine/scanner.cc
     mathengine/driver.cc
     calculator.qrc)
-add_executable(jkalk ${jkalk_SRCS})
+add_executable(kalk ${kalk_SRCS})
 
-target_link_libraries(jkalk
+target_link_libraries(kalk
     Qt5::Core
     Qt5::Widgets
     Qt5::Qml
@@ -41,4 +41,4 @@ target_link_libraries(jkalk
     KF5::ConfigCore
     KF5::I18n
     KF5::CoreAddons)
-install(TARGETS jkalk ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS kalk ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})

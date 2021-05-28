@@ -1,4 +1,4 @@
-// A Bison parser, made by GNU Bison 3.7.2.
+// A Bison parser, made by GNU Bison 3.7.
 
 // Skeleton interface for Bison LALR(1) parsers in C++
 
@@ -32,7 +32,7 @@
 
 
 /**
- ** \file /mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.hh
+ ** \file /home/jingos/dev/calculator/src/mathengine/parser.hh
  ** Define the yy::parser class.
  */
 
@@ -42,16 +42,16 @@
 // especially those whose name start with YY_ or yy_.  They are
 // private implementation details that can be changed or removed.
 
-#ifndef YY_YY_MNT_HGFS_HOST_WORKSPACE_1231_KALK_OPEN_SRC_MATHENGINE_PARSER_HH_INCLUDED
-# define YY_YY_MNT_HGFS_HOST_WORKSPACE_1231_KALK_OPEN_SRC_MATHENGINE_PARSER_HH_INCLUDED
+#ifndef YY_YY_HOME_JINGOS_DEV_CALCULATOR_SRC_MATHENGINE_PARSER_HH_INCLUDED
+# define YY_YY_HOME_JINGOS_DEV_CALCULATOR_SRC_MATHENGINE_PARSER_HH_INCLUDED
 // "%code requires" blocks.
-#line 33 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 33 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
 
   # include <string>
   #include <cmath>
   class driver;
 
-#line 55 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.hh"
+#line 55 "/home/jingos/dev/calculator/src/mathengine/parser.hh"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -185,7 +185,7 @@
 #endif
 
 namespace yy {
-#line 189 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.hh"
+#line 189 "/home/jingos/dev/calculator/src/mathengine/parser.hh"
 
 
 
@@ -508,9 +508,9 @@ namespace yy {
         S_PERCENTAGE = 17,                       // "%"
         S_NUMBER = 18,                           // "number"
         S_YYACCEPT = 19,                         // $accept
-        S_unit = 20,                             // unit
-        S_exp = 21,                              // exp
-        S_factor = 22                            // factor
+        S_exp = 20,                              // exp
+        S_factor = 21,                           // factor
+        S_unit = 22                              // unit
       };
     };
 
@@ -1406,9 +1406,9 @@ switch (yykind)
     /// Constants.
     enum
     {
-      yylast_ = 224,     ///< Last index in yytable_.
+      yylast_ = 223,     ///< Last index in yytable_.
       yynnts_ = 4,  ///< Number of nonterminal symbols.
-      yyfinal_ = 25 ///< Termination state number.
+      yyfinal_ = 32 ///< Termination state number.
     };
 
 
@@ -1536,9 +1536,9 @@ switch (yykind)
   }
 
 } // yy
-#line 1540 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.hh"
+#line 1540 "/home/jingos/dev/calculator/src/mathengine/parser.hh"
 
 
 
 
-#endif // !YY_YY_MNT_HGFS_HOST_WORKSPACE_1231_KALK_OPEN_SRC_MATHENGINE_PARSER_HH_INCLUDED
+#endif // !YY_YY_HOME_JINGOS_DEV_CALCULATOR_SRC_MATHENGINE_PARSER_HH_INCLUDED

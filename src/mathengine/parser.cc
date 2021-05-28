@@ -1,4 +1,4 @@
-// A Bison parser, made by GNU Bison 3.7.2.
+// A Bison parser, made by GNU Bison 3.7.
 
 // Skeleton implementation for Bison LALR(1) parsers in C++
 
@@ -42,11 +42,11 @@
 
 
 // Unqualified %code blocks.
-#line 48 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 48 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
 
 # include "driver.hh"
 
-#line 50 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 50 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
 
 
 #ifndef YY_
@@ -138,7 +138,7 @@
 #define YYRECOVERING()  (!!yyerrstatus_)
 
 namespace yy {
-#line 142 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 142 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
 
   /// Build a parser object.
   parser::parser (driver& drv_yyarg)
@@ -312,21 +312,21 @@ namespace yy {
         switch (yykind)
     {
       case symbol_kind::S_NUMBER: // "number"
-#line 75 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 75 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                  { yyo << yysym.value.template as < double > (); }
-#line 318 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 318 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
         break;
 
       case symbol_kind::S_exp: // exp
-#line 75 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 75 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                  { yyo << yysym.value.template as < double > (); }
-#line 324 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 324 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
         break;
 
       case symbol_kind::S_factor: // factor
-#line 75 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 75 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                  { yyo << yysym.value.template as < double > (); }
-#line 330 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 330 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
         break;
 
       default:
@@ -593,175 +593,175 @@ namespace yy {
           switch (yyn)
             {
   case 2: // unit: exp
-#line 79 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 79 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
            { drv.result = yystack_[0].value.as < double > (); }
-#line 599 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 599 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
   case 3: // exp: factor
-#line 84 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 84 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
   { yylhs.value.as < double > () = yystack_[0].value.as < double > (); }
-#line 605 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 605 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
   case 4: // exp: exp "+" exp
-#line 85 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 85 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                 { yylhs.value.as < double > () = yystack_[2].value.as < double > () + yystack_[0].value.as < double > (); }
-#line 611 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 611 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
   case 5: // exp: exp "-" exp
-#line 86 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 86 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                 { yylhs.value.as < double > () = yystack_[2].value.as < double > () - yystack_[0].value.as < double > (); }
-#line 617 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 617 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
   case 6: // exp: exp exp
-#line 87 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
-                { yylhs.value.as < double > () = yystack_[1].value.as < double > () + yystack_[0].value.as < double > (); }
-#line 623 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 87 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
+                { yylhs.value.as < double > () = yystack_[1].value.as < double > () * yystack_[0].value.as < double > (); }
+#line 623 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
   case 7: // exp: exp "*" exp
-#line 88 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 88 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                 { yylhs.value.as < double > () = yystack_[2].value.as < double > () * yystack_[0].value.as < double > (); }
-#line 629 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 629 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
   case 8: // exp: exp "/" exp
-#line 89 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 89 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                 { yylhs.value.as < double > () = yystack_[2].value.as < double > () / yystack_[0].value.as < double > (); }
-#line 635 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 635 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
   case 9: // exp: exp "^" exp
-#line 90 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 90 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                 { yylhs.value.as < double > () = pow(yystack_[2].value.as < double > (), yystack_[0].value.as < double > ()); }
-#line 641 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 641 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
   case 10: // exp: "SIN" "(" exp
-#line 91 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 91 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                     { yylhs.value.as < double > () = sin(yystack_[0].value.as < double > ()); }
-#line 647 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 647 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
   case 11: // exp: "SIN" "(" exp ")"
-#line 92 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 92 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                     { yylhs.value.as < double > () = sin(yystack_[1].value.as < double > ()); }
-#line 653 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 653 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
   case 12: // exp: "COS" "(" exp
-#line 93 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 93 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                     { yylhs.value.as < double > () = cos(yystack_[0].value.as < double > ()); }
-#line 659 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 659 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
   case 13: // exp: "COS" "(" exp ")"
-#line 94 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 94 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                     { yylhs.value.as < double > () = cos(yystack_[1].value.as < double > ()); }
-#line 665 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 665 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
   case 14: // exp: "TAN" "(" exp
-#line 95 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 95 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                     { yylhs.value.as < double > () = tan(yystack_[0].value.as < double > ()); }
-#line 671 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 671 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
   case 15: // exp: "TAN" "(" exp ")"
-#line 96 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 96 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                     { yylhs.value.as < double > () = tan(yystack_[1].value.as < double > ()); }
-#line 677 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 677 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
   case 16: // exp: "LOG" "(" exp
-#line 97 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 97 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                     { yylhs.value.as < double > () = log(yystack_[0].value.as < double > ()); }
-#line 683 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 683 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
   case 17: // exp: "LOG" "(" exp ")"
-#line 98 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 98 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                     { yylhs.value.as < double > () = log(yystack_[1].value.as < double > ()); }
-#line 689 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 689 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
   case 18: // exp: "LOG10" "(" exp
-#line 99 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 99 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                     { yylhs.value.as < double > () = log10(yystack_[0].value.as < double > ()); }
-#line 695 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 695 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
   case 19: // exp: "LOG10" "(" exp ")"
-#line 100 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 100 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                       { yylhs.value.as < double > () = log10(yystack_[1].value.as < double > ()); }
-#line 701 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 701 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
   case 20: // exp: "LOG2" "(" exp
-#line 101 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 101 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                     { yylhs.value.as < double > () = log2(yystack_[0].value.as < double > ()); }
-#line 707 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 707 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
   case 21: // exp: "LOG2" "(" exp ")"
-#line 102 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 102 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                      { yylhs.value.as < double > () = log2(yystack_[1].value.as < double > ()); }
-#line 713 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 713 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
   case 22: // exp: "SQUAREROOT" "(" exp
-#line 103 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 103 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                          { yylhs.value.as < double > () = sqrt(yystack_[0].value.as < double > ()); }
-#line 719 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 719 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
   case 23: // exp: "SQUAREROOT" "(" exp ")"
-#line 104 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 104 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                             { yylhs.value.as < double > () = sqrt(yystack_[1].value.as < double > ()); }
-#line 725 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 725 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
   case 24: // factor: "(" exp ")"
-#line 107 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 107 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                     { yylhs.value.as < double > () = yystack_[1].value.as < double > (); }
-#line 731 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 731 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
   case 25: // factor: "(" exp
-#line 108 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 108 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                { yylhs.value.as < double > () = yystack_[0].value.as < double > (); }
-#line 737 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 737 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
   case 26: // factor: "number"
-#line 109 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 109 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
   { yylhs.value.as < double > () = yystack_[0].value.as < double > (); }
-#line 743 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 743 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
   case 27: // factor: "-" "number"
-#line 110 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 110 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                { yylhs.value.as < double > () = -yystack_[0].value.as < double > (); }
-#line 749 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 749 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
   case 28: // factor: "+" "number"
-#line 111 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 111 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                { yylhs.value.as < double > () = yystack_[0].value.as < double > (); }
-#line 755 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 755 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
   case 29: // factor: factor "%"
-#line 112 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 112 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
              { yylhs.value.as < double > () = yystack_[1].value.as < double > () / 100; }
-#line 761 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 761 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
 
-#line 765 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 765 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
 
             default:
               break;
@@ -947,7 +947,7 @@ namespace yy {
     {
     "end of file", "error", "invalid token", "-", "+", "*", "/", "(", ")",
   "^", "SIN", "COS", "TAN", "LOG", "LOG10", "LOG2", "SQUAREROOT", "%",
-  "number", "$accept", "unit", "exp", "factor", YY_NULLPTR
+  "number", "$accept", "exp", "factor", "unit", YY_NULLPTR
     };
     return yy_sname[yysymbol];
   }
@@ -1219,11 +1219,11 @@ namespace yy {
   const short
   parser::yypact_[] =
   {
-      -2,   -14,   -12,    -2,     8,    10,    18,    38,    54,    70,
-      86,   -15,     7,   156,   147,   -15,   -15,    28,    -2,    -2,
-      -2,    -2,    -2,    -2,    -2,   -15,   206,   172,    -2,    -2,
-      -2,   156,   -15,   -15,    44,    60,    76,    92,   108,   124,
-     140,   -15,   186,   -15,   186,   196,   196,   156,   -15,   -15,
+      -2,   -14,   -12,    -2,     8,    10,    37,    53,    69,    85,
+     101,   -15,   155,   -10,   124,   -15,   -15,    27,    -2,    -2,
+      -2,    -2,    -2,    -2,    -2,   205,   171,    -2,    -2,    -2,
+     155,   -15,   -15,   -15,    43,    59,    75,    91,   107,   123,
+     139,   -15,   185,   -15,   185,   195,   195,   155,   -15,   -15,
      -15,   -15,   -15,   -15,   -15
   };
 
@@ -1231,9 +1231,9 @@ namespace yy {
   parser::yydefact_[] =
   {
        0,    30,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,    26,     0,     2,     3,    27,    28,    25,     0,     0,
-       0,     0,     0,     0,     0,     1,    30,     0,     0,     0,
-       0,     6,    29,    24,    10,    12,    14,    16,    18,    20,
+       0,    26,     2,     3,     0,    27,    28,    25,     0,     0,
+       0,     0,     0,     0,     0,    30,     0,     0,     0,     0,
+       6,    29,     1,    24,    10,    12,    14,    16,    18,    20,
       22,    26,     5,    26,     4,     7,     8,     9,    11,    13,
       15,    17,    19,    21,    23
   };
@@ -1241,89 +1241,89 @@ namespace yy {
   const signed char
   parser::yypgoto_[] =
   {
-     -15,   -15,     0,   -15
+     -15,     0,   -15,   -15
   };
 
   const signed char
   parser::yydefgoto_[] =
   {
-      -1,    12,    31,    14
+      -1,    30,    13,    14
   };
 
   const signed char
   parser::yytable_[] =
   {
-      13,     1,     2,    17,    15,     3,    16,    25,     4,     5,
+      12,     1,     2,    17,    15,     3,    16,    31,     4,     5,
        6,     7,     8,     9,    10,    18,    11,    19,    34,    35,
-      36,    37,    38,    39,    40,    20,    42,    44,    45,    46,
-      47,    26,    27,    28,    29,     3,    33,    30,     4,     5,
-       6,     7,     8,     9,    10,    21,    11,    26,    27,    28,
-      29,     3,    48,    30,     4,     5,     6,     7,     8,     9,
-      10,    22,    11,    26,    27,    28,    29,     3,    49,    30,
-       4,     5,     6,     7,     8,     9,    10,    23,    11,    26,
-      27,    28,    29,     3,    50,    30,     4,     5,     6,     7,
-       8,     9,    10,    24,    11,    26,    27,    28,    29,     3,
-      51,    30,     4,     5,     6,     7,     8,     9,    10,     0,
-      11,    26,    27,    28,    29,     3,    52,    30,     4,     5,
-       6,     7,     8,     9,    10,     0,    11,    26,    27,    28,
-      29,     3,    53,    30,     4,     5,     6,     7,     8,     9,
-      10,     0,    11,    26,    27,    28,    29,     3,    54,    30,
-       4,     5,     6,     7,     8,     9,    10,     0,    11,    26,
-      27,    28,    29,     3,    32,    30,     4,     5,     6,     7,
-       8,     9,    10,     0,    11,     1,     2,     0,     0,     3,
-       0,     0,     4,     5,     6,     7,     8,     9,    10,     0,
-      43,    28,    29,     3,     0,    30,     4,     5,     6,     7,
-       8,     9,    10,     3,    11,    30,     4,     5,     6,     7,
-       8,     9,    10,     3,    11,     0,     4,     5,     6,     7,
-       8,     9,    10,     0,    41
+      36,    37,    38,    39,    40,    42,    44,    45,    46,    47,
+      25,    26,    27,    28,     3,    33,    29,     4,     5,     6,
+       7,     8,     9,    10,    20,    11,    25,    26,    27,    28,
+       3,    48,    29,     4,     5,     6,     7,     8,     9,    10,
+      21,    11,    25,    26,    27,    28,     3,    49,    29,     4,
+       5,     6,     7,     8,     9,    10,    22,    11,    25,    26,
+      27,    28,     3,    50,    29,     4,     5,     6,     7,     8,
+       9,    10,    23,    11,    25,    26,    27,    28,     3,    51,
+      29,     4,     5,     6,     7,     8,     9,    10,    24,    11,
+      25,    26,    27,    28,     3,    52,    29,     4,     5,     6,
+       7,     8,     9,    10,    32,    11,    25,    26,    27,    28,
+       3,    53,    29,     4,     5,     6,     7,     8,     9,    10,
+       0,    11,    25,    26,    27,    28,     3,    54,    29,     4,
+       5,     6,     7,     8,     9,    10,     0,    11,    25,    26,
+      27,    28,     3,     0,    29,     4,     5,     6,     7,     8,
+       9,    10,     0,    11,     1,     2,     0,     0,     3,     0,
+       0,     4,     5,     6,     7,     8,     9,    10,     0,    43,
+      27,    28,     3,     0,    29,     4,     5,     6,     7,     8,
+       9,    10,     3,    11,    29,     4,     5,     6,     7,     8,
+       9,    10,     3,    11,     0,     4,     5,     6,     7,     8,
+       9,    10,     0,    41
   };
 
   const signed char
   parser::yycheck_[] =
   {
-       0,     3,     4,     3,    18,     7,    18,     0,    10,    11,
+       0,     3,     4,     3,    18,     7,    18,    17,    10,    11,
       12,    13,    14,    15,    16,     7,    18,     7,    18,    19,
-      20,    21,    22,    23,    24,     7,    26,    27,    28,    29,
-      30,     3,     4,     5,     6,     7,     8,     9,    10,    11,
-      12,    13,    14,    15,    16,     7,    18,     3,     4,     5,
-       6,     7,     8,     9,    10,    11,    12,    13,    14,    15,
-      16,     7,    18,     3,     4,     5,     6,     7,     8,     9,
-      10,    11,    12,    13,    14,    15,    16,     7,    18,     3,
-       4,     5,     6,     7,     8,     9,    10,    11,    12,    13,
-      14,    15,    16,     7,    18,     3,     4,     5,     6,     7,
-       8,     9,    10,    11,    12,    13,    14,    15,    16,    -1,
-      18,     3,     4,     5,     6,     7,     8,     9,    10,    11,
-      12,    13,    14,    15,    16,    -1,    18,     3,     4,     5,
-       6,     7,     8,     9,    10,    11,    12,    13,    14,    15,
-      16,    -1,    18,     3,     4,     5,     6,     7,     8,     9,
-      10,    11,    12,    13,    14,    15,    16,    -1,    18,     3,
-       4,     5,     6,     7,    17,     9,    10,    11,    12,    13,
-      14,    15,    16,    -1,    18,     3,     4,    -1,    -1,     7,
-      -1,    -1,    10,    11,    12,    13,    14,    15,    16,    -1,
-      18,     5,     6,     7,    -1,     9,    10,    11,    12,    13,
-      14,    15,    16,     7,    18,     9,    10,    11,    12,    13,
-      14,    15,    16,     7,    18,    -1,    10,    11,    12,    13,
-      14,    15,    16,    -1,    18
+      20,    21,    22,    23,    24,    25,    26,    27,    28,    29,
+       3,     4,     5,     6,     7,     8,     9,    10,    11,    12,
+      13,    14,    15,    16,     7,    18,     3,     4,     5,     6,
+       7,     8,     9,    10,    11,    12,    13,    14,    15,    16,
+       7,    18,     3,     4,     5,     6,     7,     8,     9,    10,
+      11,    12,    13,    14,    15,    16,     7,    18,     3,     4,
+       5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
+      15,    16,     7,    18,     3,     4,     5,     6,     7,     8,
+       9,    10,    11,    12,    13,    14,    15,    16,     7,    18,
+       3,     4,     5,     6,     7,     8,     9,    10,    11,    12,
+      13,    14,    15,    16,     0,    18,     3,     4,     5,     6,
+       7,     8,     9,    10,    11,    12,    13,    14,    15,    16,
+      -1,    18,     3,     4,     5,     6,     7,     8,     9,    10,
+      11,    12,    13,    14,    15,    16,    -1,    18,     3,     4,
+       5,     6,     7,    -1,     9,    10,    11,    12,    13,    14,
+      15,    16,    -1,    18,     3,     4,    -1,    -1,     7,    -1,
+      -1,    10,    11,    12,    13,    14,    15,    16,    -1,    18,
+       5,     6,     7,    -1,     9,    10,    11,    12,    13,    14,
+      15,    16,     7,    18,     9,    10,    11,    12,    13,    14,
+      15,    16,     7,    18,    -1,    10,    11,    12,    13,    14,
+      15,    16,    -1,    18
   };
 
   const signed char
   parser::yystos_[] =
   {
        0,     3,     4,     7,    10,    11,    12,    13,    14,    15,
-      16,    18,    20,    21,    22,    18,    18,    21,     7,     7,
-       7,     7,     7,     7,     7,     0,     3,     4,     5,     6,
-       9,    21,    17,     8,    21,    21,    21,    21,    21,    21,
-      21,    18,    21,    18,    21,    21,    21,    21,     8,     8,
+      16,    18,    20,    21,    22,    18,    18,    20,     7,     7,
+       7,     7,     7,     7,     7,     3,     4,     5,     6,     9,
+      20,    17,     0,     8,    20,    20,    20,    20,    20,    20,
+      20,    18,    20,    18,    20,    20,    20,    20,     8,     8,
        8,     8,     8,     8,     8
   };
 
   const signed char
   parser::yyr1_[] =
   {
-       0,    19,    20,    21,    21,    21,    21,    21,    21,    21,
-      21,    21,    21,    21,    21,    21,    21,    21,    21,    21,
-      21,    21,    21,    21,    22,    22,    22,    22,    22,    22,
-      22
+       0,    19,    22,    20,    20,    20,    20,    20,    20,    20,
+      20,    20,    20,    20,    20,    20,    20,    20,    20,    20,
+      20,    20,    20,    20,    21,    21,    21,    21,    21,    21,
+      21
   };
 
   const signed char
@@ -1377,9 +1377,9 @@ namespace yy {
 
 
 } // yy
-#line 1381 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.cc"
+#line 1381 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
 
-#line 116 "/mnt/hgfs/Host/workspace/1231/kalk_open/src/mathengine/parser.yy"
+#line 116 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
 
 
 void

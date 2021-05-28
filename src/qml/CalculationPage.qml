@@ -3,7 +3,7 @@
  * Copyright (C) 2016 Pierre Jacquier <pierrejacquier39@gmail.com>
  *
  *               2020 Han Young <hanyoung@protonmail.com>
- *               2021 Rui Wang  <wangrui@jingos.com>
+ *
  *
  * $BEGIN_LICENSE:GPL3+$
  *
@@ -51,7 +51,6 @@ Kirigami.Page {
                 text: inputPad.expression
             }
         }
-
         Rectangle {
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignTop
@@ -83,7 +82,6 @@ Kirigami.Page {
         Kirigami.Separator {
             Layout.fillWidth: true
         }
-
         Rectangle {
             property string expression: ""
             id: inputPad
@@ -113,7 +111,6 @@ Kirigami.Page {
                         expressionAdd(text);
                 }
             }
-
             Rectangle {
                 id: drawerIndicator
                 visible: root.inPortrait

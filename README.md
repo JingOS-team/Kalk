@@ -1,65 +1,28 @@
-# Jing-Kalk <img src="jcalculator.png" width="40"/>
-Jing-Kalk is based on Kalk [gitlab](https://invent.kde.org/plasma-mobile/kalk).
+# Kalk <img src="kalk.png" width="40"/>
+Kalk is a convergent calculator application built with the [Kirigami framework](https://kde.org/products/kirigami/). Although it is mainly targeted for mobile platforms, it can also be used on the desktop.
 
-Jing-Kalk is a beautifully designed calculator that conforms to the JingOS style and Integrating the interactive experience of pad and PC.
-
-
-
+Originally starting as a fork of [Liri calculator](https://github.com/lirios/calculator), Kalk has gone through heavy development, and no longer shares the same codebase with Liri calculator.
 
 ## Features
 * Basic calculation
-
-* Run on JingOS platform
-
-* Brand new UI & UE with JingOS-style , based on JingUI Framework
-
-* Support keyboard & touchpad & mouse & screen touch
-
-* All keys support pressed / hovered effects
-
-* Well-designed UI material:
-
-  * Font
-  * Icon
-  * Picture
-  * Touch effect
-  
-
-## Screenshots
-
-JIng-Kalk:
-
-![](./cal.jpeg)
-
-JingOS:
-
-![](./launcher.jpeg)
+* History
+* Unit conversion 
+* Currency conversion
 
 ## Links
-* Home page: https://www.jingos.com/
-* Project page: https://github.com/JingOS-team/jing-kalk
-* Issues: https://github.com/JingOS-team/jing-kalk/issues
-* Development channel: https://forum.jingos.com/
-
-
+* Project page: https://invent.kde.org/plasma-mobile/kalk
+* Issues: https://invent.kde.org/plasma-mobile/kalk/-/issues
+* Development channel: https://matrix.to/#/#plasmamobile:matrix.org
 
 ## Dependencies
-
 * Qt5 
-
 * Cmake
-
 * KI18n
-
-* Kirigami (JingOS Version)
-
+* KUnitConversion
+* Kirigami
 * KConfig
-
 * GNU Bison
-
 * Flex
-
-  
 
 ## Building and Installing
 
