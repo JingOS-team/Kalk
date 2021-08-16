@@ -1,4 +1,4 @@
-# Kalk <img src="kalk.png" width="40"/>
+# Kalk <img src="jcalculator.png" width="40"/>
 Kalk is a convergent calculator application built with the [Kirigami framework](https://kde.org/products/kirigami/). Although it is mainly targeted for mobile platforms, it can also be used on the desktop.
 
 Originally starting as a fork of [Liri calculator](https://github.com/lirios/calculator), Kalk has gone through heavy development, and no longer shares the same codebase with Liri calculator.
