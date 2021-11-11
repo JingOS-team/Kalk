@@ -1,0 +1,35 @@
+Source: kalk
+Section: utils
+Priority: optional
+Maintainer: Han Young <hanyoung@protonmail.com>
+Build-Depends: cmake,
+               debhelper (>= 12),
+               extra-cmake-modules,
+               kirigami2-dev,
+               libkf5config-dev,
+               libkf5coreaddons-dev,
+               libkf5i18n-dev,
+               libkf5unitconversion-dev,
+               qtbase5-dev,
+               qtdeclarative5-dev,
+               qtquickcontrols2-5-dev,
+               libqt5widgets5,
+               libqt5quick5,
+               libqt5quickcontrols2-5,
+               libqt5quicktest5,
+               gettext,
+               libqt5quickcontrols2-5,
+               japp-sdk-qt-dev,
+               bison,
+               flex
+Standards-Version: 4.4.1
+Vcs-Git: https://invent.kde.org/neon/mobile/kalk
+Vcs-Browser: https://invent.kde.org/neon/mobile/kalk
+
+Package: kalk
+Architecture: any
+Depends: qml-module-org-kde-kirigami2,
+         qml-module-qtquick-controls2,
+	 qml-module-qt-labs-platform, 
+         ${misc:Depends}, ${shlibs:Depends}
+Description: A powerful cross-platfrom calculator application built with the Kirigami framework

@@ -3,6 +3,7 @@
  *
  * Copyright (C) 2020 Han Young <hanyoung@protonmail.com>
  *                    Cahfofpai
+ *               2021 Bob <pengbo·wu@jingos.com>
  *
  * $BEGIN_LICENSE:GPL3+$
  *
@@ -36,11 +37,14 @@
 #include "mathengine.h"
 #include "typemodel.h"
 #include "unitmodel.h"
+#include <japplicationqt.h>
+
 int main(int argc, char *argv[])
 {
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication app(argc, argv);
-
+    JApplicationQt japp;
+    japp.enableBackgroud(false);
     QSurfaceFormat format = QSurfaceFormat::defaultFormat();
     format.setDepthBufferSize(0);
     format.setStencilBufferSize(0);
@@ -61,12 +65,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("unitModel", unitModel);
     engine.rootContext()->setContextProperty("mathEngine", mathEngine);
 
-    KAboutData aboutData("kalk",
-                         i18n("Calculator"),
-                         "0.1",
-                         i18n("Calculator in Kirigami"),
-                         KAboutLicense::GPL,
-                         i18n("© 2020 KDE Community"));
+    KAboutData aboutData("kalk", i18n("Calculator"), "0.1", i18n("Calculator in Kirigami"), KAboutLicense::GPL, i18n("© 2020 KDE Community"));
 
     KAboutData::setApplicationData(aboutData);
 

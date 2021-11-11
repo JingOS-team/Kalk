@@ -2,6 +2,7 @@
 #
 #  Copyright (C) 2020 Cahfofpai
 #                     Han Young <hanyoung@protonmail.com>
+#                2021 Bob <pengbo·wu@jingos.com>
 #
 #
 #  $BEGIN_LICENSE:GPL3+$
@@ -20,6 +21,7 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 #  $END_LICENSE$
+
 project(Kalk)
 
 ##########################Pre-Build######################################

@@ -1,0 +1,14 @@
+#!/bin/sh -e
+
+UID=1000
+
+if id "$UID" > /dev/null 2>&1; then
+
+    USER="$(id "$UID" -u -n)"
+
+    if [ -e /home/$USER/.cache/kalk ]; then
+        rm -rf /home/$USER/.cache/kalk
+    fi
+fi
+
+exit 0

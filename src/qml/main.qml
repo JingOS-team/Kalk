@@ -2,10 +2,8 @@
 /*
  * This file is part of Kalk
  * Copyright (C) 2016 Pierre Jacquier <pierrejacquier39@gmail.com>
- *
- *               2020 Cahfofpai
- *                    Han Young <hanyoung@protonmail.com>
- *
+ * Copyright (C) 2020 Cahfofpai Han Young <hanyoung@protonmail.com>
+ *               2021 Bob <pengbo·wu@jingos.com>
  *
  * $BEGIN_LICENSE:GPL3+$
  *
@@ -24,38 +22,36 @@
  *
  * $END_LICENSE$
  */
+
 import QtQuick 2.7
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1 as Controls
 import Qt.labs.platform 1.0
 import Qt.labs.settings 1.0
 
-//import org.kde.kirigami 2.13 as Kirigami
 import org.kde.kirigami 2.15 as Kirigami
+import jingos.display 1.0
 
 Kirigami.ApplicationWindow {
     id: appWindow
+
     title: 'JingOS Calc'
     visible: true
 
-    property int fontSize: theme.defaultFont.pointSize
+    property real appScale: JDisplay.dp(1.0)
+    property real appFontSize: JDisplay.sp(1.0)
+    property int fontSize: 14 * appFontSize
     property int officalWidth: 1920
     property int officalHeight: 1200
-
-    //    property int deviceWidth: screen.width /*1954*/
-    //    property int deviceHeight: screen.height /*1303*/
     property int deviceWidth: 1954
     property int deviceHeight: 1303
-    property real officalScale: deviceWidth / officalWidth
+    property real officalScale: appScale
 
     onVisibleChanged: {
         appWindow.globalToolBarStyle = ApplicationHeaderStyle.None
     }
 
     pageStack.initialPage: jingCalculationPage
-    // remove blur
-    // fastBlurMode: true
-    // fastBlurColor: "#a0ffffff"
 
     width: deviceWidth
     height: deviceHeight
@@ -64,6 +60,7 @@ Kirigami.ApplicationWindow {
 
     JingCalculationPage {
         id: jingCalculationPage
+
         objectName: "calculation"
         visible: true
     }

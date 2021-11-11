@@ -23,95 +23,84 @@
  * $END_LICENSE$
  */
 import QtQuick 2.0
-import org.kde.kirigami 2.15 as Kirigami
+import org.kde.kirigami 2.13 as Kirigami
 import QtQuick.Layouts 1.1
 
 GridLayout {
-    id: gridLayout
-
     property bool pureNumber: false
     property real mScale: appWindow.officalScale
-    property int leftFontSize: 21 * appFontSize
-    property int leftSingleFontSize: 25 * appFontSize
-    property int numFontSize: 33 * appFontSize
-    property int calFontSize: 35 * appFontSize
+    property int leftFontSize: appWindow.fontSize + 12
+    property int leftSingleFontSize: appWindow.fontSize + 18
+    property int numFontSize: appWindow.fontSize + 31
+    property int calFontSize: appWindow.fontSize + 34
 
     signal pressed(string text)
-    signal pressedAndHold(string text)
-    signal release(string text)
 
     columns: 8
     rows: 4
     columnSpacing: 0
     rowSpacing: 0
 
+    // first row
     NumberButton {
         text: "sin("
         display: "sin"
         onClicked: pressed(text)
-        textColor: Kirigami.JTheme.minorForeground
-        textSize: leftFontSize
-        backgroundColor: Kirigami.JTheme.headerBackground
-        iWidth: 91 * mScale
+        textColor: Kirigami.Theme.textColor
+        backgroundColor: "#4dc1c1c1"
     }
     NumberButton {
         text: "cos("
         display: "cos"
         onClicked: pressed(text)
-        textColor: Kirigami.JTheme.minorForeground
-        textSize: leftFontSize
-        backgroundColor: Kirigami.JTheme.headerBackground
-        iWidth: 91 * mScale
+        textColor: Kirigami.Theme.textColor
+        backgroundColor: "#4dc1c1c1"
     }
     NumberButton {
         text: "tan("
         display: "tan"
         onClicked: pressed(text)
-        textColor: Kirigami.JTheme.minorForeground
-        textSize: leftFontSize
-        backgroundColor: Kirigami.JTheme.headerBackground
-        iWidth: 91 * mScale
+        textColor: Kirigami.Theme.textColor
+        backgroundColor: "#4dc1c1c1"
     }
     NumberButton {
         text: "7"
         onClicked: pressed(text)
         textSize: numFontSize
-        backgroundColor: Kirigami.JTheme.cardBackground
-        iWidth: 135 * mScale
+        backgroundColor: "#ffffff"
+        iWidth: 290 * mScale
     }
     NumberButton {
         text: "8"
         textSize: numFontSize
         onClicked: pressed(text)
-        backgroundColor: Kirigami.JTheme.cardBackground
-        iWidth: 135 * mScale
+        backgroundColor: "#ffffff"
+        iWidth: 290 * mScale
     }
     NumberButton {
         text: "9"
         textSize: numFontSize
         onClicked: pressed(text)
-        backgroundColor: Kirigami.JTheme.cardBackground
-        iWidth: 135 * mScale
+        backgroundColor: "#ffffff"
+        iWidth: 290 * mScale
     }
     NumberButton {
         text: "+"
         textSize: calFontSize
-        iWidth: 102 * mScale
+        iWidth: 221 * mScale
         display: "+"
         onClicked: pressed(text)
-        textColor: Kirigami.JTheme.highlightLinearColor
-        backgroundColor: Kirigami.JTheme.headerBackground
+        textColor: "#e97503"
+        backgroundColor: "#f8f8f8"
     }
     NumberButton {
         text: "←"
         textSize: calFontSize
         onClicked: pressed(text)
         visible: !pureNumber
-        textColor: Kirigami.JTheme.highlightLinearColor
-        iWidth: 102 * mScale
-        onPressAndHold: gridLayout.pressedAndHold(text)
-        onRelease: gridLayout.release(text)
-        backgroundColor: Kirigami.JTheme.headerBackground
+        textColor: "#e97503"
+        iWidth: 221 * mScale
+        backgroundColor: "#f8f8f8"
     }
 
     // second row
@@ -119,66 +108,60 @@ GridLayout {
         text: "log("
         display: "log"
         onClicked: pressed(text)
-        textColor: Kirigami.JTheme.minorForeground
-        textSize: leftFontSize
-        backgroundColor: Kirigami.JTheme.headerBackground
-        iWidth: 91 * mScale
+        textColor: Kirigami.Theme.textColor
+        backgroundColor: "#4dc1c1c1"
     }
     NumberButton {
         text: "log10("
         display: "log10"
         onClicked: pressed(text)
-        textColor: Kirigami.JTheme.minorForeground
-        textSize: leftFontSize
-        backgroundColor: Kirigami.JTheme.headerBackground
-        iWidth: 91 * mScale
+        textColor: Kirigami.Theme.textColor
+        backgroundColor: "#4dc1c1c1"
     }
     NumberButton {
         text: "log2("
         display: "log2"
         onClicked: pressed(text)
-        textColor: Kirigami.JTheme.minorForeground
-        textSize: leftFontSize
-        backgroundColor: Kirigami.JTheme.headerBackground
-        iWidth: 91 * mScale
+        textColor: Kirigami.Theme.textColor
+        backgroundColor: "#4dc1c1c1"
     }
     NumberButton {
         text: "4"
         textSize: numFontSize
         onClicked: pressed(text)
-        backgroundColor: Kirigami.JTheme.cardBackground
-        iWidth: 135 * mScale
+        backgroundColor: "#ffffff"
+        iWidth: 290 * mScale
     }
     NumberButton {
         text: "5"
         textSize: numFontSize
         onClicked: pressed(text)
-        backgroundColor: Kirigami.JTheme.cardBackground
-        iWidth: 135 * mScale
+        backgroundColor: "#ffffff"
+        iWidth: 290 * mScale
     }
     NumberButton {
         text: "6"
         textSize: numFontSize
         onClicked: pressed(text)
-        backgroundColor: Kirigami.JTheme.cardBackground
-        iWidth: 135 * mScale
+        backgroundColor: "#ffffff"
+        iWidth: 290 * mScale
     }
     NumberButton {
         text: "-"
         textSize: calFontSize
-        iWidth: 102 * mScale
-        textColor: Kirigami.JTheme.highlightLinearColor
+        iWidth: 221 * mScale
+        textColor: "#e97503"
         onClicked: pressed(text)
         visible: !pureNumber
-        backgroundColor: Kirigami.JTheme.headerBackground
+        backgroundColor: "#f8f8f8"
     }
     NumberButton {
         text: "C"
         textSize: leftSingleFontSize
-        iWidth: 102 * mScale
+        iWidth: 221 * mScale
         onClicked: pressed(text)
-        textColor: Kirigami.JTheme.highlightLinearColor
-        backgroundColor: Kirigami.JTheme.headerBackground
+        textColor: "#e97503"
+        backgroundColor: "#f8f8f8"
     }
 
     // third row
@@ -187,64 +170,61 @@ GridLayout {
         display: "√"
         textSize: leftSingleFontSize
         onClicked: pressed(text)
-        textColor: Kirigami.JTheme.minorForeground
-        backgroundColor: Kirigami.JTheme.headerBackground
-        iWidth: 91 * mScale
+        textColor: Kirigami.Theme.textColor
+        backgroundColor: "#4dc1c1c1"
     }
     NumberButton {
         text: "π"
         textSize: leftSingleFontSize
         onClicked: pressed(text)
-        textColor: Kirigami.JTheme.minorForeground
-        backgroundColor: Kirigami.JTheme.headerBackground
-        iWidth: 91 * mScale
+        textColor: Kirigami.Theme.textColor
+        backgroundColor: "#4dc1c1c1"
     }
     NumberButton {
         text: "e"
         textSize: leftSingleFontSize
         onClicked: pressed(text)
-        textColor: Kirigami.JTheme.minorForeground
-        backgroundColor: Kirigami.JTheme.headerBackground
-        iWidth: 91 * mScale
+        textColor: Kirigami.Theme.textColor
+        backgroundColor: "#4dc1c1c1"
     }
     NumberButton {
         text: "1"
         textSize: numFontSize
         onClicked: pressed(text)
-        backgroundColor: Kirigami.JTheme.cardBackground
-        iWidth: 135 * mScale
+        backgroundColor: "#ffffff"
+        iWidth: 290 * mScale
     }
     NumberButton {
         text: "2"
         textSize: numFontSize
-        iWidth: 135 * mScale
+        iWidth: 290 * mScale
         onClicked: pressed(text)
-        backgroundColor: Kirigami.JTheme.cardBackground
+        backgroundColor: "#ffffff"
     }
     NumberButton {
         text: "3"
         textSize: numFontSize
-        iWidth: 135 * mScale
+        iWidth: 290 * mScale
         onClicked: pressed(text)
-        backgroundColor: Kirigami.JTheme.cardBackground
+        backgroundColor: "#ffffff"
     }
     NumberButton {
         text: "×"
         textSize: calFontSize
-        textColor: Kirigami.JTheme.highlightLinearColor
+        textColor: "#e97503"
         onClicked: pressed(text)
         visible: !pureNumber
-        iWidth: 102 * mScale
-        backgroundColor: Kirigami.JTheme.headerBackground
+        iWidth: 221 * mScale
+        backgroundColor: "#f8f8f8"
     }
     NumberButton {
         text: "="
         textSize: calFontSize
         onClicked: pressed(text)
         Layout.rowSpan: 2
-        backgroundColor: Kirigami.JTheme.highlightColor
+        backgroundColor: "#e97503"
         textColor: "#ffffff"
-        iWidth: 102 * mScale
+        iWidth: 221 * mScale
         iHeight: appWindow.height * 3 / 5 / 2
     }
 
@@ -253,61 +233,54 @@ GridLayout {
         text: "%"
         textSize: leftSingleFontSize
         onClicked: pressed(text)
-        textColor: Kirigami.JTheme.minorForeground
-        backgroundColor: Kirigami.JTheme.headerBackground
-        iWidth: 91 * mScale
+        textColor: Kirigami.Theme.textColor
+        backgroundColor: "#4dc1c1c1"
     }
-
     NumberButton {
         text: "("
         textSize: leftSingleFontSize
         onClicked: pressed(text)
-        textColor: Kirigami.JTheme.minorForeground
-        backgroundColor: Kirigami.JTheme.headerBackground
-        iWidth: 91 * mScale
+        backgroundColor: "#4dc1c1c1"
     }
     NumberButton {
         text: ")"
         textSize: leftSingleFontSize
         onClicked: pressed(text)
-        textColor: Kirigami.JTheme.minorForeground
-        backgroundColor: Kirigami.JTheme.headerBackground
-        iWidth: 91 * mScale
+        backgroundColor: "#4dc1c1c1"
     }
 
     NumberButton {
         text: "^"
         display: "xʸ"
         textSize: numFontSize
-        iWidth: 135 * mScale
+        iWidth: 290 * mScale
         onClicked: pressed(text)
         visible: !pureNumber
-        backgroundColor: Kirigami.JTheme.cardBackground
+        backgroundColor: "#ffffff"
     }
-
     NumberButton {
         text: "0"
         textSize: numFontSize
-        iWidth: 135 * mScale
+        iWidth: 290 * mScale
         onClicked: pressed(text)
-        backgroundColor: Kirigami.JTheme.cardBackground
+        backgroundColor: "#ffffff"
     }
 
     NumberButton {
         text: "."
         textSize: numFontSize
-        iWidth: 135 * mScale
+        iWidth: 290 * mScale
         onClicked: pressed(text)
-        backgroundColor: Kirigami.JTheme.cardBackground
+        backgroundColor: "#ffffff"
     }
 
     NumberButton {
-        iWidth: 102 * mScale
+        iWidth: 221 * mScale
         text: "÷"
         textSize: calFontSize
         onClicked: pressed(text)
-        textColor: Kirigami.JTheme.highlightLinearColor
+        textColor: "#e97503"
         visible: !pureNumber
-        backgroundColor: Kirigami.JTheme.headerBackground
+        backgroundColor: "#f8f8f8"
     }
 }

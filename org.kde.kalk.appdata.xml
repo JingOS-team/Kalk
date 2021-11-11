@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component type="desktop-application">
+  <id>org.kde.kalk</id>
+  <name>Calculator</name>
+  <name xml:lang="ca">Calculadora</name>
+  <name xml:lang="ca-valencia">Calculadora</name>
+  <name xml:lang="cs">Kalkulačka</name>
+  <name xml:lang="de">Calculator</name>
+  <name xml:lang="en-GB">Calculator</name>
+  <name xml:lang="es">Calculadora</name>
+  <name xml:lang="fr">Calculatrice</name>
+  <name xml:lang="it">Calcolatrice</name>
+  <name xml:lang="ko">계산기</name>
+  <name xml:lang="nl">Rekenmachine</name>
+  <name xml:lang="nn">Kalkulator</name>
+  <name xml:lang="pt">Calculadora</name>
+  <name xml:lang="pt-BR">Calculadora</name>
+  <name xml:lang="ro">Calculator</name>
+  <name xml:lang="sk">Kalkulačka</name>
+  <name xml:lang="sl">Kalkulator</name>
+  <name xml:lang="sv">Räknare</name>
+  <name xml:lang="uk">Калькулятор</name>
+  <name xml:lang="x-test">xxCalculatorxx</name>
+  <summary>A feature rich calculator</summary>
+  <summary xml:lang="ca">Una calculadora rica en característiques</summary>
+  <summary xml:lang="ca-valencia">Una calculadora rica en característiques</summary>
+  <summary xml:lang="de">Ein leistungsfähiger Rechner</summary>
+  <summary xml:lang="en-GB">A feature rich calculator</summary>
+  <summary xml:lang="es">Una calculadora con numerosas funciones</summary>
+  <summary xml:lang="fr">Une calculatrice avec de nombreuses fonctionnalités.</summary>
+  <summary xml:lang="it">Una calcolatrice ricca di funzionalità</summary>
+  <summary xml:lang="ko">다기능 계산기</summary>
+  <summary xml:lang="nl">Een rekenmachine rijk aan mogelijkheden</summary>
+  <summary xml:lang="nn">Funksjonsrik kalkulator</summary>
+  <summary xml:lang="pt">Uma calculadora rica em funcionalidades</summary>
+  <summary xml:lang="pt-BR">Uma calculadora cheia de recursos</summary>
+  <summary xml:lang="ro">Calculator cu multe funcții</summary>
+  <summary xml:lang="sk">Kalkulačka plná funkcií</summary>
+  <summary xml:lang="sl">Kalkulator z veliko možnostmi</summary>
+  <summary xml:lang="sv">En funktionsrik räknare</summary>
+  <summary xml:lang="uk">Калькулятор із широкими можливостями</summary>
+  <summary xml:lang="x-test">xxA feature rich calculatorxx</summary>
+  <developer_name>KDE Community</developer_name>
+  <developer_name xml:lang="ca">La comunitat KDE</developer_name>
+  <developer_name xml:lang="ca-valencia">La comunitat KDE</developer_name>
+  <developer_name xml:lang="cs">Komunita KDE</developer_name>
+  <developer_name xml:lang="de">KDE-Gemeinschaft</developer_name>
+  <developer_name xml:lang="en-GB">KDE Community</developer_name>
+  <developer_name xml:lang="es">Comunidad KDE</developer_name>
+  <developer_name xml:lang="fr">Communauté KDE</developer_name>
+  <developer_name xml:lang="it">© 2020 La comunità KDE</developer_name>
+  <developer_name xml:lang="ko">KDE 커뮤니티</developer_name>
+  <developer_name xml:lang="nl">KDE gemeenschap</developer_name>
+  <developer_name xml:lang="nn">KDE-fellesskapet</developer_name>
+  <developer_name xml:lang="pt">Comunidade do KDE</developer_name>
+  <developer_name xml:lang="pt-BR">Comunidade KDE</developer_name>
+  <developer_name xml:lang="ro">Comunitatea KDE</developer_name>
+  <developer_name xml:lang="sk">KDE komunita</developer_name>
+  <developer_name xml:lang="sl">Skupnost KDE</developer_name>
+  <developer_name xml:lang="sv">KDE-gemenskapen</developer_name>
+  <developer_name xml:lang="uk">Спільнота KDE</developer_name>
+  <developer_name xml:lang="x-test">xxKDE Communityxx</developer_name>
+  <description>
+    <p>Kalk is a powerful calculator designed for mobile platform.</p>
+    <p xml:lang="ca">El Kalk és una potent calculadora dissenyada per a plataformes mòbils.</p>
+    <p xml:lang="ca-valencia">El Kalk és una potent calculadora dissenyada per a plataformes mòbils.</p>
+    <p xml:lang="de">Kalk ist ein leistungsfähiger Rechner für Mobil-Plattformen.</p>
+    <p xml:lang="en-GB">Kalk is a powerful calculator designed for mobile platform.</p>
+    <p xml:lang="es">Kalk es una potente calculadora designada para la plataforma móvil.</p>
+    <p xml:lang="fr">Kalk est une calculatrice puissante conçue pour les plateformes mobiles.</p>
+    <p xml:lang="it">Kalk è una potente calcolatrice progettata per piattaforma mobile.</p>
+    <p xml:lang="ko">Kalk는 모바일 플랫폼용 다기능 계산기입니다.</p>
+    <p xml:lang="nl">Kalk is een krachtige rekenmachine ontworpen voor het mobiele platform.</p>
+    <p xml:lang="nn">Kalk er ein avansert kalkulator laga for mobiltelefonar.</p>
+    <p xml:lang="pt">O Kalk é uma calculadora poderosa desenhada para plataformas móveis.</p>
+    <p xml:lang="pt-BR">Kalk é uma poderosa calculadora desenhada para a plataforma móvel.</p>
+    <p xml:lang="ro">Kalk e un calculator puternic, proiectat pentru platforma mobilă.</p>
+    <p xml:lang="sk">Kalk je silná kalkulačka zavrhnutá pre mobilnú platformu.</p>
+    <p xml:lang="sl">Kalk je zmogljiv kalkulator zasnovan za mobilne platforme.</p>
+    <p xml:lang="sv">Kalk är en kraftfull räknare konstruerad för mobilplattformar.</p>
+    <p xml:lang="uk">Kalk — потужний калькулятор, який розроблено для мобільних платформ.</p>
+    <p xml:lang="x-test">xxKalk is a powerful calculator designed for mobile platform.xx</p>
+  </description>
+</component>

@@ -3,8 +3,8 @@
  * This file is part of Kalk
  * Copyright (C) 2016 Pierre Jacquier <pierrejacquier39@gmail.com>
  *
- *               2020 Han Young <hanyoung@protonmail.com>
- *
+ * Copyright (C) 2020 Han Young <hanyoung@protonmail.com>
+ *               2021 Bob <pengbo·wu@jingos.com>
  *
  * $BEGIN_LICENSE:GPL3+$
  *
@@ -26,62 +26,83 @@
 import QtQuick 2.7
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1 as Controls
-import org.kde.kirigami 2.13 as Kirigami
+import org.kde.kirigami 2.15 as Kirigami
 
 import "qrc:/qml/StringUtils.js" as StringUtils
 
 Kirigami.Page {
-    //    icon.name: "accessories-calculator"
     id: initialPage
-    title: i18n("Calculator")
 
+    property bool isResult: false
+    property alias myResult: result.text
+
+    title: i18n("Calculator")
     leftPadding: 0
     rightPadding: 0
     topPadding: 0
     bottomPadding: 0
-    globalToolBarStyle: Kirigami.ApplicationHeaderStyle.None
-    property bool isResult: false
-    property alias myResult: result.text
 
-    // remove blur
-    // background: Item {}
-    background:Rectangle{
-        color:"#e8efff"
+    globalToolBarStyle: Kirigami.ApplicationHeaderStyle.None
+
+    background: Rectangle {
+        color: Kirigami.JTheme.background
     }
 
     Rectangle {
         anchors.fill: parent
         color: "transparent"
-
         Rectangle {
             id: reslutLayout
+
             width: parent.width
-            Layout.fillHeight: true
             anchors.bottom: inputPad.top
             anchors.top: parent.top
-            color: "#f2fbfbfb"
+            Layout.fillHeight: true
 
-            //            color: "grey"
+            color: "transparent"
             Rectangle {
                 id: expression_view
-                width: parent.width
-                height: 120
-                color: "transparent"
 
-                Controls.Label {
-                    id: expressionRow
-                    anchors.right: parent.right
-                    anchors.rightMargin: 22
-                    anchors.bottom: parent.bottom
-                    horizontalAlignment: Text.AlignRight
-                    font.pixelSize: 60
-                    text: inputPad.expression
-                    color: "#414345"
+                width: parent.width
+                height: 120 * appScale
+
+                color: "transparent"
+                Flickable {
+                    id: expressionFlickable
+
+                    width: parent.width - 22 * appScale
+                    height: parent.height
+                    anchors.left: parent.left
+
+                    contentHeight: height
+                    contentWidth: expressionRow.contentWidth > width ? expressionRow.contentWidth : width
+                    flickableDirection: Flickable.HorizontalFlick
+                    boundsBehavior: Flickable.StopAtBounds
+
+                    clip: true
+                    Controls.Label {
+                        id: expressionRow
+
+                        anchors.fill: parent
+                        horizontalAlignment: Text.AlignRight
+                        font.pixelSize: 60 * appFontSize
+                        text: inputPad.expression
+                        color: Kirigami.JTheme.majorForeground
+                        onTextChanged: {
+                            expressionFlickable.endFlickable()
+                        }
+                    }
+                    function endFlickable() {
+                        if (expressionRow.contentWidth > width) {
+                            contentX = expressionRow.contentWidth - width
+                        }
+                    }
                 }
             }
 
             Rectangle {
                 id: result_view
+
                 Layout.fillWidth: true
                 anchors {
                     top: expression_view.bottom
@@ -94,46 +115,51 @@ Kirigami.Page {
 
                 Controls.Label {
                     id: result
+
                     anchors.right: parent.right
                     horizontalAlignment: Text.AlignRight
-                    anchors.rightMargin: 22
+                    anchors.rightMargin: 22 * appScale
                     anchors.verticalCenter: parent.verticalCenter
-                    font.pixelSize: 40
-                    color: "#8D9199"
+                    font.pixelSize: 40 * appFontSize
+                    color: Kirigami.JTheme.minorForeground
 
                     NumberAnimation on opacity {
                         id: resultFadeInAnimation
+
                         from: 0.5
                         to: 1
                         duration: Kirigami.Units.shortDuration
                     }
                     NumberAnimation on opacity {
                         id: resultFadeOutAnimation
+
                         from: 1
                         to: 0
                         duration: Kirigami.Units.shortDuration
                     }
-
                     onTextChanged: resultFadeInAnimation.start()
                 }
             }
         }
 
         Rectangle {
+            id: inputPad
 
             property string expression: ""
+            onExpressionChanged: {
+            }
             anchors {
                 left: parent.left
                 right: parent.right
                 bottom: parent.bottom
             }
 
-            id: inputPad
             height: parent.height / 5 * 3
             Kirigami.Theme.inherit: false
             color: "transparent"
             focus: true
             Keys.enabled: true
+
             Keys.onPressed: {
                 if (event.key === Qt.Key_0) {
                     expressionAdd("0")
@@ -169,17 +195,23 @@ Kirigami.Page {
                     expressionAdd(".")
                 } else if (event.key === Qt.Key_AsciiCircum) {
                     expressionAdd("^")
-                } else if (event.key === Qt.Key_Equal
-                           || event.key === Qt.Key_Enter) {
+                } else if(event.key === Qt.Key_ParenLeft) {
+                    expressionAdd("(")
+                } else if(event.key === Qt.Key_ParenRight) {
+                    expressionAdd(")")
+                } else if (event.key === Qt.Key_Equal || event.key === Qt.Key_Enter) {
                     historyManager.expression = inputPad.expression + " = " + result.text
                     inputPad.expression = mathEngine.result
                     isResult = true
                     resultFadeOutAnimation.start()
-                } else if (event.key === Qt.Key_Backspace
-                           || event.key === Qt.Key_Delete) {
-                    inputPad.expression = inputPad.expression.slice(
-                                0, inputPad.expression.length - 1)
-                } else if (event.key === Qt.Key_Escape) {
+                } else if (event.key === Qt.Key_Backspace || event.key === Qt.Key_Delete) {
+                    inputPad.expression = inputPad.expression.slice(0, inputPad.expression.length - 1)
+                    expressionAdd("")
+                    if (inputPad.expression.length == 0) {
+                        myResult = ""
+                    }
+                }
+                else if (event.key === Qt.Key_Escape) {
                     inputPad.expression = ""
                     myResult = ""
                 }
@@ -194,17 +226,12 @@ Kirigami.Page {
                 anchors.fill: parent
                 property bool longPressBack: false
 
-                //                item_base_width:  inputPad.width / 64
-                //                item_base_height : inputPad.height / 5
-                //                item_base_height:  185 * appWindow.officalScale
                 onPressed: {
                     if (text == "DEL" || text == "←") {
-                        if(inputPad.expression.length > 0 ){
-
-                            inputPad.expression = inputPad.expression.slice(
-                                    0, inputPad.expression.length - 1)
+                        if(inputPad.expression.length > 0 ) {
+                            inputPad.expression = inputPad.expression.slice (0, inputPad.expression.length - 1)
                             expressionAdd("")
-                            if(inputPad.expression.length== 0){
+                            if (inputPad.expression.length == 0) {
                                 myResult = ""
                             }
                         }
@@ -223,80 +250,58 @@ Kirigami.Page {
                         isResult = true
                         resultFadeOutAnimation.start()
                     } else {
-                        console.log("input  ....")
                         expressionAdd(text)
                     }
                 }
 
                 onPressedAndHold: {
-                    console.log("Press And Hold" , text)
                     longPressBack = true
                     back_timer.start()
                 }
 
                 onRelease: {
-                    if(longPressBack){
+                    if (longPressBack) {
                         back_timer.stop()
                     }
-                       longPressBack = false
+                    longPressBack = false
                 }
 
                 Timer {
-                     id: back_timer
-                     interval: 200
-                     repeat: true
-                     triggeredOnStart: true
-                     onTriggered: {
-                         console.log('do delete.....')
-                         if(inputPad.expression.length > 0 ){
+                    id: back_timer
 
-                             inputPad.expression = inputPad.expression.slice(
-                                     0, inputPad.expression.length - 1)
-                             expressionAdd("")
-                             if(inputPad.expression.length== 0){
-                                 myResult = ""
-                             }
-                         }
-                     }
+                    interval: 200
+                    repeat: true
+                    triggeredOnStart: true
+                    onTriggered: {
+                        if(inputPad.expression.length > 0 ) {
+                            inputPad.expression = inputPad.expression.slice(0, inputPad.expression.length - 1)
+                            expressionAdd("")
+                            if (inputPad.expression.length== 0) {
+                                myResult = ""
+                            }
+                        }
+                    }
                 }
-
             }
         }
     }
 
     function expressionAdd(text) {
-        console.log("input : " , text)
-
         if (isNumber(text)) {
             if (text === "0") {
-//                var curValue = inputPad.expression + text
                 var curValue = inputPad.expression
                 if (curValue.length === 1) {
-//                    var char_value = StringUtils.getCharAt(curValue, 0)
-//                    if (char_value === 0) {
-//                        return
-//                    }
-                    if(curValue == "0"){
+                    if (curValue == "0") {
                         return
                     }
                 } else if (curValue.length > 2) {
-                    console.log("1111   allChar : ", curValue)
-                    var lastChar = StringUtils.getCharAt(curValue,
-                                                         curValue.length - 1)
-                    console.log("lastChar : ", lastChar)
-                    var lastTwoChar = StringUtils.getCharAt(curValue,
-                                                            curValue.length - 2)
-                    console.log("lastTowChar", lastTwoChar)
-                    if (lastChar == "0" && isYunSuanFu(lastTwoChar)) {
-                        console.log("org : ", inputPad.expression)
-                        inputPad.expression = StringUtils.subString(
-                                    inputPad.expression, 0,
-                                    inputPad.expression.length - 1)
-                        console.log("new : ", inputPad.expression)
+                    var lastChar = StringUtils.getCharAt(curValue, curValue.length - 1)
+                    var lastTwoChar = StringUtils.getCharAt(curValue, curValue.length - 2)
+                    if (lastChar == "0" && isOperator(lastTwoChar)) {
+                        inputPad.expression = StringUtils.subString(inputPad.expression, 0, inputPad.expression.length - 1)
                     }
                 }
             } else {
-
                 var curValue1 = inputPad.expression
                 if (curValue1.length === 1) {
                     if (curValue1 == "0") {
@@ -304,83 +309,42 @@ Kirigami.Page {
                     }
                 } else {
                     if (curValue1.length > 2) {
-                        console.log("1111   allChar : ", curValue1)
-                        var lastChar = StringUtils.getCharAt(
-                                    curValue1, curValue1.length - 1)
-                        console.log("lastChar : ", lastChar)
-                        var lastTwoChar = StringUtils.getCharAt(
-                                    curValue1, curValue1.length - 2)
-                        console.log("lastTowChar", lastTwoChar)
-                        if (lastChar == "0" && isYunSuanFu(lastTwoChar)) {
-                            console.log("org : ", inputPad.expression)
-                            inputPad.expression = StringUtils.subString(
-                                        inputPad.expression, 0,
-                                        inputPad.expression.length - 1)
-                            console.log("new : ", inputPad.expression)
+                        var lastChar = StringUtils.getCharAt(curValue1, curValue1.length - 1)
+                        var lastTwoChar = StringUtils.getCharAt(curValue1, curValue1.length - 2)
+                        if (lastChar == "0" && isOperator(lastTwoChar)) {
+                            inputPad.expression = StringUtils.subString(inputPad.expression, 0, inputPad.expression.length - 1)
                         }
                     }
                 }
             }
         }
 
-//        if (text == ".") {
-//            var expLength = inputPad.expression.length
-//            var content  = inputPad.expression
-//            console.log("=====1.5 --> ", inputPad.expression)
-//            if (expLength === "1") {
-//                console.log("=====2-> ", inputPad.expression)
-//                if (inputPad.expression == ".") {
-//                    return
-//                }
-//            } else if (expLength > 1) {
-//                console.log("content : ", content)
-//                console.log("length : " , expLength)
-//                var uu = StringUtils.getCharAt(content , expLength - 1)
-//                console.log("special  : " ,uu )
-//                if (uu == '.') {
-//                    console.log("=====3", inputPad.expression)
-//                    return
-//                }
-//            }
-//        }
-
         if (isResult) {
-            if (text == "+" || text == "-" || text == "x" || text == "/"
-                    || text == "×" || text == "÷"
-                    || text == "^" || text == "%") {
-                //                inputPad.expression = ""
+            if (text == "+" || text == "-" || text == "x" || text == "/" || text == "×" || text == "÷" || text == "^" || text == "%") {
             } else {
                 inputPad.expression = ""
             }
-
             isResult = false
         }
 
-        console.log("8888 =>  ", inputPad.expression)
-
         if (mathEngine.parse(inputPad.expression + text)) {
-            console.log("after parse ::::::::: :", (inputPad.expression + text))
             if (!mathEngine.error) {
                 inputPad.expression += text
-                console.log("result :" , inputPad.expression)
+            } else {
             }
             myResult = mathEngine.result
-            console.log("result : ",mathEngine.result)
         }
     }
 
-    function isYunSuanFu(text) {
-        if (text === "+" || text === "-" || text === "x" || text === "/"
-        || text == "×" || text == "÷"
-                || text === "%" || text === "^") {
+    function isOperator(text) {
+        if (text === "+" || text === "-" || text === "x" || text === "/" || text == "×" || text == "÷" || text === "%" || text === "^") {
             return true
         }
         return false
     }
 
     function isNumber(text) {
-        if (text === "1" || text === "2" || text === "3" || text === "4" || text === "5" || text
-                === "6" || text === "7" || text === "8" || text === "9" || text === "0") {
+        if (text === "1" || text === "2" || text === "3" || text === "4" || text === "5" || text === "6" || text === "7" || text === "8" || text === "9" || text === "0") {
             return true
         }
         return false

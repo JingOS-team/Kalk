@@ -2,6 +2,7 @@
  * This file is part of Kalk
  *
  * Copyright (C) 2020 Han Young <hanyoung@protonmail.com>
+ *               2021 Bob <pengbo·wu@jingos.com>
  *
  * $BEGIN_LICENSE:GPL3+$
  *
@@ -29,10 +30,9 @@ class MathEngine : public QObject
     Q_OBJECT
     Q_PROPERTY(QString result READ result WRITE setResult NOTIFY resultChanged)
     Q_PROPERTY(bool error READ error NOTIFY resultChanged)
+
 public:
     Q_INVOKABLE bool parse(QString expr);
-
-
 
     inline QString result()
     {
@@ -49,6 +49,7 @@ public:
     {
         return mDriver.syntaxError_;
     };
+
 signals:
     void resultChanged();
 

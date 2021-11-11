@@ -2,7 +2,7 @@
  * This file is part of Kalk
  *
  * Copyright (C) 2020 Han Young <hanyoung@protonmail.com>
- *
+ *               2021 Bob <pengbo·wu@jingos.com>
  *
  * $BEGIN_LICENSE:GPL3+$
  *
@@ -27,12 +27,14 @@ import QtQuick.Controls 2.15 as Controls
 import org.kde.kirigami 2.13 as Kirigami
 
 Controls.Drawer {
+    id: unitConversionDrawer
+
     property alias header: headerLabel.text
     property alias inputText: input.text
     property alias outputText: output.text
     property alias from: fromComboBox
     property alias to: toComboBox
-    id: unitConversionDrawer
+
     ColumnLayout {
         anchors.fill: parent
         RowLayout {
@@ -88,7 +90,6 @@ Controls.Drawer {
                             Layout.alignment: Qt.AlignLeft
                             font.pointSize: Kirigami.Theme.defaultFont.pointSize * 2
                             onTextChanged: {
-                                console.log(unitNumberPad.expression);
                                 if(text != "") {
                                     output.text = unitModel.getRet(Number(text), fromComboBox.currentIndex, toComboBox.currentIndex);
                                 }
@@ -101,6 +102,7 @@ Controls.Drawer {
                 }
                 Controls.ComboBox {
                     id: fromComboBox
+
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignTop
                     model: unitModel
@@ -157,8 +159,6 @@ Controls.Drawer {
             NumberPad {
                 id: unitNumberPad
                 pureNumber: true
-                //height: parent.height * 0.4
-                //width: parent.width
                 Layout.alignment: Qt.AlignBottom
                 onPressed: {
                     if(text == "DEL")

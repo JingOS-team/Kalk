@@ -1,4 +1,4 @@
-// A Bison parser, made by GNU Bison 3.7.
+// A Bison parser, made by GNU Bison 3.6.4.
 
 // Skeleton interface for Bison LALR(1) parsers in C++
 
@@ -547,9 +547,9 @@ namespace yy {
       {
         switch (this->kind ())
     {
-      case symbol_kind::S_NUMBER: // "number"
-      case symbol_kind::S_exp: // exp
-      case symbol_kind::S_factor: // factor
+      case 18: // "number"
+      case 20: // exp
+      case 21: // factor
         value.move< double > (std::move (that.value));
         break;
 
@@ -611,9 +611,9 @@ namespace yy {
         // Value type destructor.
 switch (yykind)
     {
-      case symbol_kind::S_NUMBER: // "number"
-      case symbol_kind::S_exp: // exp
-      case symbol_kind::S_factor: // factor
+      case 18: // "number"
+      case 20: // exp
+      case 21: // factor
         value.template destroy< double > ();
         break;
 
@@ -1218,7 +1218,7 @@ switch (yykind)
       void move (by_state& that);
 
       /// The symbol kind (corresponding to \a state).
-      /// \a symbol_kind::S_YYEMPTY when empty.
+      /// \a S_YYEMPTY when empty.
       symbol_kind_type kind () const YY_NOEXCEPT;
 
       /// The state number used to denote an empty symbol.
@@ -1433,9 +1433,9 @@ switch (yykind)
   {
     switch (this->kind ())
     {
-      case symbol_kind::S_NUMBER: // "number"
-      case symbol_kind::S_exp: // exp
-      case symbol_kind::S_factor: // factor
+      case 18: // "number"
+      case 20: // exp
+      case 21: // factor
         value.copy< double > (YY_MOVE (that.value));
         break;
 
@@ -1468,9 +1468,9 @@ switch (yykind)
     super_type::move (s);
     switch (this->kind ())
     {
-      case symbol_kind::S_NUMBER: // "number"
-      case symbol_kind::S_exp: // exp
-      case symbol_kind::S_factor: // factor
+      case 18: // "number"
+      case 20: // exp
+      case 21: // factor
         value.move< double > (YY_MOVE (s.value));
         break;
 
@@ -1537,6 +1537,7 @@ switch (yykind)
 
 } // yy
 #line 1540 "/home/jingos/dev/calculator/src/mathengine/parser.hh"
+
 
 
 

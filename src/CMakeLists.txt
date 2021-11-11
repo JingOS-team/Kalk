@@ -2,7 +2,7 @@
 #
 #  Copyright (C) 2020 Cahfofpai
 #                     Han Young <hanyoung@protonmail.com>
-#
+#                2021 Bob <pengbo·wu@jingos.com>
 #
 #  $BEGIN_LICENSE:GPL3+$
 #
@@ -40,5 +40,6 @@ target_link_libraries(kalk
     KF5::UnitConversion
     KF5::ConfigCore
     KF5::I18n
-    KF5::CoreAddons)
+    KF5::CoreAddons
+    jappcoreqt)
 install(TARGETS kalk ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})

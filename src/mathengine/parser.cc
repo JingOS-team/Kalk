@@ -1,4 +1,4 @@
-// A Bison parser, made by GNU Bison 3.7.
+// A Bison parser, made by GNU Bison 3.6.4.
 
 // Skeleton implementation for Bison LALR(1) parsers in C++
 
@@ -207,9 +207,9 @@ namespace yy {
   {
     switch (that.kind ())
     {
-      case symbol_kind::S_NUMBER: // "number"
-      case symbol_kind::S_exp: // exp
-      case symbol_kind::S_factor: // factor
+      case 18: // "number"
+      case 20: // exp
+      case 21: // factor
         value.YY_MOVE_OR_COPY< double > (YY_MOVE (that.value));
         break;
 
@@ -228,9 +228,9 @@ namespace yy {
   {
     switch (that.kind ())
     {
-      case symbol_kind::S_NUMBER: // "number"
-      case symbol_kind::S_exp: // exp
-      case symbol_kind::S_factor: // factor
+      case 18: // "number"
+      case 20: // exp
+      case 21: // factor
         value.move< double > (YY_MOVE (that.value));
         break;
 
@@ -249,9 +249,9 @@ namespace yy {
     state = that.state;
     switch (that.kind ())
     {
-      case symbol_kind::S_NUMBER: // "number"
-      case symbol_kind::S_exp: // exp
-      case symbol_kind::S_factor: // factor
+      case 18: // "number"
+      case 20: // exp
+      case 21: // factor
         value.copy< double > (that.value);
         break;
 
@@ -269,9 +269,9 @@ namespace yy {
     state = that.state;
     switch (that.kind ())
     {
-      case symbol_kind::S_NUMBER: // "number"
-      case symbol_kind::S_exp: // exp
-      case symbol_kind::S_factor: // factor
+      case 18: // "number"
+      case 20: // exp
+      case 21: // factor
         value.move< double > (that.value);
         break;
 
@@ -311,19 +311,19 @@ namespace yy {
             << yysym.location << ": ";
         switch (yykind)
     {
-      case symbol_kind::S_NUMBER: // "number"
+      case 18: // "number"
 #line 75 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                  { yyo << yysym.value.template as < double > (); }
 #line 318 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
         break;
 
-      case symbol_kind::S_exp: // exp
+      case 20: // exp
 #line 75 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                  { yyo << yysym.value.template as < double > (); }
 #line 324 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
         break;
 
-      case symbol_kind::S_factor: // factor
+      case 21: // factor
 #line 75 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                  { yyo << yysym.value.template as < double > (); }
 #line 330 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
@@ -566,9 +566,9 @@ namespace yy {
          when using variants.  */
       switch (yyr1_[yyn])
     {
-      case symbol_kind::S_NUMBER: // "number"
-      case symbol_kind::S_exp: // exp
-      case symbol_kind::S_factor: // factor
+      case 18: // "number"
+      case 20: // exp
+      case 21: // factor
         yylhs.value.emplace< double > ();
         break;
 
@@ -592,176 +592,182 @@ namespace yy {
         {
           switch (yyn)
             {
-  case 2: // unit: exp
+  case 2:
 #line 79 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
            { drv.result = yystack_[0].value.as < double > (); }
 #line 599 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
-  case 3: // exp: factor
+  case 3:
 #line 84 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
   { yylhs.value.as < double > () = yystack_[0].value.as < double > (); }
 #line 605 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
-  case 4: // exp: exp "+" exp
+  case 4:
 #line 85 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                 { yylhs.value.as < double > () = yystack_[2].value.as < double > () + yystack_[0].value.as < double > (); }
 #line 611 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
-  case 5: // exp: exp "-" exp
+  case 5:
 #line 86 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
                 { yylhs.value.as < double > () = yystack_[2].value.as < double > () - yystack_[0].value.as < double > (); }
 #line 617 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
-  case 6: // exp: exp exp
+  case 6:
 #line 87 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
-                { yylhs.value.as < double > () = yystack_[1].value.as < double > () * yystack_[0].value.as < double > (); }
+          { yylhs.value.as < double > () = yystack_[1].value.as < double > ();  }
 #line 623 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
-  case 7: // exp: exp "*" exp
+  case 7:
 #line 88 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
-                { yylhs.value.as < double > () = yystack_[2].value.as < double > () * yystack_[0].value.as < double > (); }
+                { yylhs.value.as < double > () = yystack_[1].value.as < double > () * yystack_[0].value.as < double > (); }
 #line 629 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
-  case 8: // exp: exp "/" exp
+  case 8:
 #line 89 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
-                { yylhs.value.as < double > () = yystack_[2].value.as < double > () / yystack_[0].value.as < double > (); }
+                { yylhs.value.as < double > () = yystack_[2].value.as < double > () * yystack_[0].value.as < double > (); }
 #line 635 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
-  case 9: // exp: exp "^" exp
+  case 9:
 #line 90 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
-                { yylhs.value.as < double > () = pow(yystack_[2].value.as < double > (), yystack_[0].value.as < double > ()); }
+                { yylhs.value.as < double > () = yystack_[2].value.as < double > () / yystack_[0].value.as < double > (); }
 #line 641 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
-  case 10: // exp: "SIN" "(" exp
+  case 10:
 #line 91 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
-                    { yylhs.value.as < double > () = sin(yystack_[0].value.as < double > ()); }
+                { yylhs.value.as < double > () = pow(yystack_[2].value.as < double > (), yystack_[0].value.as < double > ()); }
 #line 647 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
-  case 11: // exp: "SIN" "(" exp ")"
+  case 11:
 #line 92 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
-                    { yylhs.value.as < double > () = sin(yystack_[1].value.as < double > ()); }
+                    { yylhs.value.as < double > () = sin(yystack_[0].value.as < double > ()); }
 #line 653 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
-  case 12: // exp: "COS" "(" exp
+  case 12:
 #line 93 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
-                    { yylhs.value.as < double > () = cos(yystack_[0].value.as < double > ()); }
+                    { yylhs.value.as < double > () = sin(yystack_[1].value.as < double > ()); }
 #line 659 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
-  case 13: // exp: "COS" "(" exp ")"
+  case 13:
 #line 94 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
-                    { yylhs.value.as < double > () = cos(yystack_[1].value.as < double > ()); }
+                    { yylhs.value.as < double > () = cos(yystack_[0].value.as < double > ()); }
 #line 665 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
-  case 14: // exp: "TAN" "(" exp
+  case 14:
 #line 95 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
-                    { yylhs.value.as < double > () = tan(yystack_[0].value.as < double > ()); }
+                    { yylhs.value.as < double > () = cos(yystack_[1].value.as < double > ()); }
 #line 671 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
-  case 15: // exp: "TAN" "(" exp ")"
+  case 15:
 #line 96 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
-                    { yylhs.value.as < double > () = tan(yystack_[1].value.as < double > ()); }
+                    { yylhs.value.as < double > () = tan(yystack_[0].value.as < double > ()); }
 #line 677 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
-  case 16: // exp: "LOG" "(" exp
+  case 16:
 #line 97 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
-                    { yylhs.value.as < double > () = log(yystack_[0].value.as < double > ()); }
+                    { yylhs.value.as < double > () = tan(yystack_[1].value.as < double > ()); }
 #line 683 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
-  case 17: // exp: "LOG" "(" exp ")"
+  case 17:
 #line 98 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
-                    { yylhs.value.as < double > () = log(yystack_[1].value.as < double > ()); }
+                    { yylhs.value.as < double > () = log(yystack_[0].value.as < double > ()); }
 #line 689 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
-  case 18: // exp: "LOG10" "(" exp
+  case 18:
 #line 99 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
-                    { yylhs.value.as < double > () = log10(yystack_[0].value.as < double > ()); }
+                    { yylhs.value.as < double > () = log(yystack_[1].value.as < double > ()); }
 #line 695 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
-  case 19: // exp: "LOG10" "(" exp ")"
+  case 19:
 #line 100 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
-                      { yylhs.value.as < double > () = log10(yystack_[1].value.as < double > ()); }
+                    { yylhs.value.as < double > () = log10(yystack_[0].value.as < double > ()); }
 #line 701 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
-  case 20: // exp: "LOG2" "(" exp
+  case 20:
 #line 101 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
-                    { yylhs.value.as < double > () = log2(yystack_[0].value.as < double > ()); }
+                      { yylhs.value.as < double > () = log10(yystack_[1].value.as < double > ()); }
 #line 707 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
-  case 21: // exp: "LOG2" "(" exp ")"
+  case 21:
 #line 102 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
-                     { yylhs.value.as < double > () = log2(yystack_[1].value.as < double > ()); }
+                    { yylhs.value.as < double > () = log2(yystack_[0].value.as < double > ()); }
 #line 713 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
-  case 22: // exp: "SQUAREROOT" "(" exp
+  case 22:
 #line 103 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
-                         { yylhs.value.as < double > () = sqrt(yystack_[0].value.as < double > ()); }
+                     { yylhs.value.as < double > () = log2(yystack_[1].value.as < double > ()); }
 #line 719 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
-  case 23: // exp: "SQUAREROOT" "(" exp ")"
+  case 23:
 #line 104 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
-                            { yylhs.value.as < double > () = sqrt(yystack_[1].value.as < double > ()); }
+                         { yylhs.value.as < double > () = sqrt(yystack_[0].value.as < double > ()); }
 #line 725 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
-  case 24: // factor: "(" exp ")"
-#line 107 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
-                    { yylhs.value.as < double > () = yystack_[1].value.as < double > (); }
+  case 24:
+#line 105 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
+                            { yylhs.value.as < double > () = sqrt(yystack_[1].value.as < double > ()); }
 #line 731 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
-  case 25: // factor: "(" exp
+  case 25:
 #line 108 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
-               { yylhs.value.as < double > () = yystack_[0].value.as < double > (); }
+                    { yylhs.value.as < double > () = yystack_[1].value.as < double > (); }
 #line 737 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
-  case 26: // factor: "number"
+  case 26:
 #line 109 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
-  { yylhs.value.as < double > () = yystack_[0].value.as < double > (); }
+               { yylhs.value.as < double > () = yystack_[0].value.as < double > (); }
 #line 743 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
-  case 27: // factor: "-" "number"
+  case 27:
 #line 110 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
-               { yylhs.value.as < double > () = -yystack_[0].value.as < double > (); }
+  { yylhs.value.as < double > () = yystack_[0].value.as < double > (); }
 #line 749 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
-  case 28: // factor: "+" "number"
+  case 28:
 #line 111 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
-               { yylhs.value.as < double > () = yystack_[0].value.as < double > (); }
+               { yylhs.value.as < double > () = -yystack_[0].value.as < double > (); }
 #line 755 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
-  case 29: // factor: factor "%"
+  case 29:
 #line 112 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
-             { yylhs.value.as < double > () = yystack_[1].value.as < double > () / 100; }
+               { yylhs.value.as < double > () = yystack_[0].value.as < double > (); }
 #line 761 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
     break;
 
+  case 30:
+#line 113 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
+             { yylhs.value.as < double > () = yystack_[1].value.as < double > () / 100; }
+#line 767 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
+    break;
 
-#line 765 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
+
+#line 771 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
 
             default:
               break;
@@ -1230,12 +1236,12 @@ namespace yy {
   const signed char
   parser::yydefact_[] =
   {
-       0,    30,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,    26,     2,     3,     0,    27,    28,    25,     0,     0,
-       0,     0,     0,     0,     0,    30,     0,     0,     0,     0,
-       6,    29,     1,    24,    10,    12,    14,    16,    18,    20,
-      22,    26,     5,    26,     4,     7,     8,     9,    11,    13,
-      15,    17,    19,    21,    23
+       0,    31,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,    27,     2,     3,     0,    28,    29,    26,     0,     0,
+       0,     0,     0,     0,     0,     6,     0,     0,     0,     0,
+       7,    30,     1,    25,    11,    13,    15,    17,    19,    21,
+      23,    27,     5,    27,     4,     8,     9,    10,    12,    14,
+      16,    18,    20,    22,    24
   };
 
   const signed char
@@ -1322,17 +1328,17 @@ namespace yy {
   {
        0,    19,    22,    20,    20,    20,    20,    20,    20,    20,
       20,    20,    20,    20,    20,    20,    20,    20,    20,    20,
-      20,    20,    20,    20,    21,    21,    21,    21,    21,    21,
-      21
+      20,    20,    20,    20,    20,    21,    21,    21,    21,    21,
+      21,    21
   };
 
   const signed char
   parser::yyr2_[] =
   {
-       0,     2,     1,     1,     3,     3,     2,     3,     3,     3,
-       3,     4,     3,     4,     3,     4,     3,     4,     3,     4,
-       3,     4,     3,     4,     3,     2,     1,     2,     2,     2,
-       1
+       0,     2,     1,     1,     3,     3,     2,     2,     3,     3,
+       3,     3,     4,     3,     4,     3,     4,     3,     4,     3,
+       4,     3,     4,     3,     4,     3,     2,     1,     2,     2,
+       2,     1
   };
 
 
@@ -1344,8 +1350,8 @@ namespace yy {
   {
        0,    79,    79,    84,    85,    86,    87,    88,    89,    90,
       91,    92,    93,    94,    95,    96,    97,    98,    99,   100,
-     101,   102,   103,   104,   107,   108,   109,   110,   111,   112,
-     113
+     101,   102,   103,   104,   105,   108,   109,   110,   111,   112,
+     113,   114
   };
 
   void
@@ -1377,9 +1383,9 @@ namespace yy {
 
 
 } // yy
-#line 1381 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
+#line 1387 "/home/jingos/dev/calculator/src/mathengine/parser.cc"
 
-#line 116 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
+#line 117 "/home/jingos/dev/calculator/src/mathengine/parser.yy"
 
 
 void
